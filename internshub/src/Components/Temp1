@@ -1,0 +1,273 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import buildUrl from 'build-url';
+
+function StudentHome() {
+  const [filterState, setFilterState] = useState({
+    startsOn: '',
+    type: '',
+    stipend1: false,
+    stipend2: false,
+    stipend3: false,
+    stipend4: false,
+    category: '',
+    duration1: false,
+    duration2: false,
+    duration3: false
+  });
+  // useEffect(() => {
+  //   const stipend = [
+  //     filterState.stipend1,
+  //     filterState.stipend2,
+  //     filterState.stipend3,
+  //     filterState.stipend4
+  //   ];
+  //   const urlQuery = buildUrl('', {
+  //     queryParams: {
+  //       stipend: stipend,
+  //       category: filterState.category,
+  //       duration1: filterState.duration1,
+  //       duration2: filterState.duration2,
+  //       duration3: filterState.duration3,
+  //       type: filterState.type,
+  //       startsOn: filterState.startsOn
+  //     }
+  //   });
+  //   return () => {
+  //     console.log(urlQuery);
+  //   };
+  // }, [filterState]);
+  function onFilterChange(event) {
+    const { name, value, type, checked } = event.target;
+    type === 'checkbox'
+      ? setFilterState({ ...filterState, [name]: checked })
+      : setFilterState({ ...filterState, [name]: value });
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault();
+
+    // let param1, param2, param3, param4;
+    // if (filterState.stipend1 === 'True') {
+    //   param1 = 'stipend: 0';
+    // }
+    // if (filterState.stipend2 === 'True') {
+    //   param2 = 'stipend: { $lt: 5000 }';
+    // }
+    // if (filterState.stipend3 === 'True') {
+    //   param3 =
+    //     '{ $and: [{ stipend: { $gte: 5000 } }, { stipend: { $lt: 10000 } }] };';
+    //   console.log('hey');
+    // }
+    // if (filterState.stipend4 === 'True') {
+    //   param4 = 'stipend: { $gte: 10000 }';
+    // }
+
+    // const stipend = [param1, param2, param3, param4];
+    // const stipend = [
+    //   filterState.stipend1 === 'True' ? 'stipend: 0' : '',
+    //   filterState.stipend2=== 'True' ? 'stipend: { $lt: 5000 }':'',
+    //   filterState.stipend3=== 'True' ?'{ $and: [{ stipend: { $gte: 5000 } }, { stipend: { $lt: 10000 } }] };':'' ,
+    //   filterState.stipend4=== 'True' ? 'stipend: { $gte: 10000 }':''
+    // ];
+    const stipend = [
+      filterState.stipend1,
+      filterState.stipend2,
+      filterState.stipend3,
+      filterState.stipend4
+    ];
+    const duration = [
+      filterState.duration1,
+      filterState.duration2,
+      filterState.duration3
+    ];
+    const urlQuery = buildUrl('', {
+      queryParams: {
+        stipend: stipend,
+        categories: filterState.category,
+        duration: duration,
+        type_of_internship: filterState.type,
+        starts_on: filterState.startsOn
+      }
+    });
+    let queryStr = urlQuery;
+    queryStr = queryStr.replace(/%2C/g, `,`);
+    console.log(queryStr);
+    // setQuery({
+    //   stipend: filterState.stipend,
+    //   starts_on: filterState.starts_on,
+    //   type_of_internship: filterState.type,
+    //   requiredSkills: filterState.requiredSkills,
+    //   duration: filterState.duration
+    // });
+  };
+
+  return (
+    <div className="container-fluid">
+      <p>{filterState.stipend1}</p>
+      <div className="jumbotron mt-5">
+        <div className="col-sm-8 mx-auto display-4 text-center">WELCOME</div>
+        <Link to="/selectedInternship" className="nav-link">
+          Select Internship
+        </Link>
+        <p>USER:{localStorage.userid}</p>
+        <p>STUDENT:{localStorage.studentid}</p>
+        <form onSubmit={handleSubmit}>
+          <label>
+            <input
+              type="radio"
+              name="type"
+              value="paid"
+              checked={filterState.type === 'paid'}
+              onChange={onFilterChange}
+            />
+            Paid
+          </label>
+          <br />
+          <label>
+            <input
+              type="radio"
+              name="type"
+              value="free"
+              checked={filterState.type === 'free'}
+              onChange={onFilterChange}
+            />
+            Free
+          </label>
+          <br />
+          <br />
+          <label>
+            <input
+              type="radio"
+              name="category"
+              value="fulltime"
+              checked={filterState.category === 'fulltime'}
+              onChange={onFilterChange}
+            />
+            Full Time
+          </label>
+          <br />
+          <label>
+            <input
+              type="radio"
+              name="category"
+              value="parttime"
+              checked={filterState.category === 'parttime'}
+              onChange={onFilterChange}
+            />
+            Part Time
+          </label>
+          <br />
+          <br />
+          <label htmlFor="duration1">
+            <input
+              type="checkbox"
+              //className="custom-control-input"
+              name="duration1"
+              checked={filterState.duration1}
+              onChange={onFilterChange}
+              id="duration1"
+            />
+            0 to 2 Months
+          </label>
+          <br />
+          <label htmlFor="duration2">
+            <input
+              type="checkbox"
+              //className="custom-control-input"
+              name="duration2"
+              checked={filterState.duration2}
+              onChange={onFilterChange}
+              id="duration2"
+            />
+            2 to 4 Months
+          </label>
+          <br />
+          <label htmlFor="duration3">
+            <input
+              type="checkbox"
+              //className="custom-control-input"
+              name="duration3"
+              checked={filterState.duration3}
+              onChange={onFilterChange}
+              id="duration3"
+            />
+            4 Months and Above
+          </label>
+          <br />
+          <br />
+          <label htmlFor="stipend1">
+            <input
+              type="checkbox"
+              //className="custom-control-input"
+              name="stipend1"
+              checked={filterState.stipend1}
+              onChange={onFilterChange}
+              id="stipend1"
+            />
+            No Stipend
+          </label>
+          <br />
+          <label htmlFor="stipend2">
+            <input
+              type="checkbox"
+              //className="custom-control-input"
+              name="stipend2"
+              checked={filterState.stipend2}
+              onChange={onFilterChange}
+              id="stipend2"
+            />
+            Below Rs.5000
+          </label>
+          <br />
+          <label htmlFor="stipend3">
+            <input
+              type="checkbox"
+              //className="custom-control-input"
+              name="stipend3"
+              checked={filterState.stipend3}
+              onChange={onFilterChange}
+              id="stipend3"
+            />
+            Between Rs.5000 and Rs.10,000
+          </label>
+          <br />
+          <label htmlFor="stipend4">
+            <input
+              type="checkbox"
+              //className="custom-control-input"
+              name="stipend4"
+              checked={filterState.stipend4}
+              onChange={onFilterChange}
+              id="stipend4"
+            />
+            Rs.10,000 and above
+          </label>
+          <br />
+          <br />
+          <label htmlFor="startsOn">
+            Starts On:
+            <input
+              type="date"
+              className="form-control"
+              name="startsOn"
+              //value={filterState.startsOn}
+              onChange={onFilterChange}
+            />
+          </label>
+          <br />
+          <button className="btn btn-danger" type="reset">
+            Reset
+          </button>
+          <br />
+          <br />
+
+          <button className="btn btn-success" type="submit">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+export default StudentHome;
