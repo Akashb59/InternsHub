@@ -1,3 +1,3 @@
 # InternsHub
 
-Build using NodeJs, Express, MongoDb and React
+Built using NodeJs, Express, MongoDb and React
