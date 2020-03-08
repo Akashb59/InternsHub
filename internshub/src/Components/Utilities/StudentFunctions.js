@@ -1,4 +1,5 @@
 import axios from "axios";
+import { showAlert } from "./Alerts";
 
 //const ip = "http://192.168.1.25:3000";
 const ip = localStorage.ip;
@@ -22,7 +23,7 @@ export const student = () => {
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -62,7 +63,7 @@ export const studentform = det => {
       user: det.user
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -84,7 +85,7 @@ export const internshipFilter = filter => {
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -106,7 +107,7 @@ export const internshipAll = () => {
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -128,7 +129,7 @@ export const selectedIntern = id => {
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };

@@ -1,6 +1,7 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 //import Cookies from 'universal-cookie';
+import { showAlert } from "./Alerts";
 
 //const ip = "http://192.168.1.25:3000";
 const ip = localStorage.ip;
@@ -25,11 +26,11 @@ export const signup = newUser => {
       localStorage.setItem("userid", id);
       //console.log(res.data);
       console.log("Sending");
-      alert("Logged In");
+      showAlert("success", "Logged In");
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -54,11 +55,11 @@ export const login = user => {
       localStorage.setItem("userid", id);
       console.log("Logged in");
       //console.log(res.data.token);
-      alert("Logged In");
+      showAlert("success", "Logged In");
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err.response);
     });
 };
@@ -82,7 +83,7 @@ export const profile = user => {
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -104,7 +105,7 @@ export const skills = () => {
     })
     .catch(err => {
       console.log(err);
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
     });
 };
 
@@ -128,7 +129,7 @@ export const roles = () => {
     })
     .catch(err => {
       console.log(err);
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
     });
 };
 export const role = roleType => {
@@ -150,7 +151,7 @@ export const role = roleType => {
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -170,7 +171,7 @@ export const addressform = address => {
       pincode: address.pincode
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -184,7 +185,7 @@ export const forgotPassword = user => {
       email: user.email
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };

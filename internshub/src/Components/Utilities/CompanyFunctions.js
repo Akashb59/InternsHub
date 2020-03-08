@@ -1,4 +1,5 @@
 import axios from "axios";
+import { showAlert } from "./Alerts";
 
 //const ip = "http://192.168.1.25:3000";
 const ip = localStorage.ip;
@@ -21,7 +22,7 @@ export const company = () => {
       return res.data;
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -40,7 +41,7 @@ export const companyform = details => {
       user: details.user
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -64,7 +65,7 @@ export const hostInternship = internship => {
       stipend: internship.stipend
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -82,7 +83,7 @@ export const companyInternships = () => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    alert(err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
 };
@@ -100,7 +101,7 @@ export const internship = id => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    //alert(err.response.data.message);
+    showAlert("error", `${err.response.data.message}`);
     //console.log(err);
   });
 };
@@ -124,7 +125,7 @@ export const editInternship = internship => {
       stipend: internship.stipend
     })
     .catch(err => {
-      alert(err.response.data.message);
+      showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
