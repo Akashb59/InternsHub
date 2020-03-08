@@ -15,22 +15,29 @@ const companySchema = new mongoose.Schema(
       maxlength: [16, 'Please Enter valid GST number!'],
       minlength: [16, 'Please Enter valid GST number!']
     },
+    // technology: [
+    //   {
+    //     name: {
+    //       type: String,
+    //       required: [true, 'Please provide technology name'],
+    //       unique: true,
+    //       maxlength: [30, 'Please Enter valid technology name!'],
+    //       minlength: [2, 'Please Enter valid technology name!']
+    //     },
+    //     type: {
+    //       type: String,
+    //       required: [true, 'Please provide technology name'],
+    //       unique: true,
+    //       maxlength: [30, 'Please Enter valid type!'],
+    //       minlength: [5, 'Please Enter valid type!']
+    //     }
+    //   }
+    // ],
     technology: [
       {
-        name: {
-          type: String,
-          required: [true, 'Please provide technology name'],
-          unique: true,
-          maxlength: [30, 'Please Enter valid technology name!'],
-          minlength: [2, 'Please Enter valid technology name!']
-        },
-        type: {
-          type: String,
-          required: [true, 'Please provide technology name'],
-          unique: true,
-          maxlength: [30, 'Please Enter valid type!'],
-          minlength: [5, 'Please Enter valid type!']
-        }
+        type: mongoose.Schema.ObjectId,
+        ref: 'SkillTypeMaster',
+        unique: true
       }
     ],
 
@@ -71,7 +78,7 @@ const companySchema = new mongoose.Schema(
 companySchema.pre(/^find/, function(next) {
   //this points to current query
   this.populate({
-    path: 'user address',
+    path: 'user address technology',
     select: '-__v -user'
   });
   next();

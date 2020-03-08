@@ -28,7 +28,7 @@ function StudentHome(props) {
   useEffect(() => {
     selectedIntern(localStorage.internId).then(res => {
       if (res) {
-        //console.log(res.data.internship);
+        console.log(res.data.internship);
         const ab = res.data.internship;
         setInternship({
           ...internship,
@@ -40,8 +40,7 @@ function StudentHome(props) {
           phone: ab.company.user.phoneNumber,
           technology: ab.company.technology.map(te => ({
             id: te._id,
-            name: te.name,
-            type: te.type
+            name: te.skill_name
           })),
           aboutCompany: ab.company.aboutCompany,
           website: ab.company.website,
@@ -149,8 +148,7 @@ function StudentHome(props) {
           {internship.technology.map(function(tech) {
             return (
               <div key={tech.id}>
-                <b>Name: </b> {tech.name} {"     "}
-                <b>Type: </b> {tech.type} {"     "}
+                <div>{tech.name}</div>
               </div>
             );
           })}

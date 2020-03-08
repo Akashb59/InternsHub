@@ -129,3 +129,32 @@ export const editInternship = internship => {
       console.log(err);
     });
 };
+
+export const companyDescription = desc => {
+  return axios
+    .patch(`${ip}/api/v1/companies/${localStorage.companyid}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      aboutCompany: desc.aboutCompany
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
+export const companyTechnology = tech => {
+  console.log(tech.technology);
+  return axios
+    .patch(`${ip}/api/v1/companies/${localStorage.companyid}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      technology: tech.technology
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
