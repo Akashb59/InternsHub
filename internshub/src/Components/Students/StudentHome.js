@@ -61,42 +61,29 @@ function StudentHome() {
       ? setFilterState({ ...filterState, [name]: checked })
       : setFilterState({ ...filterState, [name]: value });
   }
-  const handleReset = e => {
-    e.preventDefault();
-    setFilterState({
-      ...filterState,
-      startsOn: "",
-      type: "",
-      stipend1: false,
-      stipend2: false,
-      stipend3: false,
-      stipend4: false,
-      category: "",
-      duration1: false,
-      duration2: false,
-      duration3: false
-    });
-    internshipAll().then(res => {
-      if (res) {
-        console.log(res.data.internship);
-        const arr = res.data.internship.map(data => ({
-          title: data.title,
-          category: data.categories,
-          startsOn: data.starts_on.substring(0, 10),
-          type: data.type_of_internship,
-          duration: data.duration,
-          stipend: data.stipend,
-          description: data.description,
-          postedOn: data.posted_on.substring(0, 10),
-          intendedParticipants: data.intended_participants,
-          company: data.company.user.fullname,
-          requiredSkills: data.requiredSkills,
-          id: data.id
-        }));
-        setInternArray(arr);
-      }
-    });
-  };
+  // const handleReset = e => {
+  //   e.preventDefault();
+  //   internshipAll().then(res => {
+  //     if (res) {
+  //       console.log(res.data.internship);
+  //       const arr = res.data.internship.map(data => ({
+  //         title: data.title,
+  //         category: data.categories,
+  //         startsOn: data.starts_on.substring(0, 10),
+  //         type: data.type_of_internship,
+  //         duration: data.duration,
+  //         stipend: data.stipend,
+  //         description: data.description,
+  //         postedOn: data.posted_on.substring(0, 10),
+  //         intendedParticipants: data.intended_participants,
+  //         company: data.company.user.fullname,
+  //         requiredSkills: data.requiredSkills,
+  //         id: data.id
+  //       }));
+  //       setInternArray(arr);
+  //     }
+  //   });
+  // };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -146,7 +133,7 @@ function StudentHome() {
     internshipFilter(filter).then(res => {
       if (res) {
         console.log(res);
-        console.log(res.data.stats[0]);
+        //console.log(res.data.stats[0]);
         const arr = res.data.stats.map(data => ({
           title: data.title,
           category: data.categories,
@@ -362,10 +349,11 @@ function StudentHome() {
                   />
                 </label>
                 <br />
+
                 <button
                   className="btn btn-danger"
                   type="reset"
-                  onClick={handleReset}
+                  onClick={() => window.location.reload(false)}
                 >
                   Reset
                 </button>
