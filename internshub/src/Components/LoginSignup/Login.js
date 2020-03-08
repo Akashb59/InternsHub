@@ -74,111 +74,127 @@ function Login(props) {
   };
 
   return (
-    <div className="container">
-      <form className="white" onSubmit={handleSubmit}>
-        <h2 className="grey-text.text-darken-3 primary">Login</h2>
-        <div className="input-field">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder="you@example.com"
-            value={loginState.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="input-field">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control"
-            placeholder="********"
-            value={loginState.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-field">
-          <label htmlFor="role">Role</label>
-          <select
-            required
-            name="role"
-            className="form-control"
-            onChange={handleChange}
-          >
-            {roleState.map(function(role) {
-              return (
-                <option key={role} value={role}>
-                  {role}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        <br></br>
-        <div className="row">
-          <div className="input-field mr1">
-            <button
-              type="button"
-              className="btn btn-primary"
-              data-toggle="modal"
-              data-target="#myModal"
-            >
-              Forgot Password
-            </button>
+    <div className="container-fluid">
+      <div className="main">
+        <div className="login-form">
+          <div className="text-center ">
+            <h2 className="heading-secondary ma-bt-md">
+              Log into your account
+            </h2>
           </div>
-          <div className="input-field ml-auto">
-            <button className="btn btn-success" type="submit">
-              Log In
-            </button>
-          </div>
-        </div>
-      </form>
-      <div className="modal fade" id="myModal">
-        <div className="modal-dialog modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h4 className="modal-title">Forgot Password</h4>
-              <button type="button" className="close" data-dismiss="modal">
-                &times;
-              </button>
+          <form className="white" onSubmit={handleSubmit}>
+            <div className="input-field">
+              <label className="form__label" htmlFor="email">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                className="form-control form__input"
+                placeholder="you@example.com"
+                value={loginState.email}
+                onChange={handleChange}
+                required
+              />
             </div>
-            <form className="white" onSubmit={handleForgot}>
-              <div className="modal-body">
-                <div className="input-field">
-                  <label htmlFor="emailForgot">Email</label>
-                  <br></br>
-                  <input
-                    type="email"
-                    name="emailForgot"
-                    className="form-control"
-                    placeholder="you@example.com"
-                    value={loginState.emailForgot}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-              </div>
+            <div className="input-field">
+              <label className="form__label" htmlFor="password">
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                className="form-control form__input"
+                placeholder="********"
+                value={loginState.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-              <div className="modal-footer">
-                <div className="input-field">
-                  <button className="btn btn-success" type="submit">
-                    Send
-                  </button>
-                </div>
+            <div className="input-field">
+              <label className="form__label" htmlFor="role">
+                Role
+              </label>
+              <select
+                required
+                name="role"
+                className="form-control form__input"
+                onChange={handleChange}
+              >
+                {roleState.map(function(role) {
+                  return (
+                    <option key={role} value={role}>
+                      {role}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <br></br>
+            <div className="row">
+              <div className="input-field mr1">
                 <button
                   type="button"
-                  className="btn btn-secondary"
-                  data-dismiss="modal"
+                  className="btn btn-primary"
+                  data-toggle="modal"
+                  data-target="#myModal"
                 >
-                  Close
+                  Forgot Password
                 </button>
               </div>
-            </form>
+              <div className="input-field ml-auto">
+                <button className="btn btn-success" type="submit">
+                  Log In
+                </button>
+              </div>
+            </div>
+          </form>
+          <div className="modal fade" id="myModal">
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h4 className="modal-title">Forgot Password</h4>
+                  <button type="button" className="close" data-dismiss="modal">
+                    &times;
+                  </button>
+                </div>
+                <form className="white" onSubmit={handleForgot}>
+                  <div className="modal-body">
+                    <div className="input-field">
+                      <label className="form__label" htmlFor="emailForgot">
+                        Email
+                      </label>
+                      <br></br>
+                      <input
+                        type="email"
+                        name="emailForgot"
+                        className="form-control form__input"
+                        placeholder="you@example.com"
+                        value={loginState.emailForgot}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="modal-footer">
+                    <div className="input-field">
+                      <button className="btn btn-success" type="submit">
+                        Send
+                      </button>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn btn-secondary "
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
