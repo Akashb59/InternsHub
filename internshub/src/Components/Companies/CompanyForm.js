@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
-import { companyform, company } from '../Utilities/CompanyFunctions';
-import { addressform } from '../Utilities/CommonFunctions';
+import React, { useState } from "react";
+import { companyform, company } from "../Utilities/CompanyFunctions";
+import { addressform } from "../Utilities/CommonFunctions";
+import "./../../CSS/company.css";
 
 function CompanyForm(props) {
   const [compformstate, setCompFormState] = useState({
-    gst_no: '',
-    website: '',
-    establishedYear: '',
-    locality: '',
-    city: '',
-    district: '',
-    state: '',
-    country: '',
-    pincode: ''
+    gst_no: "",
+    website: "",
+    establishedYear: "",
+    locality: "",
+    city: "",
+    district: "",
+    state: "",
+    country: "",
+    pincode: ""
   });
-  const [handleGst, setHandleGst] = useState('');
+  const [handleGst, setHandleGst] = useState("");
   const handleChange = event => {
     setCompFormState({
       ...compformstate,
@@ -28,7 +29,7 @@ function CompanyForm(props) {
 
   const validateGst = () => {
     const gst_no = compformstate.gst_no;
-    if (gst_no === '') setHandleGst('Please enter valid GST number');
+    if (gst_no === "") setHandleGst("Please enter valid GST number");
   };
 
   const handleSubmit = e => {

@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 //import { Link } from 'react-router-dom';
-import { addressform } from '../Utilities/CommonFunctions';
+import "./../../CSS/student.css";
+import { addressform } from "../Utilities/CommonFunctions";
 
 function StudentForm(props) {
   const [studFormState, setStudFormState] = useState({
-    father_name: '',
-    mother_name: '',
-    dob: '',
-    gender: '',
-    hobbies: '',
-    locality: '',
-    city: '',
-    district: '',
-    state: '',
-    country: '',
-    pincode: ''
+    father_name: "",
+    mother_name: "",
+    dob: "",
+    gender: "",
+    hobbies: "",
+    locality: "",
+    city: "",
+    district: "",
+    state: "",
+    country: "",
+    pincode: ""
   });
 
   const handleChange = event => {
@@ -24,7 +25,7 @@ function StudentForm(props) {
     });
   };
   const validate = () => {
-    if (studFormState === ' ') setStudFormState('Please fill the information');
+    if (studFormState === " ") setStudFormState("Please fill the information");
   };
 
   const handleSubmit = e => {
@@ -39,15 +40,15 @@ function StudentForm(props) {
       user: localStorage.userid
     };
 
-    localStorage.setItem('father_name', studFormState.father_name);
-    localStorage.setItem('mother_name', studFormState.mother_name);
-    localStorage.setItem('dob', studFormState.dob);
-    localStorage.setItem('gender', studFormState.gender);
-    localStorage.setItem('hobbies', studFormState.hobbies);
+    localStorage.setItem("father_name", studFormState.father_name);
+    localStorage.setItem("mother_name", studFormState.mother_name);
+    localStorage.setItem("dob", studFormState.dob);
+    localStorage.setItem("gender", studFormState.gender);
+    localStorage.setItem("hobbies", studFormState.hobbies);
 
     addressform(address).then(res => {
       if (res) {
-        props.history.push('/academicForm');
+        props.history.push("/academicForm");
       }
     });
   };
@@ -118,14 +119,14 @@ function StudentForm(props) {
             name="gender"
             value="Male"
             onChange={handleChange}
-          />{' '}
+          />{" "}
           Male
           <input
             type="radio"
             name="gender"
             value="Female"
             onChange={handleChange}
-          />{' '}
+          />{" "}
           Female
         </div>
 

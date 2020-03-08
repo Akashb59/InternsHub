@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import "./../../CSS/student.css";
 //import buildUrl from "build-url";
 import { internshipFilter, internshipAll } from "../Utilities/StudentFunctions";
 

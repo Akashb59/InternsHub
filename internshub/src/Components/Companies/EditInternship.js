@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { editInternship, internship } from "../Utilities/CompanyFunctions";
 import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
+import "./../../CSS/company.css";
 
 function EditInternship(props) {
   const [internshipHostState, setInternshipHostState] = useState({

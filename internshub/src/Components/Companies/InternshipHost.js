@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { hostInternship } from '../Utilities/CompanyFunctions';
-import { skills } from '../Utilities/CommonFunctions';
-import Select from 'react-select';
+import React, { useState, useEffect } from "react";
+import { hostInternship } from "../Utilities/CompanyFunctions";
+import { skills } from "../Utilities/CommonFunctions";
+import Select from "react-select";
+import "./../../CSS/company.css";
 
 function InternshipHost(props) {
   const [internshipHostState, setInternshipHostState] = useState({
-    title: '',
-    description: '',
-    duration: '',
-    starts_on: '',
-    intended_participants: '',
+    title: "",
+    description: "",
+    duration: "",
+    starts_on: "",
+    intended_participants: "",
     requiredSkills: [],
-    categories: '',
-    type_of_internship: '',
-    stipend: ''
+    categories: "",
+    type_of_internship: "",
+    stipend: ""
   });
   const [options, setOptions] = useState([]);
   useEffect(() => {
@@ -44,7 +45,7 @@ function InternshipHost(props) {
   };
   const handleChangeSelect = selectedOption => {
     //   console.log(`Option selected:`, selectedOption);
-    if (selectedOption === null) return '';
+    if (selectedOption === null) return "";
     const selected = selectedOption.map(option => option.value);
     // if (selected.length === 0) selected = [];
     // console.log(selected);
@@ -83,8 +84,8 @@ function InternshipHost(props) {
 
     hostInternship(Internship).then(res => {
       if (res) {
-        alert('Successfully hosted internship');
-        props.history.push('/companyHome');
+        alert("Successfully hosted internship");
+        props.history.push("/companyHome");
       }
     });
   };

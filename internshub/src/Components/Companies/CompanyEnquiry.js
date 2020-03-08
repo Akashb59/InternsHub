@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React from "react";
+import "./../../CSS/company.css";
 function CompanyEnquiry() {
   return (
     <div className="container-fluid">

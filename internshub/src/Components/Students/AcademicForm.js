@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
-import { studentform, student } from '../Utilities/StudentFunctions';
-
-import '../../CSS/student.css';
+import React, { useState } from "react";
+import { studentform, student } from "../Utilities/StudentFunctions";
+import "./../../CSS/student.css";
 
 function AcademicForm(props) {
   const [academicFormState, setAcademicFormState] = useState({
-    school_name: '',
-    grade_10_per: '',
-    pu_college_name: '',
-    grade_12_per: '',
-    college_name: '',
-    university_name: '',
-    usn: '',
-    degree_cgpa: '',
-    phone_number: '',
-    website: '',
-    email: '',
-    project1_undertaken: '',
-    project2_undertaken: ''
+    school_name: "",
+    grade_10_per: "",
+    pu_college_name: "",
+    grade_12_per: "",
+    college_name: "",
+    university_name: "",
+    usn: "",
+    degree_cgpa: "",
+    phone_number: "",
+    website: "",
+    email: "",
+    project1_undertaken: "",
+    project2_undertaken: ""
   });
 
   const handleChange = event => {
@@ -27,8 +26,8 @@ function AcademicForm(props) {
     });
   };
   const validate = () => {
-    if (academicFormState === ' ')
-      setAcademicFormState('Please fill the information');
+    if (academicFormState === " ")
+      setAcademicFormState("Please fill the information");
   };
 
   const keypress = event => {

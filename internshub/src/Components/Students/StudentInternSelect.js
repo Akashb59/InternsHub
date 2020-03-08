@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { selectedIntern } from "../Utilities/StudentFunctions";
+import "./../../CSS/student.css";
 
 function StudentHome(props) {
   const [internship, setInternship] = useState({
