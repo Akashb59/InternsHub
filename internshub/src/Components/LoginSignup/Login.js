@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import { login, roles, forgotPassword } from "../Utilities/CommonFunctions";
 import { company } from "../Utilities/CompanyFunctions";
 import { student } from "../Utilities/StudentFunctions";

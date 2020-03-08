@@ -211,7 +211,7 @@ function InternshipHost(props) {
           <input
             type="radio"
             name="type_of_internship"
-            value="unpaid"
+            value="free"
             onChange={handleChange}
           />
           Unpaid
