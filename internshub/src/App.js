@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { ProtectedRouteCompany, ProtectedRouteStudent } from "./ProtectedRoute";
 
 import Landing from "./Components/General/Landing";
 import Profile from "./Components/General/Profile";
@@ -11,7 +12,6 @@ import Check1 from "./Components/Others/Check1";
 
 import Login from "./Components/LoginSignup/Login";
 import Signup from "./Components/LoginSignup/Signup";
-
 import CompanyHome from "./Components/Companies/CompanyHome";
 import CompanyForm from "./Components/Companies/CompanyForm";
 import InternshipHost from "./Components/Companies/InternshipHost";
@@ -30,41 +30,77 @@ function App() {
     <Router>
       <div>
         <Navbar />
-        <Route exact path="/" component={Landing} />
+
         <div className="main">
-          <Route exact path="/profile" component={Profile} />
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/profile" component={Profile} />
 
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
 
-          <Route exact path="/check" component={Check} />
-          <Route exact path="/check1" component={Check1} />
-          <Route exact path="/basics" component={Basics} />
+            <Route exact path="/check" component={Check} />
+            <Route exact path="/check1" component={Check1} />
+            <Route exact path="/basics" component={Basics} />
 
-          <Route exact path="/companyHome" component={CompanyHome} />
-          <Route exact path="/companyForm" component={CompanyForm} />
-          <Route exact path="/internshipHost" component={InternshipHost} />
-          <Route
-            exact
-            path="/companyDescription"
-            component={CompanyDescription}
-          />
-          <Route exact path="/companyEnquiry" component={CompanyEnquiry} />
-          <Route
-            exact
-            path="/companyTechnologies"
-            component={CompanyTechnologies}
-          />
-          <Route exact path="/editInternship" component={EditInternship} />
+            <ProtectedRouteCompany
+              exact
+              path="/companyHome"
+              component={CompanyHome}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/companyForm"
+              component={CompanyForm}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/internshipHost"
+              component={InternshipHost}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/companyDescription"
+              component={CompanyDescription}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/companyEnquiry"
+              component={CompanyEnquiry}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/companyTechnologies"
+              component={CompanyTechnologies}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/editInternship"
+              component={EditInternship}
+            />
 
-          <Route exact path="/studentHome" component={StudentHome} />
-          <Route exact path="/studentForm" component={StudentForm} />
-          <Route exact path="/academicForm" component={AcademicForm} />
-          <Route
-            exact
-            path="/selectedInternship"
-            component={StudentInternSelect}
-          />
+            <ProtectedRouteStudent
+              exact
+              path="/studentHome"
+              component={StudentHome}
+            />
+            <ProtectedRouteStudent
+              exact
+              path="/studentForm"
+              component={StudentForm}
+            />
+            <ProtectedRouteStudent
+              exact
+              path="/academicForm"
+              component={AcademicForm}
+            />
+            <ProtectedRouteStudent
+              exact
+              path="/selectedInternship"
+              component={StudentInternSelect}
+            />
+            <Route path="*" component={() => "404 NOT FOUND"} />
+          </Switch>
         </div>
       </div>
     </Router>
