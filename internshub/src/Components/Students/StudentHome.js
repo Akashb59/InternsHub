@@ -61,6 +61,42 @@ function StudentHome() {
       ? setFilterState({ ...filterState, [name]: checked })
       : setFilterState({ ...filterState, [name]: value });
   }
+  const handleReset = e => {
+    e.preventDefault();
+    setFilterState({
+      ...filterState,
+      startsOn: "",
+      type: "",
+      stipend1: false,
+      stipend2: false,
+      stipend3: false,
+      stipend4: false,
+      category: "",
+      duration1: false,
+      duration2: false,
+      duration3: false
+    });
+    internshipAll().then(res => {
+      if (res) {
+        console.log(res.data.internship);
+        const arr = res.data.internship.map(data => ({
+          title: data.title,
+          category: data.categories,
+          startsOn: data.starts_on.substring(0, 10),
+          type: data.type_of_internship,
+          duration: data.duration,
+          stipend: data.stipend,
+          description: data.description,
+          postedOn: data.posted_on.substring(0, 10),
+          intendedParticipants: data.intended_participants,
+          company: data.company.user.fullname,
+          requiredSkills: data.requiredSkills,
+          id: data.id
+        }));
+        setInternArray(arr);
+      }
+    });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -179,8 +215,8 @@ function StudentHome() {
         <p>STUDENT:{localStorage.studentid}</p> */}
       </div>
       <div className="container-fluid">
-        <div class="row">
-          <div class="col-lg-3">
+        <div className="row">
+          <div className="col-lg-3">
             <div className="jumbotron mt-2">
               <form onSubmit={handleSubmit}>
                 <label>
@@ -326,7 +362,11 @@ function StudentHome() {
                   />
                 </label>
                 <br />
-                <button className="btn btn-danger" type="reset">
+                <button
+                  className="btn btn-danger"
+                  type="reset"
+                  onClick={handleReset}
+                >
                   Reset
                 </button>
                 <br />
@@ -339,7 +379,7 @@ function StudentHome() {
             </div>
           </div>
 
-          <div class="col-sm-9">
+          <div className="col-sm-9">
             {internArray.map(function(intern) {
               return (
                 <div key={intern.id}>

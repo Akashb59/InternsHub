@@ -46,12 +46,12 @@
   transform: translateX(-50%);
   z-index: 9999;
   color: #fff;
-  font-size: 1.8rem;
+  font-size: 1.2rem;
   font-weight: 400;
   text-align: center;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  padding: 1.6rem 15rem;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  padding: 1.2rem 12rem;
   -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
 }
@@ -73,7 +73,7 @@
 
 .form__label {
   display: block;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 700;
   margin-bottom: 0.75rem;
 }

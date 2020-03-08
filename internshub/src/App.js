@@ -31,7 +31,7 @@ function App() {
       <div>
         <Navbar />
         <Route exact path="/" component={Landing} />
-        <div className="container-fluid">
+        <div className="main">
           <Route exact path="/profile" component={Profile} />
 
           <Route exact path="/signup" component={Signup} />
