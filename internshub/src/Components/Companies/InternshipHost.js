@@ -214,7 +214,7 @@ function InternshipHost(props) {
             value="free"
             onChange={handleChange}
           />
-          Unpaid
+          Free
         </div>
         <div className="form-group">
           <label htmlFor="stipend">Stipend: </label>

@@ -235,11 +235,11 @@ function EditInternship(props) {
           <input
             type="radio"
             name="type_of_internship"
-            checked={internshipHostState.type_of_internship === "unpaid"}
-            value="unpaid"
+            checked={internshipHostState.type_of_internship === "free"}
+            value="free"
             onChange={handleChange}
           />
-          Unpaid
+          Free
         </div>
         <div className="form-group">
           <label htmlFor="stipend">Stipend: </label>

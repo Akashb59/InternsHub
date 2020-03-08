@@ -108,7 +108,7 @@ export const internship = id => {
 //Changes to br made
 export const editInternship = internship => {
   return axios
-    .patch(`${ip}/api/v1/internships/${localStorage.internshipid}`, {
+    .patch(`${ip}/api/v1/internships/${localStorage.internshipId}`, {
       headers: {
         jwt: localStorage.usertoken
       },

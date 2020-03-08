@@ -56,8 +56,8 @@ const internshipSchema = new mongoose.Schema(
     type_of_internship: {
       type: String,
       enum: {
-        values: ['paid', 'unpaid'],
-        message: 'categories is either Paid or Unpaid'
+        values: ['paid', 'free'],
+        message: 'categories is either Paid or Free'
       }
     },
     slug: String
