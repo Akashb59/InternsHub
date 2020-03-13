@@ -40,6 +40,7 @@ function App() {
             <Route exact path="/login" component={Login} />
 
             <Route exact path="/check" component={Check} />
+
             <Route exact path="/check1" component={Check1} />
             <Route exact path="/basics" component={Basics} />
 

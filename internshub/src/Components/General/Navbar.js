@@ -1,10 +1,10 @@
-import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React from "react";
+import { Link, withRouter } from "react-router-dom";
 
 function Navbar(props) {
   const logout = e => {
     e.preventDefault();
-    localStorage.removeItem('usertoken');
+    localStorage.removeItem("usertoken");
     props.history.push(`/`);
   };
   const loginRegLink = (
@@ -63,9 +63,9 @@ function Navbar(props) {
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
       <div className="container">
         {localStorage.usertoken
-          ? localStorage.type === 'Student'
+          ? localStorage.type === "Student"
             ? studentLink
-            : localStorage.type === 'Company'
+            : localStorage.type === "Company"
             ? companyLink
             : placementLink
           : homeLink}
