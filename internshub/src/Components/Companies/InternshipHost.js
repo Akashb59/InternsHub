@@ -3,6 +3,7 @@ import { hostInternship } from "../Utilities/CompanyFunctions";
 import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
 import "./../../CSS/company.css";
+import { showAlert } from "../Utilities/Alerts";
 
 function InternshipHost(props) {
   const [internshipHostState, setInternshipHostState] = useState({
@@ -84,7 +85,7 @@ function InternshipHost(props) {
 
     hostInternship(Internship).then(res => {
       if (res) {
-        alert("Successfully hosted internship");
+        showAlert("Successfully hosted internship");
         props.history.push("/companyHome");
       }
     });

@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 function Landing() {
   useEffect(() => {
-    const ip = "http://192.168.1.31:3000";
+    const ip = "http://192.168.1.60:3000";
     localStorage.setItem("ip", ip);
   }, []);
   return (
     <div className="container-fluid">
-      <div className="jumbotron mt-5">
+      <div className="jumbotron">
         <div className="col-sm-8 mx-auto display-4 text-center">WELCOME</div>
         <Link to="/check" className="nav-link">
           Check

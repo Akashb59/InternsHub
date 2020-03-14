@@ -3,6 +3,7 @@ import { editInternship, internship } from "../Utilities/CompanyFunctions";
 import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
 import "./../../CSS/company.css";
+import { showAlert } from "../Utilities/Alerts";
 
 function EditInternship(props) {
   const [internshipHostState, setInternshipHostState] = useState({
@@ -98,7 +99,7 @@ function EditInternship(props) {
 
     editInternship(Internship).then(res => {
       if (res) {
-        alert("Successfully edited internship");
+        showAlert("Successfully edited internship");
         props.history.push("/companyHome");
       }
     });

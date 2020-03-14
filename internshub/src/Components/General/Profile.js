@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import jwt_decode from 'jwt-decode';
-import { profile } from '../Utilities/CommonFunctions';
+import React, { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
+import { profile } from "../Utilities/CommonFunctions";
 
 function Profile() {
-  const [fullname, setFullname] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [roleType, setRoletype] = useState('');
+  const [fullname, setFullname] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [roleType, setRoletype] = useState("");
 
   useEffect(() => {
     const token = localStorage.usertoken;
@@ -29,7 +29,7 @@ function Profile() {
 
   return (
     <div className="container">
-      <div className="jumbotron mt-5">
+      <div className="jumbotron">
         <div className="col-sm-8">
           <h1 className="text-center">Profile</h1>
         </div>

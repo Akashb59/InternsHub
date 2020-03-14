@@ -189,8 +189,6 @@ function StudentHome() {
   return (
     <div>
       <div className="container">
-        <p>{filterState.stipend1}</p>
-
         <div className="col-sm-8 mx-auto display-4 text-center">
           Internships
         </div>
