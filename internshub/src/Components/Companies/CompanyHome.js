@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import "./../../CSS/company.css";
-import { companyDescription, company } from "../Utilities/CompanyFunctions";
+import {
+  companyDescription,
+  company,
+  companyTechnology
+} from "../Utilities/CompanyFunctions";
 import { showAlert } from "./../Utilities/Alerts";
 import { Link } from "react-router-dom";
 import "./../../CSS/company.css";
@@ -29,6 +33,11 @@ function CompanyHome(props) {
     stipend: ""
   });
   const [options, setOptions] = useState([]);
+  const [technologyState, setTechnology] = useState({
+    technology: []
+  });
+  const [tech, setTech] = useState([]);
+
   useEffect(() => {
     skills().then(res => {
       if (res) {
@@ -41,38 +50,24 @@ function CompanyHome(props) {
         //console.log(options);
       }
     });
+    const id = localStorage.companyid;
+    if (localStorage.companyid !== undefined)
+      localStorage.setItem("companyId", id);
     company(localStorage.companyid).then(res => {
       if (res) {
         setDescription({
           ...descriptionState,
           aboutCompany: res.data.company[0].aboutCompany
         });
+        const technology = res.data.company[0].technology.map(
+          te => `${te.skill_name}    `
+        );
+        setTech(technology);
       }
     });
     // eslint-disable-next-line
   }, []);
 
-  const handleChange1 = event => {
-    //const {name,value}=event.target;
-    setDescription({
-      ...descriptionState,
-      [event.target.name]: event.target.value
-    });
-  };
-
-  const handleSubmit1 = e => {
-    e.preventDefault();
-    const Desc = {
-      aboutCompany: descriptionState.aboutCompany
-    };
-    companyDescription(Desc).then(res => {
-      if (res) {
-        showAlert("success", "Details Recorded");
-        props.history.push("/companyHome");
-        window.location.reload(false);
-      }
-    });
-  };
   const realoptions = options.map(option => ({
     value: option.skillid,
     label: option.skill
@@ -86,6 +81,13 @@ function CompanyHome(props) {
       [event.target.name]: event.target.value
     });
   };
+  const handleChange1 = event => {
+    //const {name,value}=event.target;
+    setDescription({
+      ...descriptionState,
+      [event.target.name]: event.target.value
+    });
+  };
   const handleChangeSelect = selectedOption => {
     //   console.log(`Option selected:`, selectedOption);
     if (selectedOption === null) return "";
@@ -95,6 +97,17 @@ function CompanyHome(props) {
     setInternshipHostState({
       ...internshipHostState,
       requiredSkills: selected
+    });
+  };
+  const handleChangeSelect1 = selectedOption => {
+    //   console.log(`Option selected:`, selectedOption);
+    if (selectedOption === null) return "";
+    const selected = selectedOption.map(option => option.value);
+    // if (selected.length === 0) selected = [];
+    // console.log(selected);
+    setTechnology({
+      ...technologyState,
+      technology: selected
     });
   };
   const handleSubmit = e => {
@@ -114,7 +127,33 @@ function CompanyHome(props) {
 
     hostInternship(Internship).then(res => {
       if (res) {
-        showAlert("Successfully hosted internship");
+        showAlert("success", "Successfully hosted internship");
+        props.history.push("/companyHome");
+        window.location.reload(false);
+      }
+    });
+  };
+  const handleSubmit1 = e => {
+    e.preventDefault();
+    const Desc = {
+      aboutCompany: descriptionState.aboutCompany
+    };
+    companyDescription(Desc).then(res => {
+      if (res) {
+        showAlert("success", "Details Recorded");
+        props.history.push("/companyHome");
+        window.location.reload(false);
+      }
+    });
+  };
+  const handleSubmit2 = e => {
+    e.preventDefault();
+    const Techno = {
+      technology: technologyState.technology
+    };
+    companyTechnology(Techno).then(res => {
+      if (res) {
+        showAlert("success", "Changed successfully");
         props.history.push("/companyHome");
         window.location.reload(false);
       }
@@ -269,43 +308,99 @@ function CompanyHome(props) {
                 <span>&times;</span>
               </button>
             </div>
-            <form onSubmit={handleSubmit1}>
-              <div className="modal-body">
-                <div className="jumbotron mt-5">
-                  <div className="col-sm-8 mx-auto display-4 text-center">
-                    <p>
-                      <b>DESCRIPTION</b>
-                    </p>
+            <ul className="nav nav-tabs">
+              <li className="nav-item">
+                <a className="nav-link active" data-toggle="tab" href="#desc">
+                  Description
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" data-toggle="tab" href="#tech">
+                  Technologies
+                </a>
+              </li>
+            </ul>
+            <div className="tab-content">
+              <div id="desc" className="container tab-pane active">
+                <br></br>
+                <form onSubmit={handleSubmit1}>
+                  <div className="modal-body">
+                    <div className="jumbotron mt-2">
+                      <div className="col-sm-8 mx-auto display-4 text-center">
+                        <p>
+                          <b>DESCRIPTION</b>
+                        </p>
+                      </div>
+                      <center>
+                        <br />
+                        {descriptionState.aboutCompany}
+                      </center>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="aboutCompany">
+                        {" "}
+                        <b>Add/Edit Description: </b>
+                      </label>
+                      <textarea
+                        className="form-control"
+                        name="aboutCompany"
+                        rows="3"
+                        maxLength="200"
+                        value={descriptionState.aboutCompany}
+                        onChange={handleChange1}
+                      ></textarea>
+                    </div>
+
+                    <div className="modal-footer">
+                      <button className="btn btn-success" type="submit">
+                        Submit
+                      </button>
+                    </div>
                   </div>
-                  <center>
-                    <br />
-                    {descriptionState.aboutCompany}
-                  </center>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="aboutCompany">
-                    {" "}
-                    <b>Add/Edit Description: </b>
-                  </label>
-                  <textarea
-                    className="form-control"
-                    name="aboutCompany"
-                    rows="3"
-                    maxLength="200"
-                    value={descriptionState.aboutCompany}
-                    onChange={handleChange1}
-                  ></textarea>
-                </div>
-                <div className="input-field"></div>
-
-                <div className="modal-footer">
-                  <button className="btn btn-success" type="submit">
-                    Submit
-                  </button>
-                </div>
+                </form>
               </div>
-            </form>
+              <div id="tech" className="container tab-pane fade">
+                <br></br>
+                <form onSubmit={handleSubmit2}>
+                  <div className="modal-body">
+                    <div className="jumbotron mt-2">
+                      <div className="col-sm-8 mx-auto display-4 text-center">
+                        <p>
+                          <b>TECHNOLOGIES</b>
+                        </p>
+                      </div>
+                      <center>
+                        <br />
+                        {tech}
+                      </center>
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="technology">
+                        {" "}
+                        <b>Add/Edit Technologies: </b>
+                      </label>
+                      <Select
+                        required
+                        name="technology"
+                        isMulti
+                        isSearchable
+                        isClearable
+                        onChange={handleChangeSelect1}
+                        options={realoptions}
+                      />
+                    </div>
+
+                    <div className="modal-footer">
+                      <button className="btn btn-success" type="submit">
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -17,10 +17,10 @@ import Signup from "./Components/LoginSignup/Signup";
 import ViewInternships from "./Components/Companies/ViewInternships";
 import CompanyHome from "./Components/Companies/CompanyHome";
 import CompanyForm from "./Components/Companies/CompanyForm";
-import InternshipHost from "./Components/Companies/InternshipHost";
-import CompanyDescription from "./Components/Companies/CompanyDescription";
+//import InternshipHost from "./Components/Companies/InternshipHost";
+//import CompanyDescription from "./Components/Companies/CompanyDescription";
 import CompanyEnquiry from "./Components/Companies/CompanyEnquiry";
-import CompanyTechnologies from "./Components/Companies/CompanyTechnologies";
+//import CompanyTechnologies from "./Components/Companies/CompanyTechnologies";
 import EditInternship from "./Components/Companies/EditInternship";
 
 import StudentHome from "./Components/Students/StudentHome";
@@ -40,13 +40,13 @@ function App() {
               <Route exact path="/" component={Landing} />
               <Route exact path="/forbidden" component={Forbidden} />
               <Route exact path="/notFound" component={NotFound} />
+
               <Route exact path="/profile" component={Profile} />
 
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/login" component={Login} />
 
               <Route exact path="/check" component={Check} />
-
               <Route exact path="/basics" component={Basics} />
 
               <ProtectedRouteCompany
@@ -59,7 +59,7 @@ function App() {
                 path="/companyForm"
                 component={CompanyForm}
               />
-              <ProtectedRouteCompany
+              {/* <ProtectedRouteCompany
                 exact
                 path="/internshipHost"
                 component={InternshipHost}
@@ -68,17 +68,17 @@ function App() {
                 exact
                 path="/companyDescription"
                 component={CompanyDescription}
-              />
+              /> */}
               <ProtectedRouteCompany
                 exact
                 path="/companyEnquiry"
                 component={CompanyEnquiry}
               />
-              <ProtectedRouteCompany
+              {/* <ProtectedRouteCompany
                 exact
                 path="/companyTechnologies"
                 component={CompanyTechnologies}
-              />
+              /> */}
               <ProtectedRouteCompany
                 exact
                 path="/editInternship"

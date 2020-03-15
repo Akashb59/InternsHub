@@ -11,8 +11,6 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors());
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
 
 // Global Middleware
 
@@ -91,7 +89,7 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 app.all('*', function(req, res, next) {
-  res.header('Access-Control-Allow-Origin', 'http://192.168.1.56:3001');
+  res.header('Access-Control-Allow-Origin', '*');
   res.header(
     'Access-Control-Allow-Methods',
     'GET, POST, OPTIONS, PUT, PATCH, DELETE'
