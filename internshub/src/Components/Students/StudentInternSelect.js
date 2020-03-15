@@ -28,6 +28,7 @@ function StudentHome(props) {
   useEffect(() => {
     selectedIntern(localStorage.internId).then(res => {
       if (res) {
+        document.title = `InternsHub | ${res.data.internship.title}`;
         console.log(res.data.internship);
         const ab = res.data.internship;
         setInternship({

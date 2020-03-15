@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { studentform, student } from "../Utilities/StudentFunctions";
 import "./../../CSS/student.css";
 
 function AcademicForm(props) {
+  useEffect(() => {
+    document.title = "InternsHub | Student Details";
+  }, []);
   const [academicFormState, setAcademicFormState] = useState({
     school_name: "",
     grade_10_per: "",

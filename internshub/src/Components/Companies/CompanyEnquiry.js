@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./../../CSS/company.css";
 function CompanyEnquiry() {
+  useEffect(() => {
+    document.title = "InternsHub | Company Enquiries";
+  }, []);
   return (
     <div className="container-fluid">
       <div className="jumbotron mt-5">

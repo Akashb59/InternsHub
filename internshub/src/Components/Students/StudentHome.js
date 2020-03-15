@@ -33,6 +33,7 @@ function StudentHome() {
   const [internArray, setInternArray] = useState([]);
 
   useEffect(() => {
+    document.title = "InternsHub | Student Home";
     internshipAll().then(res => {
       if (res) {
         console.log(res.data.internship);

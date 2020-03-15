@@ -28,7 +28,7 @@ function EditInternship(props) {
     internship(localStorage.internshipId).then(res => {
       if (res) {
         // console.log(res.data.data.internship.requiredSkills[0]._id);
-
+        document.title = `InternsHub | Edit ${res.data.data.internship.title}`;
         setInternshipHostState({
           ...internshipHostState,
           title: res.data.data.internship.title,
@@ -99,7 +99,7 @@ function EditInternship(props) {
 
     editInternship(Internship).then(res => {
       if (res) {
-        showAlert("Successfully edited internship");
+        showAlert("success", "Successfully edited internship");
         props.history.push("/companyHome");
       }
     });

@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { companyform, company } from "../Utilities/CompanyFunctions";
 import { addressform } from "../Utilities/CommonFunctions";
 import "./../../CSS/company.css";
 
 function CompanyForm(props) {
+  useEffect(() => {
+    document.title = "InternsHub | Company Details";
+  }, []);
   const [compformstate, setCompFormState] = useState({
     gst_no: "",
     website: "",

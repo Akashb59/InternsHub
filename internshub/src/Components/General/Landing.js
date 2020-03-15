@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 function Landing() {
   useEffect(() => {
-    const ip = "http://192.168.1.60:3000";
+    document.title = "InternsHub | Home";
+    const ip = "http://192.168.1.21:3000";
     localStorage.setItem("ip", ip);
   }, []);
   return (

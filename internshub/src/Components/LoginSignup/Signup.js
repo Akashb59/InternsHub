@@ -14,6 +14,7 @@ function Signup(props) {
   const [roleState, setRoleState] = useState([]);
 
   useEffect(() => {
+    document.title = "InternsHub | SignUp";
     roles().then(res => {
       if (res) {
         //console.log(res.data.userTypeMaster);

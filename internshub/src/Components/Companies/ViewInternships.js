@@ -36,6 +36,7 @@ function ViewInternships() {
   const [internshipState, setInternshipState] = useState([]);
   //const ip = "http://192.168.1.25:3000";
   useEffect(() => {
+    document.title = "InternsHub | View Internship";
     companyInternships().then(res => {
       if (res) {
         setInternshipState(res.data.data.internship);

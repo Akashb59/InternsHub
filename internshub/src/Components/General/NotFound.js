@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { showAlert } from "./../Utilities/Alerts";
 
 function NotFound() {
+  useEffect(() => {
+    document.title = "InternsHub | NOT FOUND";
+  }, []);
   return (
     <div className="container-fluid">
       {showAlert("error", "Not Found")}

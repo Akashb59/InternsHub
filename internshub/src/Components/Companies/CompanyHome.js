@@ -39,6 +39,7 @@ function CompanyHome(props) {
   const [tech, setTech] = useState([]);
 
   useEffect(() => {
+    document.title = "InternsHub | Company Home";
     skills().then(res => {
       if (res) {
         //console.log(res.data.skillTypeMaster);
@@ -303,7 +304,7 @@ function CompanyHome(props) {
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
             <div className="modal-header bg-success text-white">
-              <h5 className="modal-title">Description</h5>
+              <h5 className="modal-title">{localStorage.name} Information</h5>
               <button className="close" data-dismiss="modal">
                 <span>&times;</span>
               </button>

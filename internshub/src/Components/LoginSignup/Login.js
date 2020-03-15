@@ -14,6 +14,7 @@ function Login(props) {
   const [roleState, setRoleState] = useState([]);
 
   useEffect(() => {
+    document.title = "InternsHub | Login";
     roles().then(res => {
       if (res) {
         //console.log(res.data.userTypeMaster);

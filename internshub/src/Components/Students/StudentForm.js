@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //import { Link } from 'react-router-dom';
 import "./../../CSS/student.css";
 import { addressform } from "../Utilities/CommonFunctions";
 
 function StudentForm(props) {
+  useEffect(() => {
+    document.title = "InternsHub | Student Details";
+  }, []);
   const [studFormState, setStudFormState] = useState({
     father_name: "",
     mother_name: "",

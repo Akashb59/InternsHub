@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function Forbidden() {
+  useEffect(() => {
+    document.title = "InternsHub | FORBIDDEN";
+  }, []);
   return (
     <div className="container-fluid">
       <div className="jumbotron">

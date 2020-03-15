@@ -8,6 +8,7 @@ function Profile() {
   const [roleType, setRoletype] = useState("");
 
   useEffect(() => {
+    document.title = "InternsHub | Profile";
     const token = localStorage.usertoken;
     //console.log(token);
     const decoded = jwt_decode(token);
