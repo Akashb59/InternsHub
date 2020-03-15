@@ -143,3 +143,25 @@
 #content-wrap {
   padding-bottom: 4rem;
 }
+
+.logo {
+  width: 44px;
+  height: 44px;
+  margin-left: 40%;
+}
+@media only screen and (max-width: 574px) {
+  .logo {
+    margin-left: 0%;
+  }
+}
+
+@media only screen and (min-width: 575px) {
+  .logo {
+    margin-left: 30%;
+  }
+}
+@media only screen and (min-width: 765px) {
+  .logo {
+    margin-left: 40%;
+  }
+}

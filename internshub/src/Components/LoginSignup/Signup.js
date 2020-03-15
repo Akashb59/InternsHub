@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { signup, roles, role } from "../Utilities/CommonFunctions";
+import { signup, roles, role, profile } from "../Utilities/CommonFunctions";
 import "../../CSS/App.css";
 
 function Signup(props) {
@@ -43,12 +43,18 @@ function Signup(props) {
     };
     signup(newUser).then(res => {
       if (res) {
-        console.log(res.data.user.roleType);
+        //console.log(res.data);
         const roleType = res.data.user.roleType;
+        let id = res.data.user.id;
+        const user = {
+          id: id
+        };
+        profile(user).then(res => {
+          localStorage.setItem("name", res.data.user.fullname);
+        });
         role(roleType).then(res => {
           if (res) {
             localStorage.setItem("type", res.data.userTypeMaster.roleName);
-            localStorage.setItem("name", res.data.user.fullname);
             check = res.data.userTypeMaster.roleName;
             console.log(res.data.userTypeMaster.roleName);
             if (check === "Student") {

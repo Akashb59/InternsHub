@@ -7,7 +7,7 @@ function Footer() {
       <div className="container">
         <div className="row">
           <div className="col">
-            <p className="lead text-center">
+            <p className="lead text-center mt-3">
               Copyright ©
               <span id="year" />
               InternsHub

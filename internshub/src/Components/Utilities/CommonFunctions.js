@@ -26,7 +26,7 @@ export const signup = newUser => {
       localStorage.setItem("userid", id);
       //console.log(res.data);
       console.log("Sending");
-      showAlert("success", "Logged In");
+      showAlert("success", "Sign Up Successful");
       return res.data;
     })
     .catch(err => {

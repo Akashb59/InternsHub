@@ -28,6 +28,8 @@ import StudentForm from "./Components/Students/StudentForm";
 import AcademicForm from "./Components/Students/AcademicForm";
 import StudentInternSelect from "./Components/Students/StudentInternSelect";
 
+import "./CSS/App.css";
+
 function App() {
   return (
     <Router>

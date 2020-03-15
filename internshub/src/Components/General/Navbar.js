@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
+import "./../../CSS/App.css";
 
 function Navbar(props) {
   const logout = e => {
@@ -69,6 +70,7 @@ function Navbar(props) {
             ? companyLink
             : placementLink
           : homeLink}
+        <img className="logo" src="Logo1.png" alt="logo" />
 
         <button
           className="navbar-toggler"
@@ -77,6 +79,7 @@ function Navbar(props) {
         >
           <span className="navbar-toggler-icon" />
         </button>
+
         <div className="collapse navbar-collapse" id="navbarCollapse">
           {localStorage.usertoken ? userLink : loginRegLink}
         </div>

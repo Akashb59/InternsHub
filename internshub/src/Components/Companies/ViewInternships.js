@@ -13,21 +13,23 @@ function ViewInternships() {
       {/* <td>{props.internship._id}</td> */}
       <td>
         <Link
+          className="btn btn-warning btn-sm btn-block"
           to={{
             pathname: "/editInternship",
             internship: `${props.internship._id}`
           }}
         >
-          edit
+          <i className="fas fa-pencil-alt pl-2 pr-2"></i>
         </Link>{" "}
-        |{" "}
+      </td>
+      <td>
         <button
-          className="link"
+          className="btn btn-danger btn-sm btn-block"
           onClick={() => {
             deleteInternship(props.internship._id);
           }}
         >
-          delete
+          <i className="fas fa-trash pl-2 pr-2"></i>
         </button>
       </td>
     </tr>
@@ -36,9 +38,10 @@ function ViewInternships() {
   const [internshipState, setInternshipState] = useState([]);
   //const ip = "http://192.168.1.25:3000";
   useEffect(() => {
-    document.title = "InternsHub | View Internship";
+    document.title = "InternsHub | Hosted Internships";
     companyInternships().then(res => {
       if (res) {
+        console.log(res.data.data.internship);
         setInternshipState(res.data.data.internship);
       }
     });
@@ -80,8 +83,22 @@ function ViewInternships() {
     });
   }
   return (
-    <div className="container-fluid">
-      <div className="jumbotron mt-5">
+    <div className="container">
+      <header id="main-header" className="py-2 bg-secondary text-white">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-3"></div>
+            <div className="col-md-6 text-center">
+              <h1>
+                <i className="fas fa-book" /> Hosted Internships
+              </h1>
+            </div>
+            <div className="col-md-3"></div>
+          </div>
+        </div>
+      </header>
+      <br></br>
+      {/* <div className="jumbotron mt-5">
         <div className="col-sm-8 mx-auto display-4 text-center">WELCOME</div>
         <Link to="/internshipHost" className="nav-link">
           Host Internship
@@ -97,16 +114,16 @@ function ViewInternships() {
         </Link>
         <p>USER:{localStorage.userid}</p>
         <p>COMPANY:{localStorage.companyid}</p>
-      </div>
+      </div> */}
 
       <div>
-        <h3>Hosted Internships</h3>
-        <table className="table">
-          <thead className="thead-light">
+        <table className="table table-striped">
+          <thead className="thead-dark">
             <tr>
-              <th>title</th>
+              <th>Title</th>
               <th>Starts On</th>
-              <th>Actions</th>
+              <th>Edit</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>{internshipList()}</tbody>

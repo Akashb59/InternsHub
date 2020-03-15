@@ -14,7 +14,7 @@ exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
   req.body.stipend[0] === true ? stip.push({ stipend: 0 }) : {};
   req.body.stipend[1] === true
     ? stip.push({
-        $and: [{ stipend: { $gte: 0 } }, { stipend: { $lte: 5000 } }]
+        $and: [{ stipend: { $gt: 0 } }, { stipend: { $lte: 5000 } }]
       })
     : {};
   req.body.stipend[2] === true
@@ -68,6 +68,7 @@ exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
   }
 
   console.log(query);
+  req.query.sort = '-starts_on';
   const features = new APIFeatures(Internship.find(query), req.query)
     .filter()
     .sorter()
@@ -87,6 +88,7 @@ exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
 });
 exports.getAllInternships = catchAsync(async (req, res, next) => {
   //Execute Query
+  req.query.sort = '-starts_on';
   const features = new APIFeatures(Internship.find(), req.query)
     .filter()
     .sorter()

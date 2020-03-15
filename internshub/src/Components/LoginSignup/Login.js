@@ -39,7 +39,7 @@ function Login(props) {
     };
     login(user).then(res => {
       if (res) {
-        //console.log(res.data.user.roleType.roleName);
+        console.log(res.data);
         check = res.data.user.roleType.roleName;
         localStorage.setItem("type", res.data.user.roleType.roleName);
         localStorage.setItem("name", res.data.user.fullname);
