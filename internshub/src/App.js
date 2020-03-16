@@ -21,7 +21,7 @@ import CompanyForm from "./Components/Companies/CompanyForm";
 //import CompanyDescription from "./Components/Companies/CompanyDescription";
 import CompanyEnquiry from "./Components/Companies/CompanyEnquiry";
 //import CompanyTechnologies from "./Components/Companies/CompanyTechnologies";
-import EditInternship from "./Components/Companies/EditInternship";
+//import EditInternship from "./Components/Companies/EditInternship";
 
 import StudentHome from "./Components/Students/StudentHome";
 import StudentForm from "./Components/Students/StudentForm";
@@ -81,11 +81,11 @@ function App() {
                 path="/companyTechnologies"
                 component={CompanyTechnologies}
               /> */}
-              <ProtectedRouteCompany
+              {/* <ProtectedRouteCompany
                 exact
                 path="/editInternship"
                 component={EditInternship}
-              />
+              /> */}
               <ProtectedRouteCompany
                 exact
                 path="/viewInternships"
