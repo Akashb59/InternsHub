@@ -320,6 +320,7 @@ function ViewInternships(props) {
 
                 <div className="form-group">
                   <label htmlFor="duration">Duration: </label>
+                  <p>In months</p>
                   <input
                     type="number"
                     className="form-control"

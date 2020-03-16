@@ -108,7 +108,7 @@ function StudentHome(props) {
           <p>
             {" "}
             <b>Duration: </b>
-            {internship.duration} Months
+            {internship.duration} In Months
           </p>
           <p>
             {" "}

@@ -84,7 +84,7 @@ function StudentInfo(props) {
     addressform(address).then(res => {
       if (res) {
         showAlert("success", "Personal Information Recorded");
-        window.location.reload(false);
+        //window.location.reload(false);
         document.getElementById("filled").setAttribute("className", "nav-link");
         //setInfo("Filled");
         document

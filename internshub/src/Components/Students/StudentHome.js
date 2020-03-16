@@ -383,7 +383,7 @@ function StudentHome() {
                         </div>
                         <div className="col-sm-3 col-xs-3">
                           <p style={{ color: "grey" }}>Duration:</p>
-                          <p>{intern.duration} Months</p>
+                          <p>{intern.duration} In Months</p>
                         </div>
                         <div className="col-sm-3 col-xs-3">
                           <p style={{ color: "grey" }}>Category:</p>
