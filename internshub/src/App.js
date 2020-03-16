@@ -24,9 +24,10 @@ import CompanyEnquiry from "./Components/Companies/CompanyEnquiry";
 //import EditInternship from "./Components/Companies/EditInternship";
 
 import StudentHome from "./Components/Students/StudentHome";
-import StudentForm from "./Components/Students/StudentForm";
-import AcademicForm from "./Components/Students/AcademicForm";
+//import StudentForm from "./Components/Students/StudentForm";
+//import AcademicForm from "./Components/Students/AcademicForm";
 import StudentInternSelect from "./Components/Students/StudentInternSelect";
+import StudentInfo from "./Components/Students/StudentInfo";
 
 import "./CSS/App.css";
 
@@ -97,7 +98,7 @@ function App() {
                 path="/studentHome"
                 component={StudentHome}
               />
-              <ProtectedRouteStudent
+              {/* <ProtectedRouteStudent
                 exact
                 path="/studentForm"
                 component={StudentForm}
@@ -106,11 +107,16 @@ function App() {
                 exact
                 path="/academicForm"
                 component={AcademicForm}
-              />
+              /> */}
               <ProtectedRouteStudent
                 exact
                 path="/selectedInternship"
                 component={StudentInternSelect}
+              />
+              <ProtectedRouteStudent
+                exact
+                path="/studentDetails"
+                component={StudentInfo}
               />
               <Route path="*" component={NotFound} />
             </Switch>

@@ -58,7 +58,7 @@ function Signup(props) {
             check = res.data.userTypeMaster.roleName;
             console.log(res.data.userTypeMaster.roleName);
             if (check === "Student") {
-              props.history.push(`/studentForm`);
+              props.history.push(`/studentDetails`);
             } else if (check === "Company") {
               props.history.push(`/companyForm`);
             } else if (check === "PlacementCell") {

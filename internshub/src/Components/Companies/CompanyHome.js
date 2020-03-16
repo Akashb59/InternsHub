@@ -7,7 +7,6 @@ import {
 } from "../Utilities/CompanyFunctions";
 import { showAlert } from "./../Utilities/Alerts";
 import { Link } from "react-router-dom";
-import "./../../CSS/company.css";
 import { hostInternship } from "../Utilities/CompanyFunctions";
 import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
