@@ -240,7 +240,7 @@ function ViewInternships(props) {
           <div className="modal-content">
             <div className="modal-header">
               <div className="icon-box">
-                <i class="fa fa-times" aria-hidden="true"></i>
+                <i className="fa fa-times" aria-hidden="true"></i>
               </div>
               <h4 className="modal-title">Are you sure?</h4>
               <button
@@ -391,16 +391,16 @@ function ViewInternships(props) {
                   <input
                     type="radio"
                     name="categories"
-                    checked={internshipHostState.categories === "fulltime"}
-                    value="fulltime"
+                    checked={internshipHostState.categories === "Fulltime"}
+                    value="Fulltime"
                     onChange={handleChange}
                   />
                   Fulltime
                   <input
                     type="radio"
                     name="categories"
-                    value="parttime"
-                    checked={internshipHostState.categories === "parttime"}
+                    value="Parttime"
+                    checked={internshipHostState.categories === "Parttime"}
                     onChange={handleChange}
                   />
                   Parttime
@@ -414,16 +414,16 @@ function ViewInternships(props) {
                   <input
                     type="radio"
                     name="type_of_internship"
-                    checked={internshipHostState.type_of_internship === "paid"}
-                    value="paid"
+                    checked={internshipHostState.type_of_internship === "Paid"}
+                    value="Paid"
                     onChange={handleChange}
                   />
                   Paid
                   <input
                     type="radio"
                     name="type_of_internship"
-                    checked={internshipHostState.type_of_internship === "free"}
-                    value="free"
+                    checked={internshipHostState.type_of_internship === "Free"}
+                    value="Free"
                     onChange={handleChange}
                   />
                   Free

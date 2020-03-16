@@ -184,13 +184,13 @@ function CompanyHome(props) {
         <header id="main-header" className="py-2 bg-secondary text-white">
           <div className="container">
             <div className="row">
-              <div className="col-md-3"></div>
-              <div className="col-md-6 text-center">
+              <div className="col-md-2"></div>
+              <div className="col-md-8 text-center">
                 <h1>
                   <i className="fas fa-cog" /> {localStorage.name} Dashboard
                 </h1>
               </div>
-              <div className="col-md-3"></div>
+              <div className="col-md-2"></div>
             </div>
           </div>
         </header>
@@ -508,14 +508,14 @@ function CompanyHome(props) {
                   <input
                     type="radio"
                     name="categories"
-                    value="fulltime"
+                    value="Fulltime"
                     onChange={handleChange}
                   />
                   Fulltime
                   <input
                     type="radio"
                     name="categories"
-                    value="parttime"
+                    value="Parttime"
                     onChange={handleChange}
                   />
                   Parttime
@@ -529,14 +529,14 @@ function CompanyHome(props) {
                   <input
                     type="radio"
                     name="type_of_internship"
-                    value="paid"
+                    value="Paid"
                     onChange={handleChange}
                   />
                   Paid
                   <input
                     type="radio"
                     name="type_of_internship"
-                    value="free"
+                    value="Free"
                     onChange={handleChange}
                   />
                   Free

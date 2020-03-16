@@ -21,7 +21,7 @@ const internshipSchema = new mongoose.Schema(
     description: {
       type: String,
       maxlength: [200, 'Description size exceeded'],
-      minlength: [10, 'Enter more Description']
+      minlength: [20, 'Enter more Description']
     },
     duration: {
       type: Number
@@ -44,8 +44,8 @@ const internshipSchema = new mongoose.Schema(
     categories: {
       type: String,
       enum: {
-        values: ['fulltime', 'parttime'],
-        message: 'categories is either Full Time or Part Time'
+        values: ['Fulltime', 'Parttime'],
+        message: 'Categories is either Full Time or Part Time'
       }
     },
     active: {
@@ -56,7 +56,7 @@ const internshipSchema = new mongoose.Schema(
     type_of_internship: {
       type: String,
       enum: {
-        values: ['paid', 'free'],
+        values: ['Paid', 'Free'],
         message: 'categories is either Paid or Free'
       }
     },
