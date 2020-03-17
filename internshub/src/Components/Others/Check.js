@@ -4,8 +4,7 @@ import { showAlert } from "../Utilities/Alerts";
 function Check() {
   const [info, setInfo] = useState({
     subinfo: [],
-    count: 0,
-    info: ""
+    count: 0
   });
   useEffect(() => {
     document.title = "InternsHub | Check";

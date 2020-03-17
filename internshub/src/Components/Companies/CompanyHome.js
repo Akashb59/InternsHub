@@ -22,10 +22,10 @@ function CompanyHome(props) {
     localStorage.setItem("companyId", id);
   const [internshipHostState, setInternshipHostState] = useState({
     title: "",
-    description: "",
+    description: [],
     duration: "",
     starts_on: "",
-    intended_participants: "",
+    intended_participants: [],
     requiredSkills: [],
     categories: "",
     type_of_internship: "",
@@ -36,6 +36,14 @@ function CompanyHome(props) {
     technology: []
   });
   const [tech, setTech] = useState([]);
+  const [info, setInfo] = useState({
+    desc: [],
+    count: 0
+  });
+  const [info1, setInfo1] = useState({
+    intd: [],
+    count1: 0
+  });
 
   useEffect(() => {
     document.title = "InternsHub | Company Home";
@@ -108,6 +116,71 @@ function CompanyHome(props) {
     setTechnology({
       ...technologyState,
       technology: selected
+    });
+  };
+  const alphas = ["1", "2", "3", "4", "5", "6", "7", "8"];
+  const addTextbox = () => {
+    if (info.count >= 8) {
+      showAlert("primary", "Info! Only 8 fields can be added.");
+    }
+    if (info.count < 8)
+      setInfo({
+        count: info.count + 1,
+        desc: [...info.desc, ""]
+      });
+  };
+  const removeTextbox = () => {
+    if (info.count <= 3) {
+      showAlert("primary", "Info! Minimum 3 fields will be added.");
+    } else {
+      info.desc.pop();
+      if (info.count > 0)
+        setInfo({
+          desc: info.desc,
+          count: info.count - 1
+        });
+    }
+  };
+  const addSubInfoValue = (e, index) => {
+    info.desc[index] = e.target.value || "";
+    //console.log(e.target.value);
+    //console.log(info.subinfo);
+    setInfo({ ...info, desc: info.desc });
+    setInternshipHostState({
+      ...internshipHostState,
+      description: info.desc
+    });
+  };
+  const addTextbox1 = () => {
+    if (info1.count1 >= 8) {
+      showAlert("primary", "Info! Only 8 fields can be added.");
+    }
+    if (info1.count1 < 8)
+      setInfo1({
+        count1: info1.count1 + 1,
+        intd: [...info1.intd, ""]
+      });
+  };
+  const removeTextbox1 = () => {
+    if (info1.count1 <= 3) {
+      showAlert("primary", "Info! Minimum 3 fields will be added.");
+    } else {
+      info1.intd.pop();
+      if (info1.count1 > 0)
+        setInfo1({
+          intd: info1.intd,
+          count1: info1.count1 - 1
+        });
+    }
+  };
+  const addSubIntendedValue = (e, index) => {
+    info1.intd[index] = e.target.value || "";
+    //console.log(e.target.value);
+    //console.log(info.subinfo);
+    setInfo1({ ...info1, intd: info1.intd });
+    setInternshipHostState({
+      ...internshipHostState,
+      intended_participants: info1.intd
     });
   };
   const handleSubmit = e => {
@@ -430,19 +503,7 @@ function CompanyHome(props) {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="description">Description: </label>
-                  <textarea
-                    className="form-control"
-                    name="description"
-                    rows="3"
-                    maxLength="200"
-                    onChange={handleChange}
-                  ></textarea>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="duration">Duration: </label>
-                  <p>In months</p>
+                  <label htmlFor="duration">Duration (In months):</label>
                   <input
                     type="number"
                     className="form-control"
@@ -463,22 +524,6 @@ function CompanyHome(props) {
                     onChange={handleChange}
                     required
                   />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="intended_participants">
-                    Intended Participants:{" "}
-                  </label>
-                  <textarea
-                    className="form-control"
-                    rows="3"
-                    name="intended_participants"
-                    maxLength="200"
-                    onChange={handleChange}
-                  ></textarea>
-                  <small className="form-text text-muted">
-                    Enter in points
-                  </small>
                 </div>
 
                 <div className="form-group">
@@ -554,7 +599,91 @@ function CompanyHome(props) {
                   />
                   Enter 0 if there is no stipend
                 </div>
-                <div className="input-field"></div>
+
+                <div className="form-group">
+                  {info.count < 3 ? addTextbox() : ""}
+                  <div className="form-group">
+                    <label htmlFor="descbutton">Description:</label>
+                    <br />
+                    <Link
+                      to="#"
+                      id="descbutton"
+                      className="btn btn-primary btn-sm p-2 px-4"
+                      onClick={addTextbox}
+                    >
+                      <i className="fas fa-plus"></i>
+                    </Link>
+                    {` `}
+                    <Link
+                      to="#"
+                      id="descbutton"
+                      className="btn btn-primary btn-sm p-2 px-4 "
+                      onClick={removeTextbox}
+                    >
+                      <i className="fas fa-minus"></i>
+                    </Link>
+                  </div>
+                  <hr />
+                  {info.desc.map((desc, index) => {
+                    return (
+                      <div className="form-group" key={index}>
+                        <label htmlFor={index}>{alphas[index]}:</label>
+                        {` `}
+                        <input
+                          id={index}
+                          type="text"
+                          value={desc}
+                          maxLength="200"
+                          minLength="20"
+                          required
+                          onChange={e => addSubInfoValue(e, index)}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+                <div className="form-group">
+                  {info1.count1 < 3 ? addTextbox1() : ""}
+                  <div className="form-group">
+                    <label htmlFor="intended">Intended Participants:</label>
+                    <br />
+                    <Link
+                      to="#"
+                      id="intended"
+                      className="btn btn-primary btn-sm p-2 px-4"
+                      onClick={addTextbox1}
+                    >
+                      <i className="fas fa-plus"></i>
+                    </Link>
+                    {` `}
+                    <Link
+                      to="#"
+                      id="intended"
+                      className="btn btn-primary btn-sm p-2 px-4 "
+                      onClick={removeTextbox1}
+                    >
+                      <i className="fas fa-minus"></i>
+                    </Link>
+                  </div>
+                  <hr />
+                  {info1.intd.map((intd, index) => {
+                    return (
+                      <div className="form-group" key={index}>
+                        <label htmlFor={index}>{alphas[index]}:</label>
+                        {` `}
+                        <input
+                          id={index}
+                          type="text"
+                          value={intd}
+                          maxLength="200"
+                          minLength="20"
+                          required
+                          onChange={e => addSubIntendedValue(e, index)}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
 
                 <div className="modal-footer">
                   <button className="btn btn-success" type="submit">

@@ -19,9 +19,9 @@ const internshipSchema = new mongoose.Schema(
       }
     ],
     description: {
-      type: String,
-      maxlength: [200, 'Description size exceeded'],
-      minlength: [20, 'Enter more Description']
+      type: Array
+      // maxlength: [200, 'Description size exceeded'],
+      // minlength: [20, 'Enter more Description']
     },
     duration: {
       type: Number
@@ -37,8 +37,8 @@ const internshipSchema = new mongoose.Schema(
       type: Date
     },
     intended_participants: {
-      type: String,
-      maxlength: [200, 'Number of characters exceeded']
+      type: Array
+      // maxlength: [200, 'Number of characters exceeded']
     },
 
     categories: {

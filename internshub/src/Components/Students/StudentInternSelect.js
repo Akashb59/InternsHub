@@ -17,10 +17,10 @@ function StudentHome(props) {
     website: "",
     requiredSkills: [],
     title: "",
-    description: "",
+    description: [],
     category: "",
     duration: "",
-    intendedParticipants: "",
+    intendedParticipants: [],
     id: ""
   });
   const id = props.location.id;
@@ -29,7 +29,7 @@ function StudentHome(props) {
     selectedIntern(localStorage.internId).then(res => {
       if (res) {
         document.title = `InternsHub | ${res.data.internship.title}`;
-        console.log(res.data.internship);
+        //console.log(res.data.internship);
         const ab = res.data.internship;
         setInternship({
           ...internship,
@@ -69,7 +69,7 @@ function StudentHome(props) {
     // eslint-disable-next-line
   }, []);
 
-  console.log(internship);
+  //console.log(internship);
   return (
     <div className="container-fluid">
       <div className="col-sm-8 mx-auto display-4 text-center">
@@ -88,8 +88,10 @@ function StudentHome(props) {
             return (
               <div key={add.id}>
                 <b> Address: </b>
-                {add.locality} {add.city} {add.state} {add.country}{" "}
-                {add.pincode}
+                <br />
+                {add.locality}
+                <br /> {add.city} {add.state} <br />
+                {add.country} {add.pincode}
               </div>
             );
           })}
@@ -100,11 +102,26 @@ function StudentHome(props) {
             {internship.category}
           </p>
 
-          <p>
-            {" "}
-            <b>Description: </b>
-            {internship.description}
-          </p>
+          <b>Description: </b>
+          {internship.description.map((data, index) => {
+            return (
+              <div key={index}>
+                {index + 1}: {data}
+                <br />
+              </div>
+            );
+          })}
+          <br></br>
+          <b>Intended Participants: </b>
+          {internship.intendedParticipants.map((data, index) => {
+            return (
+              <div key={index}>
+                {index + 1}: {data}
+                <br />
+              </div>
+            );
+          })}
+          <br></br>
           <p>
             {" "}
             <b>Duration: </b>
@@ -127,10 +144,12 @@ function StudentHome(props) {
             {internship.postedOn}
           </p>
           <b>Skills Required: </b>
-          {internship.requiredSkills.map(function(rs) {
+
+          {internship.requiredSkills.map((rs, index) => {
             return (
-              <div key={rs.id}>
-                <div>{rs.skillName}</div>
+              <div key={index}>
+                {index + 1}: {rs.skillName}
+                <br />
               </div>
             );
           })}
@@ -146,10 +165,10 @@ function StudentHome(props) {
             {internship.stipend}/-
           </p>
           <b>Comapany Technologies: </b>
-          {internship.technology.map(function(tech) {
+          {internship.technology.map((tech, index) => {
             return (
-              <div key={tech.id}>
-                <div>{tech.name}</div>
+              <div key={index}>
+                {index + 1}: {tech.name}
               </div>
             );
           })}
