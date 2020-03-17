@@ -16,7 +16,7 @@ export const company = () => {
     // }
   })
     .then(res => {
-      console.log(res.data.data.company[0].id);
+      //console.log(res.data.data.company[0].id);
       //console.log(res.data.token);
       localStorage.setItem("companyid", res.data.data.company[0].id);
       return res.data;

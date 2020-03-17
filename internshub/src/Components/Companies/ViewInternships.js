@@ -11,6 +11,7 @@ import {
 import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
 import { showAlert } from "../Utilities/Alerts";
+let final;
 
 function ViewInternships(props) {
   const Internship = props => (
@@ -30,6 +31,17 @@ function ViewInternships(props) {
               if (res) {
                 // console.log(res.data.data.internship.requiredSkills[0]._id);
                 document.title = `InternsHub | Edit ${res.data.data.internship.title}`;
+                //console.log(res.data.data.internship.requiredSkills);
+                const selected = res.data.data.internship.requiredSkills.map(
+                  el => {
+                    return { value: el.id, label: el.skill_name };
+                  }
+                );
+                // if (selected.length === 0) selected = [];
+                setSelect(selected);
+                //console.log(selected);
+                final = selected;
+                //console.log(select);
                 setInternshipHostState({
                   ...internshipHostState,
                   title: res.data.data.internship.title,
@@ -55,7 +67,6 @@ function ViewInternships(props) {
                   ...info1,
                   intd: res.data.data.internship.intended_participants
                 });
-                //setInternshipHostState(res.data);
               }
             });
             skills().then(res => {
@@ -109,6 +120,7 @@ function ViewInternships(props) {
     stipend: ""
   });
   const [options, setOptions] = useState([]);
+  const [select, setSelect] = useState([]);
   const [info, setInfo] = useState({
     desc: [],
     count: 0
@@ -127,7 +139,7 @@ function ViewInternships(props) {
     document.title = "InternsHub | Hosted Internships";
     companyInternships().then(res => {
       if (res) {
-        //console.log(res.data.data.internship);
+        //console.log(res.data.data.internship[0].requiredSkills);
         setInternshipState(res.data.data.internship);
       }
     });
@@ -146,16 +158,31 @@ function ViewInternships(props) {
     });
   };
   const handleChangeSelect = selectedOption => {
-    //   console.log(`Option selected:`, selectedOption);
+    //console.log(`Option selected:`, selectedOption);
+    setSelect(selectedOption);
+    //console.log(select);
     if (selectedOption === null) return "";
+    //if (select === null) setSelect("");
     const selected = selectedOption.map(option => option.value);
-    // if (selected.length === 0) selected = [];
-    // console.log(selected);
     setInternshipHostState({
       ...internshipHostState,
       requiredSkills: selected
     });
+    //console.log(select);
   };
+  //console.log(select);
+  const selectLink = (
+    <Select
+      required
+      name="requiredSkills"
+      isMulti
+      isSearchable
+      isClearable
+      value={select}
+      onChange={handleChangeSelect}
+      options={realoptions}
+    />
+  );
   const alphas = ["1", "2", "3", "4", "5", "6", "7", "8"];
   const addTextbox = () => {
     if (info.count >= 8) {
@@ -387,8 +414,8 @@ function ViewInternships(props) {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="duration">Duration: </label>
-                  <p>In months</p>
+                  <label htmlFor="duration">Duration (In Months): </label>
+
                   <input
                     type="number"
                     className="form-control"
@@ -416,17 +443,7 @@ function ViewInternships(props) {
                 <div className="form-group">
                   <label htmlFor="requiredSkills">Required Skills: </label>
 
-                  <Select
-                    required
-                    name="requiredSkills"
-                    isMulti
-                    isSearchable
-                    isClearable
-                    //value={internshipHostState.requiredSkills}
-                    onChange={handleChangeSelect}
-                    options={realoptions}
-                  />
-                  <p>Select the required skills again</p>
+                  {final !== [] ? selectLink : {}}
                   {/* {options.map(function(requiredskill) {
               return (
                 <option key={requiredskill} value={requiredskill}>

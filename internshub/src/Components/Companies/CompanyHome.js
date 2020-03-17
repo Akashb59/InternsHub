@@ -12,7 +12,7 @@ import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
 //import { deleteInternship } from '../Utilities/CompanyFunctions';
 //import { companyInternships } from "../Utilities/CompanyFunctions";
-
+let final;
 function CompanyHome(props) {
   const [descriptionState, setDescription] = useState({
     aboutCompany: ""
@@ -35,7 +35,8 @@ function CompanyHome(props) {
   const [technologyState, setTechnology] = useState({
     technology: []
   });
-  const [tech, setTech] = useState([]);
+
+  const [select, setSelect] = useState([]);
   const [info, setInfo] = useState({
     desc: [],
     count: 0
@@ -67,10 +68,14 @@ function CompanyHome(props) {
           ...descriptionState,
           aboutCompany: res.data.company[0].aboutCompany
         });
-        const technology = res.data.company[0].technology.map(
-          te => `${te.skill_name}    `
-        );
-        setTech(technology);
+
+        const selected = res.data.company[0].technology.map(el => {
+          return { value: el.id, label: el.skill_name };
+        });
+        // if (selected.length === 0) selected = [];
+        setSelect(selected);
+        //console.log(selected);
+        final = selected;
       }
     });
     // eslint-disable-next-line
@@ -107,9 +112,13 @@ function CompanyHome(props) {
       requiredSkills: selected
     });
   };
+
   const handleChangeSelect1 = selectedOption => {
-    //   console.log(`Option selected:`, selectedOption);
+    //console.log(`Option selected:`, selectedOption);
+    setSelect(selectedOption);
+    //console.log(select);
     if (selectedOption === null) return "";
+    //if (select === null) setSelect("");
     const selected = selectedOption.map(option => option.value);
     // if (selected.length === 0) selected = [];
     // console.log(selected);
@@ -118,6 +127,7 @@ function CompanyHome(props) {
       technology: selected
     });
   };
+
   const alphas = ["1", "2", "3", "4", "5", "6", "7", "8"];
   const addTextbox = () => {
     if (info.count >= 8) {
@@ -183,6 +193,18 @@ function CompanyHome(props) {
       intended_participants: info1.intd
     });
   };
+  const selectLink = (
+    <Select
+      required
+      name="requiredSkills"
+      isMulti
+      isSearchable
+      isClearable
+      value={select}
+      onChange={handleChangeSelect1}
+      options={realoptions}
+    />
+  );
   const handleSubmit = e => {
     e.preventDefault();
     const Internship = {
@@ -445,7 +467,17 @@ function CompanyHome(props) {
                       </div>
                       <center>
                         <br />
-                        {tech}
+
+                        {select !== null
+                          ? select.map(el => {
+                              return (
+                                <div key={el.value}>
+                                  {el.label}
+                                  <br />
+                                </div>
+                              );
+                            })
+                          : ""}
                       </center>
                     </div>
 
@@ -454,15 +486,7 @@ function CompanyHome(props) {
                         {" "}
                         <b>Add/Edit Technologies: </b>
                       </label>
-                      <Select
-                        required
-                        name="technology"
-                        isMulti
-                        isSearchable
-                        isClearable
-                        onChange={handleChangeSelect1}
-                        options={realoptions}
-                      />
+                      {final !== [] ? selectLink : {}}
                     </div>
 
                     <div className="modal-footer">
