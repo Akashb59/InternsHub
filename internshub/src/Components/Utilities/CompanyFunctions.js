@@ -158,3 +158,53 @@ export const companyTechnology = tech => {
       console.log(err);
     });
 };
+
+export const companyEnquiries = () => {
+  //console.log(details.user);
+  return axios({
+    method: "get",
+    url: `${ip}/api/v1/enquiries/company/${localStorage.companyid}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken
+    }
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  }).catch(err => {
+    showAlert("error", `${err.response.data.message}`);
+    console.log(err);
+  });
+};
+
+export const internshipEnquiries = id => {
+  //console.log(details.user);
+  return axios({
+    method: "get",
+    url: `${ip}/api/v1/enquiries/${id}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken
+    }
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  }).catch(err => {
+    showAlert("error", `${err.response.data.message}`);
+    console.log(err);
+  });
+};
+
+export const internshipAccept = (id, accept) => {
+  return axios
+    .patch(`${ip}/api/v1/enquiries/${id}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      accepted: accept
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};

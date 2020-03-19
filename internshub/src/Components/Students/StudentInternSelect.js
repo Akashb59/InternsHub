@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { selectedIntern } from "../Utilities/StudentFunctions";
+import { selectedIntern, sendEnquiry } from "../Utilities/StudentFunctions";
 import "./../../CSS/student.css";
+import { showAlert } from "../Utilities/Alerts";
 
-function StudentHome(props) {
+function StudentInternSelect(props) {
   const [internship, setInternship] = useState({
     startsOn: "",
     postedOn: "",
@@ -21,8 +22,10 @@ function StudentHome(props) {
     category: "",
     duration: "",
     intendedParticipants: [],
-    id: ""
+    id: "",
+    companyId: ""
   });
+  const [info, setInfo] = useState("");
   const id = props.location.id;
   if (props.location.id !== undefined) localStorage.setItem("internId", id);
   useEffect(() => {
@@ -43,6 +46,7 @@ function StudentHome(props) {
             id: te._id,
             name: te.skill_name
           })),
+          companyId: ab.company.id,
           aboutCompany: ab.company.aboutCompany,
           website: ab.company.website,
           requiredSkills: ab.requiredSkills.map(rs => ({
@@ -68,6 +72,31 @@ function StudentHome(props) {
     });
     // eslint-disable-next-line
   }, []);
+
+  const handleChange = event => {
+    //const {name,value}=event.target;
+    setInfo(event.target.value);
+  };
+  const handleSubmit = e => {
+    e.preventDefault();
+    const information = {
+      info: info,
+      company: internship.companyId,
+      student: localStorage.studentid,
+      user: localStorage.userid,
+      internship: localStorage.internId
+    };
+    sendEnquiry(information).then(res => {
+      if (res) {
+        showAlert(
+          "success",
+          `Successfully enquired for Internship ${internship.title}`
+        );
+        props.history.push("/studentHome");
+        window.location.reload(false);
+      }
+    });
+  };
 
   //console.log(internship);
   return (
@@ -185,8 +214,50 @@ function StudentHome(props) {
             {internship.website}
           </p>
         </div>
+        <button
+          className="btn btn-success btn-block"
+          data-toggle="modal"
+          data-target="#reqInternship"
+        >
+          <i className="fas fa-arrow-circle-right"></i> Apply Now
+        </button>
+      </div>
+      <div className="modal fade" id="reqInternship">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header bg-primary text-white">
+              <h5 className="modal-title">Request for {internship.title}</h5>
+              <button className="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="modal-body">
+                <div className="form-group">
+                  <label htmlFor="info">Message: </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="info"
+                    //onBlur={validate}
+                    onChange={handleChange}
+                    required
+                    maxLength="40"
+                    minLength="10"
+                  />
+                </div>
+
+                <div className="modal-footer">
+                  <button className="btn btn-success" type="submit">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );
 }
-export default StudentHome;
+export default StudentInternSelect;

@@ -3,11 +3,11 @@ import "./../../CSS/company.css";
 import {
   companyDescription,
   company,
-  companyTechnology
+  companyTechnology,
+  hostInternship
 } from "../Utilities/CompanyFunctions";
 import { showAlert } from "./../Utilities/Alerts";
 import { Link } from "react-router-dom";
-import { hostInternship } from "../Utilities/CompanyFunctions";
 import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
 //import { deleteInternship } from '../Utilities/CompanyFunctions';
@@ -17,9 +17,6 @@ function CompanyHome(props) {
   const [descriptionState, setDescription] = useState({
     aboutCompany: ""
   });
-  const id = localStorage.companyid;
-  if (localStorage.companyid !== undefined)
-    localStorage.setItem("companyId", id);
   const [internshipHostState, setInternshipHostState] = useState({
     title: "",
     description: [],
@@ -59,9 +56,7 @@ function CompanyHome(props) {
         //console.log(options);
       }
     });
-    const id = localStorage.companyid;
-    if (localStorage.companyid !== undefined)
-      localStorage.setItem("companyId", id);
+
     company(localStorage.companyid).then(res => {
       if (res) {
         setDescription({

@@ -133,3 +133,25 @@ export const selectedIntern = id => {
       console.log(err);
     });
 };
+
+export const sendEnquiry = info => {
+  console.log(info);
+  return axios
+    .post(`${ip}/api/v1/enquiries/`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      user: info.user,
+      company: info.company,
+      student: info.student,
+      internship: info.internship,
+      reqMessage: info.info
+    })
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};

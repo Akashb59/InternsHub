@@ -12,7 +12,7 @@ function StudentInfo(props) {
   const [studFormState, setStudFormState] = useState({
     father_name: "",
     mother_name: "",
-    dob: "",
+    dob: Date,
     gender: "",
     hobbies: "",
     locality: "",
@@ -203,6 +203,7 @@ function StudentInfo(props) {
                 type="date"
                 //onBlur={validate}
                 onChange={handleChange}
+                name="dob"
                 required
                 className="form-control"
                 id="dob"

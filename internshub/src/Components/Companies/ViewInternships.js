@@ -21,7 +21,7 @@ function ViewInternships(props) {
       {/* <td>{props.internship._id}</td> */}
       <td>
         <button
-          className="btn btn-warning btn-sm btn-block"
+          className="btn btn-info btn-sm btn-block"
           data-toggle="modal"
           data-target="#editInternship"
           onClick={() => {
@@ -143,7 +143,6 @@ function ViewInternships(props) {
         setInternshipState(res.data.data.internship);
       }
     });
-    // eslint-disable-next-line
   }, []);
   const realoptions = options.map(option => ({
     value: option.skillid,
@@ -443,7 +442,7 @@ function ViewInternships(props) {
                 <div className="form-group">
                   <label htmlFor="requiredSkills">Required Skills: </label>
 
-                  {final !== [] ? selectLink : {}}
+                  {final !== [] ? selectLink : <p>Loading</p>}
                   {/* {options.map(function(requiredskill) {
               return (
                 <option key={requiredskill} value={requiredskill}>

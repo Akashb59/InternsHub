@@ -66,7 +66,7 @@ exports.updateCompany = catchAsync(async (req, res, next) => {
   });
   if (!company) {
     //console.log('hey');
-    return next(new AppError('No tour found with that ID', 404));
+    return next(new AppError('No Company found with that ID', 404));
   }
   res.status(200).json({
     status: 'Success',
@@ -80,7 +80,7 @@ exports.deleteCompany = catchAsync(async (req, res, next) => {
   const company = await Company.findByIdAndDelete(req.params.id);
   if (!company) {
     //console.log('hey');
-    return next(new AppError('No tour found with that ID', 404));
+    return next(new AppError('No Company found with that ID', 404));
   }
   res.status(204).json({
     status: 'Success',

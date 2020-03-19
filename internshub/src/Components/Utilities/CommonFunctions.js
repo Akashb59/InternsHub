@@ -16,7 +16,7 @@ export const signup = newUser => {
       role: newUser.role
     })
     .then(res => {
-      console.log("Registered");
+      //console.log("Registered");
       localStorage.setItem("usertoken", res.data.token);
       const token = localStorage.usertoken;
       //console.log(token);
@@ -25,7 +25,7 @@ export const signup = newUser => {
       //console.log(decoded.id);
       localStorage.setItem("userid", id);
       //console.log(res.data);
-      console.log("Sending");
+      //console.log("Sending");
       showAlert("success", "Sign Up Successful");
       return res.data;
     })
@@ -53,7 +53,7 @@ export const login = user => {
       const id = decoded.id;
       //console.log(decoded.id);
       localStorage.setItem("userid", id);
-      console.log("Logged in");
+      //console.log("Logged in");
       //console.log(res.data.token);
       showAlert("success", "Logged In");
       return res.data;
