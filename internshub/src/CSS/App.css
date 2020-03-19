@@ -36,6 +36,52 @@
     transform: rotate(360deg);
   }
 } */
+/* .form__label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.form__input {
+  border: none;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+.form__input:focus {
+  outline: none;
+  border-bottom: 3px solid #55c57a;
+}
+
+.form__input:focus:invalid {
+  outline: none;
+  border-bottom: 3px solid #ff7730;
+}
+.login-form {
+  margin: 0 auto;
+  max-width: 55rem;
+  background-color: #fff;
+  -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
+  padding: 3rem 4rem;
+  border-radius: 5px;
+} */
+/*
+@media only screen and (max-width: 574px) {
+  .logo {
+    margin-left: 0%;
+  }
+}
+
+@media only screen and (min-width: 575px) {
+  .logo {
+    margin-left: 30%;
+  }
+}
+@media only screen and (min-width: 765px) {
+  .logo {
+    margin-left: 40%;
+  }
+} */
 
 /*Alerts*/
 .alert {
@@ -68,48 +114,36 @@
   background-color: #0a84d6;
 }
 
+/*General */
 .jumbotron {
   margin-bottom: 0;
 }
 .navbar {
   min-height: 60px;
 }
-/*Forms*/
-
 .main {
   background-color: #f7f7f7;
   position: relative;
   min-height: 91.68975vh;
 }
-.form__label {
-  display: block;
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
-}
-.form__input {
-  border: none;
+
+#main-footer {
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  background-color: #f2f2f2;
+  height: 4rem;
 }
-.form__input:focus {
-  outline: none;
-  border-bottom: 3px solid #55c57a;
+#content-wrap {
+  padding-bottom: 4rem;
 }
 
-.form__input:focus:invalid {
-  outline: none;
-  border-bottom: 3px solid #ff7730;
+.logo {
+  width: 32px;
+  height: 32px;
 }
-.login-form {
-  margin: 0 auto;
-  max-width: 55rem;
-  background-color: #fff;
-  -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
-  box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
-  padding: 3rem 4rem;
-  border-radius: 5px;
-}
+
+/*Forms*/
+
 /*Headings*/
 .heading-secondary {
   font-size: 1.75rem;
@@ -136,36 +170,4 @@
 
 .ma-bt-md {
   margin-bottom: 3rem !important;
-}
-
-#main-footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 4rem;
-}
-#content-wrap {
-  padding-bottom: 4rem;
-}
-
-.logo {
-  width: 44px;
-  height: 44px;
-  margin-left: 40%;
-}
-@media only screen and (max-width: 574px) {
-  .logo {
-    margin-left: 0%;
-  }
-}
-
-@media only screen and (min-width: 575px) {
-  .logo {
-    margin-left: 30%;
-  }
-}
-@media only screen and (min-width: 765px) {
-  .logo {
-    margin-left: 40%;
-  }
 }

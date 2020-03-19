@@ -34,35 +34,34 @@ import "./CSS/App.css";
 function App() {
   return (
     <Router>
-      <div>
-        <Navbar />
+      <Navbar />
 
-        <div className="main">
-          <div id="content-wrap">
-            <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/forbidden" component={Forbidden} />
-              <Route exact path="/notFound" component={NotFound} />
+      <div className="main">
+        <div id="content-wrap">
+          <Switch>
+            <Route exact path="/" component={Landing} />
+            <Route exact path="/forbidden" component={Forbidden} />
+            <Route exact path="/notFound" component={NotFound} />
 
-              <Route exact path="/profile" component={Profile} />
+            <Route exact path="/profile" component={Profile} />
 
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/login" component={Login} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
 
-              <Route exact path="/check" component={Check} />
-              <Route exact path="/basics" component={Basics} />
+            <Route exact path="/check" component={Check} />
+            <Route exact path="/basics" component={Basics} />
 
-              <ProtectedRouteCompany
-                exact
-                path="/companyHome"
-                component={CompanyHome}
-              />
-              <ProtectedRouteCompany
-                exact
-                path="/companyForm"
-                component={CompanyForm}
-              />
-              {/* <ProtectedRouteCompany
+            <ProtectedRouteCompany
+              exact
+              path="/companyHome"
+              component={CompanyHome}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/companyForm"
+              component={CompanyForm}
+            />
+            {/* <ProtectedRouteCompany
                 exact
                 path="/internshipHost"
                 component={InternshipHost}
@@ -72,33 +71,33 @@ function App() {
                 path="/companyDescription"
                 component={CompanyDescription}
               /> */}
-              <ProtectedRouteCompany
-                exact
-                path="/companyEnquiry"
-                component={CompanyEnquiry}
-              />
-              {/* <ProtectedRouteCompany
+            <ProtectedRouteCompany
+              exact
+              path="/companyEnquiry"
+              component={CompanyEnquiry}
+            />
+            {/* <ProtectedRouteCompany
                 exact
                 path="/companyTechnologies"
                 component={CompanyTechnologies}
               /> */}
-              {/* <ProtectedRouteCompany
+            {/* <ProtectedRouteCompany
                 exact
                 path="/editInternship"
                 component={EditInternship}
               /> */}
-              <ProtectedRouteCompany
-                exact
-                path="/viewInternships"
-                component={ViewInternships}
-              />
+            <ProtectedRouteCompany
+              exact
+              path="/viewInternships"
+              component={ViewInternships}
+            />
 
-              <ProtectedRouteStudent
-                exact
-                path="/studentHome"
-                component={StudentHome}
-              />
-              {/* <ProtectedRouteStudent
+            <ProtectedRouteStudent
+              exact
+              path="/studentHome"
+              component={StudentHome}
+            />
+            {/* <ProtectedRouteStudent
                 exact
                 path="/studentForm"
                 component={StudentForm}
@@ -108,21 +107,20 @@ function App() {
                 path="/academicForm"
                 component={AcademicForm}
               /> */}
-              <ProtectedRouteStudent
-                exact
-                path="/selectedInternship"
-                component={StudentInternSelect}
-              />
-              <ProtectedRouteStudent
-                exact
-                path="/studentDetails"
-                component={StudentInfo}
-              />
-              <Route path="*" component={NotFound} />
-            </Switch>
-          </div>
-          <Footer />
+            <ProtectedRouteStudent
+              exact
+              path="/selectedInternship"
+              component={StudentInternSelect}
+            />
+            <ProtectedRouteStudent
+              exact
+              path="/studentDetails"
+              component={StudentInfo}
+            />
+            <Route path="*" component={NotFound} />
+          </Switch>
         </div>
+        <Footer />
       </div>
     </Router>
   );

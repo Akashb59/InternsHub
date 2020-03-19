@@ -40,23 +40,23 @@ function Navbar(props) {
 
   const studentLink = (
     <a href="/studentHome" className="navbar-brand">
-      Home
+      <img className="logo" src="Logo1.png" alt="logo" />
     </a>
   );
 
   const companyLink = (
     <a href="/companyHome" className="navbar-brand">
-      Home
+      <img className="logo" src="Logo1.png" alt="logo" />
     </a>
   );
   const homeLink = (
     <a href="/" className="navbar-brand">
-      Home
+      <img className="logo" src="Logo1.png" alt="logo" />
     </a>
   );
   const placementLink = (
     <a href="/" className="navbar-brand">
-      Home
+      <img className="logo" src="Logo1.png" alt="logo" />
     </a>
   );
 
@@ -70,7 +70,6 @@ function Navbar(props) {
             ? companyLink
             : placementLink
           : homeLink}
-        <img className="logo" src="Logo1.png" alt="logo" />
 
         <button
           className="navbar-toggler"
