@@ -5,15 +5,16 @@ const companySchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User'
+      ref: 'User',
+      required: true
     },
 
     gst_no: {
       type: String,
       required: [true, 'Please provide your GST No'],
       unique: true,
-      maxlength: [16, 'Please Enter valid GST number!'],
-      minlength: [16, 'Please Enter valid GST number!']
+      maxlength: [15, 'Please Enter valid GST number!'],
+      minlength: [15, 'Please Enter valid GST number!']
     },
     technology: [
       {
@@ -28,7 +29,7 @@ const companySchema = new mongoose.Schema(
     },
     website: {
       type: String,
-      required: true,
+      required: [true, 'Please provide your Website Info'],
       maxlength: [40, 'Please Enter valid website address!'],
       minlength: [10, 'Please Enter valid website address!'],
       validate: [validator.isURL, 'Please enter valid website!']
@@ -37,7 +38,8 @@ const companySchema = new mongoose.Schema(
     address: [
       {
         type: mongoose.Schema.ObjectId,
-        ref: 'Address'
+        ref: 'Address',
+        required: true
       }
     ],
     establishedYear: {

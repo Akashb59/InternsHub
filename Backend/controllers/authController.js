@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const slugify = require('slugify');
+//const factory = require('./handlerFactory');
 
 const { promisify } = require('util');
 const User = require('./../models/userModel');

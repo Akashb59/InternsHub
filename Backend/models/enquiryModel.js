@@ -30,6 +30,19 @@ const enquirySchema = new mongoose.Schema(
         message: 'accepted is either Yes or No'
       }
     },
+    completed: {
+      type: String,
+      default: 'No',
+      enum: {
+        values: ['Yes', 'No'],
+        message: 'accepted is either Yes or No'
+      }
+    },
+    reqAt: {
+      type: Date,
+      required: true,
+      default: Date.now()
+    },
     reqMessage: {
       type: String,
       required: true,

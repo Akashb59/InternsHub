@@ -155,3 +155,33 @@ export const sendEnquiry = info => {
       console.log(err);
     });
 };
+
+export const SkillsUpdate = skill => {
+  return axios
+    .patch(`${ip}/api/v1/students/${localStorage.studentid}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      skills: skill
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
+export const uploadResume = (ab, size) => {
+  return axios({
+    method: "patch",
+    url: `${ip}/api/v1/students/uploadResume/${localStorage.studentid}`,
+    data: ab,
+    headers: {
+      "Content-Type": "multipart/form-data",
+      size: size,
+      jwt: localStorage.usertoken
+    }
+  }).catch(err => {
+    showAlert("error", `${err.response.data.message}`);
+    console.log(err);
+  });
+};

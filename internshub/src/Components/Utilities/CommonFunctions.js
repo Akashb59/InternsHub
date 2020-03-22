@@ -65,7 +65,7 @@ export const login = user => {
 };
 
 export const profile = user => {
-  console.log(user.id);
+  //console.log(user.id);
   return axios({
     method: "get",
     url: `${ip}/api/v1/users/${user.id}`,
@@ -91,7 +91,7 @@ export const profile = user => {
 export const skills = () => {
   return axios({
     method: "get",
-    url: `${ip}/api/V1/skillTypeMasters`,
+    url: `${ip}/api/v1/skillTypeMasters`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken

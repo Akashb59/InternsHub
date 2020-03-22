@@ -2,6 +2,7 @@ const Internship = require('./../models/internshipModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const factory = require('./handlerFactory');
 
 exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
   console.log('Hello');
@@ -82,29 +83,23 @@ exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
     status: 'Success',
     results: internship.length,
     data: {
-      stats: internship
+      doc: internship
     }
   });
 });
-exports.getAllInternships = catchAsync(async (req, res, next) => {
-  //Execute Query
+
+exports.getInternshipByCompanyId = catchAsync(async (req, res, next) => {
   req.query.sort = '-starts_on';
-  const features = new APIFeatures(Internship.find(), req.query)
+  const features = new APIFeatures(
+    Internship.find({ company: req.params.id }),
+    req.query
+  )
     .filter()
     .sorter()
     .limitFields()
     .paginate();
 
   const internship = await features.query;
-  //Send Response
-  res.status(200).json({
-    status: 'Success',
-    results: internship.length,
-    data: { internship }
-  });
-});
-exports.getInternshipById = catchAsync(async (req, res, next) => {
-  const internship = await Internship.findById(req.params.id);
   if (!internship) {
     //console.log('hey');
     return next(new AppError('No internship found with that ID', 404));
@@ -112,66 +107,6 @@ exports.getInternshipById = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'Success',
     data: { internship }
-  });
-});
-
-exports.getInternshipByCompanyId = catchAsync(async (req, res, next) => {
-  const internship = await Internship.find({ company: req.params.id });
-  if (!internship) {
-    //console.log('hey');
-    return next(new AppError('No internship found with that ID', 404));
-  }
-  res.status(200).json({
-    status: 'Success',
-    data: { internship }
-  });
-});
-
-exports.createInternship = catchAsync(async (req, res, next) => {
-  const newInternship = await Internship.create(req.body);
-  //Internship.findOne({_id:req.params.id})
-  // console.log(req.body);
-  res.status(201).json({
-    status: 'Success',
-    data: {
-      Internship: newInternship
-    }
-  });
-});
-
-exports.updateInternship = catchAsync(async (req, res, next) => {
-  const internship = await Internship.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    {
-      new: true,
-      runValidators: true
-      //re validate for each update
-    }
-  );
-  if (!internship) {
-    // console.log('hey');
-    return next(new AppError('No internship found with that ID', 404));
-  }
-  res.status(200).json({
-    status: 'Success',
-    data: {
-      internship
-    }
-  });
-});
-
-exports.deleteInternship = catchAsync(async (req, res, next) => {
-  const internship = await Internship.findByIdAndDelete(req.params.id);
-  if (!internship) {
-    // console.log('hey');
-    return next(new AppError('No internship found with that ID', 404));
-  }
-  res.status(204).json({
-    status: 'Success',
-    data: {
-      internship
-    }
   });
 });
 
@@ -182,3 +117,9 @@ exports.deleteHostedInternship = catchAsync(async (req, res, next) => {
     data: null
   });
 });
+
+exports.getAllInternships = factory.getAll(Internship);
+exports.getInternshipById = factory.getOne(Internship);
+exports.createInternship = factory.createOne(Internship);
+exports.updateInternship = factory.updateOne(Internship);
+exports.deleteInternship = factory.deleteOne(Internship);

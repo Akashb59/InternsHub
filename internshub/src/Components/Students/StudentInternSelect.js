@@ -31,9 +31,9 @@ function StudentInternSelect(props) {
   useEffect(() => {
     selectedIntern(localStorage.internId).then(res => {
       if (res) {
-        document.title = `InternsHub | ${res.data.internship.title}`;
+        document.title = `InternsHub | ${res.data.title}`;
         //console.log(res.data.internship);
-        const ab = res.data.internship;
+        const ab = res.data;
         setInternship({
           ...internship,
           startsOn: ab.starts_on.substring(0, 10),
@@ -77,6 +77,7 @@ function StudentInternSelect(props) {
     //const {name,value}=event.target;
     setInfo(event.target.value);
   };
+
   const handleSubmit = e => {
     e.preventDefault();
     const information = {

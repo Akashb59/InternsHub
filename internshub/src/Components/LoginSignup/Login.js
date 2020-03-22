@@ -17,8 +17,8 @@ function Login(props) {
     document.title = "InternsHub | Login";
     roles().then(res => {
       if (res) {
-        //console.log(res.data.userTypeMaster);
-        const roleTypes = res.data.userTypeMaster.map(role => role.roleName);
+        //console.log(res.data.doc);
+        const roleTypes = res.data.doc.map(role => role.roleName);
         //console.log(roleTypes);
         const newroleTypes = roleTypes.filter(role => role !== "Admin");
         setRoleState(newroleTypes);
@@ -39,7 +39,7 @@ function Login(props) {
     };
     login(user).then(res => {
       if (res) {
-        console.log(res.data);
+        //console.log(res.data);
         check = res.data.user.roleType.roleName;
         localStorage.setItem("type", res.data.user.roleType.roleName);
         localStorage.setItem("name", res.data.user.fullname);

@@ -22,9 +22,9 @@ function Profile() {
       //console.log(res.data.user.fullname);
       //console.log(res.data.user.phoneNumber);
       //console.log(res.data.user.roleType.roleName);
-      setFullname(res.data.user.fullname);
-      setPhoneNumber(res.data.user.phoneNumber);
-      setRoletype(res.data.user.roleType.roleName);
+      setFullname(res.data.fullname);
+      setPhoneNumber(res.data.phoneNumber);
+      setRoletype(res.data.roleType.roleName);
     });
   }, []);
 

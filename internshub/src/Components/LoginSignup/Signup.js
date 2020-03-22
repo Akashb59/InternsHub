@@ -18,7 +18,7 @@ function Signup(props) {
     roles().then(res => {
       if (res) {
         //console.log(res.data.userTypeMaster);
-        const roleTypes = res.data.userTypeMaster.map(role => role.roleName);
+        const roleTypes = res.data.doc.map(role => role.roleName);
         //console.log(roleTypes);
         const newroleTypes = roleTypes.filter(role => role !== "Admin");
         setRoleState(newroleTypes);
@@ -56,7 +56,7 @@ function Signup(props) {
           if (res) {
             localStorage.setItem("type", res.data.userTypeMaster.roleName);
             check = res.data.userTypeMaster.roleName;
-            console.log(res.data.userTypeMaster.roleName);
+            //console.log(res.data.userTypeMaster.roleName);
             if (check === "Student") {
               props.history.push(`/studentDetails`);
             } else if (check === "Company") {

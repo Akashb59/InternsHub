@@ -48,7 +48,7 @@ function CompanyHome(props) {
     skills().then(res => {
       if (res) {
         //console.log(res.data.skillTypeMaster);
-        const options = res.data.skillTypeMaster.map(skill => ({
+        const options = res.data.doc.map(skill => ({
           skill: skill.skill_name,
           skillid: skill._id
         }));

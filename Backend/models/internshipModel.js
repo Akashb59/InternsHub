@@ -4,7 +4,8 @@ const internshipSchema = new mongoose.Schema(
   {
     company: {
       type: mongoose.Schema.ObjectId,
-      ref: 'Company'
+      ref: 'Company',
+      required: true
     },
     title: {
       type: String,
@@ -24,17 +25,20 @@ const internshipSchema = new mongoose.Schema(
       // minlength: [20, 'Enter more Description']
     },
     duration: {
-      type: Number
+      type: Number,
+      required: [true, 'Please provide Duration for Internship']
     },
     stipend: {
-      type: Number
+      type: Number,
+      required: [true, 'Please provide Stipend for Internship']
     },
     posted_on: {
       type: Date,
       default: Date.now()
     },
     starts_on: {
-      type: Date
+      type: Date,
+      required: [true, 'Please provide Start Date for Internship']
     },
     intended_participants: {
       type: Array

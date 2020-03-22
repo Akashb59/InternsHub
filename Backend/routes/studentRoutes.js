@@ -5,6 +5,14 @@ const studentController = require('./../controllers/studentController');
 const authController = require('./../controllers/authController');
 
 router
+  .route('/uploadResume/:id')
+  .patch(
+    authController.protect,
+    authController.restrictTo('Admin', 'Student'),
+    studentController.uploadStudentResume,
+    studentController.updateStudentResume
+  );
+router
   .route('/')
   .get(
     authController.protect,
@@ -41,14 +49,16 @@ router
   );
 router
   .route('/user/:id')
-  .patch(
-    authController.protect,
-    authController.restrictTo('Admin', 'Student'),
-    studentController.updateStudentAddCollege
-  )
   .get(
     authController.protect,
     authController.restrictTo('Admin', 'Student'),
     studentController.getStudentByIdUser
   );
+// router
+// .route('/resume/:id')
+// .patch(
+//   authController.protect,
+//   authController.restrictTo('Admin', 'Student'),
+//   studentController.updateStudentAddCollege
+// );
 module.exports = router;

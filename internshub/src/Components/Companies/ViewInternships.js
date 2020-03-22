@@ -30,13 +30,11 @@ function ViewInternships(props) {
               localStorage.setItem("internshipId", props.internship._id);
               if (res) {
                 // console.log(res.data.data.internship.requiredSkills[0]._id);
-                document.title = `InternsHub | Edit ${res.data.data.internship.title}`;
+                document.title = `InternsHub | Edit ${res.data.data.title}`;
                 //console.log(res.data.data.internship.requiredSkills);
-                const selected = res.data.data.internship.requiredSkills.map(
-                  el => {
-                    return { value: el.id, label: el.skill_name };
-                  }
-                );
+                const selected = res.data.data.requiredSkills.map(el => {
+                  return { value: el.id, label: el.skill_name };
+                });
                 // if (selected.length === 0) selected = [];
                 setSelect(selected);
                 //console.log(selected);
@@ -44,35 +42,30 @@ function ViewInternships(props) {
                 //console.log(select);
                 setInternshipHostState({
                   ...internshipHostState,
-                  title: res.data.data.internship.title,
-                  description: res.data.data.internship.description,
-                  stipend: res.data.data.internship.stipend,
-                  type_of_internship:
-                    res.data.data.internship.type_of_internship,
-                  categories: res.data.data.internship.categories,
-                  intended_participants:
-                    res.data.data.internship.intended_participants,
-                  starts_on: res.data.data.internship.starts_on.substring(
-                    0,
-                    10
-                  ),
-                  duration: res.data.data.internship.duration
+                  title: res.data.data.title,
+                  description: res.data.data.description,
+                  stipend: res.data.data.stipend,
+                  type_of_internship: res.data.data.type_of_internship,
+                  categories: res.data.data.categories,
+                  intended_participants: res.data.data.intended_participants,
+                  starts_on: res.data.data.starts_on.substring(0, 10),
+                  duration: res.data.data.duration
                   // requiredSkills: res.data.data.internship.requiredSkills[0]._id
                 });
                 setInfo({
                   ...info,
-                  desc: res.data.data.internship.description
+                  desc: res.data.data.description
                 });
                 setInfo1({
                   ...info1,
-                  intd: res.data.data.internship.intended_participants
+                  intd: res.data.data.intended_participants
                 });
               }
             });
             skills().then(res => {
               if (res) {
                 //console.log(res.data.skillTypeMaster);
-                const options = res.data.skillTypeMaster.map(skill => ({
+                const options = res.data.doc.map(skill => ({
                   skill: skill.skill_name,
                   skillid: skill._id
                 }));

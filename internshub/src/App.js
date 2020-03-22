@@ -28,6 +28,7 @@ import StudentHome from "./Components/Students/StudentHome";
 //import AcademicForm from "./Components/Students/AcademicForm";
 import StudentInternSelect from "./Components/Students/StudentInternSelect";
 import StudentInfo from "./Components/Students/StudentInfo";
+import StudentProfile from "./Components/Students/StudentProfile";
 
 import "./CSS/App.css";
 
@@ -116,6 +117,11 @@ function App() {
               exact
               path="/studentDetails"
               component={StudentInfo}
+            />
+            <ProtectedRouteStudent
+              exact
+              path="/Studentprofile"
+              component={StudentProfile}
             />
             <Route path="*" component={NotFound} />
           </Switch>

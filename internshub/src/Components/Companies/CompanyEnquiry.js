@@ -41,13 +41,17 @@ function CompanyEnquiry(props) {
     icat: "",
     itype: "",
     istip: "",
-    message: ""
+    message: "",
+    reqAt: "",
+    completed: ""
   });
   const InternshipEnq = props => (
     <tr>
       <td>{props.internship.internship.title}</td>
       <td>{props.internship.internship.starts_on.substring(0, 10)}</td>
       <td>{props.internship.user.fullname}</td>
+      <td>{props.internship.accepted}</td>
+      <td>{props.internship.reqAt.substring(0, 10)}</td>
       <td>
         <button
           className="btn btn-info btn-sm btn-block"
@@ -58,18 +62,18 @@ function CompanyEnquiry(props) {
               //console.log(props.internship._id);
               //localStorage.setItem("internshipId", props.internship._id);
               if (res) {
-                const x = res.data.data.enquiry;
-                const skill = res.data.data.enquiry.internship.requiredSkills.map(
+                const x = res.data.data;
+                const skill = res.data.data.internship.requiredSkills.map(
                   el => {
                     return {
                       name: el.skill_name
                     };
                   }
                 );
-                const skills = res.data.data.enquiry.student.skills.map(el => {
+                const skills = res.data.data.student.skills.map(el => {
                   return el.skill_name;
                 });
-                console.log(skill);
+                //console.log(skill);
                 setSelectedInternship({
                   ...selectedInternship,
                   accepted: x.accepted,
@@ -101,7 +105,9 @@ function CompanyEnquiry(props) {
                   icat: x.internship.categories,
                   itype: x.internship.type_of_internship,
                   istip: x.internship.stipend,
-                  message: x.reqMessage
+                  message: x.reqMessage,
+                  reqAt: x.reqAt,
+                  completed: x.completed
                 });
               }
             });
@@ -149,7 +155,6 @@ function CompanyEnquiry(props) {
   }, []);
   const selectLink = (
     <div>
-      {console.log(selectedInternship)}
       <ul className="nav nav-tabs">
         <li className="nav-item">
           <a className="nav-link active" data-toggle="tab" href="#int">
@@ -173,6 +178,8 @@ function CompanyEnquiry(props) {
           <p>Internship Title: {selectedInternship.iname}</p>
           <p>Student Name: {selectedInternship.sname}</p>
           <p>Accepted: {selectedInternship.accepted}</p>
+          <p>Requested At: {selectedInternship.reqAt.substring(0, 10)}</p>
+          <p>Completed: {selectedInternship.completed}</p>
           <p>Message: {selectedInternship.message}</p>
           <table>
             <thead className="thead-dark">
@@ -183,12 +190,11 @@ function CompanyEnquiry(props) {
             </thead>
             <tbody>
               <tr>
-                {console.log(selectedInternship.iskills)}
                 <td>
                   {selectedInternship.iskills !== undefined
-                    ? selectedInternship.iskills.map(el => {
+                    ? selectedInternship.iskills.map((el, index) => {
                         return (
-                          <div>
+                          <div key={index}>
                             {el.name} <br />
                           </div>
                         );
@@ -264,6 +270,8 @@ function CompanyEnquiry(props) {
               <th>Internship</th>
               <th>Starts On</th>
               <th>Student Name</th>
+              <th>Accepted</th>
+              <th>Requested On</th>
               <th>Details</th>
               <th>Action</th>
             </tr>

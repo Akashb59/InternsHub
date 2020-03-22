@@ -1,35 +1,81 @@
 const Student = require('./../models/studentModel');
-const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const factory = require('./handlerFactory');
+const multer = require('multer');
 
-exports.getAllStudents = catchAsync(async (req, res, next) => {
-  //Execute Query
-  const features = new APIFeatures(Student.find(), req.query)
-    .filter()
-    .sorter()
-    .limitFields()
-    .paginate();
-
-  const student = await features.query;
-  //Send Response
-  res.status(200).json({
-    status: 'Success',
-    results: student.length,
-    data: { student }
-  });
-});
-exports.getStudentById = catchAsync(async (req, res, next) => {
-  const student = await Student.findById(req.params.id);
-  if (!student) {
-    console.log('hey');
-    return next(new AppError('No student found with that ID', 404));
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/Resume');
+  },
+  filename: (req, file, cb) => {
+    const ext = file.mimetype.split('/')[1];
+    cb(null, `student-${req.params.id}-${Date.now()}.${ext}`);
   }
+});
+
+const multerFilter = (req, file, cb) => {
+  //console.log(file, ' ', req.headers.size);
+  if (
+    file.mimetype.startsWith('application/pdf') &&
+    (file.size || req.headers.size < 1000000)
+  ) {
+    cb(null, true);
+  } else {
+    cb(
+      new AppError(
+        'Invlaid file or size. Please upload a PDF file smaller than 1MB only!',
+        400
+      ),
+      false
+    );
+  }
+};
+const maxSize = 1 * 1000 * 1000;
+
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+  limits: { fileSize: maxSize }
+});
+
+const filterObj = (obj, ...allowedFields) => {
+  const newObj = {};
+  Object.keys(obj).forEach(el => {
+    if (allowedFields.includes(el)) newObj[el] = obj[el];
+  });
+  return newObj;
+};
+
+exports.uploadStudentResume = upload.single('resume');
+
+exports.updateStudentResume = catchAsync(async (req, res, next) => {
+  const filteredBody = filterObj(
+    req.body,
+    'academic_details',
+    'personal_details'
+  );
+  if (req.file) filteredBody.resume = req.file.filename;
+  console.log(req.params.id);
+  console.log(req.file);
+  //console.log(req.body);
+
+  //3.Update user document
+  //console.log(filteredBody.resume);
+  const updatedStudent = await Student.findByIdAndUpdate(
+    req.params.id,
+    filteredBody,
+    {
+      new: true,
+      runValidators: true
+    }
+  );
   res.status(200).json({
     status: 'Success',
-    data: { student }
+    data: { updatedStudent }
   });
 });
+
 exports.getStudentByIdUser = catchAsync(async (req, res, next) => {
   const student = await Student.find({ user: req.params.id });
   console.log(student);
@@ -40,36 +86,6 @@ exports.getStudentByIdUser = catchAsync(async (req, res, next) => {
   res.status(200).json({
     status: 'Success',
     data: { student }
-  });
-});
-
-exports.createStudent = catchAsync(async (req, res, next) => {
-  const newStudent = await Student.create(req.body);
-  //Student.findOne({_id:req.params.id})
-  console.log(req.body);
-  res.status(201).json({
-    status: 'Success',
-    data: {
-      Student: newStudent
-    }
-  });
-});
-
-exports.updateStudent = catchAsync(async (req, res, next) => {
-  const student = await Student.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-    //re validate for each update
-  });
-  if (!student) {
-    console.log('hey');
-    return next(new AppError('No student found with that ID', 404));
-  }
-  res.status(200).json({
-    status: 'Success',
-    data: {
-      student
-    }
   });
 });
 
@@ -97,16 +113,8 @@ exports.updateStudentAddCollege = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteStudent = catchAsync(async (req, res, next) => {
-  const student = await Student.findByIdAndDelete(req.params.id);
-  if (!student) {
-    console.log('hey');
-    return next(new AppError('No student found with that ID', 404));
-  }
-  res.status(204).json({
-    status: 'Success',
-    data: {
-      student
-    }
-  });
-});
+exports.getAllStudents = factory.getAll(Student);
+exports.getStudentById = factory.getOne(Student);
+exports.createStudent = factory.createOne(Student);
+exports.updateStudent = factory.updateOne(Student);
+exports.deleteStudent = factory.deleteOne(Student);

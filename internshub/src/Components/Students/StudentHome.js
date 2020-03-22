@@ -36,8 +36,8 @@ function StudentHome() {
     document.title = "InternsHub | Student Home";
     internshipAll().then(res => {
       if (res) {
-        console.log(res.data.internship);
-        const arr = res.data.internship.map(data => ({
+        //console.log(res.data.doc);
+        const arr = res.data.doc.map(data => ({
           title: data.title,
           category: data.categories,
           startsOn: data.starts_on.substring(0, 10),
@@ -135,7 +135,7 @@ function StudentHome() {
       if (res) {
         console.log(res);
         //console.log(res.data.stats[0]);
-        const arr = res.data.stats.map(data => ({
+        const arr = res.data.doc.map(data => ({
           title: data.title,
           category: data.categories,
           startsOn: data.starts_on.substring(0, 10),
@@ -189,28 +189,17 @@ function StudentHome() {
 
   return (
     <div>
-      <div className="container">
-        <div className="col-sm-8 mx-auto display-4 text-center">
-          Internships
-        </div>
-        <br></br>
-        {/* <Link to="/selectedInternship" className="nav-link">
-          Select Internship
-        </Link>
-        <p>USER:{localStorage.userid}</p>
-        <p>STUDENT:{localStorage.studentid}</p> */}
-      </div>
       <div className="container-fluid">
         <div className="row">
           <div className="col-lg-3">
-            <div className="jumbotron mt-2">
+            <div className="jumbotron">
               <form onSubmit={handleSubmit}>
                 <label>
                   <input
                     type="radio"
                     name="type"
-                    value="paid"
-                    checked={filterState.type === "paid"}
+                    value="Paid"
+                    checked={filterState.type === "Paid"}
                     onChange={onFilterChange}
                   />
                   Paid
@@ -220,8 +209,8 @@ function StudentHome() {
                   <input
                     type="radio"
                     name="type"
-                    value="free"
-                    checked={filterState.type === "free"}
+                    value="Free"
+                    checked={filterState.type === "Free"}
                     onChange={onFilterChange}
                   />
                   Free
@@ -232,8 +221,8 @@ function StudentHome() {
                   <input
                     type="radio"
                     name="category"
-                    value="fulltime"
-                    checked={filterState.category === "fulltime"}
+                    value="Fulltime"
+                    checked={filterState.category === "Fulltime"}
                     onChange={onFilterChange}
                   />
                   Full Time
@@ -243,8 +232,8 @@ function StudentHome() {
                   <input
                     type="radio"
                     name="category"
-                    value="parttime"
-                    checked={filterState.category === "parttime"}
+                    value="Parttime"
+                    checked={filterState.category === "Parttime"}
                     onChange={onFilterChange}
                   />
                   Part Time
@@ -367,6 +356,20 @@ function StudentHome() {
           </div>
 
           <div className="col-sm-9">
+            <div className="container">
+              <div className="col-sm-8 mx-auto display-4 text-center">
+                Internships
+              </div>
+              <Link to="/studentProfile" className="nav-link">
+                Student
+              </Link>
+              <br></br>
+              {/* <Link to="/selectedInternship" className="nav-link">
+          Select Internship
+        </Link>
+        <p>USER:{localStorage.userid}</p>
+        <p>STUDENT:{localStorage.studentid}</p> */}
+            </div>
             {internArray.map(function(intern) {
               return (
                 <div key={intern.id}>
