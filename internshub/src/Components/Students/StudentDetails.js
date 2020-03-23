@@ -7,12 +7,12 @@ import {
   student,
   SkillsUpdate,
   uploadResume
-} from "./../Utilities/StudentFunctions";
+} from "../Utilities/StudentFunctions";
 import Select from "react-select";
 import { showAlert } from "../Utilities/Alerts";
 let final;
 
-function StudentProfile(props) {
+function StudentDetails(props) {
   const [studentProfile, setStudentProfile] = useState({
     skills: []
   });
@@ -163,4 +163,4 @@ function StudentProfile(props) {
   );
 }
 
-export default StudentProfile;
+export default StudentDetails;

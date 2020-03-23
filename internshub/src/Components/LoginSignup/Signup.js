@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { signup, roles, role, profile } from "../Utilities/CommonFunctions";
 import "../../CSS/App.css";
+import { formatInput } from "../Utilities/Utils";
 
 function Signup(props) {
   const [signupState, setSignupState] = useState({
@@ -129,10 +130,12 @@ function Signup(props) {
           <input
             type="text"
             name="phoneNumber"
-            className="form-control "
-            placeholder="********"
+            className="form-control"
+            placeholder="0123456789"
+            onKeyDown={formatInput}
             value={signupState.phoneNumber}
             onChange={handleChange}
+            maxLength="10"
             required
           />
         </div>

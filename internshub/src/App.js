@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ProtectedRouteCompany, ProtectedRouteStudent } from "./ProtectedRoute";
 
 import Landing from "./Components/General/Landing";
-import Profile from "./Components/General/Profile";
 import Navbar from "./Components/General/Navbar";
 import Footer from "./Components/General/Footer";
 import Forbidden from "./Components/General/Forbidden";
@@ -20,6 +19,7 @@ import CompanyForm from "./Components/Companies/CompanyForm";
 //import InternshipHost from "./Components/Companies/InternshipHost";
 //import CompanyDescription from "./Components/Companies/CompanyDescription";
 import CompanyEnquiry from "./Components/Companies/CompanyEnquiry";
+import CompanyProfile from "./Components/Companies/CompanyProfile";
 //import CompanyTechnologies from "./Components/Companies/CompanyTechnologies";
 //import EditInternship from "./Components/Companies/EditInternship";
 
@@ -28,7 +28,9 @@ import StudentHome from "./Components/Students/StudentHome";
 //import AcademicForm from "./Components/Students/AcademicForm";
 import StudentInternSelect from "./Components/Students/StudentInternSelect";
 import StudentInfo from "./Components/Students/StudentInfo";
-import StudentProfile from "./Components/Students/StudentProfile";
+import StudentDetails from "./Components/Students/StudentDetails";
+import StudentAcademicProfile from "./Components/Students/StudentAcademicProfile";
+import StudentPersonalProfile from "./Components/Students/StudentPersonalProfile";
 
 import "./CSS/App.css";
 
@@ -43,8 +45,6 @@ function App() {
             <Route exact path="/" component={Landing} />
             <Route exact path="/forbidden" component={Forbidden} />
             <Route exact path="/notFound" component={NotFound} />
-
-            <Route exact path="/profile" component={Profile} />
 
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
@@ -76,6 +76,11 @@ function App() {
               exact
               path="/companyEnquiry"
               component={CompanyEnquiry}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/companyProfile"
+              component={CompanyProfile}
             />
             {/* <ProtectedRouteCompany
                 exact
@@ -120,8 +125,18 @@ function App() {
             />
             <ProtectedRouteStudent
               exact
-              path="/Studentprofile"
-              component={StudentProfile}
+              path="/StudentProfile"
+              component={StudentDetails}
+            />
+            <ProtectedRouteStudent
+              exact
+              path="/StudentPersonal"
+              component={StudentPersonalProfile}
+            />
+            <ProtectedRouteStudent
+              exact
+              path="/StudentAcademic"
+              component={StudentAcademicProfile}
             />
             <Route path="*" component={NotFound} />
           </Switch>

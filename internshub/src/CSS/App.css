@@ -171,3 +171,26 @@
 .ma-bt-md {
   margin-bottom: 3rem !important;
 }
+.nav_link {
+  color: #f7f7f7;
+}
+.nav_link:hover {
+  color: #dddddd;
+  text-decoration: none;
+}
+.nav_li {
+  margin-top: 10px;
+}
+.nav_li :nth-child() {
+  margin-bottom: 10px;
+}
+.nav_item {
+  background-color: #282c34;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: solid rgb(83, 83, 83) 2px;
+}
+.nav_ul {
+  list-style-type: none;
+  padding: 10px 18px;
+}

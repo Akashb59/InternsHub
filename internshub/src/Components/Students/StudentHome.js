@@ -360,9 +360,6 @@ function StudentHome() {
               <div className="col-sm-8 mx-auto display-4 text-center">
                 Internships
               </div>
-              <Link to="/studentProfile" className="nav-link">
-                Student
-              </Link>
               <br></br>
               {/* <Link to="/selectedInternship" className="nav-link">
           Select Internship

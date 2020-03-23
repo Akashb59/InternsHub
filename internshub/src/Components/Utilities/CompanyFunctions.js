@@ -208,3 +208,35 @@ export const internshipAccept = (id, accept) => {
       console.log(err);
     });
 };
+
+export const editDetailsForm = editDetails => {
+  return axios
+    .patch(`${ip}/api/v1/companies/${localStorage.companyid}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      gst_no: editDetails.gst_no,
+      website: editDetails.website,
+      establishedYear: editDetails.establishedYear
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
+export const editCompanyForm = pDetails => {
+  //console.log(details.user);
+  return axios
+    .patch(`${ip}/api/v1/users/${localStorage.userid}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      fullname: pDetails.fullname,
+      phoneNumber: pDetails.phoneNumber
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};

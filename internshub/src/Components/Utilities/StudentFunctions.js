@@ -185,3 +185,77 @@ export const uploadResume = (ab, size) => {
     console.log(err);
   });
 };
+
+export const editStudProfilePersonal = editStudProfile => {
+  return axios
+    .patch(`${ip}/api/v1/students/${localStorage.studentid}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      personal_details: {
+        father_name: editStudProfile.fatherName,
+        mother_name: editStudProfile.motherName,
+        dob: editStudProfile.dob,
+        gender: editStudProfile.gender,
+        hobbies: editStudProfile.hobbies
+      }
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
+export const editStudProfileAcademic = editStudProfile => {
+  return axios
+    .patch(`${ip}/api/v1/students/${localStorage.studentid}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      academic_details: {
+        school_name: editStudProfile.schoolName,
+        grade_10_per: editStudProfile.gradeTen,
+        pu_college_name: editStudProfile.puCollegeName,
+        grade_12_per: editStudProfile.gradeTwelve,
+        college_name: editStudProfile.degreeCollege,
+        university_name: editStudProfile.universityName,
+        usn: editStudProfile.usn,
+        degree_cgpa: editStudProfile.degreeCgpa,
+        project1_undertaken: editStudProfile.project1,
+        project2_undertaken: editStudProfile.project2
+      },
+      college: {
+        college_name: editStudProfile.degreeCollege,
+        phone_number: editStudProfile.phoneNumber,
+        website: editStudProfile.colWebsite,
+        email: editStudProfile.colEmail
+      }
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
+export const profileAddress = () => {
+  return axios({
+    method: "get",
+    url: `${ip}/api/v1/addresses/user/${localStorage.userid}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken
+    }
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  })
+    .then(res => {
+      //console.log(res.data.data);
+      //console.log(res.data.token);
+      return res.data;
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};

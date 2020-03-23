@@ -189,3 +189,22 @@ export const forgotPassword = user => {
       console.log(err);
     });
 };
+
+export const editAddressForm = editAddress => {
+  return axios
+    .patch(`${ip}/api/v1/addresses/${editAddress.addressID}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      locality: editAddress.locality,
+      city: editAddress.city,
+      district: editAddress.district,
+      state: editAddress.state,
+      country: editAddress.country,
+      pincode: editAddress.pincode
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};

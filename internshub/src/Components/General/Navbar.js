@@ -6,6 +6,12 @@ function Navbar(props) {
   const logout = e => {
     e.preventDefault();
     localStorage.removeItem("usertoken");
+    localStorage.removeItem("userid");
+    localStorage.removeItem("studentid");
+    localStorage.removeItem("companyid");
+    localStorage.removeItem("type");
+    localStorage.removeItem("internshipid");
+    localStorage.removeItem("name");
     props.history.push(`/`);
   };
   const loginRegLink = (
@@ -23,17 +29,57 @@ function Navbar(props) {
     </ul>
   );
 
+  const stuLink = (
+    <li className="nav-item dropdown">
+      <Link
+        className="nav-link dropdown-toggle"
+        to="#"
+        id="navbarDropdownMenuLink"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Profile
+      </Link>
+      <div
+        className="dropdown-menu nav_item"
+        aria-labelledby="navbarDropdownMenuLink"
+      >
+        <ul className="nav_ul">
+          <li className="nav_li">
+            <Link to="/studentAcademic" className="nav_link">
+              Academic Info
+            </Link>
+          </li>
+          <li className="nav_li">
+            <Link to="/studentPersonal" className="nav_link">
+              Personal Info
+            </Link>
+          </li>
+          <li className="nav_li">
+            <Link to="/studentProfile" className="nav_link">
+              Skills And Resume
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </li>
+  );
+
+  const compLink = (
+    <li className="nav-item">
+      <Link to="/companyProfile" className="nav-link">
+        Profile
+      </Link>
+    </li>
+  );
   const userLink = (
     <ul className="navbar-nav ml-auto">
+      {localStorage.type === "Student" ? stuLink : compLink}
       <li className="nav-item">
         <a href="/" onClick={logout} className="nav-link">
           Log Out
         </a>
-      </li>
-      <li className="nav-item">
-        <Link to="/profile" className="nav-link">
-          Profile
-        </Link>
       </li>
     </ul>
   );
