@@ -4,11 +4,13 @@ const authController = require('./../controllers/authController');
 
 const router = express.Router();
 
+router.route('/').get(userTypeMasterController.getAllUserTypeMasters);
+
+router.use(authController.protect);
+
 router
   .route('/')
-  .get(userTypeMasterController.getAllUserTypeMasters)
   .post(
-    authController.protect,
     authController.restrictTo('Admin'),
     userTypeMasterController.createUserTypeMaster
   );
@@ -16,7 +18,6 @@ router
 router
   .route('/:id')
   .get(
-    authController.protect,
     authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
     userTypeMasterController.getUserTypeMasterById
   );

@@ -4,41 +4,26 @@ const router = express.Router();
 const enquiryController = require('./../controllers/enquiryController');
 const authController = require('./../controllers/authController');
 
+router.use(authController.protect);
 router
   .route('/')
-  .get(
-    authController.protect,
-    authController.restrictTo('Admin'),
-    enquiryController.getAllEnquiries
-  )
+  .get(authController.restrictTo('Admin'), enquiryController.getAllEnquiries)
   .post(
-    authController.protect,
     authController.restrictTo('Admin', 'Student'),
     enquiryController.createEnquiry
   );
-
 router
   .route('/:id')
-  .get(
-    authController.protect,
-    authController.restrictTo('Admin', 'Company', 'Student'),
-    enquiryController.getEnquiryById
-  )
-  .patch(
-    authController.protect,
-    authController.restrictTo('Admin', 'Company', 'Student'),
-    enquiryController.updateEnquiry
-  )
   .delete(
-    authController.protect,
     authController.restrictTo('Admin', 'Student'),
     enquiryController.deleteEnquiry
   );
+router.use(authController.restrictTo('Admin', 'Company', 'Student'));
+
 router
-  .route('/company/:id')
-  .get(
-    authController.protect,
-    authController.restrictTo('Admin', 'Company', 'Student'),
-    enquiryController.getEnquiryByIdCompany
-  );
+  .route('/:id')
+  .get(enquiryController.getEnquiryById)
+  .patch(enquiryController.updateEnquiry);
+
+router.route('/company/:id').get(enquiryController.getEnquiryByIdCompany);
 module.exports = router;

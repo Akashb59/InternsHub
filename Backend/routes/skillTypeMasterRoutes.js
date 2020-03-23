@@ -4,15 +4,14 @@ const router = express.Router();
 const skillTypeMasterController = require('./../controllers/skillTypeMasterController');
 const authController = require('./../controllers/authController');
 
+router.use(authController.protect);
 router
   .route('/')
   .get(
-    authController.protect,
     authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
     skillTypeMasterController.getAllSkillTypeMasters
   )
   .post(
-    authController.protect,
     authController.restrictTo('Admin'),
     skillTypeMasterController.createSkillTypeMaster
   );
@@ -20,19 +19,14 @@ router
 router
   .route('/:id')
   .get(
-    authController.protect,
     authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
     skillTypeMasterController.getSkillTypeMasterById
-  )
-  .patch(
-    authController.protect,
-    authController.restrictTo('Admin'),
-    skillTypeMasterController.updateSkillTypeMaster
-  )
-  .delete(
-    authController.protect,
-    authController.restrictTo('Admin'),
-    skillTypeMasterController.deleteSkillTypeMaster
   );
+
+router.use(authController.restrictTo('Admin'));
+router
+  .route('/:id')
+  .patch(skillTypeMasterController.updateSkillTypeMaster)
+  .delete(skillTypeMasterController.deleteSkillTypeMaster);
 
 module.exports = router;

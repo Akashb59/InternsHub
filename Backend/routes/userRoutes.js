@@ -11,54 +11,35 @@ router.get('/logout', authController.logout);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
+router.use(authController.protect);
+router
+  .route('/')
+  .get(authController.restrictTo('Admin'), userController.getAllUsers);
+router.use(
+  authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell')
+);
 router.patch(
   '/updateMyPassword',
-  authController.protect,
-  authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
+
   authController.updatePassword
 );
 router.patch(
   '/updateMe',
-  authController.protect,
-  authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
+
   userController.updateMe
 );
 router.delete(
   '/deleteMe',
-  authController.protect,
-  authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
+
   userController.deleteMe
 );
 
-router
-  .route('/')
-  .get(
-    authController.protect,
-    authController.restrictTo('Admin'),
-    userController.getAllUsers
-  )
-  .post(
-    authController.protect,
-    authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
-    userController.createUser
-  );
+router.route('/').post(userController.createUser);
 
 router
   .route('/:id')
-  .get(
-    authController.protect,
-    authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
-    userController.getUserById
-  )
-  .patch(
-    authController.protect,
-    authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
-    userController.updateUser
-  )
-  .delete(
-    authController.protect,
-    authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
-    userController.deleteUser
-  );
+  .get(userController.getUserById)
+  .patch(userController.updateUser)
+  .delete(userController.deleteUser);
 
 module.exports = router;

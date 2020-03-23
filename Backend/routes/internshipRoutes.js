@@ -7,48 +7,34 @@ const authController = require('./../controllers/authController');
 router
   .route('/internshipFilter')
   .post(internshipController.getInternshipsFilter);
+
+router.use(authController.protect);
 router.delete(
   '/deleteHostedInternship/:id',
-  authController.protect,
+
   authController.restrictTo('Admin', 'Company'),
   internshipController.deleteHostedInternship
 );
 router
   .route('/')
   .get(
-    authController.protect,
     authController.restrictTo('Admin', 'Student'),
     internshipController.getAllInternships
-  )
-  .post(
-    authController.protect,
-    authController.restrictTo('Admin', 'Company'),
-    internshipController.createInternship
   );
 
 router
   .route('/:id')
   .get(
-    authController.protect,
     authController.restrictTo('Admin', 'Student', 'Company'),
     internshipController.getInternshipById
-  )
-  .patch(
-    authController.protect,
-    authController.restrictTo('Admin', 'Company'),
-    internshipController.updateInternship
-  )
-  .delete(
-    authController.protect,
-    authController.restrictTo('Admin', 'Company'),
-    internshipController.deleteInternship
   );
+
+router.use(authController.restrictTo('Admin', 'Company'));
+router.route('/').post(internshipController.createInternship);
 router
-  .route('/company/:id')
-  .get(
-    authController.protect,
-    authController.restrictTo('Admin', 'Company'),
-    internshipController.getInternshipByCompanyId
-  );
+  .route('/:id')
+  .patch(internshipController.updateInternship)
+  .delete(internshipController.deleteInternship);
+router.route('/company/:id').get(internshipController.getInternshipByCompanyId);
 
 module.exports = router;

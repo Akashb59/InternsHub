@@ -4,35 +4,19 @@ const router = express.Router();
 const addressController = require('./../controllers/addressController');
 const authController = require('./../controllers/authController');
 
+router.use(authController.protect);
 router
   .route('/')
-  .get(
-    authController.protect,
-    authController.restrictTo('Admin'),
-    addressController.getAllAddresses
-  )
+  .get(authController.restrictTo('Admin'), addressController.getAllAddresses)
   .post(
-    authController.protect,
     authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
     addressController.createAddress
   );
-
+router.use(authController.restrictTo('Admin', 'Student', 'Company'));
 router
   .route('/:id')
-  .get(
-    authController.protect,
-    authController.restrictTo('Admin', 'Student', 'Company'),
-    addressController.getAddressById
-  )
-  .patch(
-    authController.protect,
-    authController.restrictTo('Admin', 'Student', 'Company'),
-    addressController.updateAddress
-  )
-  .delete(
-    authController.protect,
-    authController.restrictTo('Admin', 'Student', 'Company'),
-    addressController.deleteAddress
-  );
+  .get(addressController.getAddressById)
+  .patch(addressController.updateAddress)
+  .delete(addressController.deleteAddress);
 
 module.exports = router;
