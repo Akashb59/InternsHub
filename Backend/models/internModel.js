@@ -69,7 +69,7 @@ internSchema.post(/^find/, function(docs, next) {
 //Aggregation Middleware
 internSchema.pre('aggregate', function(next) {
   this.pipeline().unshift({ $match: { secretIntern: { $ne: true } } });
-  console.log(this.pipeline());
+  //console.log(this.pipeline());
   next();
 });
 const Intern = mongoose.model('Intern', internSchema);

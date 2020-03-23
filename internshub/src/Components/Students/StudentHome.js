@@ -133,7 +133,7 @@ function StudentHome() {
     };
     internshipFilter(filter).then(res => {
       if (res) {
-        console.log(res);
+        //console.log(res);
         //console.log(res.data.stats[0]);
         const arr = res.data.doc.map(data => ({
           title: data.title,

@@ -138,11 +138,21 @@ const studentSchema = new mongoose.Schema(
   }
 );
 
+//Virtual Populate
+studentSchema.virtual('address', {
+  ref: 'Address',
+  foreignField: 'user',
+  localField: 'user'
+});
+
 studentSchema.pre(/^find/, function(next) {
   //this points to current query
   this.populate({
     path: 'user skills internship',
     select: '-__v -requiredSkills'
+  }).populate({
+    path: 'skills user',
+    select: '-id -_id -__v -roleType -slug -user'
   });
   next();
 });

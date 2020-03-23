@@ -9,9 +9,16 @@ function Navbar(props) {
     localStorage.removeItem("userid");
     localStorage.removeItem("studentid");
     localStorage.removeItem("companyid");
+    localStorage.removeItem("acceptInternshipid");
     localStorage.removeItem("type");
-    localStorage.removeItem("internshipid");
+    localStorage.removeItem("internshipId");
+    localStorage.removeItem("internId");
     localStorage.removeItem("name");
+    localStorage.removeItem("father_name");
+    localStorage.removeItem("mother_name");
+    localStorage.removeItem("dob");
+    localStorage.removeItem("gender");
+    localStorage.removeItem("hobbies");
     props.history.push(`/`);
   };
   const loginRegLink = (

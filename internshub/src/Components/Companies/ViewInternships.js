@@ -277,7 +277,7 @@ function ViewInternships(props) {
       // }
     })
       .then(response => {
-        console.log(response.data);
+        //console.log(response.data);
         props.history.push("/viewInternships");
         window.location.reload(false);
       })

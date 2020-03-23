@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 function Basics() {
-  const [answer, setAnswer] = useState('True');
+  const [answer, setAnswer] = useState("True");
   const [users, setUsers] = useState([]);
-  const [interns, setInterns] = useState({ name: '', age: '' });
+  const [interns, setInterns] = useState({ name: "", age: "" });
   function changeAnswer() {
-    setAnswer(prevAnswer => (prevAnswer === 'True' ? 'False' : 'True'));
+    setAnswer(prevAnswer => (prevAnswer === "True" ? "False" : "True"));
   }
 
   const handleChange = event => {
@@ -15,18 +15,18 @@ function Basics() {
   const handleSubmit = e => {
     e.preventDefault();
     axios
-      .post('http://192.168.0.194:3000/api/v1/interns', interns)
+      .post("http://192.168.0.194:3000/api/v1/interns", interns)
       .then(function(response) {
-        console.log(response);
+        //console.log(response);
       })
       .catch(function(error) {
-        console.log(error);
+        //console.log(error);
       });
   };
 
   useEffect(() => {
-    axios.get('http://192.168.0.194:3000/api/v1/users').then(response => {
-      console.log(response);
+    axios.get("http://192.168.0.194:3000/api/v1/users").then(response => {
+      //console.log(response);
       const userArr = response.data.data.user;
       const user = userArr.map(user => user.fullname);
       setUsers(user);

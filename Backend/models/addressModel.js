@@ -56,7 +56,7 @@ addressSchema.pre(/^find/, function(next) {
   //this points to current query
   this.populate({
     path: 'user',
-    select: '-__v'
+    select: '-__v -slug -roleType'
   });
   next();
 });

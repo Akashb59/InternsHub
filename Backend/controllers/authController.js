@@ -46,7 +46,7 @@ const createSendToken = (user, statusCode, res) => {
 exports.signup = catchAsync(async (req, res, next) => {
   let roleTypeObj;
   if ((await req.body.role) == 'Student') {
-    console.log(req.body.role);
+    //console.log(req.body.role);
     roleTypeObj = await userTypeMaster.findOne({
       roleName: 'Student'
     });
@@ -68,8 +68,8 @@ exports.signup = catchAsync(async (req, res, next) => {
     roleType = roleTypeObj._id;
   }
   const slug = slugify(req.body.fullname);
-  console.log(roleType);
-  console.log(slug);
+  //console.log(roleType);
+  //console.log(slug);
   const newUser = await User.create({
     fullname: req.body.fullname,
     email: req.body.email,
@@ -118,7 +118,7 @@ exports.login = catchAsync(async (req, res, next) => {
   if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
-  console.log(roleName, user.roleType._id);
+  //console.log(roleName, user.roleType._id);
   if (roleName != user.roleType.id) {
     return next(new AppError('Incorrect role', 401));
   }
@@ -250,7 +250,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
       subject: 'Your password reset token (Valid for only 10 minutes)',
       message
     });
-    console.log('pass2');
+    //console.log('pass2');
     res.status(200).json({
       status: 'success',
       message: 'Token sent to email!'

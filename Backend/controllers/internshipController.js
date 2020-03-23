@@ -5,12 +5,12 @@ const AppError = require('./../utils/appError');
 const factory = require('./handlerFactory');
 
 exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
-  console.log('Hello');
+  //console.log('Hello');
   let query;
   let stip = [];
   let dur = [];
   let arr = [];
-  console.log(req.body);
+  //console.log(req.body);
 
   req.body.stipend[0] === true ? stip.push({ stipend: 0 }) : {};
   req.body.stipend[1] === true
@@ -68,7 +68,7 @@ exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
     query = {};
   }
 
-  console.log(query);
+  //console.log(query);
   req.query.sort = '-starts_on';
   const features = new APIFeatures(Internship.find(query), req.query)
     .filter()

@@ -58,7 +58,7 @@ function CompanyForm(props) {
 
         companyform(details).then(res => {
           if (res) {
-            console.log(res);
+            //console.log(res);
             //localStorage.setItem('companyid', res.id);
             company().then(res => {
               if (res) {

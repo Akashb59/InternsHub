@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { signup, roles, role, profile } from "../Utilities/CommonFunctions";
+import { signup, roles, profile } from "../Utilities/LoginSignup";
+import { role } from "../Utilities/CommonFunctions";
 import "../../CSS/App.css";
 import { formatInput } from "../Utilities/Utils";
 

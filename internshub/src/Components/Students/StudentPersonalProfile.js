@@ -1,42 +1,36 @@
 import React, { useState, useEffect } from "react";
 import {
   student,
-  profileAddress,
   editStudProfilePersonal
 } from "../Utilities/StudentFunctions";
-import { editAddressForm } from "../Utilities/CommonFunctions";
+import { editAddressForm, editUserInfo } from "../Utilities/CommonFunctions";
 import { showAlert } from "../Utilities/Alerts";
-import "./../../CSS/company.css";
+import "./../../CSS/student.css";
 
 function StudentPersonalProfile(props) {
   useEffect(() => {
     document.title = "InternsHub | Student Profile";
     student().then(res => {
       if (res) {
-        console.log(res.data);
+        //console.log(res.data.student[0]);
         const profile = res.data.student[0].personal_details;
-        //     const profile1 = res.data.student[0].college[0];
-        profileAddress().then(res => {
-          if (res) {
-            console.log(res.data);
-            // const profile = res.data.student[0].personal_details;
-            const profile1 = res.data.address[0];
-            setStudentAcadProfileState({
-              ...studAcadProfileState,
-              fatherName: profile.father_name,
-              motherName: profile.mother_name,
-              hobbies: profile.hobbies,
-              dob: profile.dob.substring(0, 10),
-              gender: profile.gender,
-              locality: profile1.locality,
-              city: profile1.city,
-              district: profile1.district,
-              state: profile1.state,
-              country: profile1.country,
-              pincode: profile1.pincode,
-              address: profile1.id
-            });
-          }
+        const profile1 = res.data.student[0].address[0];
+        setStudentAcadProfileState({
+          ...studAcadProfileState,
+          name: res.data.student[0].user.fullname,
+          phone: res.data.student[0].user.phoneNumber,
+          fatherName: profile.father_name,
+          motherName: profile.mother_name,
+          hobbies: profile.hobbies,
+          dob: profile.dob !== null ? profile.dob.substring(0, 10) : "",
+          gender: profile.gender,
+          locality: profile1.locality,
+          city: profile1.city,
+          district: profile1.district,
+          state: profile1.state,
+          country: profile1.country,
+          pincode: profile1.pincode,
+          address: profile1.id
         });
       }
     });
@@ -56,7 +50,9 @@ function StudentPersonalProfile(props) {
     state: "",
     country: "",
     pincode: "",
-    address: ""
+    address: "",
+    name: "",
+    phone: ""
   });
 
   const handleChange = event => {
@@ -78,19 +74,25 @@ function StudentPersonalProfile(props) {
     };
     editAddressForm(editAddress).then(res => {
       if (res) {
-        console.log(res.data);
+        //console.log(res.data);
         const editStudProfile = {
-          fatherName: studAcadProfileState.fatherName,
-          motherName: studAcadProfileState.motherName,
           hobbies: studAcadProfileState.hobbies,
-          dob: studAcadProfileState.dob,
           gender: studAcadProfileState.gender
         };
         editStudProfilePersonal(editStudProfile).then(res => {
           if (res) {
-            console.log(res.data);
-            showAlert("success", "Successfully Updated Personal Information");
-            props.history.push("/StudentPersonal");
+            const details = {
+              phoneNumber: studAcadProfileState.phone
+            };
+            editUserInfo(details).then(res => {
+              if (res) {
+                showAlert(
+                  "success",
+                  "Successfully Updated Personal Information"
+                );
+                props.history.push("/StudentPersonal");
+              }
+            });
           }
         });
       }
@@ -114,6 +116,35 @@ function StudentPersonalProfile(props) {
       </header>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
+          <label htmlFor="name">Full Name: </label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Name"
+            disabled
+            id="name"
+            name="name"
+            value={studAcadProfileState.name}
+            onChange={handleChange}
+            required
+            maxLength="30"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="phone">Phone Number: </label>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Father name"
+            id="phone"
+            name="phone"
+            value={studAcadProfileState.phone}
+            onChange={handleChange}
+            required
+            maxLength="30"
+          />
+        </div>
+        <div className="form-group">
           <label htmlFor="fatherName">Father Name: </label>
           <input
             type="text"
@@ -123,7 +154,6 @@ function StudentPersonalProfile(props) {
             id="fatherName"
             name="fatherName"
             value={studAcadProfileState.fatherName}
-            // onBlur={validate}
             onChange={handleChange}
             required
             maxLength="30"
@@ -140,7 +170,6 @@ function StudentPersonalProfile(props) {
             id="motherName"
             name="motherName"
             value={studAcadProfileState.motherName}
-            //onBlur={validate}
             onChange={handleChange}
             required
             maxLength="30"
@@ -156,7 +185,6 @@ function StudentPersonalProfile(props) {
             id="hobbies"
             name="hobbies"
             value={studAcadProfileState.hobbies}
-            //onBlur={validate}
             onChange={handleChange}
             required
           />
@@ -171,8 +199,6 @@ function StudentPersonalProfile(props) {
             disabled
             id="dob"
             name="dob"
-            //value={studAcadProfileState.dob}
-            //onBlur={validate}
             onChange={handleChange}
             required
           />
@@ -210,7 +236,6 @@ function StudentPersonalProfile(props) {
             id="locality"
             name="locality"
             value={studAcadProfileState.locality}
-            //onBlur={validate}
             onChange={handleChange}
             required
             maxLength="50"
@@ -226,7 +251,6 @@ function StudentPersonalProfile(props) {
             id="city"
             name="city"
             value={studAcadProfileState.city}
-            //onBlur={validate}
             onChange={handleChange}
             required
             maxLength="15"
@@ -241,7 +265,6 @@ function StudentPersonalProfile(props) {
             id="district"
             name="district"
             value={studAcadProfileState.district}
-            //onBlur={validate}
             onChange={handleChange}
             required
             maxLength="15"
@@ -256,7 +279,6 @@ function StudentPersonalProfile(props) {
             id="state"
             name="state"
             value={studAcadProfileState.state}
-            //onBlur={validate}
             onChange={handleChange}
             required
             maxLength="20"
@@ -272,7 +294,6 @@ function StudentPersonalProfile(props) {
             id="country"
             name="country"
             value={studAcadProfileState.country}
-            //onBlur={validate}
             onChange={handleChange}
             required
             maxLength="63"

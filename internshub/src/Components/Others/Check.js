@@ -76,7 +76,7 @@ function Check() {
           </div>
         );
       })}
-      {console.log(info)}
+      {/* {console.log(info)} */}
 
       {info.subinfo.map((data, index) => {
         return (

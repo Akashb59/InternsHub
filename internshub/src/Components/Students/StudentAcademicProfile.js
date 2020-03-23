@@ -4,14 +4,14 @@ import {
   editStudProfileAcademic
 } from "../Utilities/StudentFunctions";
 import { showAlert } from "../Utilities/Alerts";
-import "./../../CSS/company.css";
+import "./../../CSS/student.css";
 
 function StudentAcademicProfile(props) {
   useEffect(() => {
     document.title = "InternsHub | Student Profile";
     student().then(res => {
       if (res) {
-        console.log(res.data);
+        //console.log(res.data);
         const profile = res.data.student[0].academic_details;
         const profile1 = res.data.student[0].college[0];
         setStudentProfileState({
@@ -77,7 +77,7 @@ function StudentAcademicProfile(props) {
     };
     editStudProfileAcademic(editStudProfile).then(res => {
       if (res) {
-        console.log(res.data);
+        //console.log(res.data);
         showAlert("success", "Successfully Updated  Academic Information");
         props.history.push("/StudentAcademic");
       }

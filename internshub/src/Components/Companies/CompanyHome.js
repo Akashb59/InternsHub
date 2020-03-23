@@ -12,6 +12,7 @@ import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
 //import { deleteInternship } from '../Utilities/CompanyFunctions';
 //import { companyInternships } from "../Utilities/CompanyFunctions";
+
 let final;
 function CompanyHome(props) {
   const [descriptionState, setDescription] = useState({

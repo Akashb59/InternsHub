@@ -1,8 +1,8 @@
 import axios from "axios";
 import { showAlert } from "./Alerts";
-
-//const ip = "http://192.168.1.25:3000";
 const ip = localStorage.ip;
+
+//GET and GET ALL
 export const company = () => {
   return axios({
     method: "get",
@@ -27,6 +27,79 @@ export const company = () => {
     });
 };
 
+export const companyInternships = () => {
+  //console.log(details.user);
+  return axios({
+    method: "get",
+    url: `${ip}/api/v1/internships/company/${localStorage.companyid}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken
+    }
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  }).catch(err => {
+    showAlert("error", `${err.response.data.message}`);
+    console.log(err);
+  });
+};
+
+export const internship = id => {
+  //  console.log(id);
+  return axios({
+    method: "get",
+    url: `${ip}/api/v1/internships/${id}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken
+    }
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  }).catch(err => {
+    showAlert("error", `${err.response.data.message}`);
+    //console.log(err);
+  });
+};
+
+export const companyEnquiries = () => {
+  //console.log(details.user);
+  return axios({
+    method: "get",
+    url: `${ip}/api/v1/enquiries/company/${localStorage.companyid}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken
+    }
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  }).catch(err => {
+    showAlert("error", `${err.response.data.message}`);
+    console.log(err);
+  });
+};
+
+export const internshipEnquiries = id => {
+  //console.log(details.user);
+  return axios({
+    method: "get",
+    url: `${ip}/api/v1/enquiries/${id}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken
+    }
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  }).catch(err => {
+    showAlert("error", `${err.response.data.message}`);
+    console.log(err);
+  });
+};
+
+//POST
 export const companyform = details => {
   //console.log(details.user);
   return axios
@@ -70,42 +143,7 @@ export const hostInternship = internship => {
     });
 };
 
-export const companyInternships = () => {
-  //console.log(details.user);
-  return axios({
-    method: "get",
-    url: `${ip}/api/v1/internships/company/${localStorage.companyid}`,
-    //withCredentials: true,
-    headers: {
-      jwt: localStorage.usertoken
-    }
-    // headers: {
-    //   Cookie: `jwt=${localStorage.usertoken}`
-    // }
-  }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
-    console.log(err);
-  });
-};
-
-export const internship = id => {
-  //  console.log(id);
-  return axios({
-    method: "get",
-    url: `${ip}/api/v1/internships/${id}`,
-    //withCredentials: true,
-    headers: {
-      jwt: localStorage.usertoken
-    }
-    // headers: {
-    //   Cookie: `jwt=${localStorage.usertoken}`
-    // }
-  }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
-    //console.log(err);
-  });
-};
-//Changes to br made
+//PATCH
 export const editInternship = internship => {
   return axios
     .patch(`${ip}/api/v1/internships/${localStorage.internshipId}`, {
@@ -145,7 +183,7 @@ export const companyDescription = desc => {
 };
 
 export const companyTechnology = tech => {
-  console.log(tech.technology);
+  //console.log(tech.technology);
   return axios
     .patch(`${ip}/api/v1/companies/${localStorage.companyid}`, {
       headers: {
@@ -157,42 +195,6 @@ export const companyTechnology = tech => {
       showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
-};
-
-export const companyEnquiries = () => {
-  //console.log(details.user);
-  return axios({
-    method: "get",
-    url: `${ip}/api/v1/enquiries/company/${localStorage.companyid}`,
-    //withCredentials: true,
-    headers: {
-      jwt: localStorage.usertoken
-    }
-    // headers: {
-    //   Cookie: `jwt=${localStorage.usertoken}`
-    // }
-  }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
-    console.log(err);
-  });
-};
-
-export const internshipEnquiries = id => {
-  //console.log(details.user);
-  return axios({
-    method: "get",
-    url: `${ip}/api/v1/enquiries/${id}`,
-    //withCredentials: true,
-    headers: {
-      jwt: localStorage.usertoken
-    }
-    // headers: {
-    //   Cookie: `jwt=${localStorage.usertoken}`
-    // }
-  }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
-    console.log(err);
-  });
 };
 
 export const internshipAccept = (id, accept) => {
@@ -218,22 +220,6 @@ export const editDetailsForm = editDetails => {
       gst_no: editDetails.gst_no,
       website: editDetails.website,
       establishedYear: editDetails.establishedYear
-    })
-    .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
-      console.log(err);
-    });
-};
-
-export const editCompanyForm = pDetails => {
-  //console.log(details.user);
-  return axios
-    .patch(`${ip}/api/v1/users/${localStorage.userid}`, {
-      headers: {
-        jwt: localStorage.usertoken
-      },
-      fullname: pDetails.fullname,
-      phoneNumber: pDetails.phoneNumber
     })
     .catch(err => {
       showAlert("error", `${err.response.data.message}`);

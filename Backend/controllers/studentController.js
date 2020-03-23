@@ -56,8 +56,8 @@ exports.updateStudentResume = catchAsync(async (req, res, next) => {
     'personal_details'
   );
   if (req.file) filteredBody.resume = req.file.filename;
-  console.log(req.params.id);
-  console.log(req.file);
+  //console.log(req.params.id);
+  //console.log(req.file);
   //console.log(req.body);
 
   //3.Update user document
@@ -77,8 +77,10 @@ exports.updateStudentResume = catchAsync(async (req, res, next) => {
 });
 
 exports.getStudentByIdUser = catchAsync(async (req, res, next) => {
-  const student = await Student.find({ user: req.params.id });
-  console.log(student);
+  const student = await Student.find({ user: req.params.id }).populate(
+    'address'
+  );
+  //console.log(student);
   if (!student) {
     //console.log('hey');
     return next(new AppError('No Student found with that ID', 404));
@@ -90,7 +92,7 @@ exports.getStudentByIdUser = catchAsync(async (req, res, next) => {
 });
 
 exports.updateStudentAddCollege = catchAsync(async (req, res, next) => {
-  console.log(req.body, req.params.id);
+  //console.log(req.body, req.params.id);
   const student = await Student.findOneAndUpdate(
     { user: req.params.id },
     {
@@ -114,7 +116,7 @@ exports.updateStudentAddCollege = catchAsync(async (req, res, next) => {
 });
 
 exports.getAllStudents = factory.getAll(Student);
-exports.getStudentById = factory.getOne(Student);
+exports.getStudentById = factory.getOne(Student, 'address');
 exports.createStudent = factory.createOne(Student);
 exports.updateStudent = factory.updateOne(Student);
 exports.deleteStudent = factory.deleteOne(Student);

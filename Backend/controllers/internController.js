@@ -51,7 +51,7 @@ exports.getAllInterns = catchAsync(async (req, res, next) => {
 exports.getInternById = catchAsync(async (req, res, next) => {
   const intern = await Intern.findById(req.params.id);
   if (!intern) {
-    console.log('hey');
+    //console.log('hey');
     return next(new AppError('No tour found with that ID', 404));
   }
   res.status(200).json({
@@ -63,7 +63,7 @@ exports.getInternById = catchAsync(async (req, res, next) => {
 exports.createIntern = catchAsync(async (req, res, next) => {
   const newIntern = await Intern.create(req.body);
   //Intern.findOne({_id:req.params.id})
-  console.log(req.body);
+  //console.log(req.body);
   res.status(201).json({
     status: 'Success',
     data: {
@@ -102,7 +102,7 @@ exports.updateIntern = catchAsync(async (req, res, next) => {
     //re validate for each update
   });
   if (!intern) {
-    console.log('hey');
+    //console.log('hey');
     return next(new AppError('No tour found with that ID', 404));
   }
   res.status(200).json({
@@ -116,7 +116,7 @@ exports.updateIntern = catchAsync(async (req, res, next) => {
 exports.deleteIntern = catchAsync(async (req, res, next) => {
   const intern = await Intern.findByIdAndDelete(req.params.id);
   if (!intern) {
-    console.log('hey');
+    //console.log('hey');
     return next(new AppError('No tour found with that ID', 404));
   }
   res.status(204).json({

@@ -1,9 +1,8 @@
 import axios from "axios";
 import { showAlert } from "./Alerts";
-
-//const ip = "http://192.168.1.25:3000";
 const ip = localStorage.ip;
 
+//GET and GET ALL
 export const student = () => {
   return axios({
     method: "get",
@@ -27,69 +26,6 @@ export const student = () => {
       console.log(err);
     });
 };
-
-export const studentform = det => {
-  return axios
-    .post(`${ip}/api/v1/students/`, {
-      headers: {
-        jwt: localStorage.usertoken
-      },
-      academic_details: {
-        school_name: det.school_name,
-        grade_10_per: det.grade_10_per,
-        pu_college_name: det.pu_college_name,
-        grade_12_per: det.grade_12_per,
-        university_name: det.university_name,
-        usn: det.usn,
-        degree_cgpa: det.degree_cgpa,
-        project1_undertaken: det.project1_undertaken,
-        project2_undertaken: det.project2_undertaken,
-        college_name: det.college_name
-      },
-
-      personal_details: {
-        father_name: det.father_name,
-        mother_name: det.mother_name,
-        dob: det.dob,
-        gender: det.gender,
-        hobbies: det.hobbies
-      },
-      college: {
-        college_name: det.college_name,
-        phone_number: det.phone_number,
-        website: det.website,
-        email: det.email
-      },
-      user: det.user
-    })
-    .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
-      console.log(err);
-    });
-};
-
-export const internshipFilter = filter => {
-  console.log(filter);
-  return axios
-    .post(`${ip}/api/v1/internships/internshipFilter`, {
-      headers: {
-        jwt: localStorage.usertoken
-      },
-      stipend: filter.stipend,
-      categories: filter.categories,
-      duration: filter.duration,
-      type_of_internship: filter.type_of_internship,
-      starts_on: filter.starts_on
-    })
-    .then(res => {
-      return res.data;
-    })
-    .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
-      console.log(err);
-    });
-};
-
 export const internshipAll = () => {
   //console.log(filter);
   return axios({
@@ -134,8 +70,71 @@ export const selectedIntern = id => {
     });
 };
 
+//POST
+export const studentform = det => {
+  return axios
+    .post(`${ip}/api/v1/students/`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      academic_details: {
+        school_name: det.school_name,
+        grade_10_per: det.grade_10_per,
+        pu_college_name: det.pu_college_name,
+        grade_12_per: det.grade_12_per,
+        university_name: det.university_name,
+        usn: det.usn,
+        degree_cgpa: det.degree_cgpa,
+        project1_undertaken: det.project1_undertaken,
+        project2_undertaken: det.project2_undertaken,
+        college_name: det.college_name
+      },
+
+      personal_details: {
+        father_name: det.father_name,
+        mother_name: det.mother_name,
+        dob: det.dob,
+        gender: det.gender,
+        hobbies: det.hobbies
+      },
+      college: {
+        college_name: det.college_name,
+        phone_number: det.phone_number,
+        website: det.website,
+        email: det.email
+      },
+      user: det.user
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
+export const internshipFilter = filter => {
+  //console.log(filter);
+  return axios
+    .post(`${ip}/api/v1/internships/internshipFilter`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      stipend: filter.stipend,
+      categories: filter.categories,
+      duration: filter.duration,
+      type_of_internship: filter.type_of_internship,
+      starts_on: filter.starts_on
+    })
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
 export const sendEnquiry = info => {
-  console.log(info);
+  //console.log(info);
   return axios
     .post(`${ip}/api/v1/enquiries/`, {
       headers: {
@@ -156,6 +155,7 @@ export const sendEnquiry = info => {
     });
 };
 
+//PATCH
 export const SkillsUpdate = skill => {
   return axios
     .patch(`${ip}/api/v1/students/${localStorage.studentid}`, {
@@ -193,9 +193,6 @@ export const editStudProfilePersonal = editStudProfile => {
         jwt: localStorage.usertoken
       },
       personal_details: {
-        father_name: editStudProfile.fatherName,
-        mother_name: editStudProfile.motherName,
-        dob: editStudProfile.dob,
         gender: editStudProfile.gender,
         hobbies: editStudProfile.hobbies
       }
@@ -230,29 +227,6 @@ export const editStudProfileAcademic = editStudProfile => {
         website: editStudProfile.colWebsite,
         email: editStudProfile.colEmail
       }
-    })
-    .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
-      console.log(err);
-    });
-};
-
-export const profileAddress = () => {
-  return axios({
-    method: "get",
-    url: `${ip}/api/v1/addresses/user/${localStorage.userid}`,
-    //withCredentials: true,
-    headers: {
-      jwt: localStorage.usertoken
-    }
-    // headers: {
-    //   Cookie: `jwt=${localStorage.usertoken}`
-    // }
-  })
-    .then(res => {
-      //console.log(res.data.data);
-      //console.log(res.data.token);
-      return res.data;
     })
     .catch(err => {
       showAlert("error", `${err.response.data.message}`);

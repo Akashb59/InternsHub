@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-import {
-  company,
-  editDetailsForm,
-  editCompanyForm
-} from "../Utilities/CompanyFunctions";
-import { editAddressForm } from "../Utilities/CommonFunctions";
+import { company, editDetailsForm } from "../Utilities/CompanyFunctions";
+import { editAddressForm, editUserInfo } from "../Utilities/CommonFunctions";
 import { showAlert } from "../Utilities/Alerts";
 import "./../../CSS/company.css";
 
@@ -15,7 +11,7 @@ function CompanyProfile(props) {
 
     company().then(res => {
       if (res) {
-        console.log(res.data.company[0]);
+        //console.log(res.data.company[0]);
         const profile = res.data.company[0];
         setCompProfileState({
           ...compProfileState,
@@ -71,7 +67,7 @@ function CompanyProfile(props) {
     };
     editAddressForm(editAddress).then(res => {
       if (res) {
-        console.log(res);
+        //console.log(res);
         const editDetails = {
           gst_no: compProfileState.gst_no,
           website: compProfileState.website,
@@ -82,10 +78,9 @@ function CompanyProfile(props) {
           if (res) {
             //console.log(res.data)
             const pDetails = {
-              fullname: compProfileState.fullname,
               phoneNumber: compProfileState.phoneNumber
             };
-            editCompanyForm(pDetails).then(res => {
+            editUserInfo(pDetails).then(res => {
               if (res) {
                 showAlert("success", "Successfully Updated Profile");
                 props.history.push("/CompanyProfile");
