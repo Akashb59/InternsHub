@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./../../CSS/company.css";
-import { FaInfo, FaQuestion } from "react-icons/fa";
-
+import { FaInfo, FaQuestion, FaFilePdf } from "react-icons/fa";
 import {
   companyEnquiries,
   internshipEnquiries,
@@ -10,6 +9,7 @@ import {
 import { showAlert } from "../Utilities/Alerts";
 
 function CompanyEnquiry(props) {
+  let src;
   const [internshipEnquiry, setInternshipEnquiry] = useState([]);
   const [resume, setResume] = useState("");
   const [selectedInternship, setSelectedInternship] = useState({
@@ -49,9 +49,28 @@ function CompanyEnquiry(props) {
   const InternshipEnq = props => (
     <tr>
       <td>{props.internship.internship.title}</td>
-      <td>{props.internship.internship.starts_on.substring(0, 10)}</td>
+      {/* <td>{props.internship.internship.starts_on.substring(0, 10)}</td> */}
       <td>{props.internship.user.fullname}</td>
-      <td>{props.internship.accepted}</td>
+      <td>
+        <button
+          className="btn btn-secondary btn-sm btn-block"
+          data-toggle="modal"
+          data-target="#resume"
+          onClick={() => {
+            internshipEnquiries(props.internship._id).then(res => {
+              //console.log(props.internship._id);
+              //localStorage.setItem("internshipId", props.internship._id);
+              if (res) {
+                //console.log(res.data.data.student.resume);
+                setResume(res.data.data.student.resume);
+              }
+            });
+          }}
+        >
+          <FaFilePdf />
+        </button>
+      </td>
+
       <td>{props.internship.reqAt.substring(0, 10)}</td>
       <td>
         <button
@@ -119,6 +138,7 @@ function CompanyEnquiry(props) {
           <FaInfo />
         </button>
       </td>
+      <td>{props.internship.accepted}</td>
       <td>
         <button
           className="btn btn-success btn-sm btn-block"
@@ -128,26 +148,7 @@ function CompanyEnquiry(props) {
             localStorage.setItem("acceptInternshipId", props.internship._id);
           }}
         >
-          Accept
-        </button>
-      </td>
-      <td>
-        <button
-          className="btn btn-secondary btn-sm btn-block"
-          data-toggle="modal"
-          data-target="#resume"
-          onClick={() => {
-            internshipEnquiries(props.internship._id).then(res => {
-              //console.log(props.internship._id);
-              //localStorage.setItem("internshipId", props.internship._id);
-              if (res) {
-                //console.log(res.data.data.student.resume);
-                setResume(res.data.data.student.resume);
-              }
-            });
-          }}
-        >
-          Resume
+          <i class="fas fa-check-circle"></i>
         </button>
       </td>
     </tr>
@@ -175,17 +176,11 @@ function CompanyEnquiry(props) {
       }
     });
   }, []);
-  let src;
-  let spilted;
+
   if (resume !== "") {
     src = `${localStorage.ip}/Resume/${resume}`;
-    console.log(src);
-    spilted = src.substring(32, 39);
-    console.log(spilted);
-    //const new
   }
 
-  console.log();
   const selectLink = (
     <div>
       <ul className="nav nav-tabs">
@@ -305,13 +300,12 @@ function CompanyEnquiry(props) {
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
-              <th>Starts On</th>
               <th>Student Name</th>
-              <th>Accepted</th>
+              <th>Resume</th>
               <th>Requested On</th>
               <th>Details</th>
+              <th>Accepted</th>
               <th>Action</th>
-              <th>Resume</th>
             </tr>
           </thead>
           <tbody>{internshipEnquiryList()}</tbody>

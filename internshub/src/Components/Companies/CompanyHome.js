@@ -14,6 +14,7 @@ import { skills } from "../Utilities/CommonFunctions";
 import Select from "react-select";
 //import { deleteInternship } from '../Utilities/CompanyFunctions';
 //import { companyInternships } from "../Utilities/CompanyFunctions";
+import { GiDesk } from "react-icons/gi";
 
 let final;
 function CompanyHome(props) {
@@ -374,7 +375,7 @@ function CompanyHome(props) {
                   <div className="card-body">
                     <h3>Internships</h3>
                     <h4 className="display-4">
-                      <i className="fa fa-globe" /> {count}
+                      <GiDesk /> {count}
                     </h4>
                     <Link
                       to="viewInternships"
@@ -388,7 +389,7 @@ function CompanyHome(props) {
                   <div className="card-body">
                     <h3>Enquiries</h3>
                     <h4 className="display-4">
-                      <i className="fas fa-folder" /> {countEnquiry}
+                      <i class="fas fa-clipboard-check"></i> {countEnquiry}
                     </h4>
                     <Link
                       to="companyEnquiry"
