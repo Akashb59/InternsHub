@@ -8,6 +8,22 @@ import { showAlert } from "../Utilities/Alerts";
 import "./../../CSS/student.css";
 
 function StudentPersonalProfile(props) {
+  const [studAcadProfileState, setStudentAcadProfileState] = useState({
+    fatherName: "",
+    motherName: "",
+    hobbies: "",
+    dob: Date,
+    gender: "",
+    locality: "",
+    city: "",
+    district: "",
+    state: "",
+    country: "",
+    pincode: "",
+    address: "",
+    name: "",
+    phone: ""
+  });
   useEffect(() => {
     document.title = "InternsHub | Student Profile";
     student().then(res => {
@@ -37,24 +53,6 @@ function StudentPersonalProfile(props) {
 
     // eslint-disable-next-line
   }, []);
-
-  const [studAcadProfileState, setStudentAcadProfileState] = useState({
-    fatherName: "",
-    motherName: "",
-    hobbies: "",
-    dob: Date,
-    gender: "",
-    locality: "",
-    city: "",
-    district: "",
-    state: "",
-    country: "",
-    pincode: "",
-    address: "",
-    name: "",
-    phone: ""
-  });
-
   const handleChange = event => {
     setStudentAcadProfileState({
       ...studAcadProfileState,
@@ -197,6 +195,7 @@ function StudentPersonalProfile(props) {
             className="form-control"
             placeholder="DOB"
             disabled
+            value={studAcadProfileState.dob}
             id="dob"
             name="dob"
             onChange={handleChange}

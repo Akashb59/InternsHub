@@ -31,7 +31,7 @@ function ViewInternships(props) {
               if (res) {
                 // console.log(res.data.data.internship.requiredSkills[0]._id);
                 document.title = `InternsHub | Edit ${res.data.data.title}`;
-                //console.log(res.data.data.internship.requiredSkills);
+                console.log(res.data);
                 const selected = res.data.data.requiredSkills.map(el => {
                   return { value: el.id, label: el.skill_name };
                 });

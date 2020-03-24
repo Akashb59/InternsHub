@@ -89,13 +89,18 @@ internshipSchema.pre(/^find/, function(next) {
   this.populate({
     path: 'company requiredSkills',
     select: '-__v'
-  }).populate({
-    path: 'requiredSkills user',
-    select: '-id -_id -__v -roleType -slug -user',
-    options: {
-      sort: 'skill_name'
-    }
-  });
+  })
+    .populate({
+      path: 'requiredSkills',
+      select: '-__v -slug -user',
+      options: {
+        sort: 'skill_name'
+      }
+    })
+    .populate({
+      path: 'user company',
+      select: '-__v -slug -id -_id'
+    });
   next();
 });
 

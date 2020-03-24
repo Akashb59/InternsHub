@@ -42,7 +42,7 @@ function StudentInternSelect(props) {
     selectedIntern(localStorage.internId).then(res => {
       if (res) {
         document.title = `InternsHub | ${res.data.title}`;
-        //console.log(res.data.internship);
+        console.log(res.data);
         const ab = res.data;
         setInternship({
           ...internship,
@@ -335,7 +335,7 @@ function StudentInternSelect(props) {
                 </div>
 
                 <div className="modal-footer">
-                  {studentState === "valid" ? (
+                  {studentState === "Valid" ? (
                     <button className="btn btn-success" type="submit">
                       Submit
                     </button>

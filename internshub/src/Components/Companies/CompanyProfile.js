@@ -179,7 +179,7 @@ function CompanyProfile(props) {
             className="form-control"
             id="eyear"
             placeholder="establishedYear"
-            value={compProfileState.establishedYear}
+            value={compProfileState.establishedYear.substring(0, 10)}
             onChange={handleChange}
             // onKeyPress={keyPress}
             required
