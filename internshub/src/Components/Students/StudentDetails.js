@@ -16,6 +16,7 @@ function StudentDetails(props) {
   const [studentProfile, setStudentProfile] = useState({
     skills: []
   });
+  const [resume, setResume] = useState("Not Uploaded Resume");
   const [options, setOptions] = useState([]);
   const [select, setSelect] = useState([]);
   useEffect(() => {
@@ -37,6 +38,9 @@ function StudentDetails(props) {
         const selected = res.data.student[0].skills.map(el => {
           return { value: el.id, label: el.skill_name };
         });
+        if (res.data.student[0].resume !== "" || null) {
+          setResume("Resume Uploaded Successfully");
+        }
         // if (selected.length === 0) selected = [];
         setStudentProfile({
           ...studentProfile,
@@ -107,14 +111,12 @@ function StudentDetails(props) {
   return (
     <div className="container">
       <div className="jumbotron">
-        <h1 className="text-center">{localStorage.name} Profile</h1>
+        <h3 className="text-center">
+          <b>Skills and Resume</b>
+        </h3>
         <form onSubmit={handleSubmit}>
-          <div className="col-sm-8 mx-auto display-4 text-center">
-            <p>
-              <b>Skills</b>
-            </p>
-          </div>
-          <center>
+          <div className="col-sm-8 mx-auto display-4 text-center"></div>
+          {/* <center>
             {select !== null
               ? select.map(el => {
                   return (
@@ -125,7 +127,7 @@ function StudentDetails(props) {
                   );
                 })
               : ""}
-          </center>
+          </center> */}
           <div className="form-group">
             <label htmlFor="skill">
               <b>Add/Edit Skills: </b>
@@ -136,16 +138,15 @@ function StudentDetails(props) {
             Submit
           </button>
         </form>
+        <br></br>
+        <br></br>
         <form onSubmit={handleSubmit1}>
-          <div className="col-sm-8 mx-auto display-4 text-center">
-            <p>
-              <b>Resume</b>
-            </p>
-          </div>
+          <div className="col-sm-8 mx-auto display-4 text-center"></div>
           <div className="form-group">
             <label htmlFor="resume">
-              <b>Add Resume </b>
+              <b>Add/Edit Resume: </b>
             </label>
+            <br></br>
             <input
               type="file"
               name="resume"
@@ -157,7 +158,9 @@ function StudentDetails(props) {
           <button className="btn btn-success" type="submit">
             Submit
           </button>
+          <br></br>
         </form>
+        Status: {resume}
       </div>
     </div>
   );

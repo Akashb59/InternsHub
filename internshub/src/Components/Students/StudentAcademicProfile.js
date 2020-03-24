@@ -226,7 +226,7 @@ function StudentAcademicProfile(props) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="degreeCgpa">UG CGPA:</label>
+          <label htmlFor="degreeCgpa">UG CGPA (Current Semester):</label>
           <input
             type="text"
             //onKeyPress={keypress}
@@ -287,7 +287,7 @@ function StudentAcademicProfile(props) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="project1">Project1 Undertaken:</label>
+          <label htmlFor="project1">Project 1 Undertaken:</label>
           <input
             type="text"
             className="form-control"
@@ -302,7 +302,7 @@ function StudentAcademicProfile(props) {
         </div>
 
         <div className="form-group">
-          <label htmlFor="project2">Project2 Undertaken:</label>
+          <label htmlFor="project2">Project 2 Undertaken:</label>
           <input
             type="text"
             className="form-control"

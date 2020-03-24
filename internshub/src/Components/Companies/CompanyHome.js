@@ -4,7 +4,9 @@ import {
   companyDescription,
   company,
   companyTechnology,
-  hostInternship
+  hostInternship,
+  companyInternships,
+  companyEnquiries
 } from "../Utilities/CompanyFunctions";
 import { showAlert } from "./../Utilities/Alerts";
 import { Link } from "react-router-dom";
@@ -30,6 +32,8 @@ function CompanyHome(props) {
     stipend: ""
   });
   const [options, setOptions] = useState([]);
+  const [count, setCount] = useState(0);
+  const [countEnquiry, setcountEnquiry] = useState(0);
   const [technologyState, setTechnology] = useState({
     technology: []
   });
@@ -57,7 +61,17 @@ function CompanyHome(props) {
         //console.log(options);
       }
     });
-
+    companyInternships().then(res => {
+      if (res) {
+        //console.log(res.data);
+        setCount(res.data.results);
+      }
+    });
+    companyEnquiries().then(res => {
+      if (res) {
+        setcountEnquiry(res.data.results);
+      }
+    });
     company(localStorage.companyid).then(res => {
       if (res) {
         setDescription({
@@ -360,7 +374,7 @@ function CompanyHome(props) {
                   <div className="card-body">
                     <h3>Internships</h3>
                     <h4 className="display-4">
-                      <i className="fa fa-globe" /> 6
+                      <i className="fa fa-globe" /> {count}
                     </h4>
                     <Link
                       to="viewInternships"
@@ -374,7 +388,7 @@ function CompanyHome(props) {
                   <div className="card-body">
                     <h3>Enquiries</h3>
                     <h4 className="display-4">
-                      <i className="fas fa-folder" /> 4
+                      <i className="fas fa-folder" /> {countEnquiry}
                     </h4>
                     <Link
                       to="companyEnquiry"

@@ -52,13 +52,14 @@ function Signup(props) {
           id: id
         };
         profile(user).then(res => {
-          localStorage.setItem("name", res.data.user.fullname);
+          localStorage.setItem("name", res.data.fullname);
         });
         role(roleType).then(res => {
           if (res) {
-            localStorage.setItem("type", res.data.userTypeMaster.roleName);
-            check = res.data.userTypeMaster.roleName;
-            //console.log(res.data.userTypeMaster.roleName);
+            //console.log(res.data);
+            localStorage.setItem("type", res.data.roleName);
+            check = res.data.roleName;
+            //console.log(res.data.roleName);
             if (check === "Student") {
               props.history.push(`/studentDetails`);
             } else if (check === "Company") {

@@ -450,12 +450,12 @@ function StudentInfo(props) {
             </div>
 
             <div className="form-group">
-              <label htmlFor="ugper">UG Percentage:</label>
+              <label htmlFor="degree_cgpa">UG CGPA (Current Semester):</label>
               <input
                 type="text"
                 onKeyPress={keypress}
                 className="form-control"
-                id="ugper"
+                id="degree_cgpa"
                 name="degree_cgpa"
                 required
                 //onBlur="return ValidateDecimal(this) ;"
@@ -507,7 +507,7 @@ function StudentInfo(props) {
             </div>
 
             <div className="form-group">
-              <label htmlFor="p1">Project1 Undertaken:</label>
+              <label htmlFor="p1">Project 1 Undertaken:</label>
               <input
                 type="text"
                 className="form-control"
@@ -521,7 +521,7 @@ function StudentInfo(props) {
             </div>
 
             <div className="form-group">
-              <label htmlFor="p2">Project2 Undertaken:</label>
+              <label htmlFor="p2">Project 2 Undertaken:</label>
               <input
                 type="text"
                 className="form-control"

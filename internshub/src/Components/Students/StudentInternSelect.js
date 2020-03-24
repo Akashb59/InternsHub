@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { selectedIntern, sendEnquiry } from "../Utilities/StudentFunctions";
+import {
+  selectedIntern,
+  sendEnquiry,
+  student
+} from "../Utilities/StudentFunctions";
 import "./../../CSS/student.css";
 import { showAlert } from "../Utilities/Alerts";
 
@@ -26,6 +30,12 @@ function StudentInternSelect(props) {
     companyId: ""
   });
   const [info, setInfo] = useState("");
+  const [studentState, setStudentState] = useState("invalid");
+  const [display, setDisplay] = useState({
+    academic: "",
+    personal: "",
+    resSkill: ""
+  });
   const id = props.location.id;
   if (props.location.id !== undefined) localStorage.setItem("internId", id);
   useEffect(() => {
@@ -99,7 +109,6 @@ function StudentInternSelect(props) {
     });
   };
 
-  //console.log(internship);
   return (
     <div className="container-fluid">
       <div className="col-sm-8 mx-auto display-4 text-center">
@@ -219,6 +228,79 @@ function StudentInternSelect(props) {
           className="btn btn-success btn-block"
           data-toggle="modal"
           data-target="#reqInternship"
+          onClick={() => {
+            student().then(res => {
+              //console.log(props.internship._id);
+              //localStorage.setItem("internshipId", props.internship._id);
+              if (res) {
+                //console.log(res.data.student[0]);
+                const personal = res.data.student[0].personal_details;
+                const academic = res.data.student[0].academic_details;
+                let personalDetails = "Invalid";
+                let resumeSkill = "Invalid";
+                let academicDetails = "Invalid";
+                if (
+                  res.data.student[0].user.fullname &&
+                  res.data.student[0].address &&
+                  personal.dob &&
+                  personal.mother_name &&
+                  personal.gender &&
+                  personal.hobbies &&
+                  personal.father_name !== (undefined || null || "" || [])
+                ) {
+                  personalDetails = "Valid";
+                }
+                if (
+                  res.data.student[0].college &&
+                  academic.school_name &&
+                  academic.grade_10_per &&
+                  academic.pu_college_name &&
+                  academic.grade_12_per &&
+                  academic.usn &&
+                  academic.degree_cgpa &&
+                  academic.project1_undertaken &&
+                  academic.project2_undertaken &&
+                  academic.college_name &&
+                  academic.university_name !== (undefined || null || "" || [])
+                ) {
+                  academicDetails = "Valid";
+                }
+                if (
+                  res.data.student[0].resume &&
+                  res.data.student[0].skills !== (undefined || null || "" || [])
+                ) {
+                  resumeSkill = "Valid";
+                }
+                if (personalDetails === "Invalid") {
+                  showAlert(
+                    "error",
+                    "Please Enter your personal details before applying"
+                  );
+                  personalDetails = "Please Provide Valid Personal Information";
+                } else if (academicDetails === "Invalid") {
+                  showAlert(
+                    "error",
+                    "Please Enter your academic details before applying"
+                  );
+                  academicDetails = "Please Provide Valid Academic Information";
+                } else if (resumeSkill === "Invalid") {
+                  showAlert(
+                    "error",
+                    "Please update resume and skill details before applying"
+                  );
+                  resumeSkill = "Please Update Skills And Resume Information";
+                } else {
+                  setStudentState("Valid");
+                }
+                setDisplay({
+                  ...display,
+                  academic: academicDetails,
+                  personal: personalDetails,
+                  resSkill: resumeSkill
+                });
+              }
+            });
+          }}
         >
           <i className="fas fa-arrow-circle-right"></i> Apply Now
         </button>
@@ -234,6 +316,10 @@ function StudentInternSelect(props) {
             </div>
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
+                <p>Academic Information: {display.academic}</p>
+                <p>Personal Information: {display.personal}</p>
+                <p>Skills and Resume Information: {display.resSkill}</p>
+                <br></br>
                 <div className="form-group">
                   <label htmlFor="info">Message: </label>
                   <input
@@ -249,9 +335,15 @@ function StudentInternSelect(props) {
                 </div>
 
                 <div className="modal-footer">
-                  <button className="btn btn-success" type="submit">
-                    Submit
-                  </button>
+                  {studentState === "valid" ? (
+                    <button className="btn btn-success" type="submit">
+                      Submit
+                    </button>
+                  ) : (
+                    <button className="btn btn-success" type="submit" disabled>
+                      Submit
+                    </button>
+                  )}
                 </div>
               </div>
             </form>

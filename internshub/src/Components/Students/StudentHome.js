@@ -189,7 +189,7 @@ function StudentHome() {
 
   return (
     <div>
-      <div className="container-fluid">
+      <div className="container">
         <div className="row">
           <div className="col-lg-3">
             <div className="jumbotron">

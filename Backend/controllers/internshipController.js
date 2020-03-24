@@ -106,6 +106,7 @@ exports.getInternshipByCompanyId = catchAsync(async (req, res, next) => {
   }
   res.status(200).json({
     status: 'Success',
+    results: internship.length,
     data: { internship }
   });
 });
