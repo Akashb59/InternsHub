@@ -60,9 +60,11 @@ exports.getOne = (Model, popOptions) =>
 
 exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
-    //console.log(req.originalUrl);
+    console.log(req.originalUrl);
     if (req.originalUrl === '/api/v1/internships/')
       req.query.sort = '-starts_on';
+    if (req.originalUrl === '/api/v1/skillTypeMasters/')
+      req.query.sort = 'skill_name';
 
     const features = new APIFeatures(Model.find(), req.query)
       .filter()

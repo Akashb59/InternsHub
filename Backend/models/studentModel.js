@@ -152,7 +152,10 @@ studentSchema.pre(/^find/, function(next) {
     select: '-__v -requiredSkills'
   }).populate({
     path: 'skills user',
-    select: '-id -_id -__v -roleType -slug -user'
+    select: '-id -_id -__v -roleType -slug -user',
+    options: {
+      sort: 'skill_name'
+    }
   });
   next();
 });

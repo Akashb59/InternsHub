@@ -11,6 +11,7 @@ import { showAlert } from "../Utilities/Alerts";
 
 function CompanyEnquiry(props) {
   const [internshipEnquiry, setInternshipEnquiry] = useState([]);
+  const [resume, setResume] = useState("");
   const [selectedInternship, setSelectedInternship] = useState({
     accepted: "",
     sname: "",
@@ -71,7 +72,9 @@ function CompanyEnquiry(props) {
                   }
                 );
                 const skills = res.data.data.student.skills.map(el => {
-                  return el.skill_name;
+                  return {
+                    name: el.skill_name
+                  };
                 });
                 //console.log(skill);
                 setSelectedInternship({
@@ -95,7 +98,7 @@ function CompanyEnquiry(props) {
                   sdob: x.student.personal_details.dob,
                   sgen: x.student.personal_details.gender,
                   shob: x.student.personal_details.hobbies,
-                  sskill: skills.name,
+                  sskill: skills,
                   iname: x.internship.title,
                   iskills: skill,
                   idesc: x.internship.description,
@@ -128,6 +131,25 @@ function CompanyEnquiry(props) {
           Accept
         </button>
       </td>
+      <td>
+        <button
+          className="btn btn-secondary btn-sm btn-block"
+          data-toggle="modal"
+          data-target="#resume"
+          onClick={() => {
+            internshipEnquiries(props.internship._id).then(res => {
+              //console.log(props.internship._id);
+              //localStorage.setItem("internshipId", props.internship._id);
+              if (res) {
+                //console.log(res.data.data.student.resume);
+                setResume(res.data.data.student.resume);
+              }
+            });
+          }}
+        >
+          Resume
+        </button>
+      </td>
     </tr>
   );
   useEffect(() => {
@@ -153,6 +175,17 @@ function CompanyEnquiry(props) {
       }
     });
   }, []);
+  let src;
+  let spilted;
+  if (resume !== "") {
+    src = `${localStorage.ip}/Resume/${resume}`;
+    console.log(src);
+    spilted = src.substring(32, 39);
+    console.log(spilted);
+    //const new
+  }
+
+  console.log();
   const selectLink = (
     <div>
       <ul className="nav nav-tabs">
@@ -203,8 +236,12 @@ function CompanyEnquiry(props) {
                 </td>
                 <td>
                   {selectedInternship.sskill !== undefined
-                    ? selectedInternship.sskill.map(el => {
-                        return el.name;
+                    ? selectedInternship.sskill.map((el, index) => {
+                        return (
+                          <div key={index}>
+                            {el.name} <br />
+                          </div>
+                        );
                       })
                     : ""}
                 </td>
@@ -274,10 +311,26 @@ function CompanyEnquiry(props) {
               <th>Requested On</th>
               <th>Details</th>
               <th>Action</th>
+              <th>Resume</th>
             </tr>
           </thead>
           <tbody>{internshipEnquiryList()}</tbody>
         </table>
+      </div>
+      <div className="modal fade" id="resume">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header bg-primary text-white">
+              <h5 className="modal-title">Resume</h5>
+              <button className="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">
+              <iframe src={src} title="student" width="100%" height="500px" />
+            </div>
+          </div>
+        </div>
       </div>
       <div className="modal fade" id="viewInternship">
         <div className="modal-dialog modal-lg">
@@ -306,7 +359,7 @@ function CompanyEnquiry(props) {
           </div>
         </div>
       </div>
-      <div></div>
+
       <div id="acceptInternship" className="modal fade">
         <div className="modal-dialog modal-confirm modal-dialog-centered">
           <div className="modal-content">

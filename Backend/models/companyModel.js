@@ -62,6 +62,9 @@ companySchema.pre(/^find/, function(next) {
   this.populate({
     path: 'user address technology',
     select: '-__v -user'
+  }).populate({
+    path: ' user',
+    select: '-id -_id -__v -roleType -slug -user'
   });
   next();
 });

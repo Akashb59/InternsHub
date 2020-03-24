@@ -6,7 +6,7 @@ const ip = localStorage.ip;
 export const skills = () => {
   return axios({
     method: "get",
-    url: `${ip}/api/v1/skillTypeMasters`,
+    url: `${ip}/api/v1/skillTypeMasters/`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -16,6 +16,7 @@ export const skills = () => {
     // }
   })
     .then(res => {
+      //console.log(res.data.data.doc);
       return res.data;
     })
     .catch(err => {
