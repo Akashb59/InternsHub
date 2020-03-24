@@ -70,7 +70,10 @@ function CompanyHome(props) {
     });
     companyEnquiries().then(res => {
       if (res) {
-        setcountEnquiry(res.data.results);
+        const internEnq = res.data.data.enquiry.filter(
+          data => data.internship !== null
+        );
+        setcountEnquiry(internEnq.length);
       }
     });
     company(localStorage.companyid).then(res => {
@@ -389,7 +392,7 @@ function CompanyHome(props) {
                   <div className="card-body">
                     <h3>Enquiries</h3>
                     <h4 className="display-4">
-                      <i class="fas fa-clipboard-check"></i> {countEnquiry}
+                      <i className="fas fa-clipboard-check"></i> {countEnquiry}
                     </h4>
                     <Link
                       to="companyEnquiry"

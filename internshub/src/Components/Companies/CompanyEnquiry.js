@@ -46,6 +46,15 @@ function CompanyEnquiry(props) {
     reqAt: "",
     completed: ""
   });
+  const None = key => (
+    <tr key={key}>
+      <td colSpan="7">
+        <center>
+          <h2>No Data Yet</h2>
+        </center>
+      </td>
+    </tr>
+  );
   const InternshipEnq = props => (
     <tr>
       <td>{props.internship.internship.title}</td>
@@ -148,7 +157,7 @@ function CompanyEnquiry(props) {
             localStorage.setItem("acceptInternshipId", props.internship._id);
           }}
         >
-          <i class="fas fa-check-circle"></i>
+          <i className="fas fa-check-circle"></i>
         </button>
       </td>
     </tr>
@@ -171,8 +180,12 @@ function CompanyEnquiry(props) {
         //     message: el.reqMessage
         //   };
         // });
-        // console.log(enq);
-        setInternshipEnquiry(res.data.data.enquiry);
+        //console.log(res.data);
+        const internEnq = res.data.data.enquiry.filter(
+          data => data.internship !== null
+        );
+        //console.log(res.data.data.enquiry[0]);
+        setInternshipEnquiry(internEnq);
       }
     });
   }, []);
@@ -204,6 +217,9 @@ function CompanyEnquiry(props) {
         <div id="int" className="container tab-pane active">
           <br></br>
           <p>Internship Title: {selectedInternship.iname}</p>
+          <p>
+            Internship Starts On: {selectedInternship.istarts.substring(0, 10)}
+          </p>
           <p>Student Name: {selectedInternship.sname}</p>
           <p>Accepted: {selectedInternship.accepted}</p>
           <p>Requested At: {selectedInternship.reqAt.substring(0, 10)}</p>
@@ -277,17 +293,67 @@ function CompanyEnquiry(props) {
       </div>
     </div>
   );
-  function internshipEnquiryList() {
-    //console.log(internshipState);
-    return internshipEnquiry.map(currentInternship => {
-      return (
-        <InternshipEnq
-          key={currentInternship.id}
-          internship={currentInternship}
-        />
-      );
+  function internshipEnquiryListYes() {
+    //console.log(acceptedYes);
+    let acceptedYes = internshipEnquiry;
+    // eslint-disable-next-line
+    return acceptedYes.map(currentInternship => {
+      var created_date = new Date(currentInternship.internship.starts_on);
+      var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
+      if (currentInternship.accepted === "Yes" && startsOn > Date.now()) {
+        return (
+          <InternshipEnq
+            key={currentInternship.id}
+            internship={currentInternship}
+          />
+        );
+      }
     });
   }
+  function internshipEnquiryListNo() {
+    //console.log(internshipState);
+    let acceptedNo = internshipEnquiry;
+
+    // eslint-disable-next-line
+    return acceptedNo.map(currentInternship => {
+      var created_date = new Date(currentInternship.internship.starts_on);
+      var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
+      if (currentInternship.accepted === "No" && startsOn > Date.now()) {
+        return (
+          <InternshipEnq
+            key={currentInternship.id}
+            internship={currentInternship}
+          />
+        );
+      }
+    });
+  }
+  let count = 0;
+  function internshipEnquiryListRest() {
+    let rest = internshipEnquiry;
+    // eslint-disable-next-line
+    return rest.map(currentInternship => {
+      var created_date = new Date(currentInternship.internship.starts_on);
+      var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
+      // console.log(startsOn);
+      // console.log(Date.now());
+      if (startsOn < Date.now()) {
+        return (
+          <InternshipEnq
+            key={currentInternship.id}
+            internship={currentInternship}
+          />
+        );
+      } else {
+        count += 1;
+        if (count <= 1) {
+          //console.log(count);
+          return <None key="key" />;
+        }
+      }
+    });
+  }
+
   return (
     <div className="container">
       <div className="jumbotron">
@@ -296,6 +362,7 @@ function CompanyEnquiry(props) {
         </div>
       </div>
       <div>
+        <h2>Pending Enquiries</h2>
         <table className="table table-striped">
           <thead className="thead-dark">
             <tr>
@@ -308,7 +375,37 @@ function CompanyEnquiry(props) {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>{internshipEnquiryList()}</tbody>
+          <tbody>{internshipEnquiryListNo()}</tbody>
+        </table>
+        <h2>Accepted Enquiries</h2>
+        <table className="table table-striped">
+          <thead className="thead-dark">
+            <tr>
+              <th>Internship</th>
+              <th>Student Name</th>
+              <th>Resume</th>
+              <th>Requested On</th>
+              <th>Details</th>
+              <th>Accepted</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>{internshipEnquiryListYes()}</tbody>
+        </table>
+        <h2>Past Enquiries</h2>
+        <table className="table table-striped">
+          <thead className="thead-dark">
+            <tr>
+              <th>Internship</th>
+              <th>Student Name</th>
+              <th>Resume</th>
+              <th>Requested On</th>
+              <th>Details</th>
+              <th>Accepted</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>{internshipEnquiryListRest()}</tbody>
         </table>
       </div>
       <div className="modal fade" id="resume">
