@@ -8,8 +8,9 @@ const userSchema = new mongoose.Schema(
   {
     fullname: {
       type: String,
-      required: [true, 'Please provide your name'],
-      maxlength: [50, 'A  name must have less or equal to 50']
+      required: [true, 'Please provide your Full Name'],
+      maxlength: [50, 'A  name must have less or equal to 50 characters'],
+      minlength: [5, 'A  name must more than 5 characters']
     },
     email: {
       type: String,
@@ -25,7 +26,8 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: [true, 'Please provide a Password'],
-      minlength: 8,
+      maxlength: [20, 'A  Password must have less or equal to 20 characters'],
+      minlength: [8, 'A  Password must have minimum of 8 characters'],
       select: false
     },
     passwordConfirm: {
@@ -41,7 +43,8 @@ const userSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: Number,
-      maxlength: [10, 'A Enter a valid Phone Number']
+      maxlength: [10, 'Enter a valid Phone Number'],
+      minlength: [10, 'Enter a valid Phone Number']
     },
     role: String,
     createdAt: {

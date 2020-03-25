@@ -484,6 +484,7 @@ function CompanyHome(props) {
                         name="aboutCompany"
                         rows="3"
                         maxLength="200"
+                        minLength="20"
                         placeholder="Enter some description about your company"
                         value={descriptionState.aboutCompany}
                         onChange={handleChange1}

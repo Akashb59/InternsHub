@@ -79,24 +79,37 @@ function CompanyProfile(props) {
         break;
       case "locality":
         errors.locality =
-          value.length < 5 ? "Must be 5 characters or more" : "";
+          value.length < 10
+            ? "Locality must have length of 10 characters or more"
+            : "";
         break;
       case "city":
-        errors.city = value.length < 5 ? "Must be 5 characters or more" : "";
+        errors.city =
+          value.length < 3
+            ? "City must have length of 3 characters or more"
+            : "";
         break;
       case "district":
         errors.district =
-          value.length < 5 ? " Must be 5 characters or more" : "";
+          value.length < 3
+            ? "District must have length of 3 characters or more"
+            : "";
         break;
       case "state":
-        errors.state = value.length < 3 ? " Must be 3 characters or more" : "";
+        errors.state =
+          value.length < 3
+            ? "State must have length of 3 characters or more"
+            : "";
         break;
       case "country":
         errors.country =
-          value.length < 3 ? " Must be 3 characters or more" : "";
+          value.length < 3
+            ? "Country must have length of 3 characters or more"
+            : "";
         break;
       case "pincode":
-        errors.pincode = value.length < 6 ? "Pincode must be 6 numbers!!" : "";
+        errors.pincode =
+          value.length < 6 ? "Pincode must be of length 6 characters" : "";
         break;
       default:
         break;

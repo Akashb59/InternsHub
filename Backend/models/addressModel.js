@@ -20,7 +20,8 @@ const addressSchema = new mongoose.Schema(
     },
     district: {
       type: String,
-      maxlength: [15, 'Please enter valid District']
+      maxlength: [15, 'Please enter valid District'],
+      minlength: [3, 'Please enter valid District']
     },
     state: {
       type: String,
@@ -39,7 +40,7 @@ const addressSchema = new mongoose.Schema(
       type: Number,
       required: [true, 'Please provide your Pincode'],
       maxlength: [6, 'Please enter valid Pincode'],
-      minlength: [2, 'Please enter valid Pincode']
+      minlength: [6, 'Please enter valid Pincode']
     }
   },
   {

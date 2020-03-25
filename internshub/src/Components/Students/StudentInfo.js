@@ -79,32 +79,45 @@ function StudentInfo(props) {
     switch (name) {
       case "father_name":
         errors.father_name =
-          value.length < 3 ? "Please fill out ths field" : "";
+          value.length < 5 ? "Please enter Your Father's Name" : "";
         break;
       case "mother_name":
         errors.mother_name =
-          value.length < 3 ? "Please fill out ths field" : "";
+          value.length < 5 ? "Please enter Your Mother's Name" : "";
         break;
       case "locality":
         errors.locality =
-          value.length < 5 ? "Must be 5 characters or more" : "";
+          value.length < 10
+            ? "Locality must have length of 10 characters or more"
+            : "";
         break;
       case "city":
-        errors.city = value.length < 5 ? "Must be 5 characters or more" : "";
+        errors.city =
+          value.length < 3
+            ? "City must have length of 3 characters or more"
+            : "";
         break;
       case "district":
         errors.district =
-          value.length < 5 ? " Must be 5 characters or more" : "";
+          value.length < 3
+            ? "District must have length of 3 characters or more"
+            : "";
         break;
       case "state":
-        errors.state = value.length < 3 ? " Must be 3 characters or more" : "";
+        errors.state =
+          value.length < 3
+            ? "State must have length of 3 characters or more"
+            : "";
         break;
       case "country":
         errors.country =
-          value.length < 3 ? " Must be 3 characters or more" : "";
+          value.length < 3
+            ? "Country must have length of 3 characters or more"
+            : "";
         break;
       case "pincode":
-        errors.pincode = value.length < 6 ? " Must be 2-6 numbers" : "";
+        errors.pincode =
+          value.length < 6 ? "Pincode must be of length 6 characters" : "";
         break;
 
       default:
@@ -129,7 +142,7 @@ function StudentInfo(props) {
       case "college_name":
         errors.college_name =
           value.length < 5
-            ? "College name must be 5 or more characters long!"
+            ? "College name must have length of 5 characters or more"
             : "";
         break;
       case "email":
@@ -138,13 +151,13 @@ function StudentInfo(props) {
       case "school_name":
         errors.school_name =
           value.length < 5
-            ? "School name must be 5 or more characters long!"
+            ? "School name must have length of 5 characters or more"
             : "";
         break;
       case "pu_college_name":
         errors.pu_college_name =
           value.length < 5
-            ? "Pu college name must be 5 or more characters long!"
+            ? "PU College name must have length of 5 characters or more"
             : "";
         break;
 
@@ -156,7 +169,7 @@ function StudentInfo(props) {
         break;
       case "university_name":
         errors.university_name =
-          value.length < 2 ? "Please fill out this field" : "";
+          value.length < 5 ? "Enter Valid University Name" : "";
         break;
       case "project1_undertaken":
         errors.project1_undertaken =
@@ -316,12 +329,12 @@ function StudentInfo(props) {
                       required
                       maxLength="30"
                     />
-                    {errors.father_name.length > 0 && (
-                      <small style={{ color: "red" }}>
-                        <span className="error">{errors.father_name}</span>
-                      </small>
-                    )}
                   </div>
+                  {errors.father_name.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.father_name}</span>
+                    </small>
+                  )}
                 </div>
               </div>
               <div className="form-group col-md-6">
@@ -344,13 +357,13 @@ function StudentInfo(props) {
                       onChange={handleChange}
                       required
                       maxLength="30"
-                    />
-                    {errors.mother_name.length > 0 && (
-                      <small style={{ color: "red" }}>
-                        <span className="error">{errors.mother_name}</span>
-                      </small>
-                    )}
+                    />{" "}
                   </div>
+                  {errors.mother_name.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.mother_name}</span>
+                    </small>
+                  )}
                 </div>
               </div>
             </div>
@@ -462,7 +475,7 @@ function StudentInfo(props) {
                     id="locality"
                     name="locality"
                     //onBlur={validate}
-                    placeholder="Locality"
+                    placeholder="Enter Locality"
                     onChange={handleChange}
                     value={studFormState.locality}
                     required
@@ -484,7 +497,7 @@ function StudentInfo(props) {
                     className="form-control"
                     id="city"
                     name="city"
-                    placeholder="City"
+                    placeholder="Enter City"
                     value={studFormState.city}
                     //onBlur={validate}
                     onChange={handleChange}
@@ -510,7 +523,7 @@ function StudentInfo(props) {
                     name="district"
                     //onBlur={validate}
                     value={studFormState.district}
-                    placeholder="District"
+                    placeholder="Enter District"
                     onChange={handleChange}
                     required
                     maxLength="15"
@@ -534,7 +547,7 @@ function StudentInfo(props) {
                     name="state"
                     value={studFormState.state}
                     //onBlur={validate}
-                    placeholder="State"
+                    placeholder="Enter State"
                     onChange={handleChange}
                     required
                     maxLength="20"
@@ -558,7 +571,7 @@ function StudentInfo(props) {
                     name="country"
                     //onBlur={validate}
                     value={studFormState.country}
-                    placeholder="Country"
+                    placeholder="Enter Country"
                     onChange={handleChange}
                     required
                     maxLength="63"
@@ -903,7 +916,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="p1"
                 name="project1_undertaken"
-                placeholder="Project 1"
+                placeholder="Enter Project 1"
                 // onBlur={validate1}
                 onChange={handleChange1}
                 required
@@ -924,7 +937,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="p2"
                 name="project2_undertaken"
-                placeholder="Project 2"
+                placeholder="Enter Project 2"
                 //onBlur={validate1}
                 onChange={handleChange1}
                 required

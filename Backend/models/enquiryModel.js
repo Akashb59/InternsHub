@@ -4,22 +4,22 @@ const enquirySchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.ObjectId,
-      required: true,
+      required: [true, 'Please enter user details'],
       ref: 'User'
     },
     student: {
       type: mongoose.Schema.ObjectId,
-      required: true,
+      required: [true, 'Please enter student details'],
       ref: 'Student'
     },
     company: {
       type: mongoose.Schema.ObjectId,
-      required: true,
+      required: [true, 'Please enter company details'],
       ref: 'Company'
     },
     internship: {
       type: mongoose.Schema.ObjectId,
-      required: true,
+      required: [true, 'Please enter internship details'],
       ref: 'Internship'
     },
     accepted: {
@@ -45,7 +45,7 @@ const enquirySchema = new mongoose.Schema(
     },
     reqMessage: {
       type: String,
-      required: true,
+      required: [true, 'Please provide a message'],
       maxlength: [40, 'Information size exceeded!'],
       minlength: [10, 'add more Information!']
     },

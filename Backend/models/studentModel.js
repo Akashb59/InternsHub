@@ -11,7 +11,8 @@ const studentSchema = new mongoose.Schema(
           maxlength: [
             50,
             'A college name must have less or equal to 50 characters'
-          ]
+          ],
+          minlength: [5, 'A college name must be more than 5 characters']
         },
         phone_number: {
           type: Number,
@@ -51,7 +52,8 @@ const studentSchema = new mongoose.Schema(
         maxlength: [
           50,
           'A School Name must have less or equal to 50 characters'
-        ]
+        ],
+        minlength: [5, 'A School name must be more than 5 characters']
       },
       college_name: {
         type: String,
@@ -59,7 +61,8 @@ const studentSchema = new mongoose.Schema(
         maxlength: [
           50,
           'A College name must have less or equal to 50 characters'
-        ]
+        ],
+        minlength: [5, 'A college name must be more than 5 characters']
       },
       pu_college_name: {
         type: String,
@@ -67,34 +70,39 @@ const studentSchema = new mongoose.Schema(
         maxlength: [
           50,
           'A College name must have less or equal to 50 characters'
-        ]
+        ],
+        minlength: [5, 'A college name must be more than 5 characters']
       },
       usn: {
         type: String,
         required: [true, 'Please enter USN'],
-        maxlength: [10, 'enter valid Registration ID']
+        maxlength: [10, 'Please enter valid USN'],
+        minlength: [10, 'Please enter valid USN']
       },
       university_name: {
         type: String,
         required: [true, 'Please enter University Name'],
         maxlength: [
           50,
-          'A University name must have less or equal to 50 characters'
-        ]
+          'An University name must have less or equal to 50 characters'
+        ],
+        minlength: [5, 'An university name must be more than 5 characters']
       },
       project1_undertaken: {
         type: String,
         maxlength: [
           30,
           'Project title 1 must have less or equal to 30 characters'
-        ]
+        ],
+        minlength: [5, 'A project title must be more than 5 characters']
       },
       project2_undertaken: {
         type: String,
         maxlength: [
           30,
           'Project title 2 must have less or equal to 30 characters'
-        ]
+        ],
+        minlength: [5, 'A project title must be more than 5 characters']
       },
       grade_10_per: {
         type: Number,
@@ -116,13 +124,23 @@ const studentSchema = new mongoose.Schema(
       gender: {
         type: String,
         enum: {
-          values: ['Male', 'Female', 'Others'],
-          message: 'Choose either of these gender'
+          values: ['Male', 'Female'],
+          message: 'Choose either of the gender'
         }
       },
       hobbies: String,
-      father_name: String,
-      mother_name: String,
+      father_name: {
+        type: String,
+        required: [true, 'Please provide your Father Name'],
+        maxlength: [50, 'Father name must have less or equal to 50 characters'],
+        minlength: [5, 'Father name must more than 5 characters']
+      },
+      mother_name: {
+        type: String,
+        required: [true, 'Please provide your Mother Name'],
+        maxlength: [50, 'Mother name must have less or equal to 50 characters'],
+        minlength: [5, 'Mother name must more than 5 characters']
+      },
       dob: Date
     },
     resume: String,

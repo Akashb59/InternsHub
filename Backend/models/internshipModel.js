@@ -11,7 +11,7 @@ const internshipSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Please provide the Title of Internship'],
       maxlength: [50, 'A title  must have less or equal to 50 characters '],
-      minlength: [5, 'A title  must have more or equal to 5']
+      minlength: [5, 'A title  must have more than 5 characters']
     },
     requiredSkills: [
       {
@@ -47,6 +47,7 @@ const internshipSchema = new mongoose.Schema(
 
     categories: {
       type: String,
+      required: [true, 'Please provide the category for Internship'],
       enum: {
         values: ['Fulltime', 'Parttime'],
         message: 'Categories is either Full Time or Part Time'
@@ -59,6 +60,7 @@ const internshipSchema = new mongoose.Schema(
     },
     type_of_internship: {
       type: String,
+      required: [true, 'Please provide the type of Internship'],
       enum: {
         values: ['Paid', 'Free'],
         message: 'categories is either Paid or Free'

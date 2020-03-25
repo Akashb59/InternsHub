@@ -53,7 +53,7 @@ function Signup(props) {
       case "fullname":
         errors.fullname =
           value.length < 5
-            ? "Full name must be 5 or more characters long!"
+            ? "Full name must have length of 5 characters or more!"
             : "";
         break;
       case "email":

@@ -81,7 +81,7 @@ function StudentAcademicProfile(props) {
       case "degreeCollege":
         errors.degreecollege =
           value.length < 5
-            ? "College name must be 5 or more characters long!"
+            ? "College name must have length of 5 characters or more"
             : "";
         break;
       case "colEmail":
@@ -98,7 +98,7 @@ function StudentAcademicProfile(props) {
       case "puCollegeName":
         errors.puCollegeName =
           value.length < 5
-            ? "Pu college name must be 5 or more characters long!"
+            ? "PU college name must be 5 or more characters long!"
             : "";
         break;
 
