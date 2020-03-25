@@ -42,7 +42,7 @@ function StudentInternSelect(props) {
     selectedIntern(localStorage.internId).then(res => {
       if (res) {
         document.title = `InternsHub | ${res.data.title}`;
-        console.log(res.data);
+        //console.log(res.data);
         const ab = res.data;
         setInternship({
           ...internship,

@@ -31,7 +31,7 @@ function ViewInternships(props) {
               if (res) {
                 // console.log(res.data.data.internship.requiredSkills[0]._id);
                 document.title = `InternsHub | Edit ${res.data.data.title}`;
-                console.log(res.data);
+                //console.log(res.data);
                 const selected = res.data.data.requiredSkills.map(el => {
                   return { value: el.id, label: el.skill_name };
                 });
@@ -289,16 +289,36 @@ function ViewInternships(props) {
     setInternshipState(internshipState.filter(el => el._id !== id));
   }
 
-  function internshipList() {
-    //console.log(internshipState);
+  function internshipListActive() {
+    // eslint-disable-next-line
     return internshipState.map(currentInternship => {
-      return (
-        <Internship
-          internship={currentInternship}
-          deleteInternship={deleteInternship}
-          key={currentInternship._id}
-        />
-      );
+      const active = currentInternship.ends_on;
+
+      if (active >= Date.now()) {
+        return (
+          <Internship
+            internship={currentInternship}
+            deleteInternship={deleteInternship}
+            key={currentInternship._id}
+          />
+        );
+      }
+    });
+  }
+  function internshipListPast() {
+    // eslint-disable-next-line
+    return internshipState.map(currentInternship => {
+      const inactive = currentInternship.ends_on;
+      //console.log(inactive);
+      if (inactive < Date.now()) {
+        return (
+          <Internship
+            internship={currentInternship}
+            deleteInternship={deleteInternship}
+            key={currentInternship._id}
+          />
+        );
+      }
     });
   }
   return (
@@ -396,6 +416,7 @@ function ViewInternships(props) {
                     type="text"
                     className="form-control"
                     name="title"
+                    disabled
                     //onBlur={validate}
                     value={internshipHostState.title}
                     onChange={handleChange}
@@ -414,6 +435,7 @@ function ViewInternships(props) {
                     name="duration"
                     value={internshipHostState.duration}
                     //onBlur={validate}
+                    disabled
                     onChange={handleChange}
                     required
                   />
@@ -427,6 +449,7 @@ function ViewInternships(props) {
                     name="starts_on"
                     value={internshipHostState.starts_on}
                     //onBlur={validate}
+                    disabled
                     onChange={handleChange}
                     required
                   />
@@ -453,12 +476,14 @@ function ViewInternships(props) {
                     name="categories"
                     checked={internshipHostState.categories === "Fulltime"}
                     value="Fulltime"
+                    disabled
                     onChange={handleChange}
                   />
                   Fulltime
                   <input
                     type="radio"
                     name="categories"
+                    disabled
                     value="Parttime"
                     checked={internshipHostState.categories === "Parttime"}
                     onChange={handleChange}
@@ -476,6 +501,7 @@ function ViewInternships(props) {
                     name="type_of_internship"
                     checked={internshipHostState.type_of_internship === "Paid"}
                     value="Paid"
+                    disabled
                     onChange={handleChange}
                   />
                   Paid
@@ -484,6 +510,7 @@ function ViewInternships(props) {
                     name="type_of_internship"
                     checked={internshipHostState.type_of_internship === "Free"}
                     value="Free"
+                    disabled
                     onChange={handleChange}
                   />
                   Free
@@ -494,6 +521,7 @@ function ViewInternships(props) {
                     type="number"
                     className="form-control"
                     name="stipend"
+                    disabled
                     //onBlur={validate}
                     onChange={handleChange}
                     value={internshipHostState.stipend}
@@ -595,19 +623,30 @@ function ViewInternships(props) {
           </div>
         </div>
       </div>
-      <div>
-        <table className="table table-striped">
-          <thead className="thead-dark">
-            <tr>
-              <th>Title</th>
-              <th>Starts On</th>
-              <th>Edit</th>
-              <th>Delete</th>
-            </tr>
-          </thead>
-          <tbody>{internshipList()}</tbody>
-        </table>
-      </div>
+      <h2>Active Internships</h2>
+      <table className="table table-striped">
+        <thead className="thead-dark">
+          <tr>
+            <th>Title</th>
+            <th>Starts On</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>{internshipListActive()}</tbody>
+      </table>
+      <h2>Past Internships</h2>
+      <table className="table table-striped">
+        <thead className="thead-dark">
+          <tr>
+            <th>Title</th>
+            <th>Starts On</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>{internshipListPast()}</tbody>
+      </table>
     </div>
   );
 }

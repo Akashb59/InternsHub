@@ -34,6 +34,21 @@ exports.updateOne = Model =>
 
 exports.createOne = Model =>
   catchAsync(async (req, res, next) => {
+    //console.log(req.originalUrl);
+    if (req.originalUrl === '/api/v1/enquiries/') {
+      let query = Model.find({
+        student: req.body.student,
+        internship: req.body.internship
+      });
+      const doc = await query;
+      //console.log(doc[0]);
+      if (doc[0]) {
+        return next(
+          new AppError('Only One Enquiry allowed for an Internship', 400)
+        );
+      }
+      //console.log(req.body);
+    }
     const doc = await Model.create(req.body);
     res.status(201).json({
       status: 'Success',
@@ -48,6 +63,7 @@ exports.getOne = (Model, popOptions) =>
     let query = Model.findById(req.params.id);
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
+    console.log(doc);
     if (!doc) {
       // console.log('hey');
       return next(new AppError('No Document found with that ID', 404));
