@@ -76,8 +76,16 @@ exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
     .limitFields()
     .paginate();
 
-  const internship = await features.query;
-
+  let internship = await features.query;
+  internship = internship.map(data => {
+    const active = data.ends_on;
+    if (active >= Date.now()) {
+      //console.log(active);
+      //console.log(Date.now());
+      return data;
+    }
+  });
+  internship = internship.filter(data => data !== undefined);
   //console.log('hi', internship);
   res.status(200).json({
     status: 'Success',

@@ -49,8 +49,7 @@ function StudentHome() {
           intendedParticipants: data.intended_participants,
           company: data.company.user.fullname,
           requiredSkills: data.requiredSkills,
-          id: data.id,
-          ends_on: data.ends_on
+          id: data.id
         }));
         setInternArray(arr);
       }
@@ -148,8 +147,7 @@ function StudentHome() {
           intendedParticipants: data.intended_participants,
           company: data.company.user.fullname,
           requiredSkills: data.requiredSkills,
-          id: data.id,
-          ends_on: data.ends_on
+          id: data.id
         }));
         setInternArray(arr);
         // setInternData({
@@ -370,61 +368,57 @@ function StudentHome() {
         <p>STUDENT:{localStorage.studentid}</p> */}
             </div>
 
-            {// eslint-disable-next-line
-            internArray.map(function(intern) {
-              const active = intern.ends_on;
-              if (active >= Date.now()) {
-                return (
-                  <div key={intern.id}>
-                    <div className="card">
-                      <div className="card-body">
-                        <h3>{intern.title}</h3>
-                        <br></br>
-                        <h5>Company name: {intern.company}</h5>
+            {internArray.map(function(intern) {
+              return (
+                <div key={intern.id}>
+                  <div className="card">
+                    <div className="card-body">
+                      <h3>{intern.title}</h3>
+                      <br></br>
+                      <h5>Company name: {intern.company}</h5>
 
-                        <div className="row d-flex">
-                          <div className="col-sm-3 col-xs-3">
-                            <p style={{ color: "grey" }}>Start Date:</p>
-                            <p>{intern.startsOn}</p>
-                          </div>
-                          <div className="col-sm-3 col-xs-3">
-                            <p style={{ color: "grey" }}>Duration:</p>
-                            <p>{intern.duration} Months</p>
-                          </div>
-                          <div className="col-sm-3 col-xs-3">
-                            <p style={{ color: "grey" }}>Category:</p>
-                            <p>{intern.category}</p>
-                          </div>
-                          <div className="col-sm-3 col-xs-3">
-                            <p style={{ color: "grey" }}>Stipend:</p>
-                            <p>Rs. {intern.stipend}/-</p>
-                          </div>
+                      <div className="row d-flex">
+                        <div className="col-sm-3 col-xs-3">
+                          <p style={{ color: "grey" }}>Start Date:</p>
+                          <p>{intern.startsOn}</p>
+                        </div>
+                        <div className="col-sm-3 col-xs-3">
+                          <p style={{ color: "grey" }}>Duration:</p>
+                          <p>{intern.duration} Months</p>
+                        </div>
+                        <div className="col-sm-3 col-xs-3">
+                          <p style={{ color: "grey" }}>Category:</p>
+                          <p>{intern.category}</p>
+                        </div>
+                        <div className="col-sm-3 col-xs-3">
+                          <p style={{ color: "grey" }}>Stipend:</p>
+                          <p>Rs. {intern.stipend}/-</p>
                         </div>
                       </div>
-                      <div className="card-footer">
-                        <Link
-                          style={{ float: "right" }}
-                          className="btn btn-success"
-                          to={{
-                            pathname: "/selectedInternship",
-                            id: intern.id
-                          }}
-                        >
-                          View Details
-                        </Link>
-                        {/* <button
+                    </div>
+                    <div className="card-footer">
+                      <Link
+                        style={{ float: "right" }}
+                        className="btn btn-success"
+                        to={{
+                          pathname: "/selectedInternship",
+                          id: intern.id
+                        }}
+                      >
+                        View Details
+                      </Link>
+                      {/* <button
                   type="button"
                   style={{ float: "right" }}
                   className="btn btn-success"
                 >
                   View Details
                 </button> */}
-                      </div>
                     </div>
-                    <br></br>
                   </div>
-                );
-              }
+                  <br></br>
+                </div>
+              );
             })}
           </div>
         </div>

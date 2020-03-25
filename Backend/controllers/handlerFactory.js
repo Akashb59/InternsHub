@@ -88,8 +88,21 @@ exports.getAll = Model =>
       .limitFields()
       .paginate();
 
-    const doc = await features.query;
+    let doc = await features.query;
     //Send Response
+    if (req.originalUrl === '/api/v1/internships/') {
+      //console.log(doc);
+      //doc.filter(data => data.ends_on >= Date.now());
+      doc = doc.map(data => {
+        const active = data.ends_on;
+        if (active >= Date.now()) {
+          //console.log(active);
+          //console.log(Date.now());
+          return data;
+        }
+      });
+    }
+    doc = doc.filter(data => data !== undefined);
     res.status(200).json({
       status: 'Success',
       results: doc.length,
