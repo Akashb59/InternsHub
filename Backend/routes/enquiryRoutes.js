@@ -26,4 +26,5 @@ router
   .patch(enquiryController.updateEnquiry);
 
 router.route('/company/:id').get(enquiryController.getEnquiryByIdCompany);
+router.route('/student/:id').get(enquiryController.getEnquiryByIdStudent);
 module.exports = router;

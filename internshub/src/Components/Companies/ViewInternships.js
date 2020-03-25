@@ -316,11 +316,14 @@ function ViewInternships(props) {
   }
 
   function internshipListActive() {
+    let count = 0;
+    let c = 0;
     // eslint-disable-next-line
     return internshipState.map(currentInternship => {
       const active = currentInternship.ends_on;
 
       if (active >= Date.now()) {
+        c += 1;
         return (
           <Internship
             internship={currentInternship}
@@ -328,15 +331,33 @@ function ViewInternships(props) {
             key={currentInternship._id}
           />
         );
+      } else {
+        count += 1;
+        if (c === 0 && internshipState.length === count) {
+          //console.log(count);
+          return <None key="key" />;
+        }
       }
     });
   }
+  const None = key => (
+    <tr key={key}>
+      <td colSpan="7">
+        <center>
+          <h2>No Data Yet</h2>
+        </center>
+      </td>
+    </tr>
+  );
   function internshipListPast() {
+    let count = 0;
+    let c = 0;
     // eslint-disable-next-line
     return internshipState.map(currentInternship => {
       const inactive = currentInternship.ends_on;
       //console.log(inactive);
       if (inactive < Date.now()) {
+        c += 1;
         return (
           <Internship
             internship={currentInternship}
@@ -344,6 +365,12 @@ function ViewInternships(props) {
             key={currentInternship._id}
           />
         );
+      } else {
+        count += 1;
+        if (c === 0 && internshipState.length === count) {
+          //console.log(count);
+          return <None key="key" />;
+        }
       }
     });
   }

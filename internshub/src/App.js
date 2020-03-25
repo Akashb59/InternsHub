@@ -24,6 +24,7 @@ import CompanyProfile from "./Components/Companies/CompanyProfile";
 //import EditInternship from "./Components/Companies/EditInternship";
 
 import StudentHome from "./Components/Students/StudentHome";
+import StudentEnquiry from "./Components/Students/StudentEnquiry";
 //import StudentForm from "./Components/Students/StudentForm";
 //import AcademicForm from "./Components/Students/AcademicForm";
 import StudentInternSelect from "./Components/Students/StudentInternSelect";
@@ -102,6 +103,11 @@ function App() {
               exact
               path="/studentHome"
               component={StudentHome}
+            />
+            <ProtectedRouteStudent
+              exact
+              path="/studentEnquiry"
+              component={StudentEnquiry}
             />
             {/* <ProtectedRouteStudent
                 exact

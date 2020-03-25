@@ -69,6 +69,27 @@ export const selectedIntern = id => {
       console.log(err);
     });
 };
+export const studentEnquiries = () => {
+  //console.log(filter);
+  return axios({
+    method: "get",
+    url: `${ip}/api/v1/enquiries/student/${localStorage.studentid}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken
+    }
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  })
+    .then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
 
 //POST
 export const studentform = det => {

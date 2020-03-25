@@ -17,6 +17,20 @@ exports.getEnquiryByIdCompany = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getEnquiryByIdStudent = catchAsync(async (req, res, next) => {
+  const enquiry = await Enquiry.find({ student: req.params.id });
+  //console.log(enquiry);
+  if (!enquiry) {
+    //console.log('hey');
+    return next(new AppError('No Enquiry found with that ID', 404));
+  }
+  res.status(200).json({
+    status: 'Success',
+    results: enquiry.length,
+    data: { enquiry }
+  });
+});
+
 exports.getAllEnquiries = factory.getAll(Enquiry);
 exports.getEnquiryById = factory.getOne(Enquiry);
 exports.createEnquiry = factory.createOne(Enquiry);

@@ -294,6 +294,8 @@ function CompanyEnquiry(props) {
     </div>
   );
   function internshipEnquiryListYes() {
+    let count = 0;
+    let c = 0;
     //console.log(acceptedYes);
     let acceptedYes = internshipEnquiry;
     // eslint-disable-next-line
@@ -301,43 +303,7 @@ function CompanyEnquiry(props) {
       var created_date = new Date(currentInternship.internship.starts_on);
       var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
       if (currentInternship.accepted === "Yes" && startsOn > Date.now()) {
-        return (
-          <InternshipEnq
-            key={currentInternship.id}
-            internship={currentInternship}
-          />
-        );
-      }
-    });
-  }
-  function internshipEnquiryListNo() {
-    //console.log(internshipState);
-    let acceptedNo = internshipEnquiry;
-
-    // eslint-disable-next-line
-    return acceptedNo.map(currentInternship => {
-      var created_date = new Date(currentInternship.internship.starts_on);
-      var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
-      if (currentInternship.accepted === "No" && startsOn > Date.now()) {
-        return (
-          <InternshipEnq
-            key={currentInternship.id}
-            internship={currentInternship}
-          />
-        );
-      }
-    });
-  }
-  let count = 0;
-  function internshipEnquiryListRest() {
-    let rest = internshipEnquiry;
-    // eslint-disable-next-line
-    return rest.map(currentInternship => {
-      var created_date = new Date(currentInternship.internship.starts_on);
-      var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
-      // console.log(startsOn);
-      // console.log(Date.now());
-      if (startsOn < Date.now()) {
+        c += 1;
         return (
           <InternshipEnq
             key={currentInternship.id}
@@ -346,7 +312,62 @@ function CompanyEnquiry(props) {
         );
       } else {
         count += 1;
-        if (count <= 1) {
+        if (c === 0 && acceptedYes.length === count) {
+          //console.log(count);
+          return <None key="key" />;
+        }
+      }
+    });
+  }
+  function internshipEnquiryListNo() {
+    let count = 0;
+    let c = 0;
+    //console.log(internshipState);
+    let acceptedNo = internshipEnquiry;
+
+    // eslint-disable-next-line
+    return acceptedNo.map(currentInternship => {
+      var created_date = new Date(currentInternship.internship.starts_on);
+      var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
+      if (currentInternship.accepted === "No" && startsOn > Date.now()) {
+        c += 1;
+        return (
+          <InternshipEnq
+            key={currentInternship.id}
+            internship={currentInternship}
+          />
+        );
+      } else {
+        count += 1;
+        if (c === 0 && acceptedNo.length === count) {
+          //console.log(count);
+          return <None key="key" />;
+        }
+      }
+    });
+  }
+
+  function internshipEnquiryListRest() {
+    let count = 0;
+    let c = 0;
+    let rest = internshipEnquiry;
+    // eslint-disable-next-line
+    return rest.map(currentInternship => {
+      var created_date = new Date(currentInternship.internship.starts_on);
+      var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
+      // console.log(startsOn);
+      // console.log(Date.now());
+      if (startsOn < Date.now()) {
+        c += 1;
+        return (
+          <InternshipEnq
+            key={currentInternship.id}
+            internship={currentInternship}
+          />
+        );
+      } else {
+        count += 1;
+        if (c === 0 && rest.length === count) {
           //console.log(count);
           return <None key="key" />;
         }

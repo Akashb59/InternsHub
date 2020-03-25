@@ -68,6 +68,11 @@ function Navbar(props) {
               Skills And Resume
             </Link>
           </li>
+          <li className="nav_li">
+            <Link to="/studentEnquiry" className="nav_link">
+              Enquiries
+            </Link>
+          </li>
         </ul>
       </div>
     </li>

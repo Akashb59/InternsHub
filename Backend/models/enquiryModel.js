@@ -64,7 +64,7 @@ const enquirySchema = new mongoose.Schema(
 enquirySchema.pre(/^find/, function(next) {
   //this points to current query
   this.populate({
-    path: 'user internship student',
+    path: 'user internship student company',
     select: '-__v'
   });
   next();
