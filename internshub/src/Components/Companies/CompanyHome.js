@@ -479,7 +479,7 @@ function CompanyHome(props) {
                           <b>TECHNOLOGIES</b>
                         </p>
                       </div>
-                      <center>
+                      {/* <center>
                         <br />
 
                         {select !== null
@@ -492,7 +492,7 @@ function CompanyHome(props) {
                               );
                             })
                           : ""}
-                      </center>
+                      </center> */}
                     </div>
 
                     <div className="form-group">

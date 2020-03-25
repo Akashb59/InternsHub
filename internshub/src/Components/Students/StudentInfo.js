@@ -163,6 +163,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="father_name"
                 name="father_name"
+                placeholder="Father Name"
                 // onBlur={validate}
                 onChange={handleChange}
                 required
@@ -178,6 +179,7 @@ function StudentInfo(props) {
                 id="mother_name"
                 name="mother_name"
                 //onBlur={validate}
+                placeholder="Mother Name"
                 onChange={handleChange}
                 required
                 maxLength="30"
@@ -191,6 +193,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="hobbies"
                 name="hobbies"
+                placeholder="Hobbies"
                 //onBlur={validate}
                 onChange={handleChange}
                 required
@@ -240,6 +243,7 @@ function StudentInfo(props) {
                 id="locality"
                 name="locality"
                 //onBlur={validate}
+                placeholder="Locality"
                 onChange={handleChange}
                 required
                 maxLength="50"
@@ -254,6 +258,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="city"
                 name="city"
+                placeholder="City"
                 //onBlur={validate}
                 onChange={handleChange}
                 required
@@ -269,6 +274,7 @@ function StudentInfo(props) {
                 id="district"
                 name="district"
                 //onBlur={validate}
+                placeholder="District"
                 onChange={handleChange}
                 required
                 maxLength="15"
@@ -283,6 +289,7 @@ function StudentInfo(props) {
                 id="state"
                 name="state"
                 //onBlur={validate}
+                placeholder="State"
                 onChange={handleChange}
                 required
                 maxLength="20"
@@ -298,6 +305,7 @@ function StudentInfo(props) {
                 id="country"
                 name="country"
                 //onBlur={validate}
+                placeholder="Country"
                 onChange={handleChange}
                 required
                 maxLength="63"
@@ -312,6 +320,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="pincode"
                 name="pincode"
+                placeholder="ZIP Code"
                 //onBlur={validate}
                 onChange={handleChange}
                 required
@@ -342,6 +351,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="schoolname"
                 name="school_name"
+                placeholder="Enter School Name"
                 //onBlur={validate1}
                 onChange={handleChange1}
                 required
@@ -357,6 +367,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="10per"
                 name="grade_10_per"
+                placeholder="Enter Percentage"
                 required
                 //onBlur="return ValidateDecimal(this) ;"
                 //onBlur={validate1}
@@ -379,6 +390,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="collegename"
                 name="pu_college_name"
+                placeholder="Enter College Name"
                 //onBlur={validate1}
                 onChange={handleChange1}
                 required
@@ -394,6 +406,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="12per"
                 name="grade_12_per"
+                placeholder="Enter Percentage"
                 required
                 //onBlur="return ValidateDecimal(this) ;"
                 //onBlur={validate1}
@@ -414,6 +427,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="dcollegename"
                 name="college_name"
+                placeholder="Enter Degree College Name"
                 //onBlur={validate1}
                 onChange={handleChange1}
                 required
@@ -428,6 +442,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="universityname"
                 name="university_name"
+                placeholder="Enter University Name"
                 // onBlur={validate1}
                 onChange={handleChange1}
                 required
@@ -442,6 +457,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="usn"
                 name="usn"
+                placeholder="Enter USN"
                 //onBlur={validate1}
                 onChange={handleChange1}
                 required
@@ -457,6 +473,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="degree_cgpa"
                 name="degree_cgpa"
+                placeholder="Enter CGPA"
                 required
                 //onBlur="return ValidateDecimal(this) ;"
                 //onBlur={validate1}
@@ -473,6 +490,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="phonenumber"
                 name="phone_number"
+                placeholder="0123456789"
                 // onBlur={validate1}
                 onChange={handleChange1}
                 maxLength="10"
@@ -486,6 +504,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="url"
                 name="website"
+                placeholder="http://www.example.com"
                 //onBlur="checkUrl()"
                 //onBlur={validate1}
                 onChange={handleChange1}
@@ -500,6 +519,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="Email"
                 name="email"
+                placeholder="you@example.com"
                 //onBlur={validate1}
                 onChange={handleChange1}
                 required
@@ -513,6 +533,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="p1"
                 name="project1_undertaken"
+                placeholder="Project 1"
                 // onBlur={validate1}
                 onChange={handleChange1}
                 required
@@ -527,6 +548,7 @@ function StudentInfo(props) {
                 className="form-control"
                 id="p2"
                 name="project2_undertaken"
+                placeholder="Project 2"
                 //onBlur={validate1}
                 onChange={handleChange1}
                 required

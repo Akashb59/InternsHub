@@ -24,8 +24,8 @@ const companySchema = new mongoose.Schema(
     ],
     aboutCompany: {
       type: String,
-      maxlength: [500, 'details are large!'],
-      minlength: [20, 'add few details!']
+      maxlength: [400, 'details are large!'],
+      minlength: [100, 'add some more details!']
     },
     website: {
       type: String,

@@ -10,7 +10,7 @@ function CompanyForm(props) {
   const [compformstate, setCompFormState] = useState({
     gst_no: "",
     website: "",
-    establishedYear: "",
+    establishedYear: Date,
     locality: "",
     city: "",
     district: "",
@@ -18,21 +18,11 @@ function CompanyForm(props) {
     country: "",
     pincode: ""
   });
-  const [handleGst, setHandleGst] = useState("");
   const handleChange = event => {
     setCompFormState({
       ...compformstate,
       [event.target.name]: event.target.value
     });
-  };
-
-  const keyPress = event => {
-    if (isNaN(String.fromCharCode(event.keyCode))) return false;
-  };
-
-  const validateGst = () => {
-    const gst_no = compformstate.gst_no;
-    if (gst_no === "") setHandleGst("Please enter valid GST number");
   };
 
   const handleSubmit = e => {
@@ -83,12 +73,10 @@ function CompanyForm(props) {
             placeholder="gst-number"
             value={compformstate.gst_no}
             onChange={handleChange}
-            onBlur={validateGst}
             required
             maxLength="16"
           />
         </div>
-        <div id="div1">{handleGst}</div>
 
         <div className="input-field">
           <label htmlFor="website">WEBSITE:</label>
@@ -108,16 +96,14 @@ function CompanyForm(props) {
         <div className="input-field">
           <label htmlFor="eyear">Established Year:</label>
           <input
-            type="text"
+            type="date"
             name="establishedYear"
             className="form-control"
             id="eyear"
-            placeholder="establishedYear"
+            placeholder="Established Year"
             value={compformstate.establishedYear}
             onChange={handleChange}
-            onKeyPress={keyPress}
             required
-            maxLength={4}
           />
         </div>
 

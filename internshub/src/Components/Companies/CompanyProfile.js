@@ -19,7 +19,10 @@ function CompanyProfile(props) {
           phoneNumber: profile.user.phoneNumber,
           gst_no: profile.gst_no,
           website: profile.website,
-          establishedYear: profile.establishedYear,
+          establishedYear:
+            profile.establishedYear !== null
+              ? profile.establishedYear.substring(0, 10)
+              : "",
           locality: profile.address[0].locality,
           city: profile.address[0].city,
           district: profile.address[0].district,
@@ -38,7 +41,7 @@ function CompanyProfile(props) {
     phoneNumber: "",
     gst_no: "",
     website: "",
-    establishedYear: "",
+    establishedYear: Date,
     locality: "",
     city: "",
     district: "",
@@ -174,16 +177,15 @@ function CompanyProfile(props) {
         <div className="input-field">
           <label htmlFor="eyear">Established Year:</label>
           <input
-            type="text"
+            type="date"
             name="establishedYear"
             className="form-control"
             id="eyear"
-            placeholder="establishedYear"
-            value={compProfileState.establishedYear.substring(0, 10)}
+            placeholder="Established Year"
+            value={compProfileState.establishedYear}
             onChange={handleChange}
             // onKeyPress={keyPress}
             required
-            maxLength={4}
           />
         </div>
 

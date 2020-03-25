@@ -118,7 +118,7 @@ function StudentPersonalProfile(props) {
           <input
             type="text"
             className="form-control"
-            placeholder="Name"
+            placeholder="John Doe"
             disabled
             id="name"
             name="name"
@@ -133,7 +133,7 @@ function StudentPersonalProfile(props) {
           <input
             type="text"
             className="form-control"
-            placeholder="Father name"
+            placeholder="0123456789"
             id="phone"
             name="phone"
             value={studAcadProfileState.phone}
@@ -193,7 +193,7 @@ function StudentPersonalProfile(props) {
           <input
             type="date"
             className="form-control"
-            placeholder="DOB"
+            placeholder="DD-MM-YYYY"
             disabled
             value={studAcadProfileState.dob}
             id="dob"
@@ -234,6 +234,7 @@ function StudentPersonalProfile(props) {
             className="form-control"
             id="locality"
             name="locality"
+            placeholder="Locality"
             value={studAcadProfileState.locality}
             onChange={handleChange}
             required
@@ -248,6 +249,7 @@ function StudentPersonalProfile(props) {
             type="text"
             className="form-control"
             id="city"
+            placeholder="City"
             name="city"
             value={studAcadProfileState.city}
             onChange={handleChange}
@@ -262,6 +264,7 @@ function StudentPersonalProfile(props) {
             type="text"
             className="form-control"
             id="district"
+            placeholder="District"
             name="district"
             value={studAcadProfileState.district}
             onChange={handleChange}
@@ -276,6 +279,7 @@ function StudentPersonalProfile(props) {
             type="text"
             className="form-control"
             id="state"
+            placeholder="State"
             name="state"
             value={studAcadProfileState.state}
             onChange={handleChange}
@@ -292,6 +296,7 @@ function StudentPersonalProfile(props) {
             className="form-control"
             id="country"
             name="country"
+            placeholder="Country"
             value={studAcadProfileState.country}
             onChange={handleChange}
             required
@@ -306,6 +311,7 @@ function StudentPersonalProfile(props) {
             type="text"
             className="form-control"
             id="pincode"
+            placeholder="Pincode"
             name="pincode"
             value={studAcadProfileState.pincode}
             //onBlur={validate}

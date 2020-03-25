@@ -109,6 +109,7 @@ function StudentAcademicProfile(props) {
             className="form-control"
             id="schoolName"
             name="schoolName"
+            disabled
             value={studentProfileState.schoolName}
             //onBlur={validate1}
             onChange={handleChange}
@@ -124,6 +125,7 @@ function StudentAcademicProfile(props) {
             //onKeyPress={keypress}
             className="form-control"
             id="gradeTen"
+            disabled
             name="gradeTen"
             value={studentProfileState.gradeTen}
             required
@@ -147,6 +149,7 @@ function StudentAcademicProfile(props) {
             type="text"
             className="form-control"
             id="puCollegeName"
+            disabled
             name="puCollegeName"
             value={studentProfileState.puCollegeName}
             //onBlur={validate1}
@@ -166,6 +169,7 @@ function StudentAcademicProfile(props) {
             className="form-control"
             id="gradeTwelve"
             name="gradeTwelve"
+            disabled
             value={studentProfileState.gradeTwelve}
             required
             //onBlur="return ValidateDecimal(this) ;"
