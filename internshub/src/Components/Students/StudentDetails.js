@@ -38,7 +38,7 @@ function StudentDetails(props) {
         const selected = res.data.student[0].skills.map(el => {
           return { value: el.id, label: el.skill_name };
         });
-        console.log(res.data.student[0].resume);
+        //console.log(res.data.student[0].resume);
         if (res.data.student[0].resume !== undefined) {
           setResume("Resume Uploaded Successfully");
         }

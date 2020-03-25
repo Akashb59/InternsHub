@@ -63,7 +63,7 @@ exports.getOne = (Model, popOptions) =>
     let query = Model.findById(req.params.id);
     if (popOptions) query = query.populate(popOptions);
     const doc = await query;
-    console.log(doc);
+    //console.log(doc);
     if (!doc) {
       // console.log('hey');
       return next(new AppError('No Document found with that ID', 404));
@@ -76,7 +76,7 @@ exports.getOne = (Model, popOptions) =>
 
 exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
-    console.log(req.originalUrl);
+    //console.log(req.originalUrl);
     if (req.originalUrl === '/api/v1/internships/')
       req.query.sort = '-starts_on';
     if (req.originalUrl === '/api/v1/skillTypeMasters/')

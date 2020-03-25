@@ -9,7 +9,7 @@ function StudentEnquiry() {
     document.title = "InternsHub | Student Enquiry";
     studentEnquiries().then(res => {
       if (res) {
-        console.log(res.data);
+        //console.log(res.data);
         const internEnq = res.data.enquiry.filter(
           data => data.internship !== null
         );
