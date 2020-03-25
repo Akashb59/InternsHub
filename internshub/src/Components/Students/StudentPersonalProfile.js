@@ -24,6 +24,20 @@ function StudentPersonalProfile(props) {
     name: "",
     phone: ""
   });
+  const [validState, setValidState] = useState({
+    errors: {
+      fullname: "",
+      phoneNumber: "",
+      father_name: "",
+      mother_name: "",
+      locality: "",
+      city: "",
+      district: "",
+      state: "",
+      country: "",
+      pincode: ""
+    }
+  });
   useEffect(() => {
     document.title = "InternsHub | Student Profile";
     student().then(res => {
@@ -54,11 +68,55 @@ function StudentPersonalProfile(props) {
     // eslint-disable-next-line
   }, []);
   const handleChange = event => {
+    const { name, value } = event.target;
+    let errors = validState.errors;
+
+    switch (name) {
+      case "fullname":
+        errors.father_name =
+          value.length < 5 ? "Please enter Your Full Name" : "";
+        break;
+      case "father_name":
+        errors.father_name =
+          value.length < 3 ? "Please enter Your Father's Name" : "";
+        break;
+      case "mother_name":
+        errors.mother_name =
+          value.length < 3 ? "Please enter Your Mother's Name" : "";
+        break;
+      case "locality":
+        errors.locality =
+          value.length < 5 ? "Must be 5 characters or more" : "";
+        break;
+      case "city":
+        errors.city = value.length < 5 ? "Must be 5 characters or more" : "";
+        break;
+      case "district":
+        errors.district =
+          value.length < 5 ? " Must be 5 characters or more" : "";
+        break;
+      case "state":
+        errors.state = value.length < 3 ? " Must be 3 characters or more" : "";
+        break;
+      case "country":
+        errors.country =
+          value.length < 3 ? " Must be 3 characters or more" : "";
+        break;
+      case "pincode":
+        errors.pincode = value.length < 6 ? " Must be 2-6 Digits" : "";
+        break;
+
+      default:
+        break;
+    }
+
+    setValidState({ errors, [name]: value });
     setStudentAcadProfileState({
       ...studAcadProfileState,
-      [event.target.name]: event.target.value
+      [name]: value
     });
   };
+  const { errors } = validState;
   const handleSubmit = e => {
     e.preventDefault();
     const editAddress = {
@@ -113,6 +171,21 @@ function StudentPersonalProfile(props) {
         </div>
       </header>
       <form onSubmit={handleSubmit}>
+        <br></br>
+        <center>
+          <b>
+            <span
+              className="heading-secondary"
+              style={{
+                fontSize: "150%"
+                //fontFamily: "Segoe Print"
+              }}
+            >
+              PERSONAL INFORMATION
+            </span>
+          </b>
+        </center>{" "}
+        <br></br>
         <div className="form-group">
           <label htmlFor="name">Full Name: </label>
           <input
@@ -126,7 +199,12 @@ function StudentPersonalProfile(props) {
             onChange={handleChange}
             required
             maxLength="30"
-          />
+          />{" "}
+          {errors.fullname.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.fullname}</span>
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="phone">Phone Number: </label>
@@ -140,42 +218,65 @@ function StudentPersonalProfile(props) {
             onChange={handleChange}
             required
             maxLength="30"
-          />
+          />{" "}
+          {errors.phoneNumber.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.phoneNumber}</span>
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="fatherName">Father Name: </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Father name"
-            disabled
-            id="fatherName"
-            name="fatherName"
-            value={studAcadProfileState.fatherName}
-            onChange={handleChange}
-            required
-            maxLength="30"
-          />
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">
+                <i class="fa fa-male" aria-hidden="true"></i>
+              </span>
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Father name"
+              disabled
+              id="fatherName"
+              name="fatherName"
+              value={studAcadProfileState.fatherName}
+              onChange={handleChange}
+              required
+              maxLength="30"
+            />{" "}
+            {errors.father_name.length > 0 && (
+              <small style={{ color: "red" }}>
+                <span className="error">{errors.father_name}</span>
+              </small>
+            )}
+          </div>
         </div>
-
         <div className="form-group">
           <label htmlFor="motherName">Mother Name:</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Mother Name"
-            disabled
-            id="motherName"
-            name="motherName"
-            value={studAcadProfileState.motherName}
-            onChange={handleChange}
-            required
-            maxLength="30"
-          />
+          <div className="input-group mb-3">
+            <div className="input-group-prepend">
+              <span className="input-group-text">
+                <i class="fa fa-female" aria-hidden="true"></i>
+              </span>
+            </div>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Mother Name"
+              disabled
+              id="motherName"
+              name="motherName"
+              value={studAcadProfileState.motherName}
+              onChange={handleChange}
+              required
+              maxLength="30"
+            />
+          </div>
         </div>
-
         <div className="form-group">
           <label htmlFor="hobbies">Hobbies:</label>
+
           <input
             type="text"
             className="form-control"
@@ -187,13 +288,11 @@ function StudentPersonalProfile(props) {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="dob">Date of Birth:</label>
           <input
             type="date"
             className="form-control"
-            placeholder="DD-MM-YYYY"
             disabled
             value={studAcadProfileState.dob}
             id="dob"
@@ -202,31 +301,74 @@ function StudentPersonalProfile(props) {
             required
           />
         </div>
-
-        <div className="form-group">
-          <label htmlFor="gender">Gender:</label>
-          <br />
-          <input
-            type="radio"
-            name="gender"
-            value="Male"
-            checked={studAcadProfileState.gender === "Male"}
-            onChange={handleChange}
-          />{" "}
-          Male
-          <input
-            type="radio"
-            name="gender"
-            value="Female"
-            checked={studAcadProfileState.gender === "Female"}
-            onChange={handleChange}
-          />{" "}
-          Female
+        <div className="row">
+          <div className="sm-col-4">
+            <table className="table table-borderless">
+              <tbody>
+                <tr>
+                  <th>Gender:</th>
+                  <td>
+                    {" "}
+                    <div className="custom-control custom-radio custom-control-inline">
+                      <input
+                        type="radio"
+                        name="gender"
+                        className="custom-control-input"
+                        checked={studAcadProfileState.gender === "Male"}
+                        id="defaultInline1"
+                        value="Male"
+                        onChange={handleChange}
+                      />{" "}
+                      <label
+                        className="custom-control-label"
+                        htmlFor="defaultInline1"
+                        style={{ color: "black" }}
+                      >
+                        Male
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    {" "}
+                    <div className="custom-control custom-radio custom-control-inline">
+                      <input
+                        type="radio"
+                        name="gender"
+                        className="custom-control-input"
+                        id="defaultInline2"
+                        value="Female"
+                        checked={studAcadProfileState.gender === "Female"}
+                        onChange={handleChange}
+                      />{" "}
+                      <label
+                        className="custom-control-label"
+                        htmlFor="defaultInline2"
+                        style={{ color: "black" }}
+                      >
+                        Female
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-
-        <span className="text-success">
-          <u>Address</u>
-        </span>
+        <br></br>
+        <center>
+          <b>
+            <span
+              className="heading-secondary"
+              style={{
+                fontSize: "150%"
+                //fontFamily: "Segoe Print"
+              }}
+            >
+              ADDRESS
+            </span>
+          </b>
+        </center>{" "}
+        <br></br>
         <div className="form-group">
           <label htmlFor="locality">Locality:</label>
           <input
@@ -240,9 +382,13 @@ function StudentPersonalProfile(props) {
             required
             maxLength="50"
             minLength="5"
-          />
+          />{" "}
+          {errors.locality.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.locality}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="city">City:</label>
           <input
@@ -255,9 +401,13 @@ function StudentPersonalProfile(props) {
             onChange={handleChange}
             required
             maxLength="15"
-          />
+          />{" "}
+          {errors.city.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.city}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="district">District:</label>
           <input
@@ -270,9 +420,13 @@ function StudentPersonalProfile(props) {
             onChange={handleChange}
             required
             maxLength="15"
-          />
+          />{" "}
+          {errors.district.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.district}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="state">State:</label>
           <input
@@ -286,9 +440,13 @@ function StudentPersonalProfile(props) {
             required
             maxLength="20"
             minLength="3"
-          />
+          />{" "}
+          {errors.state.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.state}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="country">Country:</label>
           <input
@@ -302,9 +460,13 @@ function StudentPersonalProfile(props) {
             required
             maxLength="63"
             minLength="3"
-          />
+          />{" "}
+          {errors.country.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.country}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="pincode">Pincode:</label>
           <input
@@ -319,7 +481,12 @@ function StudentPersonalProfile(props) {
             required
             maxLength="6"
             minLength="2"
-          />
+          />{" "}
+          {errors.pincode.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.pincode}</span>
+            </small>
+          )}
         </div>
         {/* <Link to="./academicForm" className="nav-link">
           submit

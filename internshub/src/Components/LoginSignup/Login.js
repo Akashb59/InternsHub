@@ -12,7 +12,12 @@ function Login(props) {
     emailForgot: ""
   });
   const [roleState, setRoleState] = useState([]);
-
+  const [validState, setValidState] = useState({
+    errors: {
+      email: "",
+      password: ""
+    }
+  });
   useEffect(() => {
     document.title = "InternsHub | Login";
     roles().then(res => {
@@ -26,9 +31,29 @@ function Login(props) {
     });
   }, []);
 
+  const validEmailRegex = RegExp(
+    // eslint-disable-next-line
+    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  );
+
   const handleChange = event => {
-    setLoginState({ ...loginState, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+    setLoginState({ ...loginState, [name]: value });
+    let errors = validState.errors;
+    switch (name) {
+      case "email":
+        errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
+        break;
+      case "password":
+        errors.password =
+          value.length < 8 ? "Password must be minimum 8 characters!" : "";
+        break;
+      default:
+        break;
+    }
+    setValidState({ errors, [name]: value });
   };
+  const { errors } = validState;
   const handleSubmit = e => {
     e.preventDefault();
     let check;
@@ -91,6 +116,11 @@ function Login(props) {
             onChange={handleChange}
             required
           />
+          {errors.email.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.email}</span>
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
@@ -103,6 +133,11 @@ function Login(props) {
             onChange={handleChange}
             required
           />
+          {errors.password.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.password}</span>
+            </small>
+          )}
         </div>
 
         <div className="form-group">

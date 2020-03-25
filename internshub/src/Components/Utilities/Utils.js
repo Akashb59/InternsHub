@@ -12,3 +12,17 @@ export const formatInput = e => {
   }
   return checkIfNum && e.preventDefault();
 };
+
+export const formatText = e => {
+  let checkIfNum;
+  if (
+    e.key !== undefined &&
+    e.keyCode !== 8 &&
+    e.keyCode !== 37 &&
+    e.keyCode !== 39 &&
+    e.keyCode !== 46
+  ) {
+    checkIfNum = e.key.match(/^[A-Za-z]+$/);
+  }
+  return checkIfNum && e.preventDefault();
+};

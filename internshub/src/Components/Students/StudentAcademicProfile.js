@@ -50,13 +50,101 @@ function StudentAcademicProfile(props) {
     project1: "",
     project2: ""
   });
+  const [validState, setValidState] = useState({
+    errors: {
+      degreecollege: "",
+      phoneNumber: "",
+      colWebsite: "",
+      colEmail: "",
+      schoolName: "",
+      puCollegeName: "",
+      universityName: "",
+      usn: "",
+      project1: "",
+      project2: "",
+      gradeTen: "",
+      gradeTwelve: "",
+      degreeCgpa: ""
+    }
+  });
+
+  const validEmailRegex = RegExp(
+    // eslint-disable-next-line
+    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  );
 
   const handleChange = event => {
+    const { name, value } = event.target;
+    let errors = validState.errors;
+
+    switch (name) {
+      case "degreeCollege":
+        errors.degreecollege =
+          value.length < 5
+            ? "College name must be 5 or more characters long!"
+            : "";
+        break;
+      case "colEmail":
+        errors.colEmail = validEmailRegex.test(value)
+          ? ""
+          : "Email is not valid!";
+        break;
+      case "schoolName":
+        errors.schoolName =
+          value.length < 5
+            ? "School name must be 5 or more characters long!"
+            : "";
+        break;
+      case "puCollegeName":
+        errors.puCollegeName =
+          value.length < 5
+            ? "Pu college name must be 5 or more characters long!"
+            : "";
+        break;
+
+      case "colWebsite":
+        errors.colWebsite =
+          value.length < 10 ? "Enter correct format of URL" : "";
+        break;
+      case "usn":
+        errors.usn = value.length < 10 ? "USN must be 10 characters long" : "";
+        break;
+      case "universityName":
+        errors.universityName =
+          value.length < 5 ? "Enter Valid University Name" : "";
+        break;
+      case "project1":
+        errors.project1 =
+          value.length < 5
+            ? "Project name must be 5 or more characters long"
+            : "";
+        break;
+      case "project2":
+        errors.project2 =
+          value.length < 5
+            ? "Project name must be 5 or more characters long"
+            : "";
+        break;
+      case "gradeTen":
+        errors.gradeTen = value.length < 2 ? "Enter Valid Percentage" : "";
+        break;
+      case "gradeTwelve":
+        errors.gradeTwelve = value.length < 2 ? "Enter Valid Percentage" : "";
+        break;
+      case "degreeCgpa":
+        errors.degreeCgpa = value.length < 1 ? "Enter Valid CGPA" : "";
+        break;
+      default:
+        break;
+    }
+
+    setValidState({ errors, [name]: value });
     setStudentProfileState({
       ...studentProfileState,
-      [event.target.name]: event.target.value
+      [name]: value
     });
   };
+  const { errors } = validState;
   const handleSubmit = e => {
     e.preventDefault();
     const editStudProfile = {
@@ -99,9 +187,20 @@ function StudentAcademicProfile(props) {
         </div>
       </header>
       <form onSubmit={handleSubmit}>
-        <span className="text-success">
-          <u>School</u>
-        </span>
+        <center>
+          <b>
+            <span
+              className="heading-secondary"
+              style={{
+                fontSize: "150%"
+                //fontFamily: "Segoe Print"
+              }}
+            >
+              SCHOOL
+            </span>
+          </b>
+        </center>{" "}
+        <br></br>
         <div className="form-group">
           <label htmlFor="schoolName">School Name:</label>
           <input
@@ -116,8 +215,12 @@ function StudentAcademicProfile(props) {
             required
             maxLength="50"
           />
+          {errors.schoolName.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.schoolName}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="gradeTen">10th Grade Percentage:</label>
           <input
@@ -135,12 +238,27 @@ function StudentAcademicProfile(props) {
             maxLength="100"
             minLength="0"
           />
+          {errors.gradeTen.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.gradeTen}</span>
+            </small>
+          )}
         </div>
-
-        <span className="text-success">
-          <u>Pre-University/Diploma College</u>
-        </span>
-
+        <br></br>
+        <center>
+          <b>
+            <span
+              className="heading-secondary"
+              style={{
+                fontSize: "150%"
+                //fontFamily: "Segoe Print"
+              }}
+            >
+              PRE_UNIVERSITY/ DIPLOMA COLLEGE
+            </span>
+          </b>
+        </center>{" "}
+        <br></br>
         <div className="form-group">
           <label htmlFor="puCollegeName">
             Pre-University/Diploma College Name:
@@ -156,9 +274,13 @@ function StudentAcademicProfile(props) {
             onChange={handleChange}
             required
             maxLength="50"
-          />
+          />{" "}
+          {errors.puCollegeName.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.puCollegeName}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="gradeTwelve">
             Pre-University /Diploma Percentage:
@@ -178,12 +300,27 @@ function StudentAcademicProfile(props) {
             maxLength="100"
             minLength="0"
           />
+          {errors.gradeTwelve.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.gradeTwelve}</span>
+            </small>
+          )}
         </div>
-
-        <span className="text-success">
-          <u>Degree College</u>
-        </span>
-
+        <br></br>
+        <center>
+          <b>
+            <span
+              className="heading-secondary"
+              style={{
+                fontSize: "150%"
+                //fontFamily: "Segoe Print"
+              }}
+            >
+              DEGREE COLLEGE
+            </span>
+          </b>
+        </center>{" "}
+        <br></br>
         <div className="form-group">
           <label htmlFor="degreeCollege">Degree College Name:</label>
           <input
@@ -197,8 +334,12 @@ function StudentAcademicProfile(props) {
             required
             maxLength="50"
           />
+          {errors.degreecollege.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.degreecollege}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="universityName">University Name:</label>
           <input
@@ -211,9 +352,13 @@ function StudentAcademicProfile(props) {
             onChange={handleChange}
             required
             maxLength="50"
-          />
+          />{" "}
+          {errors.universityName.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.universityName}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="usn">USN:</label>
           <input
@@ -226,9 +371,13 @@ function StudentAcademicProfile(props) {
             onChange={handleChange}
             required
             maxLength="10"
-          />
+          />{" "}
+          {errors.usn.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.usn}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="degreeCgpa">UG CGPA (Current Semester):</label>
           <input
@@ -244,9 +393,13 @@ function StudentAcademicProfile(props) {
             onChange={handleChange}
             maxLength="10"
             minLength="1"
-          />
+          />{" "}
+          {errors.degreeCgpa.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.degreeCgpa}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="phoneNumber"> College Phone Number:</label>
           <input
@@ -258,9 +411,13 @@ function StudentAcademicProfile(props) {
             // onBlur={validate1}
             onChange={handleChange}
             maxLength="10"
-          />
+          />{" "}
+          {errors.phoneNumber.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.phoneNumber}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="colWebsite">College Website:</label>
           <input
@@ -273,9 +430,13 @@ function StudentAcademicProfile(props) {
             //onBlur={validate1}
             onChange={handleChange}
             required
-          />
+          />{" "}
+          {errors.colWebsite.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.colWebsite}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="colEmail">College Email:</label>
           <input
@@ -287,9 +448,28 @@ function StudentAcademicProfile(props) {
             //onBlur={validate1}
             onChange={handleChange}
             required
-          />
+          />{" "}
+          {errors.colEmail.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.colEmail}</span>
+            </small>
+          )}
         </div>
-
+        <br></br>
+        <center>
+          <b>
+            <span
+              className="heading-secondary"
+              style={{
+                fontSize: "150%"
+                //fontFamily: "Segoe Print"
+              }}
+            >
+              PROJECTS
+            </span>
+          </b>
+        </center>{" "}
+        <br></br>
         <div className="form-group">
           <label htmlFor="project1">Project 1 Undertaken:</label>
           <input
@@ -302,9 +482,13 @@ function StudentAcademicProfile(props) {
             onChange={handleChange}
             required
             maxLength="30"
-          />
+          />{" "}
+          {errors.project1.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.project1}</span>
+            </small>
+          )}
         </div>
-
         <div className="form-group">
           <label htmlFor="project2">Project 2 Undertaken:</label>
           <input
@@ -317,7 +501,12 @@ function StudentAcademicProfile(props) {
             onChange={handleChange}
             required
             maxLength="30"
-          />
+          />{" "}
+          {errors.project2.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.project2}</span>
+            </small>
+          )}
         </div>
         <div className="input-field">
           <button className="btn btn-success" type="submit">

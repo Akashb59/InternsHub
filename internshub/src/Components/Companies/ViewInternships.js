@@ -112,6 +112,14 @@ function ViewInternships(props) {
     type_of_internship: "",
     stipend: ""
   });
+  const [validState, setValidState] = useState({
+    errors: {
+      title: "",
+      description: "",
+      intended_participants: "",
+      descriptions: ""
+    }
+  });
   const [options, setOptions] = useState([]);
   const [select, setSelect] = useState([]);
   const [info, setInfo] = useState({
@@ -144,11 +152,29 @@ function ViewInternships(props) {
   //const [setHandleSkills] = useState('');
   const handleChange = event => {
     //const {name,value}=event.target;
+    const { name, value } = event.target;
+    let errors = validState.errors;
+    switch (name) {
+      case "title":
+        errors.title =
+          value.length < 5 ? "Title must be 5 or more characters long!" : "";
+        break;
+      case "descriptions":
+        errors.descriptions =
+          value.length < 20
+            ? "Description must be 20 to 200 characters long!"
+            : "";
+        break;
+      default:
+        break;
+    }
+    setValidState({ errors, [name]: value });
     setInternshipHostState({
       ...internshipHostState,
-      [event.target.name]: event.target.value
+      [name]: value
     });
   };
+  const { errors } = validState;
   const handleChangeSelect = selectedOption => {
     //console.log(`Option selected:`, selectedOption);
     setSelect(selectedOption);
@@ -423,38 +449,56 @@ function ViewInternships(props) {
                     required
                     maxLength="50"
                     minLength="5"
-                  />
+                    placeholder="Enter Title"
+                  />{" "}
+                  {errors.title.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.title}</span>
+                    </small>
+                  )}
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="duration">Duration (In Months): </label>
-
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="duration"
-                    value={internshipHostState.duration}
-                    //onBlur={validate}
-                    disabled
-                    onChange={handleChange}
-                    required
-                  />
+                  <label htmlFor="duration">Duration (In months):</label>
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fa fa-clock" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="number"
+                      className="form-control"
+                      name="duration"
+                      disabled
+                      //onBlur={validate}
+                      value={internshipHostState.duration}
+                      placeholder="Enter Duration"
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
                 </div>
-
                 <div className="form-group">
                   <label htmlFor="starts_on">Starts On: </label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    name="starts_on"
-                    value={internshipHostState.starts_on}
-                    //onBlur={validate}
-                    disabled
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
 
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fa fa-calendar" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="date"
+                      className="form-control"
+                      name="starts_on"
+                      value={internshipHostState.starts_on}
+                      disabled
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                </div>
                 <div className="form-group">
                   <label htmlFor="requiredSkills">Required Skills: </label>
 
@@ -467,65 +511,129 @@ function ViewInternships(props) {
               );
             })} */}
                 </div>
+                <div className="row">
+                  <div className="sm-col-4">
+                    <table className="table table-borderless">
+                      <tbody>
+                        <tr>
+                          <th>Categories:</th>
+                          <td>
+                            {" "}
+                            <div className="custom-control custom-radio custom-control-inline">
+                              <input
+                                type="radio"
+                                className="custom-control-input"
+                                id="defaultInline1"
+                                name="categories"
+                                checked={
+                                  internshipHostState.categories === "Fulltime"
+                                }
+                                value="Fulltime"
+                                disabled
+                                onChange={handleChange}
+                              />
+                              <label
+                                className="custom-control-label"
+                                htmlFor="defaultInline1"
+                                style={{ color: "black" }}
+                              >
+                                Full Time
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            {" "}
+                            <div className="custom-control custom-radio custom-control-inline">
+                              <input
+                                type="radio"
+                                name="categories"
+                                className="custom-control-input"
+                                id="defaultInline2"
+                                checked={
+                                  internshipHostState.categories === "Parttime"
+                                }
+                                value="Parttime"
+                                disabled
+                                onChange={handleChange}
+                              />
+                              <label
+                                className="custom-control-label"
+                                htmlFor="defaultInline2"
+                                style={{ color: "black" }}
+                              >
+                                PartTime
+                              </label>
+                            </div>
+                          </td>
+                        </tr>
 
-                <div className="form-group">
-                  <label htmlFor="categories">Categories: </label>
-                  <br />
-                  <input
-                    type="radio"
-                    name="categories"
-                    checked={internshipHostState.categories === "Fulltime"}
-                    value="Fulltime"
-                    disabled
-                    onChange={handleChange}
-                  />
-                  Fulltime
-                  <input
-                    type="radio"
-                    name="categories"
-                    disabled
-                    value="Parttime"
-                    checked={internshipHostState.categories === "Parttime"}
-                    onChange={handleChange}
-                  />
-                  Parttime
+                        <tr>
+                          <th>Type Of Internship:</th>
+                          <td>
+                            <div className="custom-control custom-radio custom-control-inline">
+                              <input
+                                type="radio"
+                                name="type_of_internship"
+                                checked={
+                                  internshipHostState.type_of_internship ===
+                                  "Paid"
+                                }
+                                value="Paid"
+                                disabled
+                                className="custom-control-input border"
+                                id="defaultInline3"
+                                onChange={handleChange}
+                              />
+                              <label
+                                className="custom-control-label s1"
+                                htmlFor="defaultInline3"
+                                style={{ color: "black" }}
+                              >
+                                Paid
+                              </label>
+                            </div>
+                          </td>
+                          <td>
+                            <div className="custom-control custom-radio custom-control-inline">
+                              <input
+                                type="radio"
+                                name="type_of_internship"
+                                checked={
+                                  internshipHostState.type_of_internship ===
+                                  "Free"
+                                }
+                                value="Free"
+                                disabled
+                                className="custom-control-input"
+                                id="defaultInline4"
+                                onChange={handleChange}
+                              />
+                              <label
+                                className="custom-control-label s1"
+                                htmlFor="defaultInline4"
+                                style={{ color: "black" }}
+                              >
+                                Free
+                              </label>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
 
-                <div className="form-group">
-                  <label htmlFor="type_of_internship">
-                    Type Of Internship:{" "}
-                  </label>
-                  <br />
-                  <input
-                    type="radio"
-                    name="type_of_internship"
-                    checked={internshipHostState.type_of_internship === "Paid"}
-                    value="Paid"
-                    disabled
-                    onChange={handleChange}
-                  />
-                  Paid
-                  <input
-                    type="radio"
-                    name="type_of_internship"
-                    checked={internshipHostState.type_of_internship === "Free"}
-                    value="Free"
-                    disabled
-                    onChange={handleChange}
-                  />
-                  Free
-                </div>
                 <div className="form-group">
                   <label htmlFor="stipend">Stipend: </label>
                   <input
                     type="number"
                     className="form-control"
                     name="stipend"
-                    disabled
-                    //onBlur={validate}
+                    placeholder="Enter Stipend"
                     onChange={handleChange}
                     value={internshipHostState.stipend}
                     required
+                    disabled
                   />
                   Enter 0 if there is no stipend
                 </div>
@@ -567,6 +675,11 @@ function ViewInternships(props) {
                           required
                           onChange={e => addSubInfoValue(e, index)}
                         />
+                        {errors.description.length > 0 && (
+                          <small style={{ color: "red" }}>
+                            <span className="error">{errors.description}</span>
+                          </small>
+                        )}
                       </div>
                     );
                   })}
@@ -609,6 +722,13 @@ function ViewInternships(props) {
                           required
                           onChange={e => addSubIntendedValue(e, index)}
                         />
+                        {errors.intended_participants.length > 0 && (
+                          <small style={{ color: "red" }}>
+                            <span className="error">
+                              {errors.intended_participants}
+                            </span>
+                          </small>
+                        )}
                       </div>
                     );
                   })}

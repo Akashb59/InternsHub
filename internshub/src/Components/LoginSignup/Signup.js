@@ -15,6 +15,16 @@ function Signup(props) {
   });
   const [roleState, setRoleState] = useState([]);
 
+  const [validState, setValidState] = useState({
+    errors: {
+      fullname: "",
+      email: "",
+      password: "",
+      passwordConfirm: "",
+      phoneNumber: ""
+    }
+  });
+
   useEffect(() => {
     document.title = "InternsHub | SignUp";
     roles().then(res => {
@@ -28,9 +38,48 @@ function Signup(props) {
     });
   }, []);
 
+  const validEmailRegex = RegExp(
+    // eslint-disable-next-line
+    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  );
+
   const handleChange = event => {
-    setSignupState({ ...signupState, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+    setSignupState({ ...signupState, [name]: value });
+
+    let errors = validState.errors;
+
+    switch (name) {
+      case "fullname":
+        errors.fullname =
+          value.length < 5
+            ? "Full name must be 5 or more characters long!"
+            : "";
+        break;
+      case "email":
+        errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
+        break;
+      case "password":
+        errors.password =
+          value.length < 8 ? "Password must be minimum 8 characters!" : "";
+        break;
+      case "passwordConfirm":
+        errors.passwordConfirm =
+          value.length < 8
+            ? "Confirm Password must be minimum 8 characters!"
+            : "";
+        break;
+      case "phoneNumber":
+        errors.phoneNumber =
+          value.length < 10 ? "Phone Number must be 10 characters long!" : "";
+        break;
+      default:
+        break;
+    }
+
+    setValidState({ errors, [name]: value });
   };
+  const { errors } = validState;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -90,6 +139,11 @@ function Signup(props) {
             onChange={handleChange}
             required
           />
+          {errors.fullname.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.fullname}</span>
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="email">Email</label>
@@ -101,7 +155,12 @@ function Signup(props) {
             value={signupState.email}
             onChange={handleChange}
             required
-          />
+          />{" "}
+          {errors.email.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.email}</span>
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="password">Password</label>
@@ -113,7 +172,12 @@ function Signup(props) {
             value={signupState.password}
             onChange={handleChange}
             required
-          />
+          />{" "}
+          {errors.password.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.password}</span>
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="passwordConfirm">Password Confirm</label>
@@ -125,7 +189,12 @@ function Signup(props) {
             value={signupState.passwordConfirm}
             onChange={handleChange}
             required
-          />
+          />{" "}
+          {errors.passwordConfirm.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.passwordConfirm}</span>
+            </small>
+          )}
         </div>
         <div className="form-group">
           <label htmlFor="phoneNumber">Phone Number</label>
@@ -139,7 +208,12 @@ function Signup(props) {
             onChange={handleChange}
             maxLength="10"
             required
-          />
+          />{" "}
+          {errors.phoneNumber.length > 0 && (
+            <small style={{ color: "red" }}>
+              <span className="error">{errors.phoneNumber}</span>
+            </small>
+          )}
         </div>
 
         <div className="form-group">

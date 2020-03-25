@@ -4,6 +4,7 @@ import "./../../CSS/student.css";
 import { studentform, student } from "../Utilities/StudentFunctions";
 import { addressform } from "../Utilities/CommonFunctions";
 import { showAlert } from "../Utilities/Alerts";
+import { formatInput } from "../Utilities/Utils";
 
 function StudentInfo(props) {
   useEffect(() => {
@@ -38,30 +39,153 @@ function StudentInfo(props) {
     project1_undertaken: "",
     project2_undertaken: ""
   });
-
+  const validEmailRegex = RegExp(
+    // eslint-disable-next-line
+    /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+  );
+  const [validState, setValidState] = useState({
+    errors: {
+      college_name: "",
+      phone_number: "",
+      website: "",
+      email: "",
+      school_name: "",
+      pu_college_name: "",
+      university_name: "",
+      usn: "",
+      project1_undertaken: "",
+      project2_undertaken: "",
+      grade_10_per: "",
+      grade_12_per: "",
+      degree_cgpa: "",
+      father_name: "",
+      mother_name: "",
+      locality: "",
+      city: "",
+      district: "",
+      state: "",
+      country: "",
+      pincode: ""
+    }
+  });
   const handleChange = event => {
+    const { name, value } = event.target;
+    let errors = validState.errors;
     setStudFormState({
       ...studFormState,
-      [event.target.name]: event.target.value
+      [name]: value
     });
+
+    switch (name) {
+      case "father_name":
+        errors.father_name =
+          value.length < 3 ? "Please fill out ths field" : "";
+        break;
+      case "mother_name":
+        errors.mother_name =
+          value.length < 3 ? "Please fill out ths field" : "";
+        break;
+      case "locality":
+        errors.locality =
+          value.length < 5 ? "Must be 5 characters or more" : "";
+        break;
+      case "city":
+        errors.city = value.length < 5 ? "Must be 5 characters or more" : "";
+        break;
+      case "district":
+        errors.district =
+          value.length < 5 ? " Must be 5 characters or more" : "";
+        break;
+      case "state":
+        errors.state = value.length < 3 ? " Must be 3 characters or more" : "";
+        break;
+      case "country":
+        errors.country =
+          value.length < 3 ? " Must be 3 characters or more" : "";
+        break;
+      case "pincode":
+        errors.pincode = value.length < 6 ? " Must be 2-6 numbers" : "";
+        break;
+
+      default:
+        break;
+    }
+
+    setValidState({ errors, [name]: value });
   };
   //   const validate = () => {
   //     if (studFormState === " ") setStudFormState("Please fill the information");
   //   };
   const handleChange1 = event => {
+    const { name, value } = event.target;
+    let errors = validState.errors;
+
     setAcademicFormState({
       ...academicFormState,
-      [event.target.name]: event.target.value
+      [name]: value
     });
-  };
-  //   const validate1 = () => {
-  //     if (academicFormState === " ")
-  //       setAcademicFormState("Please fill the information");
-  //   };
 
-  const keypress = event => {
-    if (isNaN(String.fromCharCode(event.keyCode))) return false;
+    switch (name) {
+      case "college_name":
+        errors.college_name =
+          value.length < 5
+            ? "College name must be 5 or more characters long!"
+            : "";
+        break;
+      case "email":
+        errors.email = validEmailRegex.test(value) ? "" : "Email is not valid!";
+        break;
+      case "school_name":
+        errors.school_name =
+          value.length < 5
+            ? "School name must be 5 or more characters long!"
+            : "";
+        break;
+      case "pu_college_name":
+        errors.pu_college_name =
+          value.length < 5
+            ? "Pu college name must be 5 or more characters long!"
+            : "";
+        break;
+
+      case "website":
+        errors.website = value.length < 10 ? "Enter correct format of URL" : "";
+        break;
+      case "usn":
+        errors.usn = value.length < 10 ? "USN must be 10 characters long" : "";
+        break;
+      case "university_name":
+        errors.university_name =
+          value.length < 2 ? "Please fill out this field" : "";
+        break;
+      case "project1_undertaken":
+        errors.project1_undertaken =
+          value.length < 5
+            ? "Project name must be 5 or more characters long"
+            : "";
+        break;
+      case "project2_undertaken":
+        errors.project2_undertaken =
+          value.length < 5
+            ? "Project name must be 5 or more characters long"
+            : "";
+        break;
+      case "grade_10_per":
+        errors.grade_10_per = value.length < 2 ? "Enter Valid Percentage" : "";
+        break;
+      case "grade_12_per":
+        errors.grade_12_per = value.length < 2 ? "Enter Valid Percentage" : "";
+        break;
+      case "degree_cgpa":
+        errors.degree_cgpa = value.length < 1 ? "Enter Valid CGPA" : "";
+        break;
+      default:
+        break;
+    }
+
+    setValidState({ errors, [name]: value });
   };
+  const { errors } = validState;
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -156,177 +280,321 @@ function StudentInfo(props) {
           <br></br>
 
           <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="father_name">Father Name: </label>
-              <input
-                type="text"
-                className="form-control"
-                id="father_name"
-                name="father_name"
-                placeholder="Father Name"
-                // onBlur={validate}
-                onChange={handleChange}
-                required
-                maxLength="30"
-              />
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  PERSONAL DETAILS
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <div className="form-group">
+                  <label htmlFor="father_name">Father Name: </label>
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fa fa-male" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="father_name"
+                      name="father_name"
+                      value={studFormState.father_name}
+                      placeholder="Father Name"
+                      // onBlur={validate}
+                      onChange={handleChange}
+                      required
+                      maxLength="30"
+                    />
+                    {errors.father_name.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.father_name}</span>
+                      </small>
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="form-group col-md-6">
+                <div className="form-group">
+                  <label htmlFor="mother_name">Mother Name:</label>
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fa fa-female" aria-hidden="true"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="mother_name"
+                      name="mother_name"
+                      //onBlur={validate}
+                      placeholder="Mother Name"
+                      value={studFormState.mother_name}
+                      onChange={handleChange}
+                      required
+                      maxLength="30"
+                    />
+                    {errors.mother_name.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.mother_name}</span>
+                      </small>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <div className="form-group">
+                  <label htmlFor="hobbies">Hobbies:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="hobbies"
+                    name="hobbies"
+                    value={studFormState.hobbies}
+                    placeholder="Hobbies"
+                    //onBlur={validate}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="mother_name">Mother Name:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="mother_name"
-                name="mother_name"
-                //onBlur={validate}
-                placeholder="Mother Name"
-                onChange={handleChange}
-                required
-                maxLength="30"
-              />
+              <div className="form-group col-md-6">
+                <label htmlFor="dob">Date of Birth:</label>
+                <input
+                  type="date"
+                  //onBlur={validate}
+                  onChange={handleChange}
+                  name="dob"
+                  value={studFormState.dob}
+                  required
+                  className="form-control"
+                  id="dob"
+                />
+              </div>
             </div>
-
-            <div className="form-group">
-              <label htmlFor="hobbies">Hobbies:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="hobbies"
-                name="hobbies"
-                placeholder="Hobbies"
-                //onBlur={validate}
-                onChange={handleChange}
-                required
-              />
+            <div className="row">
+              <div className="sm-col-4">
+                <table className="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <th>Categories:</th>
+                      <td>
+                        {" "}
+                        <div className="custom-control custom-radio custom-control-inline">
+                          <input
+                            type="radio"
+                            name="gender"
+                            className="custom-control-input"
+                            id="defaultInline1"
+                            value="Male"
+                            onChange={handleChange}
+                          />{" "}
+                          <label
+                            className="custom-control-label"
+                            htmlFor="defaultInline1"
+                            style={{ color: "black" }}
+                          >
+                            Male
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        {" "}
+                        <div className="custom-control custom-radio custom-control-inline">
+                          <input
+                            type="radio"
+                            name="gender"
+                            className="custom-control-input"
+                            id="defaultInline2"
+                            value="Female"
+                            onChange={handleChange}
+                          />{" "}
+                          <label
+                            className="custom-control-label"
+                            htmlFor="defaultInline2"
+                            style={{ color: "black" }}
+                          >
+                            Female
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  ADDRESS
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <div className="form-group">
+                  <label htmlFor="locality">Locality:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="locality"
+                    name="locality"
+                    //onBlur={validate}
+                    placeholder="Locality"
+                    onChange={handleChange}
+                    value={studFormState.locality}
+                    required
+                    maxLength="50"
+                    minLength="5"
+                  />
+                  {errors.locality.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.locality}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
+              <div className="form-group col-md-4">
+                <div className="form-group">
+                  <label htmlFor="city">City:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="city"
+                    name="city"
+                    placeholder="City"
+                    value={studFormState.city}
+                    //onBlur={validate}
+                    onChange={handleChange}
+                    required
+                    maxLength="15"
+                  />
 
-            <div className="form-group">
-              <label htmlFor="dob">Date of Birth:</label>
-              <input
-                type="date"
-                //onBlur={validate}
-                onChange={handleChange}
-                name="dob"
-                required
-                className="form-control"
-                id="dob"
-              />
+                  {errors.city.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.city}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
+
+              <div className="form-group col-md-4">
+                <div className="form-group">
+                  <label htmlFor="district">District:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="district"
+                    name="district"
+                    //onBlur={validate}
+                    value={studFormState.district}
+                    placeholder="District"
+                    onChange={handleChange}
+                    required
+                    maxLength="15"
+                  />
+                  {errors.district.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.district}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
             </div>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <div className="form-group">
+                  <label htmlFor="state">State:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="state"
+                    name="state"
+                    value={studFormState.state}
+                    //onBlur={validate}
+                    placeholder="State"
+                    onChange={handleChange}
+                    required
+                    maxLength="20"
+                    minLength="3"
+                  />
+                  {errors.state.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.state}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="gender">Gender:</label>
-              <br />
-              <input
-                type="radio"
-                name="gender"
-                value="Male"
-                onChange={handleChange}
-              />{" "}
-              Male
-              <input
-                type="radio"
-                name="gender"
-                value="Female"
-                onChange={handleChange}
-              />{" "}
-              Female
-            </div>
+              <div className="form-group col-md-4">
+                <div className="form-group">
+                  <label htmlFor="country">Country:</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="country"
+                    name="country"
+                    //onBlur={validate}
+                    value={studFormState.country}
+                    placeholder="Country"
+                    onChange={handleChange}
+                    required
+                    maxLength="63"
+                    minLength="3"
+                  />
+                  {errors.country.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.country}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
 
-            <span className="text-success">
-              <u>Address</u>
-            </span>
-            <div className="form-group">
-              <label htmlFor="locality">Locality:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="locality"
-                name="locality"
-                //onBlur={validate}
-                placeholder="Locality"
-                onChange={handleChange}
-                required
-                maxLength="50"
-                minLength="5"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="city">City:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="city"
-                name="city"
-                placeholder="City"
-                //onBlur={validate}
-                onChange={handleChange}
-                required
-                maxLength="15"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="district">District:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="district"
-                name="district"
-                //onBlur={validate}
-                placeholder="District"
-                onChange={handleChange}
-                required
-                maxLength="15"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="state">State:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="state"
-                name="state"
-                //onBlur={validate}
-                placeholder="State"
-                onChange={handleChange}
-                required
-                maxLength="20"
-                minLength="3"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="country">Country:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="country"
-                name="country"
-                //onBlur={validate}
-                placeholder="Country"
-                onChange={handleChange}
-                required
-                maxLength="63"
-                minLength="3"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="pincode">Pincode:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="pincode"
-                name="pincode"
-                placeholder="ZIP Code"
-                //onBlur={validate}
-                onChange={handleChange}
-                required
-                maxLength="6"
-                minLength="2"
-              />
+              <div className="form-group col-md-4">
+                <div className="form-group">
+                  <label htmlFor="pincode">Pincode:</label>
+                  <input
+                    type="text"
+                    name="pincode"
+                    className="form-control"
+                    id="pincode"
+                    placeholder="Enter ZIP Code"
+                    value={studFormState.pincode}
+                    onChange={handleChange}
+                    required
+                    onKeyDown={formatInput}
+                    maxLength="6"
+                    minLength="2"
+                  />
+                  {errors.pincode.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.pincode}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
             </div>
             {/* <Link to="./academicForm" className="nav-link">
           submit
@@ -340,12 +608,24 @@ function StudentInfo(props) {
         </div>
         <div id="aca" className="container tab-pane fade">
           <br></br>
+
           <form onSubmit={handleSubmit1}>
-            <span className="text-success">
-              <u>School</u>
-            </span>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  SCHOOL
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
             <div className="form-group">
-              <label htmlFor="schoolname">School Name:</label>
+              <label htmlFor="school_name">School Name:</label>
               <input
                 type="text"
                 className="form-control"
@@ -356,14 +636,18 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 required
                 maxLength="50"
+                value={academicFormState.school_name}
               />
+              {errors.school_name.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.school_name}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
-              <label htmlFor="10per">10th Grade Percentage:</label>
+              <label htmlFor="grade_10_per">10th Grade Percentage:</label>
               <input
                 type="text"
-                onKeyPress={keypress}
                 className="form-control"
                 id="10per"
                 name="grade_10_per"
@@ -374,15 +658,31 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 maxLength="100"
                 minLength="0"
+                value={academicFormState.grade_10_per}
               />
+              {errors.grade_10_per.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.grade_10_per}</span>
+                </small>
+              )}
             </div>
-
-            <span className="text-success">
-              <u>Pre-University/Diploma College</u>
-            </span>
-
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  PRE_UNIVERSITY/ DIPLOMA COLLEGE
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
             <div className="form-group">
-              <label htmlFor="collegename">
+              <label htmlFor="pu_college_name">
                 Pre-University/Diploma College Name:
               </label>
               <input
@@ -395,14 +695,20 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 required
                 maxLength="50"
-              />
+                value={academicFormState.pu_college_name}
+              />{" "}
+              {errors.pu_college_name.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.pu_college_name}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
-              <label htmlFor="12per">Pre-University /Diploma Percentage:</label>
+              <label htmlFor="grade_12_per">
+                Pre-University /Diploma Percentage:
+              </label>
               <input
                 type="text"
-                onKeyPress={keypress}
                 className="form-control"
                 id="12per"
                 name="grade_12_per"
@@ -411,17 +717,33 @@ function StudentInfo(props) {
                 //onBlur="return ValidateDecimal(this) ;"
                 //onBlur={validate1}
                 onChange={handleChange1}
-                maxLength="100"
+                maxLength="50"
+                value={academicFormState.grade_12_per}
                 minLength="0"
               />
+              {errors.grade_12_per.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.grade_12_per}</span>
+                </small>
+              )}
             </div>
-
-            <span className="text-success">
-              <u>Degree College</u>
-            </span>
-
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  DEGREE COLLEGE
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
             <div className="form-group">
-              <label htmlFor="dcollegename">Degree College Name:</label>
+              <label htmlFor="college_name">Degree College Name:</label>
               <input
                 type="text"
                 className="form-control"
@@ -432,11 +754,16 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 required
                 maxLength="50"
+                value={academicFormState.college_name}
               />
+              {errors.college_name.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.college_name}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
-              <label htmlFor="universityname">University Name:</label>
+              <label htmlFor="university_name">University Name:</label>
               <input
                 type="text"
                 className="form-control"
@@ -447,9 +774,15 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 required
                 maxLength="50"
-              />
+                value={academicFormState.university_name}
+                // onBlur={validate1}
+              />{" "}
+              {errors.university_name.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.university_name}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
               <label htmlFor="usn">USN:</label>
               <input
@@ -462,14 +795,18 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 required
                 maxLength="10"
-              />
+                value={academicFormState.usn}
+              />{" "}
+              {errors.usn.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.usn}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
               <label htmlFor="degree_cgpa">UG CGPA (Current Semester):</label>
               <input
                 type="text"
-                onKeyPress={keypress}
                 className="form-control"
                 id="degree_cgpa"
                 name="degree_cgpa"
@@ -480,11 +817,16 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 maxLength="10"
                 minLength="1"
-              />
+                value={academicFormState.degree_cgpa}
+              />{" "}
+              {errors.degree_cgpa.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.degree_cgpa}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
-              <label htmlFor="phonenumber"> College Phone Number:</label>
+              <label htmlFor="phone_number"> College Phone Number:</label>
               <input
                 type="text"
                 className="form-control"
@@ -494,26 +836,34 @@ function StudentInfo(props) {
                 // onBlur={validate1}
                 onChange={handleChange1}
                 maxLength="10"
-              />
+                value={academicFormState.phone_number}
+              />{" "}
+              {errors.phone_number.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.phone_number}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
-              <label htmlFor="Website">College Website:</label>
+              <label htmlFor="website">College Website:</label>
               <input
                 type="url"
                 className="form-control"
                 id="url"
                 name="website"
                 placeholder="http://www.example.com"
-                //onBlur="checkUrl()"
-                //onBlur={validate1}
                 onChange={handleChange1}
                 required
-              />
+                value={academicFormState.website}
+              />{" "}
+              {errors.website.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.website}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
-              <label htmlFor="Email">College Email:</label>
+              <label htmlFor="email">College Email:</label>
               <input
                 type="email"
                 className="form-control"
@@ -523,11 +873,31 @@ function StudentInfo(props) {
                 //onBlur={validate1}
                 onChange={handleChange1}
                 required
-              />
+                value={academicFormState.email}
+              />{" "}
+              {errors.email.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.email}</span>
+                </small>
+              )}
             </div>
-
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  PROJECTS
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
             <div className="form-group">
-              <label htmlFor="p1">Project 1 Undertaken:</label>
+              <label htmlFor="project1_undertaken">Project 1 Undertaken:</label>
               <input
                 type="text"
                 className="form-control"
@@ -538,11 +908,17 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 required
                 maxLength="30"
-              />
+                value={academicFormState.project1_undertaken}
+                // onBlur={validate1}
+              />{" "}
+              {errors.project1_undertaken.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.project1_undertaken}</span>
+                </small>
+              )}
             </div>
-
             <div className="form-group">
-              <label htmlFor="p2">Project 2 Undertaken:</label>
+              <label htmlFor="project2_undertaken">Project 2 Undertaken:</label>
               <input
                 type="text"
                 className="form-control"
@@ -553,7 +929,14 @@ function StudentInfo(props) {
                 onChange={handleChange1}
                 required
                 maxLength="30"
-              />
+                value={academicFormState.project2_undertaken}
+                //onBlur={validate1}
+              />{" "}
+              {errors.project2_undertaken.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.project2_undertaken}</span>
+                </small>
+              )}
             </div>
             <div className="input-field">
               <button className="btn btn-success" type="submit">
