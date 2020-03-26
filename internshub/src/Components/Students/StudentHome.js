@@ -49,6 +49,7 @@ function StudentHome() {
           postedOn: data.posted_on.substring(0, 10),
           intendedParticipants: data.intended_participants,
           company: data.company.user.fullname,
+          photo: data.company.user.photo,
           requiredSkills: data.requiredSkills,
           id: data.id
         }));
@@ -375,16 +376,27 @@ function StudentHome() {
                 <div key={intern.id}>
                   <div className="card">
                     <div className="card-body">
-                      <h3>{intern.title}</h3>
-                      <br></br>
-                      <h5>Company name: {intern.company}</h5>
+                      <div className="row">
+                        <div className="col-sm-10">
+                          <h3>{intern.title}</h3>
+                          <br></br>
+                          <h5>Company name: {intern.company}</h5>
+                        </div>
+                        <div className="col-sm-2">
+                          <img
+                            src={`${localStorage.ip}/Images/${intern.photo}`}
+                            className="card-img"
+                            alt="Logo"
+                          />
+                        </div>
+                      </div>
                       <div className="row d-flex">
                         <div className="col-sm-2 col-xs-2">
                           <p style={{ color: "grey" }}>Start Date:</p>
                           <p>{intern.startsOn}</p>
                         </div>
                         <div className="col-sm-2 col-xs-2">
-                          <p style={{ color: "grey" }}>Internship Location:</p>
+                          <p style={{ color: "grey" }}>Location:</p>
                           <p>{intern.location}</p>
                         </div>
                         <div className="col-sm-2 col-xs-3">
@@ -399,6 +411,7 @@ function StudentHome() {
                           <p style={{ color: "grey" }}>Stipend:</p>
                           <p>Rs. {intern.stipend}/-</p>
                         </div>
+                        <div className="col-sm-2 col-xs-3"></div>
                       </div>
                     </div>
                     <div className="card-footer">

@@ -5,6 +5,7 @@ import { editAddressForm, editUserInfo } from "../Utilities/CommonFunctions";
 import { showAlert } from "../Utilities/Alerts";
 import { formatInput } from "../Utilities/Utils";
 import "./../../CSS/company.css";
+import "./../../CSS/App.css";
 
 function CompanyProfile(props) {
   useEffect(() => {
@@ -17,6 +18,7 @@ function CompanyProfile(props) {
         setCompProfileState({
           ...compProfileState,
           fullname: profile.user.fullname,
+          photo: profile.user.photo,
           phoneNumber: profile.user.phoneNumber,
           gst_no: profile.gst_no,
           website: profile.website,
@@ -51,6 +53,7 @@ function CompanyProfile(props) {
   const [compProfileState, setCompProfileState] = useState({
     fullname: "",
     phoneNumber: "",
+    photo: "",
     gst_no: "",
     website: "",
     establishedYear: Date,
@@ -140,19 +143,26 @@ function CompanyProfile(props) {
         editDetailsForm(editDetails).then(res => {
           if (res) {
             //console.log(res.data)
-            const pDetails = {
-              phoneNumber: compProfileState.phoneNumber
-            };
-            editUserInfo(pDetails).then(res => {
+            const form = new FormData();
+            form.append("photo", file);
+            form.append("phoneNumber", compProfileState.phoneNumber);
+            editUserInfo(form).then(res => {
               if (res) {
                 showAlert("success", "Successfully Updated Profile");
                 props.history.push("/CompanyProfile");
+                window.location.reload(false);
               }
             });
           }
         });
       }
     });
+  };
+  let file;
+  const handleFile = event => {
+    //const {name,value}=event.target;
+    file = event.target.files[0];
+    // console.log(file);
   };
 
   return (
@@ -170,6 +180,7 @@ function CompanyProfile(props) {
           </div>
         </div>
       </header>
+
       <form onSubmit={handleSubmit}>
         <center>
           <b>
@@ -185,6 +196,24 @@ function CompanyProfile(props) {
           </b>
         </center>
         <br></br>
+        <div className="form__photo-upload ">
+          <input
+            type="file"
+            accept="image/*"
+            id="photo"
+            name="photo"
+            className="form__upload"
+            onChange={handleFile}
+          />
+          <label className="ml-auto" htmlFor="photo">
+            Choose new photo
+          </label>
+          <img
+            className="form__user-photo ml-4"
+            src={`${localStorage.ip}/Images/${compProfileState.photo}`}
+            alt=""
+          />
+        </div>
         <div className="input-field">
           <label htmlFor="fullname">Company Name:</label>
           <input
@@ -203,11 +232,12 @@ function CompanyProfile(props) {
         <div className="input-field">
           <label htmlFor="phoneNumber">Phone Number:</label>
           <input
-            type="number"
+            type="text"
             name="phoneNumber"
             className="form-control"
             id="phoneNumber"
             placeholder="Phone Number"
+            onKeyDown={formatInput}
             value={compProfileState.phoneNumber}
             onChange={handleChange}
             required

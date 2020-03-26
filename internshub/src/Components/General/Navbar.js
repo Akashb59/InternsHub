@@ -63,6 +63,13 @@ function Navbar(props) {
       }
     });
   };
+  let firstName;
+  if (localStorage.name !== undefined) {
+    firstName = localStorage.name.split(" ")[0];
+  } else {
+    firstName = "Profile";
+  }
+
   const logout = e => {
     e.preventDefault();
     localStorage.removeItem("usertoken");
@@ -78,6 +85,7 @@ function Navbar(props) {
     localStorage.removeItem("mother_name");
     localStorage.removeItem("dob");
     localStorage.removeItem("gender");
+    localStorage.removeItem("photo");
     localStorage.removeItem("hobbies");
     props.history.push(`/`);
   };
@@ -106,7 +114,14 @@ function Navbar(props) {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Profile
+        {/* <img
+          src={`${localStorage.ip}/Images/${localStorage.photo}`}
+          alt=""
+          width="auto"
+          height="30"
+        /> */}
+
+        <span>{firstName}</span>
       </Link>
       <div
         className="dropdown-menu nav_item"
@@ -158,7 +173,7 @@ function Navbar(props) {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Profile
+        <span>{firstName}</span>
       </Link>
       <div
         className="dropdown-menu nav_item"
@@ -196,7 +211,7 @@ function Navbar(props) {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Profile
+        <span>{firstName}</span>
       </Link>
       <div
         className="dropdown-menu nav_item"
@@ -228,7 +243,7 @@ function Navbar(props) {
         aria-haspopup="true"
         aria-expanded="false"
       >
-        Profile
+        <span>{firstName}</span>
       </Link>
       <div
         className="dropdown-menu nav_item"

@@ -18,21 +18,14 @@ router
 router.use(
   authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell')
 );
-router.patch(
-  '/updateMyPassword',
-
-  authController.updatePassword
-);
+router.patch('/updateMyPassword', authController.updatePassword);
 router.patch(
   '/updateMe',
-
+  userController.uploadUserPhoto,
+  userController.resizeUserPhoto,
   userController.updateMe
 );
-router.delete(
-  '/deleteMe',
-
-  userController.deleteMe
-);
+router.delete('/deleteMe', userController.deleteMe);
 
 router.route('/').post(userController.createUser);
 

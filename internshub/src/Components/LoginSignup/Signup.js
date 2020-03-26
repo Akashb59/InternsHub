@@ -102,6 +102,7 @@ function Signup(props) {
         };
         profile(user).then(res => {
           localStorage.setItem("name", res.data.fullname);
+          localStorage.setItem("photo", res.data.user.photo);
         });
         role(roleType).then(res => {
           if (res) {

@@ -69,6 +69,7 @@ function Login(props) {
         check = res.data.user.roleType.roleName;
         localStorage.setItem("type", res.data.user.roleType.roleName);
         localStorage.setItem("name", res.data.user.fullname);
+        localStorage.setItem("photo", res.data.user.photo);
         if (check === "Student") {
           student().then(res => {
             if (res) {
@@ -162,17 +163,17 @@ function Login(props) {
         </div>
         <br></br>
         <div className="row">
-          <div className="form-group mr1">
+          <div className="form-group ml-auto">
             <button
               type="button"
-              className="btn btn-primary"
+              className="btn btn-secondary"
               data-toggle="modal"
               data-target="#myModal"
             >
               Forgot Password
             </button>
           </div>
-          <div className="form-group ml-auto">
+          <div className="form-group ml-2 mr-5">
             <button className="btn btn-success" type="submit">
               Log In
             </button>
@@ -188,7 +189,7 @@ function Login(props) {
                 &times;
               </button>
             </div>
-            <form className="white" onSubmit={handleForgot}>
+            <form onSubmit={handleForgot}>
               <div className="modal-body">
                 <div className="form-group">
                   <label htmlFor="emailForgot">Email</label>

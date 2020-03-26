@@ -168,6 +168,7 @@ function StudentAcademicProfile(props) {
         //console.log(res.data);
         showAlert("success", "Successfully Updated  Academic Information");
         props.history.push("/StudentAcademic");
+        window.location.reload(false);
       }
     });
   };

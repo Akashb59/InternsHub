@@ -105,16 +105,17 @@ export const editAddressForm = editAddress => {
 };
 
 export const editUserInfo = details => {
-  //console.log(details.user);
-  return axios
-    .patch(`${ip}/api/v1/users/${localStorage.userid}`, {
-      headers: {
-        jwt: localStorage.usertoken
-      },
-      phoneNumber: details.phoneNumber
-    })
-    .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
-      console.log(err);
-    });
+  console.log(details);
+  return axios({
+    method: "patch",
+    url: `${ip}/api/v1/users/updateMe`,
+    data: details,
+    headers: {
+      "Content-Type": "multipart/form-data",
+      jwt: localStorage.usertoken
+    }
+  }).catch(err => {
+    showAlert("error", `${err.response.data.message}`);
+    console.log(err);
+  });
 };

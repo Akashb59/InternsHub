@@ -11,6 +11,7 @@ function StudentInternSelect(props) {
   const [internship, setInternship] = useState({
     startsOn: "",
     location: "",
+    photo: "",
     postedOn: "",
     type: "",
     address: [],
@@ -50,6 +51,7 @@ function StudentInternSelect(props) {
           startsOn: ab.starts_on.substring(0, 10),
           postedOn: ab.posted_on.substring(0, 10),
           type: ab.type_of_internship,
+          photo: ab.company.user.photo,
           stipend: ab.stipend,
           location: ab.location,
           name: ab.company.user.fullname,
@@ -112,13 +114,26 @@ function StudentInternSelect(props) {
   };
 
   return (
-    <div className="container-fluid">
-      <div className="col-sm-8 mx-auto display-4 text-center">
-        {internship.title}
-        <br></br>
-        {internship.name}
+    <div className="container">
+      <div className="row ">
+        <div className="col-sm-8  mt-5">
+          <div className="col-sm-8 mx-auto text-center">
+            <div className="display-4">{internship.title}</div>
+            <br></br>
+            <h3>{internship.name}</h3>
+          </div>
+        </div>
+        <div className="col-sm-4  mt-3">
+          <img
+            src={`${localStorage.ip}/Images/${internship.photo}`}
+            className="card-img w-auto"
+            alt="Logo"
+            width="300px"
+            height="200px"
+          />
+        </div>
       </div>
-      <div className="jumbotron mt-5">
+      <div className="jumbotron">
         <br></br>
         <div>
           <p>
