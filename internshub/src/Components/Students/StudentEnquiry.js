@@ -22,11 +22,36 @@ function StudentEnquiry() {
   const InternshipEnq = props => (
     <tr>
       <td>{props.internship.internship.title}</td>
-      <td>{props.internship.internship.starts_on.substring(0, 10)}</td>
-      <td>{props.internship.company.user.fullname}</td>
       <td>{props.internship.reqAt.substring(0, 10)}</td>
-      <td>{props.internship.accepted}</td>
-      <td>{props.internship.completed}</td>
+      <td>
+        <button
+          className="btn btn-secondary btn-sm btn-block"
+          data-toggle="modal"
+          data-target="#more"
+          onClick={() => {
+            localStorage.setItem(
+              "starts",
+              props.internship.internship.starts_on.substring(0, 10)
+            );
+            localStorage.setItem(
+              "compName",
+              props.internship.company.user.fullname
+            );
+            localStorage.setItem("accepted", props.internship.accepted);
+            localStorage.setItem("completed", props.internship.completed);
+            localStorage.setItem(
+              "compEmail",
+              props.internship.company.user.email
+            );
+            localStorage.setItem(
+              "compPhone",
+              props.internship.company.user.phoneNumber
+            );
+          }}
+        >
+          More Info
+        </button>
+      </td>
     </tr>
   );
   const None = key => (
@@ -98,11 +123,8 @@ function StudentEnquiry() {
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
-              <th>Starts On</th>
-              <th>Company</th>
               <th>Requested On</th>
-              <th>Accepted</th>
-              <th>Completed</th>
+              <th>More Info</th>
             </tr>
           </thead>
           <tbody>{internshipEnquiryListReq()}</tbody>
@@ -112,15 +134,43 @@ function StudentEnquiry() {
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
-              <th>Starts On</th>
-              <th>Company</th>
               <th>Requested On</th>
-              <th>Accepted</th>
-              <th>Completed</th>
+              <th>More Info</th>
             </tr>
           </thead>
           <tbody>{internshipEnquiryListCom()}</tbody>
         </table>
+        <div className="modal fade" id="more">
+          <div className="modal-dialog modal-lg">
+            <div className="modal-content">
+              <div className="modal-header bg-primary text-white">
+                <h5 className="modal-title">More Information</h5>
+                <button
+                  className="close"
+                  data-dismiss="modal"
+                  onClick={() => {
+                    localStorage.removeItem("compName");
+                    localStorage.removeItem("compEmail");
+                    localStorage.removeItem("compPhone");
+                    localStorage.removeItem("accepted");
+                    localStorage.removeItem("completed");
+                    localStorage.removeItem("starts");
+                  }}
+                >
+                  <span>&times;</span>
+                </button>
+              </div>
+              <div className="modal-body">
+                <p>Starts On: {localStorage.starts}</p>
+                <p>Company Name: {localStorage.compName}</p>
+                <p>Company Email: {localStorage.compEmail}</p>
+                <p>Company Phone Number: {localStorage.compPhone}</p>
+                <p>Accepted State: {localStorage.accepted}</p>
+                <p>Completed State: {localStorage.completed}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

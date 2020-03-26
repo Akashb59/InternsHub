@@ -215,7 +215,11 @@ export const editStudProfilePersonal = editStudProfile => {
       },
       personal_details: {
         gender: editStudProfile.gender,
-        hobbies: editStudProfile.hobbies
+        hobbies: editStudProfile.hobbies,
+        father_name: editStudProfile.father_name,
+        mother_name: editStudProfile.mother_name,
+        dob: editStudProfile.dob,
+        full_name: editStudProfile.full_name
       }
     })
     .catch(err => {

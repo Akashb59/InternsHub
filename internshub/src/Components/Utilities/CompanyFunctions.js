@@ -197,13 +197,14 @@ export const companyTechnology = tech => {
     });
 };
 
-export const internshipAccept = (id, accept) => {
+export const internshipAccept = (id, accepted, completed) => {
   return axios
     .patch(`${ip}/api/v1/enquiries/${id}`, {
       headers: {
         jwt: localStorage.usertoken
       },
-      accepted: accept
+      accepted,
+      completed
     })
     .catch(err => {
       showAlert("error", `${err.response.data.message}`);

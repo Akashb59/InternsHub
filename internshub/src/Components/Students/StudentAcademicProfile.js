@@ -111,7 +111,7 @@ function StudentAcademicProfile(props) {
         break;
       case "universityName":
         errors.universityName =
-          value.length < 5 ? "Enter Valid University Name" : "";
+          value.length < 5 ? "University name must be 5 characters long" : "";
         break;
       case "project1":
         errors.project1 =

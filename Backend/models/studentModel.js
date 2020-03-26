@@ -168,13 +168,18 @@ studentSchema.pre(/^find/, function(next) {
   this.populate({
     path: 'user skills internship',
     select: '-__v -requiredSkills'
-  }).populate({
-    path: 'skills user',
-    select: '-id -_id -__v -roleType -slug -user',
-    options: {
-      sort: 'skill_name'
-    }
-  });
+  })
+    .populate({
+      path: 'skills ',
+      select: '-__v -slug ',
+      options: {
+        sort: 'skill_name'
+      }
+    })
+    .populate({
+      path: 'user',
+      select: '-id -_id -__v -roleType -slug '
+    });
   next();
 });
 

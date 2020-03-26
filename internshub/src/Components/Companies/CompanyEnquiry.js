@@ -29,7 +29,7 @@ function CompanyEnquiry(props) {
     scname: "",
     sfname: "",
     smname: "",
-    sdob: "",
+    sdob: Date,
     sgen: "",
     shob: "",
     sskill: [],
@@ -38,12 +38,12 @@ function CompanyEnquiry(props) {
     idesc: [],
     ipart: [],
     idur: "",
-    istarts: "",
+    istarts: Date,
     icat: "",
     itype: "",
     istip: "",
     message: "",
-    reqAt: "",
+    reqAt: Date,
     completed: ""
   });
   const None = key => (
@@ -123,7 +123,7 @@ function CompanyEnquiry(props) {
                   scname: x.student.academic_details.college_name,
                   sfname: x.student.personal_details.father_name,
                   smname: x.student.personal_details.mother_name,
-                  sdob: x.student.personal_details.dob,
+                  sdob: x.student.personal_details.dob.substring(0, 10),
                   sgen: x.student.personal_details.gender,
                   shob: x.student.personal_details.hobbies,
                   sskill: skills,
@@ -132,12 +132,12 @@ function CompanyEnquiry(props) {
                   idesc: x.internship.description,
                   ipart: x.internship.intended_participants,
                   idur: x.internship.duration,
-                  istarts: x.internship.starts_on,
+                  istarts: x.internship.starts_on.substring(0, 10),
                   icat: x.internship.categories,
                   itype: x.internship.type_of_internship,
                   istip: x.internship.stipend,
                   message: x.reqMessage,
-                  reqAt: x.reqAt,
+                  reqAt: x.reqAt.substring(0, 10),
                   completed: x.completed
                 });
               }
@@ -217,12 +217,10 @@ function CompanyEnquiry(props) {
         <div id="int" className="container tab-pane active">
           <br></br>
           <p>Internship Title: {selectedInternship.iname}</p>
-          <p>
-            Internship Starts On: {selectedInternship.istarts.substring(0, 10)}
-          </p>
+          <p>Internship Starts On: {selectedInternship.istarts}</p>
           <p>Student Name: {selectedInternship.sname}</p>
           <p>Accepted: {selectedInternship.accepted}</p>
-          <p>Requested At: {selectedInternship.reqAt.substring(0, 10)}</p>
+          <p>Requested At: {selectedInternship.reqAt}</p>
           <p>Completed: {selectedInternship.completed}</p>
           <p>Message: {selectedInternship.message}</p>
           <table>
@@ -284,6 +282,8 @@ function CompanyEnquiry(props) {
 
         <div id="stuPer" className="container tab-pane fade">
           <br></br>
+          <p>Student Email: {selectedInternship.semail}</p>
+          <p>Phone Number: {selectedInternship.sphno}</p>
           <p>Gender: {selectedInternship.sgen}</p>
           <p>Hobbies: {selectedInternship.shob}</p>
           <p>Father Name: {selectedInternship.sfname}</p>
@@ -459,6 +459,22 @@ function CompanyEnquiry(props) {
                 {selectedInternship !== {} ? selectLink : <p>Loading</p>}
               </div>
               <div className="modal-footer">
+                {selectedInternship.accepted === "Yes" ? (
+                  <button
+                    className="btn btn-success"
+                    data-toggle="modal"
+                    data-target="#completedInternship"
+                  >
+                    <i className="fas fa-check-circle"></i> Mark Student as
+                    completed Internship
+                  </button>
+                ) : (
+                  <button className="btn btn-success" disabled>
+                    <i className="fas fa-check-circle"></i> Mark Student as
+                    completed Internship
+                  </button>
+                )}
+
                 <button
                   type="button"
                   className="btn btn-danger"
@@ -467,6 +483,63 @@ function CompanyEnquiry(props) {
                   Close
                 </button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="completedInternship" className="modal fade">
+        <div className="modal-dialog modal-confirm modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <div className="container">
+                <h4 className="modal-title">Are you sure</h4>
+                <br></br>
+                <h2>
+                  <FaQuestion />
+                </h2>
+              </div>
+              <button
+                type="button"
+                className="close"
+                data-dismiss="modal"
+                aria-hidden="true"
+              >
+                &times;
+              </button>
+            </div>
+            <div className="modal-body">
+              <p>
+                Do you really want to mark the candidate as "completed the
+                Internship?" This process cannot be undone.
+              </p>
+            </div>
+            <div className="modal-footer">
+              <button type="button" className="btn" data-dismiss="modal">
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={() => {
+                  const accept = "Yes";
+                  const completed = "Yes";
+                  internshipAccept(
+                    localStorage.acceptInternshipId,
+                    accept,
+                    completed
+                  ).then(res => {
+                    //console.log(props.internship._id);
+                    //localStorage.setItem("internshipId", props.internship._id);
+                    if (res) {
+                      props.history.push("/companyEnquiry");
+                      window.location.reload(false);
+                      showAlert("success", "Successfully Accpted Candidate");
+                    }
+                  });
+                }}
+              >
+                Accept
+              </button>
             </div>
           </div>
         </div>
@@ -507,9 +580,11 @@ function CompanyEnquiry(props) {
                 className="btn btn-danger"
                 onClick={() => {
                   const accept = "Yes";
+                  const completed = "No";
                   internshipAccept(
                     localStorage.acceptInternshipId,
-                    accept
+                    accept,
+                    completed
                   ).then(res => {
                     //console.log(props.internship._id);
                     //localStorage.setItem("internshipId", props.internship._id);

@@ -214,8 +214,8 @@ function CompanyProfile(props) {
             maxLength="10"
           />
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
+        <div className="form-row">
+          <div className="form-group col-md-6">
             <div className="input-field">
               <label htmlFor="gst_no">GST-NUMBER:</label>
               <input
@@ -238,7 +238,7 @@ function CompanyProfile(props) {
               )}
             </div>
           </div>
-          <div class="form-group col-md-6">
+          <div className="form-group col-md-6">
             <div className="input-field">
               <label htmlFor="eyear">Established Year:</label>
               <input
@@ -247,7 +247,7 @@ function CompanyProfile(props) {
                 className="form-control"
                 id="eyear"
                 placeholder="Enter Established Year"
-                value={compProfileState.establishedYear}
+                value={compProfileState.establishedYear.toString()}
                 onChange={handleChange}
                 // onKeyPress={keyPress}
                 required
@@ -289,8 +289,8 @@ function CompanyProfile(props) {
           </b>
         </center>{" "}
         <br></br>
-        <div class="form-row">
-          <div class="form-group col-md-4">
+        <div className="form-row">
+          <div className="form-group col-md-4">
             <div className="input-field">
               <label htmlFor="locality">Locality:</label>
               <input
@@ -311,7 +311,7 @@ function CompanyProfile(props) {
               )}
             </div>
           </div>
-          <div class="form-group col-md-4">
+          <div className="form-group col-md-4">
             <div className="input-field">
               <label htmlFor="city">City:</label>
               <input
@@ -332,7 +332,7 @@ function CompanyProfile(props) {
               )}
             </div>
           </div>
-          <div class="form-group col-md-4">
+          <div className="form-group col-md-4">
             <div className="input-field">
               <label htmlFor="district">District:</label>
               <input
@@ -354,8 +354,8 @@ function CompanyProfile(props) {
             </div>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-group col-md-4">
+        <div className="form-row">
+          <div className="form-group col-md-4">
             <div className="input-field">
               <label htmlFor="state">State:</label>
               <input
@@ -376,7 +376,7 @@ function CompanyProfile(props) {
               )}
             </div>
           </div>
-          <div class="form-group col-md-4">
+          <div className="form-group col-md-4">
             <div className="input-field">
               <label htmlFor="country">Country:</label>
               <input
@@ -397,7 +397,7 @@ function CompanyProfile(props) {
               )}
             </div>
           </div>
-          <div class="form-group col-md-4">
+          <div className="form-group col-md-4">
             <div className="input-field">
               <label htmlFor="pincode">Pincode:</label>
               <input

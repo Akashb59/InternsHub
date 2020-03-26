@@ -145,7 +145,11 @@ function StudentPersonalProfile(props) {
         //console.log(res.data);
         const editStudProfile = {
           hobbies: studAcadProfileState.hobbies,
-          gender: studAcadProfileState.gender
+          gender: studAcadProfileState.gender,
+          father_name: studAcadProfileState.fatherName,
+          mother_name: studAcadProfileState.motherName,
+          dob: studAcadProfileState.dob,
+          fullname: studAcadProfileState.name
         };
         editStudProfilePersonal(editStudProfile).then(res => {
           if (res) {
@@ -242,7 +246,7 @@ function StudentPersonalProfile(props) {
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text">
-                <i class="fa fa-male" aria-hidden="true"></i>
+                <i className="fa fa-male" aria-hidden="true"></i>
               </span>
             </div>
             <input
@@ -269,7 +273,7 @@ function StudentPersonalProfile(props) {
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text">
-                <i class="fa fa-female" aria-hidden="true"></i>
+                <i className="fa fa-female" aria-hidden="true"></i>
               </span>
             </div>
             <input
@@ -306,10 +310,10 @@ function StudentPersonalProfile(props) {
             type="date"
             className="form-control"
             disabled
-            value={studAcadProfileState.dob}
             id="dob"
             name="dob"
             onChange={handleChange}
+            value={studAcadProfileState.dob.toString()}
             required
           />
         </div>
