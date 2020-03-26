@@ -40,6 +40,7 @@ function CompanyEnquiry(props) {
     idur: "",
     istarts: Date,
     icat: "",
+    iloc: "",
     itype: "",
     istip: "",
     message: "",
@@ -135,6 +136,7 @@ function CompanyEnquiry(props) {
                   istarts: x.internship.starts_on.substring(0, 10),
                   icat: x.internship.categories,
                   itype: x.internship.type_of_internship,
+                  iloc: x.internship.location,
                   istip: x.internship.stipend,
                   message: x.reqMessage,
                   reqAt: x.reqAt.substring(0, 10),
@@ -217,6 +219,7 @@ function CompanyEnquiry(props) {
         <div id="int" className="container tab-pane active">
           <br></br>
           <p>Internship Title: {selectedInternship.iname}</p>
+          <p>Internship Location: {selectedInternship.iloc}</p>
           <p>Internship Starts On: {selectedInternship.istarts}</p>
           <p>Student Name: {selectedInternship.sname}</p>
           <p>Accepted: {selectedInternship.accepted}</p>

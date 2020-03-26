@@ -39,6 +39,7 @@ function StudentHome() {
         //console.log(res.data.doc);
         const arr = res.data.doc.map(data => ({
           title: data.title,
+          location: data.location,
           category: data.categories,
           startsOn: data.starts_on.substring(0, 10),
           type: data.type_of_internship,
@@ -137,6 +138,7 @@ function StudentHome() {
         //console.log(res.data.stats[0]);
         const arr = res.data.doc.map(data => ({
           title: data.title,
+          location: data.location,
           category: data.categories,
           startsOn: data.starts_on.substring(0, 10),
           type: data.type_of_internship,
@@ -376,21 +378,24 @@ function StudentHome() {
                       <h3>{intern.title}</h3>
                       <br></br>
                       <h5>Company name: {intern.company}</h5>
-
                       <div className="row d-flex">
-                        <div className="col-sm-3 col-xs-3">
+                        <div className="col-sm-2 col-xs-2">
                           <p style={{ color: "grey" }}>Start Date:</p>
                           <p>{intern.startsOn}</p>
                         </div>
-                        <div className="col-sm-3 col-xs-3">
+                        <div className="col-sm-2 col-xs-2">
+                          <p style={{ color: "grey" }}>Internship Location:</p>
+                          <p>{intern.location}</p>
+                        </div>
+                        <div className="col-sm-2 col-xs-3">
                           <p style={{ color: "grey" }}>Duration:</p>
                           <p>{intern.duration} Months</p>
                         </div>
-                        <div className="col-sm-3 col-xs-3">
+                        <div className="col-sm-2 col-xs-3">
                           <p style={{ color: "grey" }}>Category:</p>
                           <p>{intern.category}</p>
                         </div>
-                        <div className="col-sm-3 col-xs-3">
+                        <div className="col-sm-2 col-xs-3">
                           <p style={{ color: "grey" }}>Stipend:</p>
                           <p>Rs. {intern.stipend}/-</p>
                         </div>

@@ -10,6 +10,7 @@ import { showAlert } from "../Utilities/Alerts";
 function StudentInternSelect(props) {
   const [internship, setInternship] = useState({
     startsOn: "",
+    location: "",
     postedOn: "",
     type: "",
     address: [],
@@ -50,6 +51,7 @@ function StudentInternSelect(props) {
           postedOn: ab.posted_on.substring(0, 10),
           type: ab.type_of_internship,
           stipend: ab.stipend,
+          location: ab.location,
           name: ab.company.user.fullname,
           phone: ab.company.user.phoneNumber,
           technology: ab.company.technology.map(te => ({
@@ -222,6 +224,11 @@ function StudentInternSelect(props) {
             {" "}
             <b>Company Website: </b>
             {internship.website}
+          </p>
+          <p>
+            {" "}
+            <b>Internship Location: </b>
+            {internship.location}
           </p>
         </div>
         <button

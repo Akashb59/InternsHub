@@ -23,6 +23,7 @@ function CompanyHome(props) {
   });
   const [internshipHostState, setInternshipHostState] = useState({
     title: "",
+    location: "",
     description: [],
     duration: "",
     starts_on: "",
@@ -53,7 +54,8 @@ function CompanyHome(props) {
       title: "",
       description: "",
       intended_participants: "",
-      descriptions: ""
+      descriptions: "",
+      location: ""
     }
   });
 
@@ -118,6 +120,10 @@ function CompanyHome(props) {
       case "title":
         errors.title =
           value.length < 5 ? "Title must be 5 or more characters long!" : "";
+        break;
+      case "location":
+        errors.location =
+          value.length < 5 ? "Location must be 5 or more characters long!" : "";
         break;
       case "descriptions":
         errors.descriptions =
@@ -251,6 +257,7 @@ function CompanyHome(props) {
     e.preventDefault();
     const Internship = {
       title: internshipHostState.title,
+      location: internshipHostState.location,
       description: internshipHostState.description,
       duration: internshipHostState.duration,
       starts_on: internshipHostState.starts_on,
@@ -577,6 +584,25 @@ function CompanyHome(props) {
                   {errors.title.length > 0 && (
                     <small style={{ color: "red" }}>
                       <span className="error">{errors.title}</span>
+                    </small>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="location">Location: </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="location"
+                    //onBlur={validate}
+                    placeholder="Enter Location"
+                    onChange={handleChange}
+                    required
+                    maxLength="50"
+                    minLength="5"
+                  />{" "}
+                  {errors.location.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.location}</span>
                     </small>
                   )}
                 </div>

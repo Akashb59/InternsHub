@@ -43,6 +43,7 @@ function ViewInternships(props) {
                 setInternshipHostState({
                   ...internshipHostState,
                   title: res.data.data.title,
+                  location: res.data.data.location,
                   description: res.data.data.description,
                   stipend: res.data.data.stipend,
                   type_of_internship: res.data.data.type_of_internship,
@@ -103,6 +104,7 @@ function ViewInternships(props) {
   );
   const [internshipHostState, setInternshipHostState] = useState({
     title: "",
+    location: "",
     description: [],
     duration: "",
     starts_on: "",
@@ -117,6 +119,7 @@ function ViewInternships(props) {
       title: "",
       description: "",
       intended_participants: "",
+      location: "",
       descriptions: ""
     }
   });
@@ -158,6 +161,10 @@ function ViewInternships(props) {
       case "title":
         errors.title =
           value.length < 5 ? "Title must be 5 or more characters long!" : "";
+        break;
+      case "location":
+        errors.location =
+          value.length < 5 ? "Location must be 5 or more characters long!" : "";
         break;
       case "descriptions":
         errors.descriptions =
@@ -270,6 +277,7 @@ function ViewInternships(props) {
     e.preventDefault();
     const Internship = {
       title: internshipHostState.title,
+      location: internshipHostState.location,
       description: internshipHostState.description,
       duration: internshipHostState.duration,
       starts_on: internshipHostState.starts_on,
@@ -484,7 +492,27 @@ function ViewInternships(props) {
                     </small>
                   )}
                 </div>
-
+                <div className="form-group">
+                  <label htmlFor="location">Location: </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="location"
+                    disabled
+                    //onBlur={validate}
+                    value={internshipHostState.location}
+                    onChange={handleChange}
+                    required
+                    maxLength="50"
+                    minLength="5"
+                    placeholder="Enter Location"
+                  />{" "}
+                  {errors.location.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.location}</span>
+                    </small>
+                  )}
+                </div>
                 <div className="form-group">
                   <label htmlFor="duration">Duration (In months):</label>
                   <div className="input-group mb-3">

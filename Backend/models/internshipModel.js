@@ -13,6 +13,12 @@ const internshipSchema = new mongoose.Schema(
       maxlength: [50, 'A title  must have less or equal to 50 characters '],
       minlength: [5, 'A title  must have more than 5 characters']
     },
+    location: {
+      type: String,
+      required: [true, 'Please provide the Location of Internship'],
+      maxlength: [50, 'A location must have less or equal to 50 characters '],
+      minlength: [5, 'A location must have more than 5 characters']
+    },
     requiredSkills: [
       {
         type: mongoose.Schema.ObjectId,

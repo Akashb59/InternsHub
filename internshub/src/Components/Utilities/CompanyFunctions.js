@@ -126,6 +126,7 @@ export const hostInternship = internship => {
         jwt: localStorage.usertoken
       },
       title: internship.title,
+      location: internship.location,
       description: internship.description,
       duration: internship.duration,
       posted_on: internship.posted_on,
@@ -151,6 +152,7 @@ export const editInternship = internship => {
         jwt: localStorage.usertoken
       },
       title: internship.title,
+      location: internship.location,
       description: internship.description,
       duration: internship.duration,
       posted_on: internship.posted_on,
