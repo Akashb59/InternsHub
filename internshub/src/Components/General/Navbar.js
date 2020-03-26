@@ -57,8 +57,9 @@ function Navbar(props) {
       if (res) {
         //console.log(res.data);
         showAlert("success", "Successfully Updated password");
+        localStorage.removeItem("usertoken");
         props.history.push("/");
-        window.location.reload(false);
+        window.location.reload(true);
       }
     });
   };

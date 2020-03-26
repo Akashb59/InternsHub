@@ -55,7 +55,7 @@ function PasswordReset(props) {
     newPass(user, token).then(res => {
       if (res) {
         //console.log(res.data);
-        showAlert("success", "Successfully Updated password");
+        showAlert("success", "Password reset successful");
         props.history.push("/");
         window.location.reload(false);
       }
@@ -63,7 +63,7 @@ function PasswordReset(props) {
   };
   useEffect(() => {
     document.title = "InternsHub | Reset Password";
-    console.log(window.location.href);
+    //console.log(window.location.href);
     const token = window.location.href.split("/");
     setToken(token[token.length - 1]);
   }, []);
@@ -108,6 +108,9 @@ function PasswordReset(props) {
             </small>
           )}
         </div>
+        <button className="btn btn-success" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );
