@@ -57,3 +57,31 @@ export const ProtectedRouteStudent = ({ component: Component, ...rest }) => {
     />
   );
 };
+
+export const ProtectedRouteAdmin = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={props => {
+        if (localStorage.type === "Admin") {
+          return <Component {...props} />;
+        } else {
+          return (
+            <div>
+              {showAlert("error", "No Permission")}
+
+              <Redirect
+                to={{
+                  pathname: "/forbidden",
+                  state: {
+                    from: props.location
+                  }
+                }}
+              />
+            </div>
+          );
+        }
+      }}
+    />
+  );
+};

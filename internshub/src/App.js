@@ -1,6 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { ProtectedRouteCompany, ProtectedRouteStudent } from "./ProtectedRoute";
+import {
+  ProtectedRouteCompany,
+  ProtectedRouteStudent,
+  ProtectedRouteAdmin
+} from "./ProtectedRoute";
 
 import Landing from "./Components/General/Landing";
 import Navbar from "./Components/General/Navbar";
@@ -8,12 +12,15 @@ import Footer from "./Components/General/Footer";
 import Forbidden from "./Components/General/Forbidden";
 import NotFound from "./Components/General/NotFound";
 
+import Admin from "./Components/LoginSignup/Admin";
+
 import Basics from "./Components/Others/Basics";
 import Check from "./Components/Others/Check";
 
 import Login from "./Components/LoginSignup/Login";
 import Signup from "./Components/LoginSignup/Signup";
 import PasswordReset from "./Components/LoginSignup/PasswordReset";
+import AdminLogin from "./Components/LoginSignup/AdminLogin";
 
 import ViewInternships from "./Components/Companies/ViewInternships";
 import CompanyHome from "./Components/Companies/CompanyHome";
@@ -52,9 +59,12 @@ function App() {
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/resetPassword/:id" component={PasswordReset} />
+            <Route exact path="/adminLogin" component={AdminLogin} />
 
             <Route exact path="/check" component={Check} />
             <Route exact path="/basics" component={Basics} />
+
+            <ProtectedRouteAdmin path="/adminHome" component={Admin} />
 
             <ProtectedRouteCompany
               exact

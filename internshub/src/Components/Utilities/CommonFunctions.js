@@ -70,6 +70,20 @@ export const addressform = address => {
     });
 };
 
+export const createSkill = skill => {
+  return axios
+    .post(`${ip}/api/v1/skillTypeMasters/`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      skill_name: skill
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
 //PATCH
 export const editAddressForm = editAddress => {
   return axios

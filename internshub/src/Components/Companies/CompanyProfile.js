@@ -170,7 +170,7 @@ function CompanyProfile(props) {
           </div>
         </div>
       </header>
-      <form className="white" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <center>
           <b>
             <span

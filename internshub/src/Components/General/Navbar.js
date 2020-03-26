@@ -185,9 +185,80 @@ function Navbar(props) {
       </div>
     </li>
   );
+
+  const admLink = (
+    <li className="nav-item dropdown">
+      <Link
+        className="nav-link dropdown-toggle"
+        to="#"
+        id="navbarDropdownMenuLink"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Profile
+      </Link>
+      <div
+        className="dropdown-menu nav_item"
+        aria-labelledby="navbarDropdownMenuLink"
+      >
+        <ul className="nav_ul">
+          <li className="nav_li">
+            <Link
+              className="nav_link"
+              to="#"
+              data-toggle="modal"
+              data-target="#updatePassword"
+            >
+              Update Password
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </li>
+  );
+
+  const placLink = (
+    <li className="nav-item dropdown">
+      <Link
+        className="nav-link dropdown-toggle"
+        to="#"
+        id="navbarDropdownMenuLink"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        Profile
+      </Link>
+      <div
+        className="dropdown-menu nav_item"
+        aria-labelledby="navbarDropdownMenuLink"
+      >
+        <ul className="nav_ul">
+          <li className="nav_li">
+            <Link
+              className="nav_link"
+              to="#"
+              data-toggle="modal"
+              data-target="#updatePassword"
+            >
+              Update Password
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </li>
+  );
+
   const userLink = (
     <ul className="navbar-nav ml-auto">
-      {localStorage.type === "Student" ? stuLink : compLink}
+      {localStorage.type === "Student"
+        ? stuLink
+        : localStorage.type === "Company"
+        ? compLink
+        : localStorage.type === "Admin"
+        ? admLink
+        : placLink}
       <li className="nav-item">
         <a href="/" onClick={logout} className="nav-link">
           Log Out
@@ -207,6 +278,13 @@ function Navbar(props) {
       <img className="logo" src="Logo1.png" alt="logo" />
     </a>
   );
+
+  const adminLink = (
+    <a href="/adminHome" className="navbar-brand">
+      <img className="logo" src="Logo1.png" alt="logo" />
+    </a>
+  );
+
   const homeLink = (
     <a href="/" className="navbar-brand">
       <img className="logo" src="Logo1.png" alt="logo" />
@@ -226,6 +304,8 @@ function Navbar(props) {
             ? studentLink
             : localStorage.type === "Company"
             ? companyLink
+            : localStorage.type === "Admin"
+            ? adminLink
             : placementLink
           : homeLink}
 

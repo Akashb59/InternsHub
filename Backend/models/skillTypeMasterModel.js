@@ -5,7 +5,8 @@ const skillTypeMasterSchema = new mongoose.Schema(
     skill_name: {
       type: String,
       required: [true, 'Please Enter the Skills'],
-      maxlength: [30, 'A skill name must have less or equal to 30 Characters']
+      maxlength: [30, 'A skill name must have less or equal to 30 Characters'],
+      unique: [true, 'Skill already exists']
     },
     slug: String
   },
