@@ -13,6 +13,8 @@ import Check from "./Components/Others/Check";
 
 import Login from "./Components/LoginSignup/Login";
 import Signup from "./Components/LoginSignup/Signup";
+import PasswordReset from "./Components/LoginSignup/PasswordReset";
+
 import ViewInternships from "./Components/Companies/ViewInternships";
 import CompanyHome from "./Components/Companies/CompanyHome";
 import CompanyForm from "./Components/Companies/CompanyForm";
@@ -49,6 +51,7 @@ function App() {
 
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/resetPassword/:id" component={PasswordReset} />
 
             <Route exact path="/check" component={Check} />
             <Route exact path="/basics" component={Basics} />

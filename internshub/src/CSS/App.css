@@ -194,3 +194,7 @@
   list-style-type: none;
   padding: 10px 18px;
 }
+
+.navbar-expand-sm .navbar-nav .dropdown-menu {
+  min-width: 200px;
+}

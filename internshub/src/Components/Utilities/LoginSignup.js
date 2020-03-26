@@ -126,3 +126,35 @@ export const forgotPassword = user => {
       console.log(err);
     });
 };
+
+//PATCH
+export const updatePass = pass => {
+  return axios
+    .patch(`${ip}/api/v1/users/updateMyPassword`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      passwordCurrent: pass.currentPassword,
+      password: pass.password,
+      passwordConfirm: pass.passwordConfirm
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
+export const newPass = (pass, token) => {
+  return axios
+    .patch(`${ip}/api/v1/users/resetPassword/${token}`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      password: pass.password,
+      passwordConfirm: pass.passwordConfirm
+    })
+    .catch(err => {
+      showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};

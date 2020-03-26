@@ -3,6 +3,7 @@ import { companyform, company } from "../Utilities/CompanyFunctions";
 import { addressform } from "../Utilities/CommonFunctions";
 import "./../../CSS/company.css";
 import { formatInput } from "../Utilities/Utils";
+import { showAlert } from "../Utilities/Alerts";
 
 function CompanyForm(props) {
   useEffect(() => {
@@ -114,7 +115,9 @@ function CompanyForm(props) {
             //localStorage.setItem('companyid', res.id);
             company().then(res => {
               if (res) {
-                props.history.push(`/companyHome`);
+                showAlert("success", "Successfully recorded details");
+                props.history.push("/companyHome");
+                window.location.reload(false);
               }
             });
           }

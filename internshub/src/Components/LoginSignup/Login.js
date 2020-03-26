@@ -3,6 +3,7 @@ import { login, roles, forgotPassword } from "../Utilities/LoginSignup";
 import { company } from "../Utilities/CompanyFunctions";
 import { student } from "../Utilities/StudentFunctions";
 import "../../CSS/App.css";
+import { showAlert } from "../Utilities/Alerts";
 
 function Login(props) {
   const [loginState, setLoginState] = useState({
@@ -94,7 +95,9 @@ function Login(props) {
     forgotPassword(forgot).then(res => {
       if (res) {
         //console.log(res.data.user.roleType.roleName);
-        alert("Email Sent Successfully");
+        showAlert("success", "Email Sent Successfully");
+        props.history.push("/");
+        window.location.reload(false);
       }
     });
   };
@@ -208,13 +211,15 @@ function Login(props) {
                     Send
                   </button>
                 </div>
-                <button
-                  type="button"
-                  className="btn btn-secondary "
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
+                <div className="form-group">
+                  <button
+                    type="button"
+                    className="btn btn-secondary "
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </form>
           </div>
