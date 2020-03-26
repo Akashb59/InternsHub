@@ -12,6 +12,9 @@ const app = express();
 
 app.use(cors());
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
 // Global Middleware
 
 //1.Serving static files

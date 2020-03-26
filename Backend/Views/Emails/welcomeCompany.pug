@@ -1,0 +1,17 @@
+extends baseEmail
+
+block content
+  p Hi #{firstName},
+  p Welcome to InternsHub, we're glad to have you 🎉🙏
+  p We're all a big familiy here, so make sure to host many internships in our website and get onboarded with our students!
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  a(href=`${url}`, target='_blank') InternsHub Website
+  p If you need any help in hosting an internship, please don't hesitate to contact us!
+  p - Admin, InternsHub
