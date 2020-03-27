@@ -27,6 +27,8 @@ function Signup(props) {
 
   useEffect(() => {
     document.title = "InternsHub | SignUp";
+    const ip = "http://192.168.1.16:3000";
+    localStorage.setItem("ip", ip);
     roles().then(res => {
       if (res) {
         //console.log(res.data.userTypeMaster);
@@ -102,7 +104,7 @@ function Signup(props) {
         };
         profile(user).then(res => {
           localStorage.setItem("name", res.data.fullname);
-          localStorage.setItem("photo", res.data.user.photo);
+          //localStorage.setItem("photo", res.data.user.photo);
         });
         role(roleType).then(res => {
           if (res) {

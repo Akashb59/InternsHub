@@ -81,12 +81,7 @@ function Navbar(props) {
     localStorage.removeItem("internshipId");
     localStorage.removeItem("internId");
     localStorage.removeItem("name");
-    localStorage.removeItem("father_name");
-    localStorage.removeItem("mother_name");
-    localStorage.removeItem("dob");
-    localStorage.removeItem("gender");
     localStorage.removeItem("photo");
-    localStorage.removeItem("hobbies");
     props.history.push(`/`);
   };
   const loginRegLink = (

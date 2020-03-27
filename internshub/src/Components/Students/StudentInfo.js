@@ -23,6 +23,13 @@ function StudentInfo(props) {
     country: "",
     pincode: ""
   });
+  const [more, setMore] = useState({
+    father_name: "",
+    mother_name: "",
+    dob: Date,
+    gender: "",
+    hobbies: ""
+  });
   //const [info, setInfo] = useState("");
   const [academicFormState, setAcademicFormState] = useState({
     school_name: "",
@@ -212,11 +219,14 @@ function StudentInfo(props) {
       user: localStorage.userid
     };
 
-    localStorage.setItem("father_name", studFormState.father_name);
-    localStorage.setItem("mother_name", studFormState.mother_name);
-    localStorage.setItem("dob", studFormState.dob);
-    localStorage.setItem("gender", studFormState.gender);
-    localStorage.setItem("hobbies", studFormState.hobbies);
+    setMore({
+      ...more,
+      father_name: studFormState.father_name,
+      mother_name: studFormState.mother_name,
+      dob: studFormState.dob,
+      gender: studFormState.gender,
+      hobbies: studFormState.hobbies
+    });
 
     addressform(address).then(res => {
       if (res) {
@@ -236,11 +246,11 @@ function StudentInfo(props) {
     //const newadd = localStorage.address_copy;
 
     const det = {
-      father_name: localStorage.father_name,
-      mother_name: localStorage.mother_name,
-      dob: localStorage.dob,
-      gender: localStorage.gender,
-      hobbies: localStorage.hobbies,
+      father_name: more.father_name,
+      mother_name: more.mother_name,
+      dob: more.dob,
+      gender: more.gender,
+      hobbies: more.hobbies,
       school_name: academicFormState.school_name,
       grade_10_per: academicFormState.grade_10_per,
       pu_college_name: academicFormState.pu_college_name,
@@ -404,7 +414,7 @@ function StudentInfo(props) {
                 <table className="table table-borderless">
                   <tbody>
                     <tr>
-                      <th>Categories:</th>
+                      <th>Gender:</th>
                       <td>
                         {" "}
                         <div className="custom-control custom-radio custom-control-inline">

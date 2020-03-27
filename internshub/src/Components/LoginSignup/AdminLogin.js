@@ -18,6 +18,8 @@ function AdminLogin(props) {
   });
   useEffect(() => {
     document.title = "InternsHub | Admin Login";
+    const ip = "http://192.168.1.16:3000";
+    localStorage.setItem("ip", ip);
   }, []);
 
   const validEmailRegex = RegExp(

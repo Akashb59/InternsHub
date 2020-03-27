@@ -139,6 +139,7 @@ function StudentHome() {
         //console.log(res.data.stats[0]);
         const arr = res.data.doc.map(data => ({
           title: data.title,
+          photo: data.company.user.photo,
           location: data.location,
           category: data.categories,
           startsOn: data.starts_on.substring(0, 10),

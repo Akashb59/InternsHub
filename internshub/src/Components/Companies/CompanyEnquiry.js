@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import "./../../CSS/company.css";
 import { FaInfo, FaQuestion, FaFilePdf } from "react-icons/fa";
 import {
@@ -150,18 +150,22 @@ function CompanyEnquiry(props) {
         </button>
       </td>
       <td>{props.internship.accepted}</td>
-      <td>
-        <button
-          className="btn btn-success btn-sm btn-block"
-          data-toggle="modal"
-          data-target="#acceptInternship"
-          onClick={() => {
-            localStorage.setItem("acceptInternshipId", props.internship._id);
-          }}
-        >
-          <i className="fas fa-check-circle"></i>
-        </button>
-      </td>
+      {props.internship.accepted === "No" ? (
+        <td>
+          <button
+            className="btn btn-success btn-sm btn-block"
+            data-toggle="modal"
+            data-target="#acceptInternship"
+            onClick={() => {
+              localStorage.setItem("acceptInternshipId", props.internship._id);
+            }}
+          >
+            <i className="fas fa-check-circle"></i>
+          </button>
+        </td>
+      ) : (
+        <Fragment />
+      )}
     </tr>
   );
   useEffect(() => {
@@ -220,10 +224,10 @@ function CompanyEnquiry(props) {
           <br></br>
           <p>Internship Title: {selectedInternship.iname}</p>
           <p>Internship Location: {selectedInternship.iloc}</p>
-          <p>Internship Starts On: {selectedInternship.istarts}</p>
+          <p>Internship Starts On: {selectedInternship.istarts.toString()}</p>
           <p>Student Name: {selectedInternship.sname}</p>
           <p>Accepted: {selectedInternship.accepted}</p>
-          <p>Requested At: {selectedInternship.reqAt}</p>
+          <p>Requested At: {selectedInternship.reqAt.toString()}</p>
           <p>Completed: {selectedInternship.completed}</p>
           <p>Message: {selectedInternship.message}</p>
           <table>
@@ -291,7 +295,7 @@ function CompanyEnquiry(props) {
           <p>Hobbies: {selectedInternship.shob}</p>
           <p>Father Name: {selectedInternship.sfname}</p>
           <p>Mother Name: {selectedInternship.smname}</p>
-          <p>Date Of Birth: {selectedInternship.sdob}</p>
+          <p>Date Of Birth: {selectedInternship.sdob.toString()}</p>
         </div>
       </div>
     </div>
@@ -411,7 +415,6 @@ function CompanyEnquiry(props) {
               <th>Requested On</th>
               <th>Details</th>
               <th>Accepted</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>{internshipEnquiryListYes()}</tbody>
@@ -426,7 +429,6 @@ function CompanyEnquiry(props) {
               <th>Requested On</th>
               <th>Details</th>
               <th>Accepted</th>
-              <th>Action</th>
             </tr>
           </thead>
           <tbody>{internshipEnquiryListRest()}</tbody>
