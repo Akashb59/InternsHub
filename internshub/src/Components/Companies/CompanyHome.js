@@ -369,43 +369,53 @@ function CompanyHome(props) {
               <div className="col-md-9">
                 <div className="card">
                   <div className="card-header">
-                    <h4>Enquiries</h4>
+                    <h5>Enquiries</h5>
                   </div>
-                  <table className="table table-striped">
-                    <thead className="thead-dark">
-                      <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Post One</td>
-                        <td>Web Development</td>
-                        <td>May 10 2018</td>
-                        <td>
-                          <a href="details.html" className="btn btn-secondary">
-                            <i className="fas fa-angle-double-right" /> Details
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Post Two</td>
-                        <td>Tech Gadgets</td>
-                        <td>May 11 2018</td>
-                        <td>
-                          <a href="details.html" className="btn btn-secondary">
-                            <i className="fas fa-angle-double-right" /> Details
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <div className="table-responsive">
+                    <table className="table table-sm table-hover table-striped">
+                      <thead className="thead-dark thead-small">
+                        <tr>
+                          <th>#</th>
+                          <th>Title</th>
+                          <th>Category</th>
+                          <th>Date</th>
+                          <th />
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Post One</td>
+                          <td>Web Development</td>
+                          <td>May 10 2018</td>
+                          <td>
+                            <a
+                              href="details.html"
+                              className="btn btn-secondary"
+                            >
+                              <i className="fas fa-angle-double-right" />{" "}
+                              Details
+                            </a>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Post Two</td>
+                          <td>Tech Gadgets</td>
+                          <td>May 11 2018</td>
+                          <td>
+                            <a
+                              href="details.html"
+                              className="btn btn-secondary"
+                            >
+                              <i className="fas fa-angle-double-right" />{" "}
+                              Details
+                            </a>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
               <div className="col-md-3">
@@ -801,19 +811,24 @@ function CompanyHome(props) {
                   <hr />
                   {info.desc.map((desc, index) => {
                     return (
-                      <div className="form-group" key={index}>
-                        <label htmlFor={index}>{alphas[index]}:</label>
-                        {` `}
-                        <input
-                          id={index}
-                          type="text"
-                          value={desc}
-                          maxLength="200"
-                          minLength="20"
-                          placeholder="Description"
-                          required
-                          onChange={e => addSubInfoValue(e, index)}
-                        />
+                      <div className="form-row" key={index}>
+                        <div className="pt-2 my-1">
+                          <label htmlFor={index}>{alphas[index]}:</label>
+                        </div>
+
+                        <div className="col">
+                          <input
+                            id={index}
+                            type="text"
+                            value={desc}
+                            maxLength="200"
+                            className="form-control my-1"
+                            minLength="20"
+                            placeholder="Description"
+                            required
+                            onChange={e => addSubInfoValue(e, index)}
+                          />
+                        </div>
                         {errors.description.length > 0 && (
                           <small style={{ color: "red" }}>
                             <span className="error">{errors.description}</span>
@@ -849,19 +864,24 @@ function CompanyHome(props) {
                   <hr />
                   {info1.intd.map((intd, index) => {
                     return (
-                      <div className="form-group" key={index}>
-                        <label htmlFor={index}>{alphas[index]}:</label>
-                        {` `}
-                        <input
-                          id={index}
-                          type="text"
-                          value={intd}
-                          placeholder="Intended Participants"
-                          maxLength="200"
-                          minLength="20"
-                          required
-                          onChange={e => addSubIntendedValue(e, index)}
-                        />
+                      <div className="form-row" key={index}>
+                        <div className="pt-2 my-1">
+                          <label htmlFor={index}>{alphas[index]}:</label>
+                          {` `}
+                        </div>
+                        <div className="col">
+                          <input
+                            id={index}
+                            type="text"
+                            value={intd}
+                            placeholder="Intended Participants"
+                            className="form-control my-1"
+                            maxLength="200"
+                            minLength="20"
+                            required
+                            onChange={e => addSubIntendedValue(e, index)}
+                          />{" "}
+                        </div>
                         {errors.intended_participants.length > 0 && (
                           <small style={{ color: "red" }}>
                             <span className="error">

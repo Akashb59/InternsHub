@@ -127,122 +127,186 @@ function Signup(props) {
 
   return (
     <div className="container">
-      <div className="text-center ">
-        <h2 className="heading-secondary ma-bt-md">Create a new account</h2>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="fullname">Full Name</label>
-          <input
-            type="ematextil"
-            name="fullname"
-            className="form-control "
-            placeholder="John Doe"
-            value={signupState.fullname}
-            onChange={handleChange}
-            required
-          />
-          {errors.fullname.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.fullname}</span>
-            </small>
-          )}
+      <div className="row py-5">
+        <div className="col-lg-6 d-none d-lg-block">
+          <h1 className="login-quote pt-5">
+            The only person you are <strong>destined to become </strong>is the
+            person you<strong> decide to be</strong>.
+          </h1>
+          <div className="d-flex">
+            <div className="p-5 align-self-start">
+              <i className="fas fa-check fa-2x"></i>
+            </div>
+            <div className="p-4 align-self-end"></div>
+          </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control "
-            placeholder="you@example.com"
-            value={signupState.email}
-            onChange={handleChange}
-            required
-          />{" "}
-          {errors.email.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.email}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control "
-            placeholder="********"
-            value={signupState.password}
-            onChange={handleChange}
-            required
-          />{" "}
-          {errors.password.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.password}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="passwordConfirm">Password Confirm</label>
-          <input
-            type="password"
-            name="passwordConfirm"
-            className="form-control "
-            placeholder="********"
-            value={signupState.passwordConfirm}
-            onChange={handleChange}
-            required
-          />{" "}
-          {errors.passwordConfirm.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.passwordConfirm}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number</label>
-          <input
-            type="text"
-            name="phoneNumber"
-            className="form-control"
-            placeholder="0123456789"
-            onKeyDown={formatInput}
-            value={signupState.phoneNumber}
-            onChange={handleChange}
-            maxLength="10"
-            required
-          />{" "}
-          {errors.phoneNumber.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.phoneNumber}</span>
-            </small>
-          )}
-        </div>
+        <div className="col-lg-6">
+          <div className="card bg-body p-3 rounded card-form">
+            <div className="card-body">
+              <div className="text-center">
+                <h2 className="heading-secondary ma-bt-md">
+                  Create A New Account
+                </h2>
+              </div>
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="fullname">Full Name:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fas fa-user"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="ematextil"
+                      name="fullname"
+                      className="form-control "
+                      placeholder="John Doe"
+                      value={signupState.fullname}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  {errors.fullname.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.fullname}</span>
+                    </small>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="email">Email:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fas fa-envelope"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="email"
+                      name="email"
+                      className="form-control "
+                      placeholder="you@example.com"
+                      value={signupState.email}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  {errors.email.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.email}</span>
+                    </small>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fas fa-key"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="password"
+                      name="password"
+                      className="form-control "
+                      placeholder="********"
+                      value={signupState.password}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  {errors.password.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.password}</span>
+                    </small>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="passwordConfirm">Confirm Password:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fas fa-key"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="password"
+                      name="passwordConfirm"
+                      className="form-control "
+                      placeholder="********"
+                      value={signupState.passwordConfirm}
+                      onChange={handleChange}
+                      required
+                    />
+                  </div>
+                  {errors.passwordConfirm.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.passwordConfirm}</span>
+                    </small>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="phoneNumber">Phone Number:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fas fa-mobile"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      name="phoneNumber"
+                      className="form-control"
+                      placeholder="0123456789"
+                      onKeyDown={formatInput}
+                      value={signupState.phoneNumber}
+                      onChange={handleChange}
+                      maxLength="10"
+                      required
+                    />
+                  </div>
+                  {errors.phoneNumber.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.phoneNumber}</span>
+                    </small>
+                  )}
+                </div>
 
-        <div className="form-group">
-          <label htmlFor="role">Role</label>
-          <select
-            required
-            name="role"
-            className="form-control "
-            onChange={handleChange}
-          >
-            {roleState.map(function(role) {
-              return (
-                <option key={role} value={role}>
-                  {role}
-                </option>
-              );
-            })}
-          </select>
+                <div className="form-group mb-4">
+                  <label htmlFor="role">Role:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fas fa-user-tag"></i>
+                      </span>
+                    </div>
+                    <select
+                      required
+                      name="role"
+                      className="form-control "
+                      onChange={handleChange}
+                    >
+                      {roleState.map(function(role) {
+                        return (
+                          <option key={role} value={role}>
+                            {role}
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+                </div>
+
+                <div className="form-group">
+                  <button className="btn btn-success btn-block" type="submit">
+                    Sign Up
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
-        <br></br>
-        <div className="form-group">
-          <button className="btn btn-success" type="submit">
-            Sign Up
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }

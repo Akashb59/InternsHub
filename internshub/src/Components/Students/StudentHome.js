@@ -196,7 +196,7 @@ function StudentHome() {
       <div className="container">
         <div className="row">
           <div className="col-lg-3">
-            <div className="jumbotron">
+            <div className="jumbotron sticky-top p-5">
               <form onSubmit={handleSubmit}>
                 <label>
                   <input
@@ -375,13 +375,15 @@ function StudentHome() {
             {internArray.map(function(intern) {
               return (
                 <div key={intern.id}>
-                  <div className="card">
+                  <div className="card border-info">
                     <div className="card-body">
                       <div className="row">
                         <div className="col-sm-10">
-                          <h3>{intern.title}</h3>
+                          <h3 className="card-title">{intern.title}</h3>
+                          <h6 className="card-subtitle text-muted">
+                            Company: {intern.company}
+                          </h6>
                           <br></br>
-                          <h5>Company name: {intern.company}</h5>
                         </div>
                         <div className="col-sm-2">
                           <img
