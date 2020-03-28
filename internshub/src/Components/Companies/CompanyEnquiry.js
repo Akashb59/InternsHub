@@ -304,6 +304,9 @@ function CompanyEnquiry(props) {
     let c = 0;
     //console.log(acceptedYes);
     let acceptedYes = internshipEnquiry;
+    if (acceptedYes.length === 0) {
+      return <None key="key" />;
+    }
     // eslint-disable-next-line
     return acceptedYes.map(currentInternship => {
       var created_date = new Date(currentInternship.internship.starts_on);
@@ -330,7 +333,9 @@ function CompanyEnquiry(props) {
     let c = 0;
     //console.log(internshipState);
     let acceptedNo = internshipEnquiry;
-
+    if (acceptedNo.length === 0) {
+      return <None key="key" />;
+    }
     // eslint-disable-next-line
     return acceptedNo.map(currentInternship => {
       var created_date = new Date(currentInternship.internship.starts_on);
@@ -357,6 +362,9 @@ function CompanyEnquiry(props) {
     let count = 0;
     let c = 0;
     let rest = internshipEnquiry;
+    if (rest.length === 0) {
+      return <None key="key" />;
+    }
     // eslint-disable-next-line
     return rest.map(currentInternship => {
       var created_date = new Date(currentInternship.internship.starts_on);
@@ -382,15 +390,13 @@ function CompanyEnquiry(props) {
   }
 
   return (
-    <div className="container">
-      <div className="jumbotron">
-        <div className="col-sm-8 mx-auto display-4 text-center">
-          Company Enquiry
-        </div>
-      </div>
+    <div className="container pt-4">
+      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2">
+        <i className="fas fa-clipboard-check"></i> Company Enquiry
+      </h2>
       <div>
         <h2>Pending Enquiries</h2>
-        <table className="table table-striped">
+        <table className="table table-striped table-hover bg-white">
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
@@ -405,7 +411,7 @@ function CompanyEnquiry(props) {
           <tbody>{internshipEnquiryListNo()}</tbody>
         </table>
         <h2>Accepted Enquiries</h2>
-        <table className="table table-striped">
+        <table className="table table-striped table-hover bg-white">
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
@@ -419,7 +425,7 @@ function CompanyEnquiry(props) {
           <tbody>{internshipEnquiryListYes()}</tbody>
         </table>
         <h2>Past Enquiries</h2>
-        <table className="table table-striped">
+        <table className="table table-striped table-hover bg-white">
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
@@ -436,7 +442,7 @@ function CompanyEnquiry(props) {
       <div className="modal fade" id="resume">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
-            <div className="modal-header bg-primary text-white">
+            <div className="modal-header bg-info  text-white">
               <h5 className="modal-title">Resume</h5>
               <button className="close" data-dismiss="modal">
                 <span>&times;</span>
@@ -451,7 +457,7 @@ function CompanyEnquiry(props) {
       <div className="modal fade" id="viewInternship">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
-            <div className="modal-header bg-primary text-white">
+            <div className="modal-header bg-info text-white">
               <h5 className="modal-title">Details</h5>
               <button className="close" data-dismiss="modal">
                 <span>&times;</span>
@@ -494,7 +500,7 @@ function CompanyEnquiry(props) {
       <div id="completedInternship" className="modal fade">
         <div className="modal-dialog modal-confirm modal-dialog-centered">
           <div className="modal-content">
-            <div className="modal-header">
+            <div className="modal-header bg-info ">
               <div className="container">
                 <h4 className="modal-title">Are you sure</h4>
                 <br></br>

@@ -306,7 +306,7 @@ function Navbar(props) {
   );
 
   return (
-    <nav className="navbar navbar-expand-md navbar-dark">
+    <nav className="navbar navbar-expand-sm navbar-dark">
       <div className="container">
         {localStorage.usertoken
           ? localStorage.type === "Student"
@@ -332,7 +332,7 @@ function Navbar(props) {
         <div className="modal fade" id="updatePassword">
           <div className="modal-dialog modal-md">
             <div className="modal-content">
-              <div className="modal-header bg-primary text-white">
+              <div className="modal-header bg-info  text-white">
                 <h5 className="modal-title">Update Password</h5>
                 <button className="close" data-dismiss="modal">
                   <span>&times;</span>

@@ -325,6 +325,9 @@ function ViewInternships(props) {
   function internshipListActive() {
     let count = 0;
     let c = 0;
+    if (internshipState.length === 0) {
+      return <None key="key" />;
+    }
     // eslint-disable-next-line
     return internshipState.map(currentInternship => {
       const active = currentInternship.ends_on;
@@ -359,6 +362,9 @@ function ViewInternships(props) {
   function internshipListPast() {
     let count = 0;
     let c = 0;
+    if (internshipState.length === 0) {
+      return <None key="key" />;
+    }
     // eslint-disable-next-line
     return internshipState.map(currentInternship => {
       const inactive = currentInternship.ends_on;
@@ -382,38 +388,10 @@ function ViewInternships(props) {
     });
   }
   return (
-    <div className="container">
-      <header id="main-header" className="py-2 bg-secondary text-white">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-3"></div>
-            <div className="col-md-6 text-center">
-              <h1>
-                <i className="fas fa-book" /> Hosted Internships
-              </h1>
-            </div>
-            <div className="col-md-3"></div>
-          </div>
-        </div>
-      </header>
-      <br></br>
-      {/* <div className="jumbotron mt-5">
-        <div className="col-sm-8 mx-auto display-4 text-center">WELCOME</div>
-        <Link to="/internshipHost" className="nav-link">
-          Host Internship
-        </Link>
-        <Link to="/companyTechnologies" className="nav-link">
-          Company Technologies
-        </Link>
-        <Link to="/companyEnquiry" className="nav-link">
-          Company Enquiry
-        </Link>
-        <Link to="/companyDescription" className="nav-link">
-          Company Description
-        </Link>
-        <p>USER:{localStorage.userid}</p>
-        <p>COMPANY:{localStorage.companyid}</p>
-      </div> */}
+    <div className="container pt-4">
+      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2">
+        <i className="fas fa-book" /> Hosted Internships
+      </h2>
       <div id="delInternship" className="modal fade">
         <div className="modal-dialog modal-confirm modal-dialog-centered">
           <div className="modal-content">
@@ -462,7 +440,7 @@ function ViewInternships(props) {
       <div className="modal fade" id="editInternship">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
-            <div className="modal-header bg-primary text-white">
+            <div className="modal-header bg-info  text-white">
               <h5 className="modal-title">Edit {internshipHostState.title}</h5>
               <button className="close" data-dismiss="modal">
                 <span>&times;</span>
@@ -582,7 +560,7 @@ function ViewInternships(props) {
                 </div>
                 <div className="row">
                   <div className="sm-col-4">
-                    <table className="table table-borderless">
+                    <table className="table bg-white table-borderless">
                       <tbody>
                         <tr>
                           <th>Categories:</th>
@@ -820,7 +798,7 @@ function ViewInternships(props) {
         </div>
       </div>
       <h2>Active Internships</h2>
-      <table className="table table-striped">
+      <table className="table table-striped table-hover bg-white">
         <thead className="thead-dark">
           <tr>
             <th>Title</th>
@@ -832,7 +810,7 @@ function ViewInternships(props) {
         <tbody>{internshipListActive()}</tbody>
       </table>
       <h2>Past Internships</h2>
-      <table className="table table-striped">
+      <table className="table table-striped table-hover bg-white">
         <thead className="thead-dark">
           <tr>
             <th>Title</th>

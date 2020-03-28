@@ -304,25 +304,25 @@ function CompanyHome(props) {
   };
 
   return (
-    <div className="container">
-      <h2 className="text-center bg-secondary text-white py-2">
+    <div className="container pt-3">
+      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2 small-header">
         <i className="fas fa-cog" /> {localStorage.name} Dashboard
       </h2>
-      <section id="actions" className="py-3 mb-3 bg-light">
+      <section id="actions" className="py-3 mb-2">
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-5 offset-md-1">
               <button
-                className="btn btn-primary btn-block"
+                className="btn btn-primary btn-block small-button"
                 data-toggle="modal"
                 data-target="#hostNewInternship"
               >
                 <i className="fas fa-plus-circle"></i> Host New Internship
               </button>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-5">
               <button
-                className="btn btn-success btn-block"
+                className="btn btn-dark-green btn-block small-button"
                 data-toggle="modal"
                 data-target="#editInfoModal"
               >
@@ -381,29 +381,29 @@ function CompanyHome(props) {
               </div>
             </div>
             <div className="col-md-3">
-              <div className="card text-center bg-primary text-white mb-3">
-                <div className="card-body">
+              <div className="card text-center bg-primary text-white mb-3 small-card">
+                <div className="card-body py-3">
                   <h3>Internships</h3>
                   <h4 className="display-4">
                     <GiDesk /> {count}
                   </h4>
                   <Link
                     to="viewInternships"
-                    className="btn btn-outline-light btn-sm"
+                    className="btn btn-outline-smoke btn-sm"
                   >
                     View
                   </Link>
                 </div>
               </div>
-              <div className="card text-center bg-success text-white mb-3">
-                <div className="card-body">
+              <div className="card text-center bg-dark-green text-white mb-3 small-card">
+                <div className="card-body py-3">
                   <h3>Enquiries</h3>
                   <h4 className="display-4">
                     <i className="fas fa-clipboard-check"></i> {countEnquiry}
                   </h4>
                   <Link
                     to="companyEnquiry"
-                    className="btn btn-outline-light btn-sm"
+                    className="btn btn-outline-smoke btn-sm"
                   >
                     View
                   </Link>
@@ -417,7 +417,7 @@ function CompanyHome(props) {
       <div className="modal fade" id="editInfoModal">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
-            <div className="modal-header bg-success text-white">
+            <div className="modal-header bg-info text-white">
               <h5 className="modal-title">{localStorage.name} Information</h5>
               <button className="close" data-dismiss="modal">
                 <span>&times;</span>
@@ -441,7 +441,7 @@ function CompanyHome(props) {
                 <form onSubmit={handleSubmit1}>
                   <div className="modal-body">
                     <div className="jumbotron mt-2">
-                      <div className="col-sm-8 mx-auto display-4 text-center">
+                      <div className="mx-auto display-4 text-center small-header">
                         <p>
                           <b>DESCRIPTION</b>
                         </p>
@@ -487,7 +487,7 @@ function CompanyHome(props) {
                 <form onSubmit={handleSubmit2}>
                   <div className="modal-body">
                     <div className="jumbotron mt-2">
-                      <div className="col-sm-8 mx-auto display-4 text-center">
+                      <div className="col-sm-8 mx-auto display-4 text-center small-header">
                         <p>
                           <b>TECHNOLOGIES</b>
                         </p>
@@ -531,7 +531,7 @@ function CompanyHome(props) {
       <div className="modal fade" id="hostNewInternship">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
-            <div className="modal-header bg-primary text-white">
+            <div className="modal-header bg-info text-white">
               <h5 className="modal-title">New Internship</h5>
               <button className="close" data-dismiss="modal">
                 <span>&times;</span>
@@ -653,7 +653,7 @@ function CompanyHome(props) {
                 </div>
                 <div className="row">
                   <div className="sm-col-4">
-                    <table className="table table-borderless">
+                    <table className="table bg-white table-borderless">
                       <tbody>
                         <tr>
                           <th>Categories:</th>

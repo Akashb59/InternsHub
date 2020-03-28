@@ -329,7 +329,7 @@ function StudentInternSelect(props) {
       <div className="modal fade" id="reqInternship">
         <div className="modal-dialog modal-lg">
           <div className="modal-content">
-            <div className="modal-header bg-primary text-white">
+            <div className="modal-header bg-info  text-white">
               <h5 className="modal-title">Request for {internship.title}</h5>
               <button className="close" data-dismiss="modal">
                 <span>&times;</span>

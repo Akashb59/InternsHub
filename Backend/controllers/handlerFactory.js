@@ -94,7 +94,7 @@ exports.getAll = Model =>
       //console.log(doc);
       //doc.filter(data => data.ends_on >= Date.now());
       doc = doc.map(data => {
-        const active = data.ends_on;
+        const active = data.starts_on.getTime() + 7 * 24 * 60 * 60 * 1000;
         if (active >= Date.now()) {
           //console.log(active);
           //console.log(Date.now());

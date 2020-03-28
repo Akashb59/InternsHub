@@ -78,7 +78,7 @@ exports.getInternshipsFilter = catchAsync(async (req, res, next) => {
 
   let internship = await features.query;
   internship = internship.map(data => {
-    const active = data.ends_on;
+    const active = data.starts_on.getTime() + 7 * 24 * 60 * 60 * 1000;
     if (active >= Date.now()) {
       //console.log(active);
       //console.log(Date.now());

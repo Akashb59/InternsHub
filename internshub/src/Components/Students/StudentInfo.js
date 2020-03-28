@@ -282,7 +282,7 @@ function StudentInfo(props) {
   };
   return (
     <div className="container py-5">
-      <h2 className="text-center bg-primary text-white py-2">
+      <h2 className="text-center bg-secondary text-white py-2">
         {/* <i className="fas fa-pencil-alt" />*/} Student Information
       </h2>
       <div className="card bg-body p-3 rounded card-form">
@@ -769,7 +769,7 @@ function StudentInfo(props) {
                         //fontFamily: "Segoe Print"
                       }}
                     >
-                      PRE_UNIVERSITY/ DIPLOMA COLLEGE
+                      PRE-UNIVERSITY/ DIPLOMA COLLEGE
                     </span>
                   </b>
                 </center>{" "}

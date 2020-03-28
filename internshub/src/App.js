@@ -43,6 +43,8 @@ import StudentAcademicProfile from "./Components/Students/StudentAcademicProfile
 import StudentPersonalProfile from "./Components/Students/StudentPersonalProfile";
 
 import "./CSS/App.css";
+import "./CSS/bootstrap.css";
+import "./CSS/style.css";
 
 function App() {
   return (

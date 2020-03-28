@@ -66,6 +66,9 @@ function StudentEnquiry() {
   function internshipEnquiryListReq() {
     let count = 0;
     let c = 0;
+    if (studentEnquiry.length === 0) {
+      return <None key="key" />;
+    }
     // eslint-disable-next-line
     return studentEnquiry.map(currentInternship => {
       var ends_on = new Date(currentInternship.internship.ends_on);
@@ -89,6 +92,9 @@ function StudentEnquiry() {
   function internshipEnquiryListCom() {
     let count = 0;
     let c = 0;
+    if (studentEnquiry.length === 0) {
+      return <None key="key" />;
+    }
     // eslint-disable-next-line
     return studentEnquiry.map(currentInternship => {
       var ends_on = new Date(currentInternship.internship.ends_on);
@@ -111,15 +117,13 @@ function StudentEnquiry() {
   }
 
   return (
-    <div className="container">
-      <div className="jumbotron">
-        <div className="col-sm-8 mx-auto display-4 text-center">
-          Student Enquiry
-        </div>
-      </div>
+    <div className="container pt-4">
+      <h2 className="text-center display-4 bg-secondary rounded text-white pb-3">
+        My Enquiries
+      </h2>
       <div>
         <h2>Requested / Ongoing Internships</h2>
-        <table className="table table-striped">
+        <table className="table table-striped table-hover bg-white">
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
@@ -130,7 +134,7 @@ function StudentEnquiry() {
           <tbody>{internshipEnquiryListReq()}</tbody>
         </table>
         <h2>Completed / Past Internships</h2>
-        <table className="table table-striped">
+        <table className="table table-striped table-hover bg-white">
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
@@ -143,7 +147,7 @@ function StudentEnquiry() {
         <div className="modal fade" id="more">
           <div className="modal-dialog modal-lg">
             <div className="modal-content">
-              <div className="modal-header bg-primary text-white">
+              <div className="modal-header bg-info  text-white">
                 <h5 className="modal-title">More Information</h5>
                 <button className="close" data-dismiss="modal">
                   <span>&times;</span>

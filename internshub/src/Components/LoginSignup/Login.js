@@ -206,7 +206,7 @@ function Login(props) {
                   <div className="form-group col-sm-5">
                     <button
                       type="button"
-                      className="btn btn-block btn-secondary"
+                      className="btn btn-block btn-dark"
                       data-toggle="modal"
                       data-target="#myModal"
                     >
@@ -227,7 +227,7 @@ function Login(props) {
       <div className="modal fade" id="myModal">
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
-            <div className="modal-header">
+            <div className="modal-header bg-info ">
               <h4 className="modal-title">Forgot Password</h4>
               <button type="button" className="close" data-dismiss="modal">
                 &times;
