@@ -182,367 +182,451 @@ function StudentPersonalProfile(props) {
   };
 
   return (
-    <div className="container">
+    <div className="container py-5">
       {/* <p>{console.log(studPersonalProfile.dob)}</p> */}
-      <header id="main-header" className="py-0 bg-primary text-white">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-3"></div>
-            <div className="col-md-6 text-center">
-              <h1>
-                <i className="fas fa-pencil" /> Edit Profile
-              </h1>
+      <h2 className="text-center bg-primary text-white py-2">
+        <i className="fas fa-user-edit"></i> Edit Personal Information
+      </h2>
+      <div className="card bg-body p-3 rounded card-form">
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  PERSONAL INFORMATION
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
+            <div className="form__photo-upload ">
+              <input
+                type="file"
+                accept="image/*"
+                id="photo"
+                name="photo"
+                className="form__upload"
+                onChange={handleFile}
+              />
+              <label className="ml-auto" htmlFor="photo">
+                Choose new photo
+              </label>
+              <img
+                className="form__user-photo ml-4"
+                src={`${localStorage.ip}/Images/${studPersonalProfile.photo}`}
+                alt=""
+              />
             </div>
-            <div className="col-md-3"></div>
-          </div>
-        </div>
-      </header>
-      <form onSubmit={handleSubmit}>
-        <br></br>
-        <center>
-          <b>
-            <span
-              className="heading-secondary"
-              style={{
-                fontSize: "150%"
-                //fontFamily: "Segoe Print"
-              }}
-            >
-              PERSONAL INFORMATION
-            </span>
-          </b>
-        </center>{" "}
-        <br></br>
-        <div className="form__photo-upload ">
-          <input
-            type="file"
-            accept="image/*"
-            id="photo"
-            name="photo"
-            className="form__upload"
-            onChange={handleFile}
-          />
-          <label className="ml-auto" htmlFor="photo">
-            Choose new photo
-          </label>
-          <img
-            className="form__user-photo ml-4"
-            src={`${localStorage.ip}/Images/${studPersonalProfile.photo}`}
-            alt=""
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="name">Full Name: </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="John Doe"
-            disabled
-            id="name"
-            name="name"
-            value={studPersonalProfile.name}
-            onChange={handleChange}
-            required
-            maxLength="30"
-          />{" "}
-          {errors.fullname.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.fullname}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number: </label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="0123456789"
-            onKeyDown={formatInput}
-            id="phoneNumber"
-            name="phoneNumber"
-            value={studPersonalProfile.phoneNumber}
-            onChange={handleChange}
-            required
-            maxLength="10"
-          />{" "}
-          {errors.phoneNumber.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.phoneNumber}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="fatherName">Father Name: </label>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">
-                <i className="fa fa-male" aria-hidden="true"></i>
-              </span>
+            <div className="form-group">
+              <label htmlFor="name">Full Name: </label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-user"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="John Doe"
+                  disabled
+                  id="name"
+                  name="name"
+                  value={studPersonalProfile.name}
+                  onChange={handleChange}
+                  required
+                  maxLength="30"
+                />
+              </div>
+              {errors.fullname.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.fullname}</span>
+                </small>
+              )}
             </div>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Father name"
-              disabled
-              id="fatherName"
-              name="fatherName"
-              value={studPersonalProfile.fatherName}
-              onChange={handleChange}
-              required
-              maxLength="30"
-            />{" "}
-            {errors.father_name.length > 0 && (
-              <small style={{ color: "red" }}>
-                <span className="error">{errors.father_name}</span>
-              </small>
-            )}
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="motherName">Mother Name:</label>
-          <div className="input-group mb-3">
-            <div className="input-group-prepend">
-              <span className="input-group-text">
-                <i className="fa fa-female" aria-hidden="true"></i>
-              </span>
+            <div className="form-group">
+              <label htmlFor="phoneNumber">Phone Number: </label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-mobile"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="0123456789"
+                  onKeyDown={formatInput}
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={studPersonalProfile.phoneNumber}
+                  onChange={handleChange}
+                  required
+                  maxLength="10"
+                />
+              </div>
+              {errors.phoneNumber.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.phoneNumber}</span>
+                </small>
+              )}
             </div>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Mother Name"
-              disabled
-              id="motherName"
-              name="motherName"
-              value={studPersonalProfile.motherName}
-              onChange={handleChange}
-              required
-              maxLength="30"
-            />
-          </div>
-        </div>
-        <div className="form-group">
-          <label htmlFor="hobbies">Hobbies:</label>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="fatherName">Father Name: </label>
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">
+                      <i className="fa fa-male" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Father name"
+                    disabled
+                    id="fatherName"
+                    name="fatherName"
+                    value={studPersonalProfile.fatherName}
+                    onChange={handleChange}
+                    required
+                    maxLength="30"
+                  />{" "}
+                  {errors.father_name.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.father_name}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="motherName">Mother Name:</label>
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">
+                      <i className="fa fa-female" aria-hidden="true"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Mother Name"
+                    disabled
+                    id="motherName"
+                    name="motherName"
+                    value={studPersonalProfile.motherName}
+                    onChange={handleChange}
+                    required
+                    maxLength="30"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-6">
+                <label htmlFor="hobbies">Hobbies:</label>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">
+                      <i className="fas fa-clipboard-list"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Hobbies"
+                    id="hobbies"
+                    name="hobbies"
+                    value={studPersonalProfile.hobbies}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="form-group col-md-6">
+                <label htmlFor="dob">Date of Birth:</label>
+                <div className="input-group">
+                  <div className="input-group-prepend">
+                    <span className="input-group-text">
+                      <i className="fas fa-birthday-cake"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="date"
+                    className="form-control"
+                    disabled
+                    id="dob"
+                    name="dob"
+                    onChange={handleChange}
+                    value={studPersonalProfile.dob.toString()}
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="sm-col-4">
+                <table className="table table-borderless">
+                  <tbody>
+                    <tr>
+                      <th>Gender:</th>
+                      <td>
+                        {" "}
+                        <div className="custom-control custom-radio custom-control-inline">
+                          <input
+                            type="radio"
+                            name="gender"
+                            className="custom-control-input"
+                            checked={studPersonalProfile.gender === "Male"}
+                            id="defaultInline1"
+                            value="Male"
+                            onChange={handleChange}
+                          />{" "}
+                          <label
+                            className="custom-control-label"
+                            htmlFor="defaultInline1"
+                            style={{ color: "black" }}
+                          >
+                            Male
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        {" "}
+                        <div className="custom-control custom-radio custom-control-inline">
+                          <input
+                            type="radio"
+                            name="gender"
+                            className="custom-control-input"
+                            id="defaultInline2"
+                            value="Female"
+                            checked={studPersonalProfile.gender === "Female"}
+                            onChange={handleChange}
+                          />{" "}
+                          <label
+                            className="custom-control-label"
+                            htmlFor="defaultInline2"
+                            style={{ color: "black" }}
+                          >
+                            Female
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  ADDRESS
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <div className="input-field">
+                  <label htmlFor="locality">Locality:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-location-arrow"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="locality"
+                      name="locality"
+                      placeholder="Locality"
+                      value={studPersonalProfile.locality}
+                      onChange={handleChange}
+                      required
+                      maxLength="50"
+                      minLength="5"
+                    />
+                  </div>
+                  {errors.locality.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.locality}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
 
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Hobbies"
-            id="hobbies"
-            name="hobbies"
-            value={studPersonalProfile.hobbies}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="dob">Date of Birth:</label>
-          <input
-            type="date"
-            className="form-control"
-            disabled
-            id="dob"
-            name="dob"
-            onChange={handleChange}
-            value={studPersonalProfile.dob.toString()}
-            required
-          />
-        </div>
-        <div className="row">
-          <div className="sm-col-4">
-            <table className="table table-borderless">
-              <tbody>
-                <tr>
-                  <th>Gender:</th>
-                  <td>
-                    {" "}
-                    <div className="custom-control custom-radio custom-control-inline">
-                      <input
-                        type="radio"
-                        name="gender"
-                        className="custom-control-input"
-                        checked={studPersonalProfile.gender === "Male"}
-                        id="defaultInline1"
-                        value="Male"
-                        onChange={handleChange}
-                      />{" "}
-                      <label
-                        className="custom-control-label"
-                        htmlFor="defaultInline1"
-                        style={{ color: "black" }}
-                      >
-                        Male
-                      </label>
+              <div className="form-group col-md-4">
+                <div className="input-field">
+                  <label htmlFor="city">City:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-location-arrow"></i>
+                      </span>
                     </div>
-                  </td>
-                  <td>
-                    {" "}
-                    <div className="custom-control custom-radio custom-control-inline">
-                      <input
-                        type="radio"
-                        name="gender"
-                        className="custom-control-input"
-                        id="defaultInline2"
-                        value="Female"
-                        checked={studPersonalProfile.gender === "Female"}
-                        onChange={handleChange}
-                      />{" "}
-                      <label
-                        className="custom-control-label"
-                        htmlFor="defaultInline2"
-                        style={{ color: "black" }}
-                      >
-                        Female
-                      </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="city"
+                      placeholder="City"
+                      name="city"
+                      value={studPersonalProfile.city}
+                      onChange={handleChange}
+                      required
+                      maxLength="15"
+                    />
+                  </div>
+                  {errors.city.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.city}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
+              <div className="form-group col-md-4">
+                <div className="input-field">
+                  <label htmlFor="district">District:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-location-arrow"></i>
+                      </span>
                     </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <br></br>
-        <center>
-          <b>
-            <span
-              className="heading-secondary"
-              style={{
-                fontSize: "150%"
-                //fontFamily: "Segoe Print"
-              }}
-            >
-              ADDRESS
-            </span>
-          </b>
-        </center>{" "}
-        <br></br>
-        <div className="form-group">
-          <label htmlFor="locality">Locality:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="locality"
-            name="locality"
-            placeholder="Locality"
-            value={studPersonalProfile.locality}
-            onChange={handleChange}
-            required
-            maxLength="50"
-            minLength="5"
-          />{" "}
-          {errors.locality.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.locality}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="city">City:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="city"
-            placeholder="City"
-            name="city"
-            value={studPersonalProfile.city}
-            onChange={handleChange}
-            required
-            maxLength="15"
-          />{" "}
-          {errors.city.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.city}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="district">District:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="district"
-            placeholder="District"
-            name="district"
-            value={studPersonalProfile.district}
-            onChange={handleChange}
-            required
-            maxLength="15"
-          />{" "}
-          {errors.district.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.district}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="state">State:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="state"
-            placeholder="State"
-            name="state"
-            value={studPersonalProfile.state}
-            onChange={handleChange}
-            required
-            maxLength="20"
-            minLength="3"
-          />{" "}
-          {errors.state.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.state}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="country">Country:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="country"
-            name="country"
-            placeholder="Country"
-            value={studPersonalProfile.country}
-            onChange={handleChange}
-            required
-            maxLength="63"
-            minLength="3"
-          />{" "}
-          {errors.country.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.country}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="pincode">Pincode:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="pincode"
-            placeholder="Pincode"
-            name="pincode"
-            value={studPersonalProfile.pincode}
-            //onBlur={validate}
-            onChange={handleChange}
-            required
-            maxLength="6"
-            minLength="2"
-          />{" "}
-          {errors.pincode.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.pincode}</span>
-            </small>
-          )}
-        </div>
-        {/* <Link to="./academicForm" className="nav-link">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="district"
+                      placeholder="District"
+                      name="district"
+                      value={studPersonalProfile.district}
+                      onChange={handleChange}
+                      required
+                      maxLength="15"
+                    />
+                  </div>
+                  {errors.district.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.district}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="form-row">
+              <div className="form-group col-md-4">
+                <div className="input-field">
+                  <label htmlFor="state">State:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-map-marker-alt"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="state"
+                      placeholder="State"
+                      name="state"
+                      value={studPersonalProfile.state}
+                      onChange={handleChange}
+                      required
+                      maxLength="20"
+                      minLength="3"
+                    />
+                  </div>
+                  {errors.state.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.state}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
+              <div className="form-group col-md-4">
+                <div className="input-field">
+                  <label htmlFor="country">Country:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-map-marker-alt"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="country"
+                      name="country"
+                      placeholder="Country"
+                      value={studPersonalProfile.country}
+                      onChange={handleChange}
+                      required
+                      maxLength="63"
+                      minLength="3"
+                    />
+                  </div>
+                  {errors.country.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.country}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
+              <div className="form-group col-md-4">
+                <div className="input-field">
+                  <label htmlFor="pincode">Pincode:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-map-marker-alt"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="pincode"
+                      placeholder="Pincode"
+                      name="pincode"
+                      value={studPersonalProfile.pincode}
+                      //onBlur={validate}
+                      onChange={handleChange}
+                      required
+                      maxLength="6"
+                      minLength="2"
+                    />
+                  </div>
+                  {errors.pincode.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.pincode}</span>
+                    </small>
+                  )}
+                </div>
+              </div>
+            </div>
+            {/* <Link to="./academicForm" className="nav-link">
           submit
         </Link> */}
-        <div className="input-field">
-          <button className="btn btn-success" type="submit">
-            Submit
-          </button>
+            <div className="input-field col-md-6 offset-md-3 mt-2">
+              <button className="btn btn-success btn-block" type="submit">
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 }

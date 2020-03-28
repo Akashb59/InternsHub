@@ -83,10 +83,19 @@
   }
 } */
 
+.modal-backdrop {
+  z-index: 0;
+  position: fixed;
+}
+.sticky-top {
+  z-index: 0;
+}
+
 .navbar {
   border-bottom: #20bf6b 2px solid;
-  opacity: 0.9;
   min-height: 4.5rem !important;
+  z-index: 1;
+  position: relative;
 }
 
 /*Alerts*/
@@ -191,7 +200,7 @@
   margin-bottom: 10px;
 }
 .nav_item {
-  background-color: #282c34;
+  background-color: #343a40;
   margin-top: 4px;
   margin-bottom: 4px;
   border: solid rgb(83, 83, 83) 2px;

@@ -331,7 +331,7 @@ function Navbar(props) {
           {localStorage.usertoken ? userLink : loginRegLink}
         </div>
         <div className="modal fade" id="updatePassword">
-          <div className="modal-dialog modal-lg">
+          <div className="modal-dialog modal-md">
             <div className="modal-content">
               <div className="modal-header bg-primary text-white">
                 <h5 className="modal-title">Update Password</h5>
@@ -343,15 +343,22 @@ function Navbar(props) {
                 <div className="modal-body">
                   <div className="form-group">
                     <label htmlFor="password">Current Password</label>
-                    <input
-                      type="password"
-                      name="currentPassword"
-                      className="form-control "
-                      placeholder="********"
-                      value={pass.currentPassword}
-                      onChange={handleChange}
-                      required
-                    />{" "}
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-key"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="password"
+                        name="currentPassword"
+                        className="form-control "
+                        placeholder="********"
+                        value={pass.currentPassword}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
                     {errors.currentPassword.length > 0 && (
                       <small style={{ color: "red" }}>
                         <span className="error">{errors.currentPassword}</span>
@@ -361,15 +368,22 @@ function Navbar(props) {
 
                   <div className="form-group">
                     <label htmlFor="password">Password</label>
-                    <input
-                      type="password"
-                      name="password"
-                      className="form-control "
-                      placeholder="********"
-                      value={pass.password}
-                      onChange={handleChange}
-                      required
-                    />{" "}
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-key"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="password"
+                        name="password"
+                        className="form-control "
+                        placeholder="********"
+                        value={pass.password}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
                     {errors.password.length > 0 && (
                       <small style={{ color: "red" }}>
                         <span className="error">{errors.password}</span>
@@ -378,15 +392,22 @@ function Navbar(props) {
                   </div>
                   <div className="form-group">
                     <label htmlFor="passwordConfirm">Password Confirm</label>
-                    <input
-                      type="password"
-                      name="passwordConfirm"
-                      className="form-control "
-                      placeholder="********"
-                      value={pass.passwordConfirm}
-                      onChange={handleChange}
-                      required
-                    />{" "}
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-key"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="password"
+                        name="passwordConfirm"
+                        className="form-control "
+                        placeholder="********"
+                        value={pass.passwordConfirm}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
                     {errors.passwordConfirm.length > 0 && (
                       <small style={{ color: "red" }}>
                         <span className="error">{errors.passwordConfirm}</span>

@@ -27,7 +27,7 @@ function Signup(props) {
 
   useEffect(() => {
     document.title = "InternsHub | SignUp";
-    const ip = "http://192.168.1.16:3000";
+    const ip = "http://192.168.1.13:3000";
     localStorage.setItem("ip", ip);
     roles().then(res => {
       if (res) {
@@ -154,7 +154,7 @@ function Signup(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-user"></i>
+                        <i className="fas fa-user"></i>
                       </span>
                     </div>
                     <input
@@ -178,7 +178,7 @@ function Signup(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-envelope"></i>
+                        <i className="fas fa-envelope"></i>
                       </span>
                     </div>
                     <input
@@ -202,7 +202,7 @@ function Signup(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-key"></i>
+                        <i className="fas fa-key"></i>
                       </span>
                     </div>
                     <input
@@ -226,7 +226,7 @@ function Signup(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-key"></i>
+                        <i className="fas fa-key"></i>
                       </span>
                     </div>
                     <input
@@ -250,7 +250,7 @@ function Signup(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-mobile"></i>
+                        <i className="fas fa-mobile"></i>
                       </span>
                     </div>
                     <input
@@ -277,7 +277,7 @@ function Signup(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-user-tag"></i>
+                        <i className="fas fa-user-tag"></i>
                       </span>
                     </div>
                     <select

@@ -21,7 +21,7 @@ function Login(props) {
   });
   useEffect(() => {
     document.title = "InternsHub | Login";
-    const ip = "http://192.168.1.16:3000";
+    const ip = "http://192.168.1.13:3000";
     localStorage.setItem("ip", ip);
     roles().then(res => {
       if (res) {
@@ -134,7 +134,7 @@ function Login(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-envelope"></i>
+                        <i className="fas fa-envelope"></i>
                       </span>
                     </div>
                     <input
@@ -158,7 +158,7 @@ function Login(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-key"></i>
+                        <i className="fas fa-key"></i>
                       </span>
                     </div>
                     <input
@@ -183,7 +183,7 @@ function Login(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i class="fas fa-user-tag"></i>
+                        <i className="fas fa-user-tag"></i>
                       </span>
                     </div>
                     <select
@@ -204,17 +204,17 @@ function Login(props) {
                 </div>
 
                 <div className="row">
-                  <div className="form-group col-4">
+                  <div className="form-group col-sm-5">
                     <button
                       type="button"
-                      className="btn btn-secondary"
+                      className="btn btn-block btn-secondary"
                       data-toggle="modal"
                       data-target="#myModal"
                     >
                       Forgot Password
                     </button>
                   </div>
-                  <div className="form-group ml-2 col">
+                  <div className="form-group col">
                     <button className="btn btn-block btn-success" type="submit">
                       Log In
                     </button>

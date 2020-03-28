@@ -192,11 +192,15 @@ function StudentHome() {
   };
 
   return (
-    <div>
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-3">
-            <div className="jumbotron sticky-top p-5">
+    <div className="container">
+      <div className="row">
+        <div className="col-lg-3">
+          <div className="card bg-body sticky-top p-3 rounded card-form">
+            <div className="card-body">
+              <div className="text-center">
+                <h2 className="blockquote">Filter</h2>
+              </div>
+
               <form onSubmit={handleSubmit}>
                 <label>
                   <input
@@ -358,90 +362,90 @@ function StudentHome() {
               </form>
             </div>
           </div>
+        </div>
 
-          <div className="col-sm-9">
-            <div className="container">
-              <div className="col-sm-8 mx-auto display-4 text-center">
-                Internships
-              </div>
-              <br></br>
-              {/* <Link to="/selectedInternship" className="nav-link">
+        <div className="col-sm-9">
+          <div className="container">
+            <div className="col-sm-8 mx-auto display-4 text-center">
+              Internships
+            </div>
+            <br></br>
+            {/* <Link to="/selectedInternship" className="nav-link">
           Select Internship
         </Link>
         <p>USER:{localStorage.userid}</p>
         <p>STUDENT:{localStorage.studentid}</p> */}
-            </div>
+          </div>
 
-            {internArray.map(function(intern) {
-              return (
-                <div key={intern.id}>
-                  <div className="card border-info">
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-sm-10">
-                          <h3 className="card-title">{intern.title}</h3>
-                          <h6 className="card-subtitle text-muted">
-                            Company: {intern.company}
-                          </h6>
-                          <br></br>
-                        </div>
-                        <div className="col-sm-2">
-                          <img
-                            src={`${localStorage.ip}/Images/${intern.photo}`}
-                            className="card-img"
-                            alt="Logo"
-                          />
-                        </div>
+          {internArray.map(function(intern) {
+            return (
+              <div key={intern.id}>
+                <div className="card">
+                  <div className="card-body">
+                    <div className="row">
+                      <div className="col-sm-10">
+                        <h3 className="card-title">{intern.title}</h3>
+                        <h6 className="card-subtitle text-muted">
+                          Company: {intern.company}
+                        </h6>
+                        <br></br>
                       </div>
-                      <div className="row d-flex">
-                        <div className="col-sm-2 col-xs-2">
-                          <p style={{ color: "grey" }}>Start Date:</p>
-                          <p>{intern.startsOn}</p>
-                        </div>
-                        <div className="col-sm-2 col-xs-2">
-                          <p style={{ color: "grey" }}>Location:</p>
-                          <p>{intern.location}</p>
-                        </div>
-                        <div className="col-sm-2 col-xs-3">
-                          <p style={{ color: "grey" }}>Duration:</p>
-                          <p>{intern.duration} Months</p>
-                        </div>
-                        <div className="col-sm-2 col-xs-3">
-                          <p style={{ color: "grey" }}>Category:</p>
-                          <p>{intern.category}</p>
-                        </div>
-                        <div className="col-sm-2 col-xs-3">
-                          <p style={{ color: "grey" }}>Stipend:</p>
-                          <p>Rs. {intern.stipend}/-</p>
-                        </div>
-                        <div className="col-sm-2 col-xs-3"></div>
+                      <div className="col-sm-2">
+                        <img
+                          src={`${localStorage.ip}/Images/${intern.photo}`}
+                          className="card-img"
+                          alt="Logo"
+                        />
                       </div>
                     </div>
-                    <div className="card-footer">
-                      <Link
-                        style={{ float: "right" }}
-                        className="btn btn-success"
-                        to={{
-                          pathname: "/selectedInternship",
-                          id: intern.id
-                        }}
-                      >
-                        View Details
-                      </Link>
-                      {/* <button
+                    <div className="row d-flex">
+                      <div className="col-sm-2 col-xs-2">
+                        <p style={{ color: "grey" }}>Start Date:</p>
+                        <p>{intern.startsOn}</p>
+                      </div>
+                      <div className="col-sm-2 col-xs-2">
+                        <p style={{ color: "grey" }}>Location:</p>
+                        <p>{intern.location}</p>
+                      </div>
+                      <div className="col-sm-2 col-xs-3">
+                        <p style={{ color: "grey" }}>Duration:</p>
+                        <p>{intern.duration} Months</p>
+                      </div>
+                      <div className="col-sm-2 col-xs-3">
+                        <p style={{ color: "grey" }}>Category:</p>
+                        <p>{intern.category}</p>
+                      </div>
+                      <div className="col-sm-2 col-xs-3">
+                        <p style={{ color: "grey" }}>Stipend:</p>
+                        <p>Rs. {intern.stipend}/-</p>
+                      </div>
+                      <div className="col-sm-2 col-xs-3"></div>
+                    </div>
+                  </div>
+                  <div className="card-footer">
+                    <Link
+                      style={{ float: "right" }}
+                      className="btn btn-success"
+                      to={{
+                        pathname: "/selectedInternship",
+                        id: intern.id
+                      }}
+                    >
+                      View Details <i className="fas fa-angle-double-right" />
+                    </Link>
+                    {/* <button
                   type="button"
                   style={{ float: "right" }}
                   className="btn btn-success"
                 >
                   View Details
                 </button> */}
-                    </div>
                   </div>
-                  <br></br>
                 </div>
-              );
-            })}
-          </div>
+                <br></br>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

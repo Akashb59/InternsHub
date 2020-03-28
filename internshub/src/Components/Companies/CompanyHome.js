@@ -306,152 +306,114 @@ function CompanyHome(props) {
 
   return (
     <div className="container">
-      {/* <div className="jumbotron mt-5">
-        <div className="col-sm-8 mx-auto display-4 text-center">WELCOME</div>
-        <Link to="/internshipHost" className="nav-link">
-          Host Internship
-        </Link>
-        <Link to="/companyTechnologies" className="nav-link">
-          Company Technologies
-        </Link>
-        <Link to="/companyEnquiry" className="nav-link">
-          Company Enquiry
-        </Link>
-        <Link to="/companyDescription" className="nav-link">
-          Company Description
-        </Link>
-        <p>USER:{localStorage.userid}</p>
-        <p>{localStorage.name}</p>
-        <p>COMPANY:{localStorage.companyid}</p>
-      </div> */}
-      <div>
-        <header id="main-header" className="py-2 bg-secondary text-white">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-2"></div>
-              <div className="col-md-8 text-center">
-                <h1>
-                  <i className="fas fa-cog" /> {localStorage.name} Dashboard
-                </h1>
-              </div>
-              <div className="col-md-2"></div>
+      <h2 className="text-center bg-secondary text-white py-2">
+        <i className="fas fa-cog" /> {localStorage.name} Dashboard
+      </h2>
+      <section id="actions" className="py-3 mb-3 bg-light">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <button
+                className="btn btn-primary btn-block"
+                data-toggle="modal"
+                data-target="#hostNewInternship"
+              >
+                <i className="fas fa-plus-circle"></i> Host New Internship
+              </button>
+            </div>
+            <div className="col-md-6">
+              <button
+                className="btn btn-success btn-block"
+                data-toggle="modal"
+                data-target="#editInfoModal"
+              >
+                <i className="fas fa-pencil-alt"></i> Add/Edit Company
+                Information
+              </button>
             </div>
           </div>
-        </header>
-        <section id="actions" className="py-4 mb-4 bg-light">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6">
-                <button
-                  className="btn btn-primary btn-block"
-                  data-toggle="modal"
-                  data-target="#hostNewInternship"
-                >
-                  <i className="fas fa-plus-circle"></i> Host New Internship
-                </button>
-              </div>
-              <div className="col-md-6">
-                <button
-                  className="btn btn-success btn-block"
-                  data-toggle="modal"
-                  data-target="#editInfoModal"
-                >
-                  <i className="fas fa-pencil-alt"></i> Add/Edit Company
-                  Information
-                </button>
+        </div>
+      </section>
+      <section id="posts">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-9">
+              <div className="card">
+                <div className="card-header">
+                  <h5>Enquiries</h5>
+                </div>
+                <div className="table-responsive">
+                  <table className="table table-sm table-hover table-striped">
+                    <thead className="thead-dark thead-small">
+                      <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th />
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>Post One</td>
+                        <td>Web Development</td>
+                        <td>May 10 2018</td>
+                        <td>
+                          <a href="details.html" className="btn btn-secondary">
+                            <i className="fas fa-angle-double-right" /> Details
+                          </a>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Post Two</td>
+                        <td>Tech Gadgets</td>
+                        <td>May 11 2018</td>
+                        <td>
+                          <a href="details.html" className="btn btn-secondary">
+                            <i className="fas fa-angle-double-right" /> Details
+                          </a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-        <section id="posts">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-9">
-                <div className="card">
-                  <div className="card-header">
-                    <h5>Enquiries</h5>
-                  </div>
-                  <div className="table-responsive">
-                    <table className="table table-sm table-hover table-striped">
-                      <thead className="thead-dark thead-small">
-                        <tr>
-                          <th>#</th>
-                          <th>Title</th>
-                          <th>Category</th>
-                          <th>Date</th>
-                          <th />
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Post One</td>
-                          <td>Web Development</td>
-                          <td>May 10 2018</td>
-                          <td>
-                            <a
-                              href="details.html"
-                              className="btn btn-secondary"
-                            >
-                              <i className="fas fa-angle-double-right" />{" "}
-                              Details
-                            </a>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Post Two</td>
-                          <td>Tech Gadgets</td>
-                          <td>May 11 2018</td>
-                          <td>
-                            <a
-                              href="details.html"
-                              className="btn btn-secondary"
-                            >
-                              <i className="fas fa-angle-double-right" />{" "}
-                              Details
-                            </a>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+            <div className="col-md-3">
+              <div className="card text-center bg-primary text-white mb-3">
+                <div className="card-body">
+                  <h3>Internships</h3>
+                  <h4 className="display-4">
+                    <GiDesk /> {count}
+                  </h4>
+                  <Link
+                    to="viewInternships"
+                    className="btn btn-outline-light btn-sm"
+                  >
+                    View
+                  </Link>
                 </div>
               </div>
-              <div className="col-md-3">
-                <div className="card text-center bg-primary text-white mb-3">
-                  <div className="card-body">
-                    <h3>Internships</h3>
-                    <h4 className="display-4">
-                      <GiDesk /> {count}
-                    </h4>
-                    <Link
-                      to="viewInternships"
-                      className="btn btn-outline-light btn-sm"
-                    >
-                      View
-                    </Link>
-                  </div>
-                </div>
-                <div className="card text-center bg-success text-white mb-3">
-                  <div className="card-body">
-                    <h3>Enquiries</h3>
-                    <h4 className="display-4">
-                      <i className="fas fa-clipboard-check"></i> {countEnquiry}
-                    </h4>
-                    <Link
-                      to="companyEnquiry"
-                      className="btn btn-outline-light btn-sm"
-                    >
-                      View
-                    </Link>
-                  </div>
+              <div className="card text-center bg-success text-white mb-3">
+                <div className="card-body">
+                  <h3>Enquiries</h3>
+                  <h4 className="display-4">
+                    <i className="fas fa-clipboard-check"></i> {countEnquiry}
+                  </h4>
+                  <Link
+                    to="companyEnquiry"
+                    className="btn btn-outline-light btn-sm"
+                  >
+                    View
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
       <div className="modal fade" id="editInfoModal">
         <div className="modal-dialog modal-lg">
@@ -580,17 +542,24 @@ function CompanyHome(props) {
               <div className="modal-body">
                 <div className="form-group">
                   <label htmlFor="title">Title: </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="title"
-                    //onBlur={validate}
-                    placeholder="Enter Title"
-                    onChange={handleChange}
-                    required
-                    maxLength="50"
-                    minLength="5"
-                  />{" "}
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-code"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="title"
+                      //onBlur={validate}
+                      placeholder="Enter Title"
+                      onChange={handleChange}
+                      required
+                      maxLength="50"
+                      minLength="5"
+                    />
+                  </div>
                   {errors.title.length > 0 && (
                     <small style={{ color: "red" }}>
                       <span className="error">{errors.title}</span>
@@ -599,17 +568,24 @@ function CompanyHome(props) {
                 </div>
                 <div className="form-group">
                   <label htmlFor="location">Location: </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="location"
-                    //onBlur={validate}
-                    placeholder="Enter Location"
-                    onChange={handleChange}
-                    required
-                    maxLength="50"
-                    minLength="5"
-                  />{" "}
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-map-marker-alt"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="location"
+                      //onBlur={validate}
+                      placeholder="Enter Location"
+                      onChange={handleChange}
+                      required
+                      maxLength="50"
+                      minLength="5"
+                    />
+                  </div>
                   {errors.location.length > 0 && (
                     <small style={{ color: "red" }}>
                       <span className="error">{errors.location}</span>
@@ -772,16 +748,23 @@ function CompanyHome(props) {
 
                 <div className="form-group">
                   <label htmlFor="stipend">Stipend: </label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="stipend"
-                    //onBlur={validate}
-                    placeholder="Enter Stipend"
-                    onChange={handleChange}
-                    value={internshipHostState.stipend}
-                    required
-                  />
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-rupee-sign"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="number"
+                      className="form-control"
+                      name="stipend"
+                      //onBlur={validate}
+                      placeholder="Enter Stipend"
+                      onChange={handleChange}
+                      value={internshipHostState.stipend}
+                      required
+                    />
+                  </div>
                   <small>Enter 0 if no stipend</small>
                 </div>
 
@@ -824,7 +807,7 @@ function CompanyHome(props) {
                             maxLength="200"
                             className="form-control my-1"
                             minLength="20"
-                            placeholder="Description"
+                            placeholder="Enter Description for Internship"
                             required
                             onChange={e => addSubInfoValue(e, index)}
                           />
@@ -874,7 +857,7 @@ function CompanyHome(props) {
                             id={index}
                             type="text"
                             value={intd}
-                            placeholder="Intended Participants"
+                            placeholder="Enter Intended Participants for Internship"
                             className="form-control my-1"
                             maxLength="200"
                             minLength="20"
@@ -895,7 +878,7 @@ function CompanyHome(props) {
                 </div>
 
                 <div className="modal-footer">
-                  <button className="btn btn-success" type="submit">
+                  <button className="btn btn-success btn-block" type="submit">
                     Submit
                   </button>
                 </div>

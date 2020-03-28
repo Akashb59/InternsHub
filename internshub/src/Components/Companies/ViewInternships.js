@@ -473,19 +473,26 @@ function ViewInternships(props) {
               <div className="modal-body">
                 <div className="form-group">
                   <label htmlFor="title">Title: </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="title"
-                    disabled
-                    //onBlur={validate}
-                    value={internshipHostState.title}
-                    onChange={handleChange}
-                    required
-                    maxLength="50"
-                    minLength="5"
-                    placeholder="Enter Title"
-                  />{" "}
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-code"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="title"
+                      disabled
+                      //onBlur={validate}
+                      value={internshipHostState.title}
+                      onChange={handleChange}
+                      required
+                      maxLength="50"
+                      minLength="5"
+                      placeholder="Enter Title"
+                    />
+                  </div>
                   {errors.title.length > 0 && (
                     <small style={{ color: "red" }}>
                       <span className="error">{errors.title}</span>
@@ -494,19 +501,27 @@ function ViewInternships(props) {
                 </div>
                 <div className="form-group">
                   <label htmlFor="location">Location: </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="location"
-                    disabled
-                    //onBlur={validate}
-                    value={internshipHostState.location}
-                    onChange={handleChange}
-                    required
-                    maxLength="50"
-                    minLength="5"
-                    placeholder="Enter Location"
-                  />{" "}
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-map-marker-alt"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="location"
+                      disabled
+                      //onBlur={validate}
+                      value={internshipHostState.location}
+                      onChange={handleChange}
+                      required
+                      maxLength="50"
+                      minLength="5"
+                      placeholder="Enter Location"
+                    />
+                  </div>
+
                   {errors.location.length > 0 && (
                     <small style={{ color: "red" }}>
                       <span className="error">{errors.location}</span>
@@ -680,17 +695,24 @@ function ViewInternships(props) {
 
                 <div className="form-group">
                   <label htmlFor="stipend">Stipend: </label>
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="stipend"
-                    placeholder="Enter Stipend"
-                    onChange={handleChange}
-                    value={internshipHostState.stipend}
-                    required
-                    disabled
-                  />
-                  Enter 0 if there is no stipend
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i className="fas fa-rupee-sign"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="number"
+                      className="form-control"
+                      name="stipend"
+                      placeholder="Enter Stipend"
+                      onChange={handleChange}
+                      value={internshipHostState.stipend}
+                      required
+                      disabled
+                    />
+                  </div>
+                  <small>Enter 0 if no stipend</small>
                 </div>
                 <div className="form-group">
                   {info.count < 3 ? addTextbox() : ""}
@@ -789,7 +811,7 @@ function ViewInternships(props) {
                   })}
                 </div>
                 <div className="modal-footer">
-                  <button className="btn btn-success" type="submit">
+                  <button className="btn btn-success btn-block" type="submit">
                     Submit
                   </button>
                 </div>

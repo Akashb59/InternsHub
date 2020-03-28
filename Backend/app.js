@@ -78,7 +78,7 @@ app.get('/api/v1/interns/:id', getInternById);
 app.post('/api/v1/interns', createIntern);
 app.patch('/api/v1/interns/:id', updateIntern);
 app.delete('/api/v1/interns/:id', deleteIntern); */
-const internRouter = require('./routes/internRoutes');
+//const internRouter = require('./routes/internRoutes');
 const addressRouter = require('./routes/addressRoutes');
 const companyRouter = require('./routes/companyRoutes');
 const internshipRouter = require('./routes/internshipRoutes');
@@ -108,7 +108,7 @@ app.all('*', function(req, res, next) {
 //Routes
 
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/interns', internRouter);
+//app.use('/api/v1/interns', internRouter);
 app.use('/api/v1/addresses', addressRouter);
 app.use('/api/v1/companies', companyRouter);
 app.use('/api/v1/placementCells', placementCellRouter);

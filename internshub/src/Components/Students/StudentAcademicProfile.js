@@ -173,348 +173,433 @@ function StudentAcademicProfile(props) {
     });
   };
   return (
-    <div className="container">
-      <header id="main-header" className="py-0 bg-primary text-white">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-3"></div>
-            <div className="col-md-6 text-center">
-              <h1>
-                <i className="fas fa-pencil" /> Edit Profile
-              </h1>
+    <div className="container py-5">
+      <h2 className="text-center bg-primary text-white py-2">
+        <i className="fas fa-pencil-alt" /> Edit Academic Information
+      </h2>
+      <div className="card bg-body p-3 rounded card-form">
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  SCHOOL
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
+            <div className="form-group">
+              <label htmlFor="schoolName">School Name:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-school"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="schoolName"
+                  name="schoolName"
+                  disabled
+                  value={studentProfileState.schoolName}
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                  maxLength="50"
+                />
+              </div>
+              {errors.schoolName.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.schoolName}</span>
+                </small>
+              )}
             </div>
-            <div className="col-md-3"></div>
-          </div>
+            <div className="form-group">
+              <label htmlFor="gradeTen">10th Grade Percentage:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-percentage"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  //onKeyPress={keypress}
+                  className="form-control"
+                  id="gradeTen"
+                  disabled
+                  name="gradeTen"
+                  value={studentProfileState.gradeTen}
+                  required
+                  //onBlur="return ValidateDecimal(this) ;"
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  maxLength="100"
+                  minLength="0"
+                />
+              </div>
+              {errors.gradeTen.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.gradeTen}</span>
+                </small>
+              )}
+            </div>
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  PRE_UNIVERSITY/ DIPLOMA COLLEGE
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
+            <div className="form-group">
+              <label htmlFor="puCollegeName">
+                Pre-University/Diploma College Name:
+              </label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-school"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="puCollegeName"
+                  disabled
+                  name="puCollegeName"
+                  value={studentProfileState.puCollegeName}
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                  maxLength="50"
+                />
+              </div>
+              {errors.puCollegeName.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.puCollegeName}</span>
+                </small>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="gradeTwelve">
+                Pre-University /Diploma Percentage:
+              </label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-percentage"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  //onKeyPress={keypress}
+                  className="form-control"
+                  id="gradeTwelve"
+                  name="gradeTwelve"
+                  disabled
+                  value={studentProfileState.gradeTwelve}
+                  required
+                  //onBlur="return ValidateDecimal(this) ;"
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  maxLength="100"
+                  minLength="0"
+                />
+              </div>
+              {errors.gradeTwelve.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.gradeTwelve}</span>
+                </small>
+              )}
+            </div>
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  DEGREE COLLEGE
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
+            <div className="form-group">
+              <label htmlFor="degreeCollege">Degree College Name:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-school"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="degreeCollege"
+                  name="degreeCollege"
+                  value={studentProfileState.degreeCollege}
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                  maxLength="50"
+                />
+              </div>
+              {errors.degreecollege.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.degreecollege}</span>
+                </small>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="universityName">University Name:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-university"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="universityName"
+                  name="universityName"
+                  value={studentProfileState.universityName}
+                  // onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                  maxLength="50"
+                />
+              </div>
+              {errors.universityName.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.universityName}</span>
+                </small>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="usn">USN:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-user-graduate"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="usn"
+                  name="usn"
+                  value={studentProfileState.usn}
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                  maxLength="10"
+                />
+              </div>
+              {errors.usn.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.usn}</span>
+                </small>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="degreeCgpa">UG CGPA (Current Semester):</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-graduation-cap"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  //onKeyPress={keypress}
+                  className="form-control"
+                  id="degreeCgpa"
+                  name="degreeCgpa"
+                  value={studentProfileState.degreeCgpa}
+                  required
+                  //onBlur="return ValidateDecimal(this) ;"
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  maxLength="10"
+                  minLength="1"
+                />
+              </div>
+              {errors.degreeCgpa.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.degreeCgpa}</span>
+                </small>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="phoneNumber"> College Phone Number:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-mobile"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={studentProfileState.phoneNumber}
+                  // onBlur={validate1}
+                  onChange={handleChange}
+                  maxLength="10"
+                />
+              </div>
+              {errors.phoneNumber.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.phoneNumber}</span>
+                </small>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="colWebsite">College Website:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-desktop"></i>
+                  </span>
+                </div>
+                <input
+                  type="url"
+                  className="form-control"
+                  id="colWebsite"
+                  name="colWebsite"
+                  value={studentProfileState.colWebsite}
+                  //onBlur="checkUrl()"
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              {errors.colWebsite.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.colWebsite}</span>
+                </small>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="colEmail">College Email:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-envelope"></i>
+                  </span>
+                </div>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="colEmail"
+                  name="colEmail"
+                  value={studentProfileState.colEmail}
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              {errors.colEmail.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.colEmail}</span>
+                </small>
+              )}
+            </div>
+            <br></br>
+            <center>
+              <b>
+                <span
+                  className="heading-secondary"
+                  style={{
+                    fontSize: "150%"
+                    //fontFamily: "Segoe Print"
+                  }}
+                >
+                  PROJECTS
+                </span>
+              </b>
+            </center>{" "}
+            <br></br>
+            <div className="form-group">
+              <label htmlFor="project1">Project 1 Undertaken:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-briefcase"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="project1"
+                  name="project1"
+                  value={studentProfileState.project1}
+                  // onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                  maxLength="30"
+                />
+              </div>
+              {errors.project1.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.project1}</span>
+                </small>
+              )}
+            </div>
+            <div className="form-group">
+              <label htmlFor="project2">Project 2 Undertaken:</label>
+              <div className="input-group">
+                <div className="input-group-prepend">
+                  <span className="input-group-text">
+                    <i className="fas fa-briefcase"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="project2"
+                  name="project2"
+                  value={studentProfileState.project2}
+                  //onBlur={validate1}
+                  onChange={handleChange}
+                  required
+                  maxLength="30"
+                />
+              </div>
+              {errors.project2.length > 0 && (
+                <small style={{ color: "red" }}>
+                  <span className="error">{errors.project2}</span>
+                </small>
+              )}
+            </div>
+            <div className="input-field col-md-6 offset-md-3 mt-2">
+              <button className="btn btn-success btn-block" type="submit">
+                Submit
+              </button>
+            </div>
+          </form>
         </div>
-      </header>
-      <form onSubmit={handleSubmit}>
-        <center>
-          <b>
-            <span
-              className="heading-secondary"
-              style={{
-                fontSize: "150%"
-                //fontFamily: "Segoe Print"
-              }}
-            >
-              SCHOOL
-            </span>
-          </b>
-        </center>{" "}
-        <br></br>
-        <div className="form-group">
-          <label htmlFor="schoolName">School Name:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="schoolName"
-            name="schoolName"
-            disabled
-            value={studentProfileState.schoolName}
-            //onBlur={validate1}
-            onChange={handleChange}
-            required
-            maxLength="50"
-          />
-          {errors.schoolName.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.schoolName}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="gradeTen">10th Grade Percentage:</label>
-          <input
-            type="text"
-            //onKeyPress={keypress}
-            className="form-control"
-            id="gradeTen"
-            disabled
-            name="gradeTen"
-            value={studentProfileState.gradeTen}
-            required
-            //onBlur="return ValidateDecimal(this) ;"
-            //onBlur={validate1}
-            onChange={handleChange}
-            maxLength="100"
-            minLength="0"
-          />
-          {errors.gradeTen.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.gradeTen}</span>
-            </small>
-          )}
-        </div>
-        <br></br>
-        <center>
-          <b>
-            <span
-              className="heading-secondary"
-              style={{
-                fontSize: "150%"
-                //fontFamily: "Segoe Print"
-              }}
-            >
-              PRE_UNIVERSITY/ DIPLOMA COLLEGE
-            </span>
-          </b>
-        </center>{" "}
-        <br></br>
-        <div className="form-group">
-          <label htmlFor="puCollegeName">
-            Pre-University/Diploma College Name:
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="puCollegeName"
-            disabled
-            name="puCollegeName"
-            value={studentProfileState.puCollegeName}
-            //onBlur={validate1}
-            onChange={handleChange}
-            required
-            maxLength="50"
-          />{" "}
-          {errors.puCollegeName.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.puCollegeName}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="gradeTwelve">
-            Pre-University /Diploma Percentage:
-          </label>
-          <input
-            type="text"
-            //onKeyPress={keypress}
-            className="form-control"
-            id="gradeTwelve"
-            name="gradeTwelve"
-            disabled
-            value={studentProfileState.gradeTwelve}
-            required
-            //onBlur="return ValidateDecimal(this) ;"
-            //onBlur={validate1}
-            onChange={handleChange}
-            maxLength="100"
-            minLength="0"
-          />
-          {errors.gradeTwelve.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.gradeTwelve}</span>
-            </small>
-          )}
-        </div>
-        <br></br>
-        <center>
-          <b>
-            <span
-              className="heading-secondary"
-              style={{
-                fontSize: "150%"
-                //fontFamily: "Segoe Print"
-              }}
-            >
-              DEGREE COLLEGE
-            </span>
-          </b>
-        </center>{" "}
-        <br></br>
-        <div className="form-group">
-          <label htmlFor="degreeCollege">Degree College Name:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="degreeCollege"
-            name="degreeCollege"
-            value={studentProfileState.degreeCollege}
-            //onBlur={validate1}
-            onChange={handleChange}
-            required
-            maxLength="50"
-          />
-          {errors.degreecollege.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.degreecollege}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="universityName">University Name:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="universityName"
-            name="universityName"
-            value={studentProfileState.universityName}
-            // onBlur={validate1}
-            onChange={handleChange}
-            required
-            maxLength="50"
-          />{" "}
-          {errors.universityName.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.universityName}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="usn">USN:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="usn"
-            name="usn"
-            value={studentProfileState.usn}
-            //onBlur={validate1}
-            onChange={handleChange}
-            required
-            maxLength="10"
-          />{" "}
-          {errors.usn.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.usn}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="degreeCgpa">UG CGPA (Current Semester):</label>
-          <input
-            type="text"
-            //onKeyPress={keypress}
-            className="form-control"
-            id="degreeCgpa"
-            name="degreeCgpa"
-            value={studentProfileState.degreeCgpa}
-            required
-            //onBlur="return ValidateDecimal(this) ;"
-            //onBlur={validate1}
-            onChange={handleChange}
-            maxLength="10"
-            minLength="1"
-          />{" "}
-          {errors.degreeCgpa.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.degreeCgpa}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="phoneNumber"> College Phone Number:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="phoneNumber"
-            name="phoneNumber"
-            value={studentProfileState.phoneNumber}
-            // onBlur={validate1}
-            onChange={handleChange}
-            maxLength="10"
-          />{" "}
-          {errors.phoneNumber.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.phoneNumber}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="colWebsite">College Website:</label>
-          <input
-            type="url"
-            className="form-control"
-            id="colWebsite"
-            name="colWebsite"
-            value={studentProfileState.colWebsite}
-            //onBlur="checkUrl()"
-            //onBlur={validate1}
-            onChange={handleChange}
-            required
-          />{" "}
-          {errors.colWebsite.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.colWebsite}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="colEmail">College Email:</label>
-          <input
-            type="email"
-            className="form-control"
-            id="colEmail"
-            name="colEmail"
-            value={studentProfileState.colEmail}
-            //onBlur={validate1}
-            onChange={handleChange}
-            required
-          />{" "}
-          {errors.colEmail.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.colEmail}</span>
-            </small>
-          )}
-        </div>
-        <br></br>
-        <center>
-          <b>
-            <span
-              className="heading-secondary"
-              style={{
-                fontSize: "150%"
-                //fontFamily: "Segoe Print"
-              }}
-            >
-              PROJECTS
-            </span>
-          </b>
-        </center>{" "}
-        <br></br>
-        <div className="form-group">
-          <label htmlFor="project1">Project 1 Undertaken:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="project1"
-            name="project1"
-            value={studentProfileState.project1}
-            // onBlur={validate1}
-            onChange={handleChange}
-            required
-            maxLength="30"
-          />{" "}
-          {errors.project1.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.project1}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="project2">Project 2 Undertaken:</label>
-          <input
-            type="text"
-            className="form-control"
-            id="project2"
-            name="project2"
-            value={studentProfileState.project2}
-            //onBlur={validate1}
-            onChange={handleChange}
-            required
-            maxLength="30"
-          />{" "}
-          {errors.project2.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.project2}</span>
-            </small>
-          )}
-        </div>
-        <div className="input-field">
-          <button className="btn btn-success" type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }
