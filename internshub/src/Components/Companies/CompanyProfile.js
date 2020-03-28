@@ -250,7 +250,7 @@ function CompanyProfile(props) {
             <div className="form-row">
               <div className="form-group col-md-6">
                 <div className="input-field">
-                  <label htmlFor="gst_no">GST-NUMBER:</label>
+                  <label htmlFor="gst_no">GST-Number:</label>
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
@@ -303,7 +303,7 @@ function CompanyProfile(props) {
               </div>
             </div>
             <div className="input-field">
-              <label htmlFor="website">WEBSITE:</label>
+              <label htmlFor="website">Website:</label>
               <div className="input-group">
                 <div className="input-group-prepend">
                   <span className="input-group-text">

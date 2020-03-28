@@ -32,7 +32,7 @@ function StudentEnquiry() {
       <td>{props.internship.reqAt.substring(0, 10)}</td>
       <td>
         <button
-          className="btn btn-secondary btn-sm btn-block"
+          className="btn btn-dark btn-sm btn-block"
           data-toggle="modal"
           data-target="#more"
           onClick={() => {
@@ -49,7 +49,7 @@ function StudentEnquiry() {
             });
           }}
         >
-          More Info
+          <i className="fas fa-expand-arrows-alt"></i>
         </button>
       </td>
     </tr>
@@ -118,7 +118,7 @@ function StudentEnquiry() {
 
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white pb-3 small-header">
+      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 small-header small-head-padding">
         My Enquiries
       </h2>
       <div>
@@ -154,7 +154,7 @@ function StudentEnquiry() {
                 </button>
               </div>
               <div className="modal-body">
-                <p>Starts On: {more.starts}</p>
+                <p>Starts On: {more.starts.toString()}</p>
                 <p>Company Name: {more.compName}</p>
                 <p>Company Email: {more.compEmail}</p>
                 <p>Company Phone Number: {more.compPhone}</p>

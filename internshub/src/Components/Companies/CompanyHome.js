@@ -306,7 +306,7 @@ function CompanyHome(props) {
   return (
     <div className="container pt-3">
       <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2 small-header">
-        <i className="fas fa-cog" /> {localStorage.name} Dashboard
+        <i className="fas fa-tachometer-alt"></i> {localStorage.name} Dashboard
       </h2>
       <section id="actions" className="py-3 mb-2">
         <div className="container">
@@ -487,7 +487,7 @@ function CompanyHome(props) {
                 <form onSubmit={handleSubmit2}>
                   <div className="modal-body">
                     <div className="jumbotron mt-2">
-                      <div className="col-sm-8 mx-auto display-4 text-center small-header">
+                      <div className="col-sm-8 mx-auto display-4 text-center small-header smaller-header">
                         <p>
                           <b>TECHNOLOGIES</b>
                         </p>

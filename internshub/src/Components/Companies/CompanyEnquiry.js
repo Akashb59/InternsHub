@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Fragment } from "react";
-import { FaInfo, FaQuestion, FaFilePdf } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa";
 import {
   companyEnquiries,
   internshipEnquiries,
@@ -62,7 +62,7 @@ function CompanyEnquiry(props) {
       <td className="small-table">{props.internship.user.fullname}</td>
       <td>
         <button
-          className="btn btn-secondary btn-sm btn-block"
+          className="btn btn-dark btn-sm btn-block"
           data-toggle="modal"
           data-target="#resume"
           onClick={() => {
@@ -76,7 +76,7 @@ function CompanyEnquiry(props) {
             });
           }}
         >
-          <FaFilePdf />
+          <i className="fas fa-file-pdf"></i>
         </button>
       </td>
 
@@ -145,7 +145,7 @@ function CompanyEnquiry(props) {
             });
           }}
         >
-          <FaInfo />
+          <i className="fas fa-expand-arrows-alt"></i>
         </button>
       </td>
       <td className="xsmall-table">{props.internship.accepted}</td>

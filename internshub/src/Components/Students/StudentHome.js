@@ -512,12 +512,14 @@ function StudentHome() {
           {internArray.map(function(intern) {
             return (
               <div key={intern.id}>
-                <div className="card bg-card">
+                <div className="card bg-card intern-card">
                   <div className="card-body small-intern-card">
                     <div className="row">
                       <div className="col-sm-6 col-md-8 col-lg-9">
-                        <h3 className="card-title">{intern.title}</h3>
-                        <h6 className="card-subtitle text-muted">
+                        <h3 className="card-title small-intern-title">
+                          {intern.title}
+                        </h3>
+                        <h6 className="card-subtitle small-intern-subtitle text-muted">
                           Company: {intern.company}
                         </h6>
                         <br></br>

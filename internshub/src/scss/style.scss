@@ -72,7 +72,7 @@ $dark: #222629;
 
 .sticky-top {
   z-index: 0;
-  top: 1rem !important;
+  top: 0.5rem;
 }
 
 label {
@@ -181,6 +181,7 @@ label {
   margin: 100px auto;
 }
 
+// filter
 .no-bold {
   font-weight: 400 !important;
 }
@@ -191,7 +192,7 @@ th {
   padding: 0 5px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .small-button {
     margin-bottom: 1.5rem !important;
   }
@@ -205,8 +206,22 @@ th {
   .small-table {
     display: none;
   }
+  .small-intern-title {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+  .small-intern-subtitle {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+  }
+  .intern-card {
+    margin-top: 1.5rem;
+  }
+  .card-form {
+    margin-bottom: 1rem;
+  }
 }
-@media (max-width: 576px) {
+@media (max-width: 575px) {
   .small-header {
     font-size: 2rem;
     font-weight: 300;
@@ -219,19 +234,41 @@ th {
     text-align: center;
     display: inline-block;
   }
+  .small-intern-title {
+    margin-top: 0rem;
+    font-size: 1.2rem;
+  }
+  .small-intern-subtitle {
+    margin-top: 0rem;
+    font-size: 0.8rem;
+  }
 }
 @media (max-width: 1200px) {
   .container {
     max-width: 99%;
   }
 }
-@media (max-width: 768px) {
+@media (min-width: 1400px) {
+  .small-intern-title {
+    margin-top: 0.5rem;
+    font-size: 2.2rem;
+  }
+  .small-intern-subtitle {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+  }
+  .sticky-top {
+    z-index: 0;
+    top: 3rem !important;
+  }
+}
+@media (max-width: 767px) {
   .small-filter {
     padding-left: 10rem;
     padding-right: 10rem;
   }
 }
-@media (max-width: 576px) {
+@media (max-width: 575px) {
   .small-filter {
     padding-left: 5rem;
     padding-right: 5rem;
@@ -241,5 +278,18 @@ th {
   .small-filter {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+}
+
+@media (max-width: 825px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 1000px) {
+  .smaller-header {
+    font-size: 2.5rem;
+    font-weight: 300;
   }
 }

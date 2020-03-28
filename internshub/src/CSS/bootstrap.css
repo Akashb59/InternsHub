@@ -2705,7 +2705,7 @@ input[type="button"].btn-block {
     background-size: 50% 50%; }
 
 .custom-checkbox .custom-control-label::before {
-  border-radius: 1.2rem; }
+  border-radius: 0.2rem; }
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
   background-color: #17a2b8; }
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {

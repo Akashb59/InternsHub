@@ -222,7 +222,7 @@ function ViewInternships(props) {
   };
   const removeTextbox = () => {
     if (info.count <= 3) {
-      showAlert("primary", "Info! Minimum 3 fields will be added.");
+      showAlert("primary", "Info! Cannot remove any more fields.");
     } else {
       info.desc.pop();
       if (info.count > 0)
@@ -254,7 +254,7 @@ function ViewInternships(props) {
   };
   const removeTextbox1 = () => {
     if (info1.count1 <= 3) {
-      showAlert("primary", "Info! Minimum 3 fields will be added.");
+      showAlert("primary", "Info! Cannot remove any more fields.");
     } else {
       info1.intd.pop();
       if (info1.count1 > 0)
