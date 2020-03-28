@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./../../CSS/student.css";
 //import buildUrl from "build-url";
 import { internshipFilter, internshipAll } from "../Utilities/StudentFunctions";
 
@@ -193,9 +192,9 @@ function StudentHome() {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="row p-4">
         <div className="col-lg-3">
-          <div className="card bg-body sticky-top p-3 rounded card-form">
+          <div className="card bg-body sticky-top p-2 rounded card-form">
             <div className="card-body">
               <div className="text-center">
                 <h2 className="blockquote">Filter</h2>
@@ -380,7 +379,7 @@ function StudentHome() {
           {internArray.map(function(intern) {
             return (
               <div key={intern.id}>
-                <div className="card">
+                <div className="card bg-card">
                   <div className="card-body">
                     <div className="row">
                       <div className="col-sm-10">

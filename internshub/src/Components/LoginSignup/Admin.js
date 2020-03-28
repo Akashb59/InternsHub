@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { createSkill, skills } from "./../Utilities/CommonFunctions";
-
-import "../../CSS/App.css";
 import { showAlert } from "../Utilities/Alerts";
 
 function Admin(props) {

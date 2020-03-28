@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { login } from "../Utilities/LoginSignup";
-import "../../CSS/App.css";
 import { showAlert } from "../Utilities/Alerts";
 
 function AdminLogin(props) {

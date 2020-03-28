@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../../CSS/student.css";
 import { studentEnquiries } from "../Utilities/StudentFunctions";
 
 function StudentEnquiry() {

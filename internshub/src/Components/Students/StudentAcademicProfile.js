@@ -4,7 +4,6 @@ import {
   editStudProfileAcademic
 } from "../Utilities/StudentFunctions";
 import { showAlert } from "../Utilities/Alerts";
-import "./../../CSS/student.css";
 
 function StudentAcademicProfile(props) {
   useEffect(() => {

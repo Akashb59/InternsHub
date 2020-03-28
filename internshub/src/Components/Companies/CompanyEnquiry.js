@@ -1,5 +1,4 @@
 import React, { useEffect, useState, Fragment } from "react";
-import "./../../CSS/company.css";
 import { FaInfo, FaQuestion, FaFilePdf } from "react-icons/fa";
 import {
   companyEnquiries,

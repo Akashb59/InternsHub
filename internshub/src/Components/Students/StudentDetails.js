@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "../../CSS/student.css";
 //import { showAlert } from "./../Utilities/Alerts";
 //import { Link } from "react-router-dom";
 import { skills } from "../Utilities/CommonFunctions";

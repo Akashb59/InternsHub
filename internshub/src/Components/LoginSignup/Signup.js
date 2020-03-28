@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { signup, roles, profile } from "../Utilities/LoginSignup";
 import { role } from "../Utilities/CommonFunctions";
-import "../../CSS/App.css";
 import { formatInput } from "../Utilities/Utils";
 
 function Signup(props) {

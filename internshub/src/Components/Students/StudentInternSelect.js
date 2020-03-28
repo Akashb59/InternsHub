@@ -4,7 +4,6 @@ import {
   sendEnquiry,
   student
 } from "../Utilities/StudentFunctions";
-import "./../../CSS/student.css";
 import { showAlert } from "../Utilities/Alerts";
 
 function StudentInternSelect(props) {

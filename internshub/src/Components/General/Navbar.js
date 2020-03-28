@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import "./../../CSS/App.css";
 import { useState } from "react";
 import { showAlert } from "../Utilities/Alerts";
 import { updatePass } from "./../Utilities/LoginSignup";
@@ -307,7 +306,7 @@ function Navbar(props) {
   );
 
   return (
-    <nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-md navbar-dark">
       <div className="container">
         {localStorage.usertoken
           ? localStorage.type === "Student"

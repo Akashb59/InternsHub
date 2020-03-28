@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./../../CSS/student.css";
 //import { Link } from "react-router-dom";
 import { studentform, student } from "../Utilities/StudentFunctions";
 import { addressform } from "../Utilities/CommonFunctions";

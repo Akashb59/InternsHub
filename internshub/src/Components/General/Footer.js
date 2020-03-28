@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer id="main-footer" className="bg-dark text-white">
+    <footer id="main-footer" className="text-white">
       <div className="container">
         <div className="row">
           <div className="col">

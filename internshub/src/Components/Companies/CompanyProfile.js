@@ -4,8 +4,6 @@ import { company, editDetailsForm } from "../Utilities/CompanyFunctions";
 import { editAddressForm, editUserInfo } from "../Utilities/CommonFunctions";
 import { showAlert } from "../Utilities/Alerts";
 import { formatInput } from "../Utilities/Utils";
-import "./../../CSS/company.css";
-import "./../../CSS/App.css";
 
 function CompanyProfile(props) {
   useEffect(() => {

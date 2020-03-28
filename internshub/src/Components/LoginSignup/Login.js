@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { login, roles, forgotPassword } from "../Utilities/LoginSignup";
 import { company } from "../Utilities/CompanyFunctions";
 import { student } from "../Utilities/StudentFunctions";
-import "../../CSS/App.css";
 import { showAlert } from "../Utilities/Alerts";
 
 function Login(props) {

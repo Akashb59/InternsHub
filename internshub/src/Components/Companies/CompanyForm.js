@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { companyform, company } from "../Utilities/CompanyFunctions";
 import { addressform } from "../Utilities/CommonFunctions";
-import "./../../CSS/company.css";
 import { formatInput } from "../Utilities/Utils";
 import { showAlert } from "../Utilities/Alerts";
 

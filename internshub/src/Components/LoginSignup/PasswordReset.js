@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { newPass } from "../Utilities/LoginSignup";
-import "../../CSS/App.css";
 import { showAlert } from "../Utilities/Alerts";
 
 function PasswordReset(props) {

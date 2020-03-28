@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "./../../CSS/company.css";
 import {
   companyDescription,
   company,

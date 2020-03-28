@@ -5,7 +5,6 @@ import {
 } from "../Utilities/StudentFunctions";
 import { editAddressForm, editUserInfo } from "../Utilities/CommonFunctions";
 import { showAlert } from "../Utilities/Alerts";
-import "./../../CSS/student.css";
 import { formatInput } from "../Utilities/Utils";
 
 function StudentPersonalProfile(props) {
