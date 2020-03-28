@@ -192,13 +192,13 @@ function StudentHome() {
 
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white ">
+      <h2 className="text-center display-4 bg-secondary rounded text-white small-header">
         Internships
       </h2>
-      <div className="row p-2 ">
+      <div className="row p-2">
         <div className="col-md-4 col-lg-3">
           <div className="card bg-body sticky-top px-3 rounded card-form">
-            <div className="card-body">
+            <div className="card-body small-filter">
               <div className="text-center">
                 <h2 className="blockquote mb-3">
                   {" "}
@@ -483,7 +483,7 @@ function StudentHome() {
                         <tr>
                           <td>
                             <button
-                              className="btn btn-danger mt-3"
+                              className="btn btn-block btn-danger mt-3"
                               type="reset"
                               onClick={() => window.location.reload(false)}
                             >
@@ -492,7 +492,7 @@ function StudentHome() {
                           </td>
                           <td>
                             <button
-                              className="btn btn-success mt-3"
+                              className="btn btn-block btn-success mt-3"
                               type="submit"
                             >
                               Submit
@@ -513,7 +513,7 @@ function StudentHome() {
             return (
               <div key={intern.id}>
                 <div className="card bg-card">
-                  <div className="card-body">
+                  <div className="card-body small-intern-card">
                     <div className="row">
                       <div className="col-sm-6 col-md-8 col-lg-9">
                         <h3 className="card-title">{intern.title}</h3>
@@ -525,30 +525,30 @@ function StudentHome() {
                       <div className="col-sm-6 col-md-4 col-lg-3">
                         <img
                           src={`${localStorage.ip}/Images/${intern.photo}`}
-                          className="card-img"
+                          className="card-img small-image"
                           alt="Logo"
                         />
                       </div>
                     </div>
                     <hr />
                     <div className="row d-flex">
-                      <div className="col-sm-4 offset-sm-2 offset-lg-0 col-lg-2">
+                      <div className="col-4 offset-2 offset-lg-0 col-lg-2">
                         <p style={{ color: "grey" }}>Start Date:</p>
                         <p>{intern.startsOn}</p>
                       </div>
-                      <div className="col-sm-4 col-lg-2">
+                      <div className="col-4 col-lg-2">
                         <p style={{ color: "grey" }}>Location:</p>
                         <p>{intern.location}</p>
                       </div>
-                      <div className="col-sm-4 col-lg-2">
+                      <div className="col-4 col-lg-2">
                         <p style={{ color: "grey" }}>Duration:</p>
                         <p>{intern.duration} Months</p>
                       </div>
-                      <div className="col-sm-4 col-lg-2">
+                      <div className="col-4 col-lg-2">
                         <p style={{ color: "grey" }}>Category:</p>
                         <p>{intern.category}</p>
                       </div>
-                      <div className="col-sm-4 col-lg-2">
+                      <div className="col-4 col-lg-2">
                         <p style={{ color: "grey" }}>Stipend:</p>
                         <p>Rs. {intern.stipend}/-</p>
                       </div>

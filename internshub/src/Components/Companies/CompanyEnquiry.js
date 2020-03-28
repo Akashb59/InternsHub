@@ -59,7 +59,7 @@ function CompanyEnquiry(props) {
     <tr>
       <td>{props.internship.internship.title}</td>
       {/* <td>{props.internship.internship.starts_on.substring(0, 10)}</td> */}
-      <td>{props.internship.user.fullname}</td>
+      <td className="small-table">{props.internship.user.fullname}</td>
       <td>
         <button
           className="btn btn-secondary btn-sm btn-block"
@@ -80,7 +80,7 @@ function CompanyEnquiry(props) {
         </button>
       </td>
 
-      <td>{props.internship.reqAt.substring(0, 10)}</td>
+      <td className="small-table">{props.internship.reqAt.substring(0, 10)}</td>
       <td>
         <button
           className="btn btn-info btn-sm btn-block"
@@ -148,7 +148,7 @@ function CompanyEnquiry(props) {
           <FaInfo />
         </button>
       </td>
-      <td>{props.internship.accepted}</td>
+      <td className="xsmall-table">{props.internship.accepted}</td>
       {props.internship.accepted === "No" ? (
         <td>
           <button
@@ -391,7 +391,7 @@ function CompanyEnquiry(props) {
 
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2">
+      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2 small-header">
         <i className="fas fa-clipboard-check"></i> Company Enquiry
       </h2>
       <div>
@@ -400,11 +400,11 @@ function CompanyEnquiry(props) {
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
-              <th>Student Name</th>
+              <th className="small-table">Student Name</th>
               <th>Resume</th>
-              <th>Requested On</th>
+              <th className="small-table">Requested On</th>
               <th>Details</th>
-              <th>Accepted</th>
+              <th className="small-table">Accepted</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -415,11 +415,11 @@ function CompanyEnquiry(props) {
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
-              <th>Student Name</th>
+              <th className="small-table">Student Name</th>
               <th>Resume</th>
-              <th>Requested On</th>
+              <th className="small-table">Requested On</th>
               <th>Details</th>
-              <th>Accepted</th>
+              <th className="xsmall-table">Accepted</th>
             </tr>
           </thead>
           <tbody>{internshipEnquiryListYes()}</tbody>
@@ -429,11 +429,11 @@ function CompanyEnquiry(props) {
           <thead className="thead-dark">
             <tr>
               <th>Internship</th>
-              <th>Student Name</th>
+              <th className="small-table">Student Name</th>
               <th>Resume</th>
-              <th>Requested On</th>
+              <th className="small-table">Requested On</th>
               <th>Details</th>
-              <th>Accepted</th>
+              <th className="xsmall-table">Accepted</th>
             </tr>
           </thead>
           <tbody>{internshipEnquiryListRest()}</tbody>

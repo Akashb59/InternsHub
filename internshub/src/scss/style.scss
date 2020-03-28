@@ -202,10 +202,44 @@ th {
     font-size: 2.5rem;
     font-weight: 300;
   }
+  .small-table {
+    display: none;
+  }
 }
 @media (max-width: 576px) {
   .small-header {
     font-size: 2rem;
     font-weight: 300;
+  }
+  .small-image {
+    width: 15rem;
+    height: 12rem;
+  }
+  .small-intern-card {
+    text-align: center;
+    display: inline-block;
+  }
+}
+@media (max-width: 1200px) {
+  .container {
+    max-width: 99%;
+  }
+}
+@media (max-width: 768px) {
+  .small-filter {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+}
+@media (max-width: 576px) {
+  .small-filter {
+    padding-left: 5rem;
+    padding-right: 5rem;
+  }
+}
+@media (max-width: 400px) {
+  .small-filter {
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
 }

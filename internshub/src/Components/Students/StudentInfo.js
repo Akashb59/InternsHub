@@ -425,7 +425,7 @@ function StudentInfo(props) {
                 </div>
                 <div className="row">
                   <div className="sm-col-4">
-                    <table className="table table-borderless">
+                    <table className="table bg-white table-borderless">
                       <tbody>
                         <tr>
                           <th>Gender:</th>

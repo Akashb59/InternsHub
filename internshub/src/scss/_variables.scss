@@ -237,7 +237,7 @@ $line-height-sm: 1.5 !default;
 $border-width: 1px !default;
 $border-color: $gray-300 !default;
 
-$border-radius: 0.25rem !default;
+$border-radius: 1.2rem !default;
 $border-radius-lg: 0.3rem !default;
 $border-radius-sm: 0.2rem !default;
 
@@ -755,7 +755,7 @@ $pagination-disabled-border-color: $gray-300 !default;
 
 // Jumbotron
 
-$jumbotron-padding: 2rem !default;
+$jumbotron-padding: 0.5rem !default;
 $jumbotron-bg: $gray-200 !default;
 
 // Cards

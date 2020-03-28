@@ -16,7 +16,9 @@ function ViewInternships(props) {
   const Internship = props => (
     <tr>
       <td>{props.internship.title}</td>
-      <td>{props.internship.starts_on.substring(0, 10)}</td>
+      <td className="small-table">
+        {props.internship.starts_on.substring(0, 10)}
+      </td>
       {/* <td>{props.internship._id}</td> */}
       <td>
         <button
@@ -389,7 +391,7 @@ function ViewInternships(props) {
   }
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2">
+      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2 small-header">
         <i className="fas fa-book" /> Hosted Internships
       </h2>
       <div id="delInternship" className="modal fade">
@@ -802,7 +804,7 @@ function ViewInternships(props) {
         <thead className="thead-dark">
           <tr>
             <th>Title</th>
-            <th>Starts On</th>
+            <th className="small-table">Starts On</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -814,7 +816,7 @@ function ViewInternships(props) {
         <thead className="thead-dark">
           <tr>
             <th>Title</th>
-            <th>Starts On</th>
+            <th className="small-table">Starts On</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>

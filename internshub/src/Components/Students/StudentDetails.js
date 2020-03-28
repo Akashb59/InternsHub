@@ -153,8 +153,12 @@ function StudentDetails(props) {
               id="resume"
               onChange={handleFile}
               accept="application/pdf"
-            />
+            />{" "}
+            <small class="form-text text-muted" id="fileHelp">
+              Max 1Mb size
+            </small>
           </div>
+
           <button className="btn btn-success" type="submit">
             Submit
           </button>

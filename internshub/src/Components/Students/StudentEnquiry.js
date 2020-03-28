@@ -118,7 +118,7 @@ function StudentEnquiry() {
 
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white pb-3">
+      <h2 className="text-center display-4 bg-secondary rounded text-white pb-3 small-header">
         My Enquiries
       </h2>
       <div>
