@@ -221,7 +221,11 @@ th {
     font-size: 0.8rem; }
 
   .count-disp {
-    margin-top: 1rem; } }
+    margin-top: 1rem; }
+
+  .chart {
+    width: 100% !important;
+    height: auto !important; } }
 @media (max-width: 1200px) {
   .container {
     max-width: 99%; } }

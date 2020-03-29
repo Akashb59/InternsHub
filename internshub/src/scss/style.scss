@@ -248,6 +248,10 @@ th {
   .count-disp {
     margin-top: 1rem;
   }
+  .chart {
+    width: 100% !important;
+    height: auto !important;
+  }
 }
 @media (max-width: 1200px) {
   .container {

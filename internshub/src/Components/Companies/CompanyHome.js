@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
 import {
   companyDescription,
   company,
@@ -31,6 +32,20 @@ function CompanyHome(props) {
     categories: "",
     type_of_internship: "",
     stipend: ""
+  });
+  const [enqChart, setEnqChart] = useState({
+    labels: ["Previous week", "Previous week", "Previous week", "Current week"],
+    datasets: [
+      {
+        label: "Enquiries",
+        fill: false,
+        lineTension: 0.4,
+        backgroundColor: "rgba(75,192,192,1)",
+        borderColor: "rgba(0,0,0,1)",
+        borderWidth: 2,
+        data: [0, 0, 0, 0]
+      }
+    ]
   });
   const [options, setOptions] = useState([]);
   const [count, setCount] = useState(0);
@@ -71,6 +86,7 @@ function CompanyHome(props) {
         //console.log(options);
       }
     });
+
     companyInternships().then(res => {
       if (res) {
         //console.log(res.data);
@@ -79,6 +95,46 @@ function CompanyHome(props) {
     });
     companyEnquiries().then(res => {
       if (res) {
+        const array = res.data.data.enquiry.map(el => {
+          var date = new Date(el.reqAt);
+          return date.getTime();
+        });
+        //console.log(array);
+        //console.log(7 * 24 * 60 * 60 * 1000);
+        //console.log(Date.now());
+        //console.log(Date.now() - 7 * 24 * 60 * 60 * 1000);
+        let count1 = 0;
+        let count2 = 0;
+        let count3 = 0;
+        let count4 = 0;
+        let result = [];
+        const w1 = Date.now() - 7 * 24 * 60 * 60 * 1000;
+        const w2 = Date.now() - 2 * 7 * 24 * 60 * 60 * 1000;
+        const w3 = Date.now() - 3 * 7 * 24 * 60 * 60 * 1000;
+        // eslint-disable-next-line
+        array.map(el => {
+          if (el > w1) count1 += 1;
+          else if (el > w2) count2 += 1;
+          else if (el > w3) count3 += 1;
+          else count4 += 1;
+        });
+        result[3] = count1;
+        result[2] = count2;
+        result[1] = count3;
+        result[0] = count4;
+        //console.log(result);
+        const resChart = [
+          {
+            label: "Enquiries",
+            fill: false,
+            lineTension: 0.4,
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
+            borderWidth: 2,
+            data: result
+          }
+        ];
+        setEnqChart({ ...enqChart, datasets: resChart });
         const internEnq = res.data.data.enquiry.filter(
           data => data.internship !== null
         );
@@ -337,46 +393,23 @@ function CompanyHome(props) {
         <div className="container">
           <div className="row">
             <div className="col-md-9">
-              <div className="card">
-                <div className="card-header">
-                  <h5>Enquiries</h5>
-                </div>
-                <div className="table-responsive">
-                  <table className="table table-sm table-hover table-striped">
-                    <thead className="thead-dark thead-small">
-                      <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th />
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Post One</td>
-                        <td>Web Development</td>
-                        <td>May 10 2018</td>
-                        <td>
-                          <a href="details.html" className="btn btn-secondary">
-                            <i className="fas fa-angle-double-right" /> Details
-                          </a>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Post Two</td>
-                        <td>Tech Gadgets</td>
-                        <td>May 11 2018</td>
-                        <td>
-                          <a href="details.html" className="btn btn-secondary">
-                            <i className="fas fa-angle-double-right" /> Details
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+              <div className="row">
+                <div className="col-md-3"></div>
+                <div className="col-md-9 chart">
+                  <Line
+                    data={enqChart}
+                    options={{
+                      title: {
+                        display: true,
+                        text: "Average Enquiries per Week",
+                        fontSize: 20
+                      },
+                      legend: {
+                        display: true,
+                        position: "right"
+                      }
+                    }}
+                  />
                 </div>
               </div>
             </div>
