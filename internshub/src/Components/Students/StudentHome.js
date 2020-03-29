@@ -86,7 +86,7 @@ function StudentHome() {
   //     }
   //   });
   // };
-
+  let count = 0;
   const handleSubmit = e => {
     e.preventDefault();
 
@@ -189,326 +189,347 @@ function StudentHome() {
     //   duration: filterState.duration
     // });
   };
-
+  count = internArray.length;
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white small-header">
-        Internships
+      <h2 className="text-center display-4 bg-secondary rounded text-white small-header pb-2">
+        <i className="far fa-list-alt"></i> Internships
       </h2>
+
       <div className="row p-2">
         <div className="col-md-4 col-lg-3">
-          <div className="card bg-body sticky-top px-3 rounded card-form">
-            <div className="card-body small-filter">
+          <div className="d-lg-none d-md-none d-sm-block">
+            <div id="accordion">
               <div className="text-center">
-                <h2 className="blockquote mb-3">
-                  {" "}
-                  <i className="fas fa-filter" /> Filter
-                </h2>
-              </div>
-              <form onSubmit={handleSubmit}>
-                <div className="row">
-                  <div className="table-responsive ">
-                    <table className="table bg-body table-sm table-borderless filter-table">
-                      <tbody>
-                        <tr>
-                          <td colSpan="2">
-                            <p className="font-weight-bold mb-0">
-                              Type of Internship:
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="custom-control custom-radio custom-control-inline">
-                              <input
-                                type="radio"
-                                name="type"
-                                value="Paid"
-                                checked={filterState.type === "Paid"}
-                                className="custom-control-input"
-                                id="defaultInline1"
-                                onChange={onFilterChange}
-                              />
-                              <label
-                                className="custom-control-label s1 no-bold"
-                                htmlFor="defaultInline1"
-                              >
-                                Paid
-                              </label>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="custom-control custom-radio custom-control-inline">
-                              <input
-                                type="radio"
-                                name="type"
-                                value="Free"
-                                checked={filterState.type === "Free"}
-                                onChange={onFilterChange}
-                                className="custom-control-input"
-                                id="defaultInline2"
-                              />
-                              <label
-                                className="custom-control-label s1 no-bold"
-                                htmlFor="defaultInline2"
-                              >
-                                Free
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <p className="font-weight-bold mb-0 mt-3">
-                              Category:
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div className="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                name="category"
-                                value="Fulltime"
-                                checked={filterState.category === "Fulltime"}
-                                onChange={onFilterChange}
-                                className="custom-control-input"
-                                id="defaultInline3"
-                              />
-                              <label
-                                className="custom-control-label s1 no-bold"
-                                htmlFor="defaultInline3"
-                              >
-                                Full Time
-                              </label>
-                            </div>
-                          </td>
-
-                          <td>
-                            <div className="custom-control custom-radio">
-                              <input
-                                type="radio"
-                                name="category"
-                                value="Parttime"
-                                checked={filterState.category === "Parttime"}
-                                onChange={onFilterChange}
-                                className="custom-control-input"
-                                id="defaultInline4"
-                              />
-                              <label
-                                className="custom-control-label s1 no-bold"
-                                htmlFor="defaultInline4"
-                              >
-                                Part Time
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td colSpan="2">
-                            <p className="font-weight-bold mb-0 mt-3">
-                              Duration (in Months):
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <div className="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                name="duration1"
-                                checked={filterState.duration1}
-                                onChange={onFilterChange}
-                                id="customCheck1"
-                              />
-                              <label
-                                className="custom-control-label no-bold"
-                                htmlFor="customCheck1"
-                              >
-                                0 - 2
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <div className="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                name="duration2"
-                                checked={filterState.duration2}
-                                onChange={onFilterChange}
-                                id="customCheck2"
-                              />
-                              <label
-                                className="custom-control-label no-bold"
-                                htmlFor="customCheck2"
-                              >
-                                2 - 4
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <div className="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                name="duration3"
-                                checked={filterState.duration3}
-                                onChange={onFilterChange}
-                                id="customCheck3"
-                              />
-                              <label
-                                className="custom-control-label no-bold"
-                                htmlFor="customCheck3"
-                              >
-                                > 4
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td colSpan="2">
-                            <p className="font-weight-bold mb-0 mt-3">
-                              Stipend (in ₹):
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <div className="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                name="stipend1"
-                                checked={filterState.stipend1}
-                                onChange={onFilterChange}
-                                id="customCheck4"
-                              />
-                              <label
-                                className="custom-control-label no-bold"
-                                htmlFor="customCheck4"
-                              >
-                                No Stipend
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <div className="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                name="stipend2"
-                                checked={filterState.stipend2}
-                                onChange={onFilterChange}
-                                id="customCheck5"
-                              />
-                              <label
-                                className="custom-control-label no-bold"
-                                htmlFor="customCheck5"
-                              >
-                                {`< 5,000`}
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <div className="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                name="stipend3"
-                                checked={filterState.stipend3}
-                                onChange={onFilterChange}
-                                id="customCheck6"
-                              />
-                              <label
-                                className="custom-control-label no-bold"
-                                htmlFor="customCheck6"
-                              >
-                                {`5,000 - 10,000`}
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <div className="custom-control custom-checkbox">
-                              <input
-                                type="checkbox"
-                                className="custom-control-input"
-                                name="stipend4"
-                                checked={filterState.stipend4}
-                                onChange={onFilterChange}
-                                id="customCheck7"
-                              />
-                              <label
-                                className="custom-control-label no-bold"
-                                htmlFor="customCheck7"
-                              >
-                                {`> 10,000`}
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <td colSpan="2">
-                            <p className="font-weight-bold mb-0 mt-3">
-                              Starts On:
-                            </p>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colSpan="2">
-                            <input
-                              type="date"
-                              className="form-control"
-                              name="startsOn"
-                              value={filterState.startsOn}
-                              onChange={onFilterChange}
-                            />
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <button
-                              className="btn btn-block btn-danger mt-3"
-                              type="reset"
-                              onClick={() => window.location.reload(false)}
-                            >
-                              Reset
-                            </button>
-                          </td>
-                          <td>
-                            <button
-                              className="btn btn-block btn-success mt-3"
-                              type="submit"
-                            >
-                              Submit
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                <div
+                  href="#collapse1"
+                  data-toggle="collapse"
+                  data-parent="#accordion"
+                >
+                  <button className="btn px-5 btn-sm btn-outline-success rounded my-2">
+                    <i className="fas fa-arrows-alt-v"></i> Filter Toggle
+                  </button>
                 </div>
-              </form>
+              </div>
+            </div>
+          </div>
+          <div id="collapse1" class="collapse show mt-3 sticky-top">
+            <div className="card bg-body px-3 rounded-lg card-form anyClass">
+              <div className="card-body small-filter ">
+                <div className="text-center">
+                  <h2 className="blockquote mb-3">
+                    {" "}
+                    <i className="fas fa-filter" /> Filter
+                  </h2>
+                </div>
+                <form onSubmit={handleSubmit}>
+                  <div className="row">
+                    <div className="table-responsive">
+                      <table className="table bg-body table-sm table-borderless filter-table">
+                        <tbody>
+                          <tr>
+                            <td colSpan="2">
+                              <p className="font-weight-bold mb-0">
+                                Type of Internship:
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div className="custom-control custom-radio custom-control-inline">
+                                <input
+                                  type="radio"
+                                  name="type"
+                                  value="Paid"
+                                  checked={filterState.type === "Paid"}
+                                  className="custom-control-input"
+                                  id="defaultInline1"
+                                  onChange={onFilterChange}
+                                />
+                                <label
+                                  className="custom-control-label s1 no-bold"
+                                  htmlFor="defaultInline1"
+                                >
+                                  Paid
+                                </label>
+                              </div>
+                            </td>
+                            <td>
+                              <div className="custom-control custom-radio custom-control-inline">
+                                <input
+                                  type="radio"
+                                  name="type"
+                                  value="Free"
+                                  checked={filterState.type === "Free"}
+                                  onChange={onFilterChange}
+                                  className="custom-control-input"
+                                  id="defaultInline2"
+                                />
+                                <label
+                                  className="custom-control-label s1 no-bold"
+                                  htmlFor="defaultInline2"
+                                >
+                                  Free
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <p className="font-weight-bold mb-0 mt-3">
+                                Category:
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <div className="custom-control custom-radio">
+                                <input
+                                  type="radio"
+                                  name="category"
+                                  value="Fulltime"
+                                  checked={filterState.category === "Fulltime"}
+                                  onChange={onFilterChange}
+                                  className="custom-control-input"
+                                  id="defaultInline3"
+                                />
+                                <label
+                                  className="custom-control-label s1 no-bold"
+                                  htmlFor="defaultInline3"
+                                >
+                                  Full Time
+                                </label>
+                              </div>
+                            </td>
+
+                            <td>
+                              <div className="custom-control custom-radio">
+                                <input
+                                  type="radio"
+                                  name="category"
+                                  value="Parttime"
+                                  checked={filterState.category === "Parttime"}
+                                  onChange={onFilterChange}
+                                  className="custom-control-input"
+                                  id="defaultInline4"
+                                />
+                                <label
+                                  className="custom-control-label s1 no-bold"
+                                  htmlFor="defaultInline4"
+                                >
+                                  Part Time
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td colSpan="2">
+                              <p className="font-weight-bold mb-0 mt-3">
+                                Duration (in Months):
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <div className="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  name="duration1"
+                                  checked={filterState.duration1}
+                                  onChange={onFilterChange}
+                                  id="customCheck1"
+                                />
+                                <label
+                                  className="custom-control-label no-bold"
+                                  htmlFor="customCheck1"
+                                >
+                                  0 - 2
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <div className="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  name="duration2"
+                                  checked={filterState.duration2}
+                                  onChange={onFilterChange}
+                                  id="customCheck2"
+                                />
+                                <label
+                                  className="custom-control-label no-bold"
+                                  htmlFor="customCheck2"
+                                >
+                                  2 - 4
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <div className="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  name="duration3"
+                                  checked={filterState.duration3}
+                                  onChange={onFilterChange}
+                                  id="customCheck3"
+                                />
+                                <label
+                                  className="custom-control-label no-bold"
+                                  htmlFor="customCheck3"
+                                >
+                                  > 4
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td colSpan="2">
+                              <p className="font-weight-bold mb-0 mt-3">
+                                Stipend (in ₹):
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <div className="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  name="stipend1"
+                                  checked={filterState.stipend1}
+                                  onChange={onFilterChange}
+                                  id="customCheck4"
+                                />
+                                <label
+                                  className="custom-control-label no-bold"
+                                  htmlFor="customCheck4"
+                                >
+                                  No Stipend
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <div className="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  name="stipend2"
+                                  checked={filterState.stipend2}
+                                  onChange={onFilterChange}
+                                  id="customCheck5"
+                                />
+                                <label
+                                  className="custom-control-label no-bold"
+                                  htmlFor="customCheck5"
+                                >
+                                  {`< 5,000`}
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <div className="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  name="stipend3"
+                                  checked={filterState.stipend3}
+                                  onChange={onFilterChange}
+                                  id="customCheck6"
+                                />
+                                <label
+                                  className="custom-control-label no-bold"
+                                  htmlFor="customCheck6"
+                                >
+                                  {`5,000 - 10,000`}
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <div className="custom-control custom-checkbox">
+                                <input
+                                  type="checkbox"
+                                  className="custom-control-input"
+                                  name="stipend4"
+                                  checked={filterState.stipend4}
+                                  onChange={onFilterChange}
+                                  id="customCheck7"
+                                />
+                                <label
+                                  className="custom-control-label no-bold"
+                                  htmlFor="customCheck7"
+                                >
+                                  {`> 10,000`}
+                                </label>
+                              </div>
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td colSpan="2">
+                              <p className="font-weight-bold mb-0 mt-3">
+                                Starts On:
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td colSpan="2">
+                              <input
+                                type="date"
+                                className="form-control"
+                                name="startsOn"
+                                value={filterState.startsOn}
+                                onChange={onFilterChange}
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <button
+                                className="btn btn-block btn-danger mt-3"
+                                type="reset"
+                                onClick={() => window.location.reload(false)}
+                              >
+                                Reset
+                              </button>
+                            </td>
+                            <td>
+                              <button
+                                className="btn btn-block btn-success mt-3"
+                                type="submit"
+                              >
+                                Submit
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
 
         <div className="col-md-8 col-lg-9">
+          <h2 className="text-center text-right small-header mb-3 count-disp">
+            <i class="fas fa-sliders-h"></i> {count} Listings
+          </h2>
           {internArray.map(function(intern) {
             return (
               <div key={intern.id}>

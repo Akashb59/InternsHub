@@ -1,5 +1,5 @@
-$primary: #3292a6;
-$primary-overlay: rgba(50, 146, 166, 0.8);
+$primary: #e2e2e2;
+$primary-overlay: #f2f2f2;
 $dark: #222629;
 
 // Navbar
@@ -242,6 +242,9 @@ th {
     margin-top: 0rem;
     font-size: 0.8rem;
   }
+  .count-disp {
+    margin-top: 1rem;
+  }
 }
 @media (max-width: 1200px) {
   .container {
@@ -292,4 +295,54 @@ th {
     font-size: 2.5rem;
     font-weight: 300;
   }
+}
+@media (min-width: 500px) {
+  .anyClass {
+    height: auto;
+    overflow-y: scroll;
+    padding-right: 0rem !important;
+  }
+}
+
+@media (min-width: 750px) {
+  .anyClass {
+    min-height: 25rem;
+    overflow-y: scroll;
+    padding-right: 0rem !important;
+  }
+}
+
+@media (min-width: 1000px) {
+  .anyClass {
+    overflow-y: hidden;
+    height: auto;
+    padding-right: 0rem !important;
+  }
+}
+@media (min-width: 768px) {
+  #collapse1 {
+    display: block;
+  }
+}
+
+//Filter Scrollbar
+.anyClass::-webkit-scrollbar {
+  width: 5px;
+}
+
+.anyClass::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px $primary;
+  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
+  border-radius: 10px;
+}
+
+.anyClass::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  height: calc(100% - 2rem);
+}
+
+.anyClass::-webkit-scrollbar-thumb:hover {
+  background: rgb(148, 152, 156);
 }
