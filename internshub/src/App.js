@@ -75,7 +75,7 @@ function App() {
             />
             <ProtectedRouteCompany
               exact
-              path="/companyForm"
+              path="/companyDetails"
               component={CompanyForm}
             />
             {/* <ProtectedRouteCompany

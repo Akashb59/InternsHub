@@ -281,11 +281,11 @@ function StudentInfo(props) {
     });
   };
   return (
-    <div className="container py-5">
-      <h2 className="text-center bg-secondary text-white py-2">
-        {/* <i className="fas fa-pencil-alt" />*/} Student Information
+    <div className="container py-4">
+      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 small-header">
+        <i className="fas fa-user-circle" /> Student Information
       </h2>
-      <div className="card bg-body p-3 rounded card-form">
+      <div className="card bg-body p-2 mt-4 rounded card-form">
         <div className="card-body">
           <ul className="nav nav-tabs">
             <li className="nav-item">
@@ -295,12 +295,12 @@ function StudentInfo(props) {
                 id="filled"
                 href="#per"
               >
-                Personal Information
+                Personal
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" data-toggle="tab" id="fill" href="#aca">
-                Academic Information
+                Academic
               </a>
             </li>
           </ul>
@@ -415,7 +415,7 @@ function StudentInfo(props) {
                         //onBlur={validate}
                         onChange={handleChange}
                         name="dob"
-                        value={studFormState.dob}
+                        value={studFormState.dob.toString()}
                         required
                         className="form-control"
                         id="dob"
@@ -425,7 +425,7 @@ function StudentInfo(props) {
                 </div>
                 <div className="row">
                   <div className="sm-col-4">
-                    <table className="table bg-white table-borderless">
+                    <table className="table bg-card table-borderless">
                       <tbody>
                         <tr>
                           <th>Gender:</th>
@@ -703,61 +703,63 @@ function StudentInfo(props) {
                   </b>
                 </center>{" "}
                 <br></br>
-                <div className="form-group">
-                  <label htmlFor="school_name">School Name:</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-school"></i>
-                      </span>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="school_name">School Name:</label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-school"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="schoolname"
+                        name="school_name"
+                        placeholder="Enter School Name"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        required
+                        maxLength="50"
+                        value={academicFormState.school_name}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="schoolname"
-                      name="school_name"
-                      placeholder="Enter School Name"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      required
-                      maxLength="50"
-                      value={academicFormState.school_name}
-                    />
+                    {errors.school_name.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.school_name}</span>
+                      </small>
+                    )}
                   </div>
-                  {errors.school_name.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.school_name}</span>
-                    </small>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="grade_10_per">10th Grade Percentage:</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-percentage"></i>
-                      </span>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="grade_10_per">10th Grade Percentage:</label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-percentage"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="10per"
+                        name="grade_10_per"
+                        placeholder="Enter Percentage"
+                        required
+                        //onBlur="return ValidateDecimal(this) ;"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        maxLength="100"
+                        minLength="0"
+                        value={academicFormState.grade_10_per}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="10per"
-                      name="grade_10_per"
-                      placeholder="Enter Percentage"
-                      required
-                      //onBlur="return ValidateDecimal(this) ;"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      maxLength="100"
-                      minLength="0"
-                      value={academicFormState.grade_10_per}
-                    />
+                    {errors.grade_10_per.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.grade_10_per}</span>
+                      </small>
+                    )}
                   </div>
-                  {errors.grade_10_per.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.grade_10_per}</span>
-                    </small>
-                  )}
                 </div>
                 <br></br>
                 <center>
@@ -774,65 +776,67 @@ function StudentInfo(props) {
                   </b>
                 </center>{" "}
                 <br></br>
-                <div className="form-group">
-                  <label htmlFor="pu_college_name">
-                    Pre-University/Diploma College Name:
-                  </label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-school"></i>
-                      </span>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="pu_college_name">
+                      Pre-University/Diploma College Name:
+                    </label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-school"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="collegename"
+                        name="pu_college_name"
+                        placeholder="Enter College Name"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        required
+                        maxLength="50"
+                        value={academicFormState.pu_college_name}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="collegename"
-                      name="pu_college_name"
-                      placeholder="Enter College Name"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      required
-                      maxLength="50"
-                      value={academicFormState.pu_college_name}
-                    />
+                    {errors.pu_college_name.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.pu_college_name}</span>
+                      </small>
+                    )}
                   </div>
-                  {errors.pu_college_name.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.pu_college_name}</span>
-                    </small>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="grade_12_per">
-                    Pre-University /Diploma Percentage:
-                  </label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-percentage"></i>
-                      </span>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="grade_12_per">
+                      Pre-University /Diploma Percentage:
+                    </label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-percentage"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="12per"
+                        name="grade_12_per"
+                        placeholder="Enter Percentage"
+                        required
+                        //onBlur="return ValidateDecimal(this) ;"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        maxLength="50"
+                        value={academicFormState.grade_12_per}
+                        minLength="0"
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="12per"
-                      name="grade_12_per"
-                      placeholder="Enter Percentage"
-                      required
-                      //onBlur="return ValidateDecimal(this) ;"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      maxLength="50"
-                      value={academicFormState.grade_12_per}
-                      minLength="0"
-                    />
+                    {errors.grade_12_per.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.grade_12_per}</span>
+                      </small>
+                    )}
                   </div>
-                  {errors.grade_12_per.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.grade_12_per}</span>
-                    </small>
-                  )}
                 </div>
                 <br></br>
                 <center>
@@ -849,195 +853,201 @@ function StudentInfo(props) {
                   </b>
                 </center>{" "}
                 <br></br>
-                <div className="form-group">
-                  <label htmlFor="college_name">Degree College Name:</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-school"></i>
-                      </span>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="college_name">Degree College Name:</label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-school"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="dcollegename"
+                        name="college_name"
+                        placeholder="Enter Degree College Name"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        required
+                        maxLength="50"
+                        value={academicFormState.college_name}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="dcollegename"
-                      name="college_name"
-                      placeholder="Enter Degree College Name"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      required
-                      maxLength="50"
-                      value={academicFormState.college_name}
-                    />
+                    {errors.college_name.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.college_name}</span>
+                      </small>
+                    )}
                   </div>
-                  {errors.college_name.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.college_name}</span>
-                    </small>
-                  )}
+                  <div className="form-group col-md-6">
+                    <label htmlFor="university_name">University Name:</label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-university"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="universityname"
+                        name="university_name"
+                        placeholder="Enter University Name"
+                        // onBlur={validate1}
+                        onChange={handleChange1}
+                        required
+                        maxLength="50"
+                        value={academicFormState.university_name}
+                        // onBlur={validate1}
+                      />
+                    </div>
+                    {errors.university_name.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.university_name}</span>
+                      </small>
+                    )}
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="university_name">University Name:</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-university"></i>
-                      </span>
+                <div className="form-row">
+                  <div className="form-group col-md-4">
+                    <label htmlFor="usn">USN:</label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-user-graduate"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="usn"
+                        name="usn"
+                        placeholder="Enter USN"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        required
+                        maxLength="10"
+                        value={academicFormState.usn}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="universityname"
-                      name="university_name"
-                      placeholder="Enter University Name"
-                      // onBlur={validate1}
-                      onChange={handleChange1}
-                      required
-                      maxLength="50"
-                      value={academicFormState.university_name}
-                      // onBlur={validate1}
-                    />
+                    {errors.usn.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.usn}</span>
+                      </small>
+                    )}
                   </div>
-                  {errors.university_name.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.university_name}</span>
-                    </small>
-                  )}
+                  <div className="form-group col-md-4">
+                    <label htmlFor="degree_cgpa">
+                      UG CGPA (Current Semester):
+                    </label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-graduation-cap"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="degree_cgpa"
+                        name="degree_cgpa"
+                        placeholder="Enter CGPA"
+                        required
+                        //onBlur="return ValidateDecimal(this) ;"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        maxLength="10"
+                        minLength="1"
+                        value={academicFormState.degree_cgpa}
+                      />
+                    </div>
+                    {errors.degree_cgpa.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.degree_cgpa}</span>
+                      </small>
+                    )}
+                  </div>
+                  <div className="form-group col-md-4">
+                    <label htmlFor="phone_number"> College Phone Number:</label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-mobile"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="phonenumber"
+                        name="phone_number"
+                        placeholder="0123456789"
+                        // onBlur={validate1}
+                        onChange={handleChange1}
+                        maxLength="10"
+                        value={academicFormState.phone_number}
+                      />
+                    </div>
+                    {errors.phone_number.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.phone_number}</span>
+                      </small>
+                    )}
+                  </div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="usn">USN:</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-user-graduate"></i>
-                      </span>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="website">College Website:</label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-desktop"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="url"
+                        className="form-control"
+                        id="url"
+                        name="website"
+                        placeholder="http://www.example.com"
+                        onChange={handleChange1}
+                        required
+                        value={academicFormState.website}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="usn"
-                      name="usn"
-                      placeholder="Enter USN"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      required
-                      maxLength="10"
-                      value={academicFormState.usn}
-                    />
+                    {errors.website.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.website}</span>
+                      </small>
+                    )}
                   </div>
-                  {errors.usn.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.usn}</span>
-                    </small>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="degree_cgpa">
-                    UG CGPA (Current Semester):
-                  </label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-graduation-cap"></i>
-                      </span>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="email">College Email:</label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-envelope"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="Email"
+                        name="email"
+                        placeholder="you@example.com"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        required
+                        value={academicFormState.email}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="degree_cgpa"
-                      name="degree_cgpa"
-                      placeholder="Enter CGPA"
-                      required
-                      //onBlur="return ValidateDecimal(this) ;"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      maxLength="10"
-                      minLength="1"
-                      value={academicFormState.degree_cgpa}
-                    />
+                    {errors.email.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">{errors.email}</span>
+                      </small>
+                    )}
                   </div>
-                  {errors.degree_cgpa.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.degree_cgpa}</span>
-                    </small>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="phone_number"> College Phone Number:</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-mobile"></i>
-                      </span>
-                    </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="phonenumber"
-                      name="phone_number"
-                      placeholder="0123456789"
-                      // onBlur={validate1}
-                      onChange={handleChange1}
-                      maxLength="10"
-                      value={academicFormState.phone_number}
-                    />
-                  </div>
-                  {errors.phone_number.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.phone_number}</span>
-                    </small>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="website">College Website:</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-desktop"></i>
-                      </span>
-                    </div>
-                    <input
-                      type="url"
-                      className="form-control"
-                      id="url"
-                      name="website"
-                      placeholder="http://www.example.com"
-                      onChange={handleChange1}
-                      required
-                      value={academicFormState.website}
-                    />
-                  </div>
-                  {errors.website.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.website}</span>
-                    </small>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">College Email:</label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-envelope"></i>
-                      </span>
-                    </div>
-                    <input
-                      type="email"
-                      className="form-control"
-                      id="Email"
-                      name="email"
-                      placeholder="you@example.com"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      required
-                      value={academicFormState.email}
-                    />
-                  </div>
-                  {errors.email.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.email}</span>
-                    </small>
-                  )}
                 </div>
                 <br></br>
                 <center>
@@ -1054,69 +1064,71 @@ function StudentInfo(props) {
                   </b>
                 </center>{" "}
                 <br></br>
-                <div className="form-group">
-                  <label htmlFor="project1_undertaken">
-                    Project 1 Undertaken:
-                  </label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-briefcase"></i>
-                      </span>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="project1_undertaken">
+                      Project 1 Undertaken:
+                    </label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-briefcase"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="p1"
+                        name="project1_undertaken"
+                        placeholder="Enter Project 1"
+                        // onBlur={validate1}
+                        onChange={handleChange1}
+                        required
+                        maxLength="30"
+                        value={academicFormState.project1_undertaken}
+                        // onBlur={validate1}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="p1"
-                      name="project1_undertaken"
-                      placeholder="Enter Project 1"
-                      // onBlur={validate1}
-                      onChange={handleChange1}
-                      required
-                      maxLength="30"
-                      value={academicFormState.project1_undertaken}
-                      // onBlur={validate1}
-                    />
+                    {errors.project1_undertaken.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">
+                          {errors.project1_undertaken}
+                        </span>
+                      </small>
+                    )}
                   </div>
-                  {errors.project1_undertaken.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">
-                        {errors.project1_undertaken}
-                      </span>
-                    </small>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="project2_undertaken">
-                    Project 2 Undertaken:
-                  </label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-briefcase"></i>
-                      </span>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="project2_undertaken">
+                      Project 2 Undertaken:
+                    </label>
+                    <div className="input-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-briefcase"></i>
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="p2"
+                        name="project2_undertaken"
+                        placeholder="Enter Project 2"
+                        //onBlur={validate1}
+                        onChange={handleChange1}
+                        required
+                        maxLength="30"
+                        value={academicFormState.project2_undertaken}
+                        //onBlur={validate1}
+                      />
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="p2"
-                      name="project2_undertaken"
-                      placeholder="Enter Project 2"
-                      //onBlur={validate1}
-                      onChange={handleChange1}
-                      required
-                      maxLength="30"
-                      value={academicFormState.project2_undertaken}
-                      //onBlur={validate1}
-                    />
+                    {errors.project2_undertaken.length > 0 && (
+                      <small style={{ color: "red" }}>
+                        <span className="error">
+                          {errors.project2_undertaken}
+                        </span>
+                      </small>
+                    )}
                   </div>
-                  {errors.project2_undertaken.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">
-                        {errors.project2_undertaken}
-                      </span>
-                    </small>
-                  )}
                 </div>
                 <div className="input-field col-md-6 offset-md-3 mt-2">
                   <button className="btn btn-success btn-block" type="submit">

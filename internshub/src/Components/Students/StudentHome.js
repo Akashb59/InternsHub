@@ -192,7 +192,7 @@ function StudentHome() {
   count = internArray.length;
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white small-header pb-2">
+      <h2 className="text-center display-4 bg-secondary rounded text-white small-header py-2">
         <i className="far fa-list-alt"></i> Internships
       </h2>
 

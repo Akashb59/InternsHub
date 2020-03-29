@@ -22,7 +22,8 @@ export const company = () => {
       return res.data;
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -40,7 +41,8 @@ export const companyInternships = () => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
+    if (err.value !== undefined)
+      showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
 };
@@ -58,8 +60,9 @@ export const internship = id => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
-    //console.log(err);
+    if (err.value !== undefined)
+      showAlert("error", `${err.response.data.message}`);
+    console.log(err);
   });
 };
 
@@ -76,7 +79,8 @@ export const companyEnquiries = () => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
+    if (err.value !== undefined)
+      showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
 };
@@ -94,7 +98,8 @@ export const internshipEnquiries = id => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
+    if (err.value !== undefined)
+      showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
 };
@@ -114,7 +119,8 @@ export const companyform = details => {
       user: details.user
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -139,7 +145,8 @@ export const hostInternship = internship => {
       stipend: internship.stipend
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -165,7 +172,8 @@ export const editInternship = internship => {
       stipend: internship.stipend
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -179,7 +187,8 @@ export const companyDescription = desc => {
       aboutCompany: desc.aboutCompany
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -194,7 +203,8 @@ export const companyTechnology = tech => {
       technology: tech.technology
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -209,7 +219,8 @@ export const internshipAccept = (id, accepted, completed) => {
       completed
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -225,7 +236,8 @@ export const editDetailsForm = editDetails => {
       establishedYear: editDetails.establishedYear
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };

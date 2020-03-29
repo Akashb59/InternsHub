@@ -204,97 +204,331 @@ function CompanyEnquiry(props) {
       <ul className="nav nav-tabs">
         <li className="nav-item">
           <a className="nav-link active" data-toggle="tab" href="#int">
-            Internship Details
+            Internship
           </a>
         </li>
         <li className="nav-item">
           <a className="nav-link" data-toggle="tab" href="#stuAca">
-            Student Academic Details
+            Student Academic
           </a>
         </li>
         <li className="nav-item">
           <a className="nav-link" data-toggle="tab" href="#stuPer">
-            Student Personal Details
+            Student Personal
           </a>
         </li>
       </ul>
       <div className="tab-content">
         <div id="int" className="container tab-pane active">
           <br></br>
-          <p>Internship Title: {selectedInternship.iname}</p>
-          <p>Internship Location: {selectedInternship.iloc}</p>
-          <p>Internship Starts On: {selectedInternship.istarts.toString()}</p>
-          <p>Student Name: {selectedInternship.sname}</p>
-          <p>Accepted: {selectedInternship.accepted}</p>
-          <p>Requested At: {selectedInternship.reqAt.toString()}</p>
-          <p>Completed: {selectedInternship.completed}</p>
-          <p>Message: {selectedInternship.message}</p>
-          <table>
-            <thead className="thead-dark">
-              <tr>
-                <th>Required Skills</th>
-                <th>Student Skills</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  {selectedInternship.iskills !== undefined
-                    ? selectedInternship.iskills.map((el, index) => {
+          <div className="row">
+            <table className="table bg-body table-borderless">
+              <tbody>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold mb-0">Title:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.iname}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Student Name:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sname}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Starts On: </p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.istarts.toString()}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Accepted:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.accepted}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Requested At:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.reqAt.toString()}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Completed:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.completed}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Location:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.iloc}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Message:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.message}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Duration:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.idur}</p>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Stipend:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.istip}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Type:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.itype}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Required Skills</p>
+
+                    {selectedInternship.iskills !== undefined
+                      ? selectedInternship.iskills.map((el, index) => {
+                          return (
+                            <div key={index}>
+                              {el.name} <br />
+                            </div>
+                          );
+                        })
+                      : ""}
+                  </td>
+
+                  <td>
+                    <p className="font-weight-bold">Student Skills</p>
+
+                    {selectedInternship.sskill !== undefined
+                      ? selectedInternship.sskill.map((el, index) => {
+                          return (
+                            <div key={index}>
+                              {el.name} <br />
+                            </div>
+                          );
+                        })
+                      : ""}
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div>
+                      <p className="font-weight-bold">Description:</p>
+                      {selectedInternship.idesc.map((data, index) => {
                         return (
                           <div key={index}>
-                            {el.name} <br />
+                            {index + 1}: {data}
+                            <br />
                           </div>
                         );
-                      })
-                    : ""}
-                </td>
-                <td>
-                  {selectedInternship.sskill !== undefined
-                    ? selectedInternship.sskill.map((el, index) => {
+                      })}
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p className="font-weight-bold">Intended Participants:</p>{" "}
+                      {selectedInternship.ipart.map((data, index) => {
                         return (
                           <div key={index}>
-                            {el.name} <br />
+                            {index + 1}: {data}
+                            <br />
                           </div>
                         );
-                      })
-                    : ""}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <br></br>
-          <p>Internship Duration: {selectedInternship.idur}</p>
-          <p>Internship Description: {selectedInternship.idesc}</p>
-          <p>Internship Stipend: {selectedInternship.istip}</p>
-          <p>Internship Duration: {selectedInternship.idur}</p>
-          <p>Internship Intended Participants: {selectedInternship.ipart}</p>
-          <p>Internship Type: {selectedInternship.itype}</p>
+                      })}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div id="stuAca" className="container tab-pane fade">
           <br></br>
-          <p>College Name: {selectedInternship.scname}</p>
-          <p>Degree CGPA: {selectedInternship.sdegcgpa}</p>
-          <p>Project 1: {selectedInternship.sp1}</p>
-          <p>Project 2: {selectedInternship.sp2}</p>
-          <p>University: {selectedInternship.suniv}</p>
-          <p>USN: {selectedInternship.susn}</p>
-          <p>PU College Name: {selectedInternship.spu}</p>
-          <p>PU College Percentage: {selectedInternship.spugrade}</p>
-          <p>School Name: {selectedInternship.sschool}</p>
-          <p>School Percentage: {selectedInternship.sgrade10}</p>
+          <div className="row">
+            <table className="table bg-body table-borderless">
+              <tbody>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">College Name:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.scname}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">USN:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.susn}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Degree CGPA:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sdegcgpa}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">University:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.suniv}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Project 1:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sp1}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Project 2:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sp2}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">PU College Name:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.spu}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">PU College Percentage:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.spugrade}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">School Name:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sschool}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">School Percentage:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sgrade10}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div id="stuPer" className="container tab-pane fade">
           <br></br>
-          <p>Student Email: {selectedInternship.semail}</p>
-          <p>Phone Number: {selectedInternship.sphno}</p>
-          <p>Gender: {selectedInternship.sgen}</p>
-          <p>Hobbies: {selectedInternship.shob}</p>
-          <p>Father Name: {selectedInternship.sfname}</p>
-          <p>Mother Name: {selectedInternship.smname}</p>
-          <p>Date Of Birth: {selectedInternship.sdob.toString()}</p>
+          <div className="row">
+            <table className="table bg-body table-borderless">
+              <tbody>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Student Email:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.semail}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Phone Number:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sphno}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Date Of Birth:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sdob.toString()}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Father Name:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sfname}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Mother Name:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.smname}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Gender:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.sgen}</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="text-right">
+                    <p className="font-weight-bold">Hobbies:</p>
+                  </td>
+                  <td>
+                    <p>{selectedInternship.shob}</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -455,7 +689,7 @@ function CompanyEnquiry(props) {
         </div>
       </div>
       <div className="modal fade" id="viewInternship">
-        <div className="modal-dialog modal-lg">
+        <div className="modal-dialog modal-md">
           <div className="modal-content">
             <div className="modal-header bg-info text-white">
               <h5 className="modal-title">Details</h5>

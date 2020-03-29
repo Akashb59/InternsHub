@@ -24,7 +24,8 @@ export const profile = user => {
       return res.data;
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -49,7 +50,8 @@ export const roles = () => {
     })
     .catch(err => {
       console.log(err);
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
     });
 };
 
@@ -79,7 +81,8 @@ export const signup = newUser => {
       return res.data;
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -108,7 +111,8 @@ export const login = user => {
       return res.data;
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -122,7 +126,8 @@ export const forgotPassword = user => {
       email: user.email
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -139,7 +144,8 @@ export const updatePass = pass => {
       passwordConfirm: pass.passwordConfirm
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -154,7 +160,8 @@ export const newPass = (pass, token) => {
       passwordConfirm: pass.passwordConfirm
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };

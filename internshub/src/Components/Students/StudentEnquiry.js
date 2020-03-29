@@ -119,7 +119,7 @@ function StudentEnquiry() {
   return (
     <div className="container pt-4">
       <h2 className="text-center display-4 bg-secondary rounded text-white pb-3 small-header small-head-padding">
-        My Enquiries
+        <i className="fas fa-clipboard-check"></i> My Enquiries
       </h2>
       <div>
         <h2>Requested / Ongoing Internships</h2>

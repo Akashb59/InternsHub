@@ -21,7 +21,8 @@ export const skills = () => {
     })
     .catch(err => {
       console.log(err);
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
     });
 };
 
@@ -44,7 +45,8 @@ export const role = roleType => {
       return res.data;
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -65,7 +67,8 @@ export const addressform = address => {
       pincode: address.pincode
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -79,7 +82,8 @@ export const createSkill = skill => {
       skill_name: skill
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -99,7 +103,8 @@ export const editAddressForm = editAddress => {
       pincode: editAddress.pincode
     })
     .catch(err => {
-      showAlert("error", `${err.response.data.message}`);
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
 };
@@ -115,7 +120,8 @@ export const editUserInfo = details => {
       jwt: localStorage.usertoken
     }
   }).catch(err => {
-    showAlert("error", `${err.response.data.message}`);
+    if (err.value !== undefined)
+      showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
 };

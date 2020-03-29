@@ -180,6 +180,9 @@ th {
     font-size: 2.5rem;
     font-weight: 300; }
 
+  .small-head-padding {
+    padding-top: 1rem; }
+
   .small-table {
     display: none; }
 

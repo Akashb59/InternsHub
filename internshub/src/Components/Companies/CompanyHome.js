@@ -544,7 +544,7 @@ function CompanyHome(props) {
                   <div className="input-group">
                     <div className="input-group-prepend">
                       <span className="input-group-text">
-                        <i className="fas fa-code"></i>
+                        <i className="fas fa-clipboard"></i>
                       </span>
                     </div>
                     <input

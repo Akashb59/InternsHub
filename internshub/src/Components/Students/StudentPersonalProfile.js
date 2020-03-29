@@ -181,12 +181,12 @@ function StudentPersonalProfile(props) {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container py-4">
       {/* <p>{console.log(studPersonalProfile.dob)}</p> */}
       <h2 className="text-center display-4 bg-secondary text-white py-2 rounded small-header">
         <i className="fas fa-user-edit"></i> Edit Personal Information
       </h2>
-      <div className="card bg-body p-3 rounded card-form">
+      <div className="card bg-body p-2 mt-4  rounded card-form">
         <div className="card-body">
           <form onSubmit={handleSubmit}>
             <br></br>
