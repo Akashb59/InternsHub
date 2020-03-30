@@ -127,7 +127,7 @@ function Signup(props) {
   return (
     <div className="container">
       <div className="row py-5">
-        <div className="col-lg-6 d-none d-lg-block">
+        {/* <div className="col-lg-6 d-none d-lg-block">
           <h1 className="login-quote pt-5">
             The only person you are <strong>destined to become </strong>is the
             person you<strong> decide to be</strong>.
@@ -138,8 +138,8 @@ function Signup(props) {
             </div>
             <div className="p-4 align-self-end"></div>
           </div>
-        </div>
-        <div className="col-lg-6">
+        </div> */}
+        <div className="col-lg-8 offset-lg-2">
           <div className="card bg-body p-3 rounded card-form">
             <div className="card-body">
               <div className="text-center">

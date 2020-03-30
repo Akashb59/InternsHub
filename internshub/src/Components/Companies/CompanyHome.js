@@ -446,12 +446,13 @@ function CompanyHome(props) {
                     options={{
                       title: {
                         display: true,
-                        text: "Average Enquiries per Week",
-                        fontSize: 20
+                        text: "Average Enquiries Per Week",
+                        fontSize: 20,
+                        fontWeight: 900
                       },
                       legend: {
                         display: true,
-                        position: "right"
+                        position: "top"
                       }
                     }}
                   />

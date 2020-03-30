@@ -86,6 +86,16 @@ function Navbar(props) {
   const loginRegLink = (
     <ul className="navbar-nav ml-auto">
       <li className="nav-item">
+        <Link to="/about" className="nav-link">
+          About
+        </Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/contact" className="nav-link">
+          Contact
+        </Link>
+      </li>
+      <li className="nav-item">
         <Link to="/login" className="nav-link">
           Log in
         </Link>
@@ -261,6 +271,16 @@ function Navbar(props) {
 
   const userLink = (
     <ul className="navbar-nav ml-auto">
+      <li className="nav-item">
+        <a href="/about" className="nav-link">
+          About
+        </a>
+      </li>
+      <li className="nav-item">
+        <a href="/contact" className="nav-link">
+          Contact
+        </a>
+      </li>
       {localStorage.type === "Student"
         ? stuLink
         : localStorage.type === "Company"

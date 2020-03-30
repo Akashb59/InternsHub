@@ -73,6 +73,25 @@ export const addressform = address => {
     });
 };
 
+export const sendContactInfo = contact => {
+  return axios
+    .post(`${ip}/api/v1/contact/`, {
+      headers: {
+        jwt: localStorage.usertoken
+      },
+      firstName: contact.firstName,
+      lastName: contact.lastName,
+      phone: contact.phone,
+      message: contact.message,
+      email: contact.email
+    })
+    .catch(err => {
+      if (err.value !== undefined)
+        showAlert("error", `${err.response.data.message}`);
+      console.log(err);
+    });
+};
+
 export const createSkill = skill => {
   return axios
     .post(`${ip}/api/v1/skillTypeMasters/`, {

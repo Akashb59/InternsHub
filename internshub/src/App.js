@@ -7,6 +7,8 @@ import {
 } from "./ProtectedRoute";
 
 import Landing from "./Components/General/Landing";
+import About from "./Components/General/About";
+import Contact from "./Components/General/Contact";
 import Navbar from "./Components/General/Navbar";
 import Footer from "./Components/General/Footer";
 import Forbidden from "./Components/General/Forbidden";
@@ -55,6 +57,8 @@ function App() {
         <div id="content-wrap">
           <Switch>
             <Route exact path="/" component={Landing} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/contact" component={Contact} />
             <Route exact path="/forbidden" component={Forbidden} />
             <Route exact path="/notFound" component={NotFound} />
 

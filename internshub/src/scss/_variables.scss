@@ -84,6 +84,7 @@ $light: $teal !default;
 $dark: $gray-600 !default;
 $dark-green: $dark-green !default;
 $smoke: $white !default;
+$gray-dark: $gray-800 !default;
 
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -98,7 +99,8 @@ $theme-colors: map-merge(
     "danger": $danger,
     "light": $light,
     "dark": $dark,
-    "dark-green": $dark-green
+    "dark-green": $dark-green,
+    "gray-dark": $gray-dark
   ),
   $theme-colors
 );

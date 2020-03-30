@@ -90,6 +90,7 @@ const skillTypeMasterRouter = require('./routes/skillTypeMasterRoutes');
 const studentRouter = require('./routes/studentRoutes');
 const AppError = require('./utils/appError');
 const enquiryRouter = require('./routes/enquiryRoutes');
+const contactRouter = require('./routes/contactRoutes');
 const globalErrorHandler = require('./controllers/errorController');
 
 app.all('*', function(req, res, next) {
@@ -117,6 +118,7 @@ app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/skillTypeMasters', skillTypeMasterRouter);
 app.use('/api/v1/students', studentRouter);
 app.use('/api/v1/enquiries', enquiryRouter);
+app.use('/api/v1/contact', contactRouter);
 app.use('/api/v1/userTypeMasters', userTypeMasterRouter);
 
 //10.Global error handling middleware

@@ -1,0 +1,32 @@
+extends baseEmail
+
+block content
+  p Hi Admin,
+  p We have a brand new request
+  p Please contact our valued customer!
+  table.btn.btn-primary(role='presentation', border='0', cellpadding='0', cellspacing='0')
+    tbody
+      tr
+        td(align='left')
+          table(role='presentation', border='0', cellpadding='0', cellspacing='0')
+            tbody
+              tr
+                td
+                  p Name: #{firstName}
+              tr
+                td
+              tr
+                td
+                  p Email: #{emailInfo}
+              tr
+                td
+              tr
+                td
+                  p phone: #{phone}
+              tr
+                td
+              tr
+                td
+                  p Message: #{message}
+  p - Auto-generated mail, InternsHub
+  
