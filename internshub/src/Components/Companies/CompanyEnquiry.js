@@ -791,7 +791,7 @@ function CompanyEnquiry(props) {
 
       <div id="acceptInternship" className="modal fade">
         <div className="modal-dialog modal-confirm modal-dialog-centered">
-          <div className="modal-content">
+          <div className="modal-content modal-responsive">
             <div className="modal-header">
               <div className="container">
                 <h4 className="modal-title">Are you sure</h4>

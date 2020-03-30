@@ -12,6 +12,7 @@
     "axios": "^0.19.2",
     "build-url": "^2.0.0",
     "chart.js": "^2.9.3",
+    "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
     "multiselect-dropdown-react": "^1.0.5",
     "react": "^16.12.0",

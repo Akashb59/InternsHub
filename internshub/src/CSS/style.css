@@ -198,7 +198,10 @@ th {
     margin-top: 1.5rem; }
 
   .card-form {
-    margin-bottom: 1rem; } }
+    margin-bottom: 1rem; }
+
+  .card-p p {
+    display: inline-block; } }
 @media (max-width: 575px) {
   .small-header {
     font-size: 2rem;
@@ -278,6 +281,9 @@ th {
 @media (min-width: 768px) {
   #collapse1 {
     display: block; } }
+@media (max-width: 415px) {
+  .modal-responsive {
+    width: 85%; } }
 .anyClass::-webkit-scrollbar {
   width: 5px; }
 

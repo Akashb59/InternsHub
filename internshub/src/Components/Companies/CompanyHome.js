@@ -49,7 +49,10 @@ function CompanyHome(props) {
   });
   const [options, setOptions] = useState([]);
   const [count, setCount] = useState(0);
+  const [countActive, setCountActive] = useState(0);
   const [countEnquiry, setcountEnquiry] = useState(0);
+  const [countAcceptedEnquiry, setCountAcceptedEnquiry] = useState(0);
+  const [countPendingEnquiry, setCountPendingEnquiry] = useState(0);
   const [technologyState, setTechnology] = useState({
     technology: []
   });
@@ -89,8 +92,19 @@ function CompanyHome(props) {
 
     companyInternships().then(res => {
       if (res) {
-        //console.log(res.data);
+        //console.log(res.data.data);
         setCount(res.data.results);
+        let c = 0;
+        const result = res.data.data.internship.map(currentInternship => {
+          const active = currentInternship.ends_on;
+
+          if (active >= Date.now()) {
+            c += 1;
+          }
+          return c;
+        });
+        //console.log(result[result.length - 1]);
+        setCountActive(result[result.length - 1]);
       }
     });
     companyEnquiries().then(res => {
@@ -139,6 +153,15 @@ function CompanyHome(props) {
           data => data.internship !== null
         );
         setcountEnquiry(internEnq.length);
+        const AcceptedEnq = res.data.data.enquiry.filter(
+          data => data.accepted === "Yes"
+        );
+        setCountAcceptedEnquiry(AcceptedEnq.length);
+        //console.log(AcceptedEnq.length);
+        const PendingEnq = res.data.data.enquiry.filter(
+          data => data.accepted === "No"
+        );
+        setCountPendingEnquiry(PendingEnq.length);
       }
     });
     company(localStorage.companyid).then(res => {
@@ -394,7 +417,29 @@ function CompanyHome(props) {
           <div className="row">
             <div className="col-md-9">
               <div className="row">
-                <div className="col-md-3"></div>
+                <div className="col-md-3 mb-4">
+                  <div className="card text-center">
+                    <div className="card-header bg-dark text-white pb-1">
+                      <h5>Statistics</h5>
+                    </div>
+                    <div className="card-body p-2">
+                      <ul className="list-group">
+                        <li className="list-group-item px-0 text-muted pb-0">
+                          Total Internships:
+                          <h5> {count} </h5>
+                        </li>
+                        <li className="list-group-item px-0 text-muted pb-0">
+                          Total Enquiries:
+                          <h5> {countEnquiry} </h5>
+                        </li>
+                        <li className="list-group-item px-0 text-muted pb-0">
+                          Accepted Enquiries:
+                          <h5> {countAcceptedEnquiry} </h5>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
                 <div className="col-md-9 chart">
                   <Line
                     data={enqChart}
@@ -418,7 +463,7 @@ function CompanyHome(props) {
                 <div className="card-body py-3">
                   <h3>Internships</h3>
                   <h4 className="display-4">
-                    <GiDesk /> {count}
+                    <GiDesk /> {countActive}
                   </h4>
                   <Link
                     to="viewInternships"
@@ -432,7 +477,8 @@ function CompanyHome(props) {
                 <div className="card-body py-3">
                   <h3>Enquiries</h3>
                   <h4 className="display-4">
-                    <i className="fas fa-clipboard-check"></i> {countEnquiry}
+                    <i className="fas fa-clipboard-check"></i>{" "}
+                    {countPendingEnquiry}
                   </h4>
                   <Link
                     to="companyEnquiry"

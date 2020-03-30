@@ -223,6 +223,11 @@ th {
   .card-form {
     margin-bottom: 1rem;
   }
+  .card-p {
+    p {
+      display: inline-block;
+    }
+  }
 }
 @media (max-width: 575px) {
   .small-header {
@@ -329,6 +334,11 @@ th {
 @media (min-width: 768px) {
   #collapse1 {
     display: block;
+  }
+}
+@media (max-width: 415px) {
+  .modal-responsive {
+    width: 85%;
   }
 }
 

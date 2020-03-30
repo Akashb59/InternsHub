@@ -396,7 +396,7 @@ function ViewInternships(props) {
       </h2>
       <div id="delInternship" className="modal fade">
         <div className="modal-dialog modal-confirm modal-dialog-centered">
-          <div className="modal-content">
+          <div className="modal-content modal-responsive">
             <div className="modal-header">
               <div className="icon-box">
                 <i className="fa fa-times" aria-hidden="true"></i>

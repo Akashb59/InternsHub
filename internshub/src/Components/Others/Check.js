@@ -1,93 +1,123 @@
-import React, { useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import { companyEnquiries } from "./../Utilities/CompanyFunctions";
+import React, { useEffect } from "react";
+import $ from "jquery";
 function Check() {
-  const [enqChart, setEnqChart] = useState({
-    labels: ["Previous week", "Previous week", "Previous week", "Current week"],
-    datasets: [
-      {
-        label: "Enquiries",
-        fill: false,
-        lineTension: 0.4,
-        backgroundColor: "rgba(75,192,192,1)",
-        borderColor: "rgba(0,0,0,1)",
-        borderWidth: 2,
-        data: [65, 59, 10, 81]
-      }
-    ]
-  });
-
   useEffect(() => {
     document.title = "InternsHub | Check";
 
-    companyEnquiries().then(res => {
-      if (res) {
-        //console.log(res.data.data.enquiry);
-        const array = res.data.data.enquiry.map(el => {
-          var date = new Date(el.reqAt);
-          return date.getTime();
-        });
-        //console.log(array);
-        //console.log(7 * 24 * 60 * 60 * 1000);
-        //console.log(Date.now());
-        //console.log(Date.now() - 7 * 24 * 60 * 60 * 1000);
-        let count1 = 0;
-        let count2 = 0;
-        let count3 = 0;
-        let count4 = 0;
-        let result = [];
-        const w1 = Date.now() - 7 * 24 * 60 * 60 * 1000;
-        const w2 = Date.now() - 2 * 7 * 24 * 60 * 60 * 1000;
-        const w3 = Date.now() - 3 * 7 * 24 * 60 * 60 * 1000;
-        // eslint-disable-next-line
-        array.map(el => {
-          if (el > w1) count1 += 1;
-          else if (el > w2) count2 += 1;
-          else if (el > w3) count3 += 1;
-          else count4 += 1;
-        });
-        result[3] = count1;
-        result[2] = count2;
-        result[1] = count3;
-        result[0] = count4;
-        console.log(result);
-        res = [
-          {
-            label: "Enquiries",
-            fill: false,
-            lineTension: 0.4,
-            backgroundColor: "rgba(75,192,192,1)",
-            borderColor: "rgba(0,0,0,1)",
-            borderWidth: 2,
-            data: result
-          }
-        ];
-        setEnqChart({ ...enqChart, datasets: res });
-      }
+    $(".port-item").click(function() {
+      $(".show").removeClass("show");
+      $(".show").addClass("hide");
     });
-    // eslint-disable-next-line
+
+    // $(document).on("click", '[data-toggle="lightbox"]', function(e) {
+    //   e.preventDefault();
+    //   $(this).ekkoLightbox();
+    // });
   }, []);
 
   return (
     <div className="container">
-      <div className="row">
-        <div className="col-md-5 offset-md-1">
-          <Line
-            data={enqChart}
-            options={{
-              title: {
-                display: true,
-                text: "Average Enquiries per Week",
-                fontSize: 20
-              },
-              legend: {
-                display: true,
-                position: "right"
-              }
-            }}
-          />
+      <header id="main-header">
+        <div className="row no-gutters">
+          <div className="col-lg-8 col-md-7">
+            <div className="d-flex flex-column">
+              <div className="p-5 bg-dark text-white">
+                <div className="d-flex flex-row justify-content-between align-items-center">
+                  <h1 className="display-4">John Doe</h1>
+                  <div className="d-none d-md-block">
+                    <a href="http://twitter.com" className="text-white">
+                      <i className="fab fa-twitter" />
+                    </a>
+                  </div>
+                  <div>
+                    <a href="http://facebook.com" className="text-white">
+                      <i className="fab fa-facebook" />
+                    </a>
+                  </div>
+                  <div>
+                    <a href="http://instagram.com" className="text-white">
+                      <i className="fab fa-instagram" />
+                    </a>
+                  </div>
+                  <div>
+                    <a href="http://github.com" className="text-white">
+                      <i className="fab fa-github" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="p-4 bg-black">
+                Experienced Full Stack Web Developer
+              </div>
+              <div>
+                <div className="d-flex flex-row text-white align-items-stretch text-center">
+                  <div
+                    className="port-item p-4 bg-primary"
+                    data-toggle="collapse"
+                    data-target="#home"
+                  >
+                    <i className="fas fa-home fa-2x d-block" />
+                    <span className="d-none d-sm-block">Home</span>
+                  </div>
+                  <div
+                    className="port-item p-4 bg-success"
+                    data-toggle="collapse"
+                    data-target="#resume"
+                  >
+                    <i className="fas fa-graduation-cap fa-2x d-block" />
+                    <span className="d-none d-sm-block">Resume</span>
+                  </div>
+                  <div
+                    className="port-item p-4 bg-warning"
+                    data-toggle="collapse"
+                    data-target="#work"
+                  >
+                    <i className="fas fa-folder-open fa-2x d-block" />
+                    <span className="d-none d-sm-block">Work</span>
+                  </div>
+                  <div
+                    className="port-item p-4 bg-danger"
+                    data-toggle="collapse"
+                    data-target="#contact"
+                  >
+                    <i className="fas fa-envelope fa-2x d-block" />
+                    <span className="d-none d-sm-block">Contact</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="col-sm-4 offset-sm-4"></div>
+      </header>
+      <div id="home" className="collapse" style={{ transition: "all .5s" }}>
+        <h2>Welcome To My Page</h2>
+        <p className="lead">
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, ut!
+        </p>
+      </div>
+      <div id="resume" className="collapse" style={{ transition: "all .5s" }}>
+        <div className="card card-body bg-success text-white py-5">
+          <h2>My Resume</h2>
+          <p className="lead">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, ut!
+          </p>
+        </div>
+      </div>
+      <div id="work" className="collapse" style={{ transition: "all .5s" }}>
+        <div className="card card-body bg-warning text-white py-5">
+          <h2>My Work</h2>
+          <p className="lead">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, ut!
+          </p>
+        </div>
+      </div>
+      <div id="contact" className="collapse" style={{ transition: "all .5s" }}>
+        <div className="card card-body bg-danger text-white py-5">
+          <h2>Contact</h2>
+          <p className="lead">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nihil, ut!
+          </p>
+        </div>
       </div>
     </div>
   );

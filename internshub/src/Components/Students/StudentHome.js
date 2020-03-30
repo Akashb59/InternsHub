@@ -213,7 +213,7 @@ function StudentHome() {
               </div>
             </div>
           </div>
-          <div id="collapse1" class="collapse show mt-3 sticky-top">
+          <div id="collapse1" className="collapse show mt-3 sticky-top">
             <div className="card bg-body px-3 rounded-lg card-form anyClass">
               <div className="card-body small-filter ">
                 <div className="text-center">
@@ -528,7 +528,7 @@ function StudentHome() {
 
         <div className="col-md-8 col-lg-9">
           <h2 className="text-center text-right small-header mb-3 count-disp">
-            <i class="fas fa-sliders-h"></i> {count} Listings
+            <i className="fas fa-sliders-h"></i> {count} Listings
           </h2>
           {internArray.map(function(intern) {
             return (
@@ -543,9 +543,8 @@ function StudentHome() {
                         <h6 className="card-subtitle small-intern-subtitle text-muted">
                           Company: {intern.company}
                         </h6>
-                        <br></br>
                       </div>
-                      <div className="col-sm-6 col-md-4 col-lg-3">
+                      <div className="col-sm-6 col-md-4 col-lg-3 mt-3">
                         <img
                           src={`${localStorage.ip}/Images/${intern.photo}`}
                           className="card-img small-image"
@@ -555,24 +554,24 @@ function StudentHome() {
                     </div>
                     <hr />
                     <div className="row d-flex">
-                      <div className="col-4 offset-2 offset-lg-0 col-lg-2">
-                        <p style={{ color: "grey" }}>Start Date:</p>
+                      <div className="col-sm-4 offset-sm-2 offset-lg-0 col-lg-2 card-p">
+                        <p style={{ color: "grey" }}>Start Date:</p>{" "}
                         <p>{intern.startsOn}</p>
                       </div>
-                      <div className="col-4 col-lg-2">
-                        <p style={{ color: "grey" }}>Location:</p>
+                      <div className="col-sm-4 col-lg-2 card-p">
+                        <p style={{ color: "grey" }}>Location:</p>{" "}
                         <p>{intern.location}</p>
                       </div>
-                      <div className="col-4 col-lg-2">
-                        <p style={{ color: "grey" }}>Duration:</p>
+                      <div className="col-sm-4 col-lg-2 card-p">
+                        <p style={{ color: "grey" }}>Duration:</p>{" "}
                         <p>{intern.duration} Months</p>
                       </div>
-                      <div className="col-4 col-lg-2">
-                        <p style={{ color: "grey" }}>Category:</p>
+                      <div className="col-sm-4 col-lg-2 card-p">
+                        <p style={{ color: "grey" }}>Category:</p>{" "}
                         <p>{intern.category}</p>
                       </div>
-                      <div className="col-4 col-lg-2">
-                        <p style={{ color: "grey" }}>Stipend:</p>
+                      <div className="col-sm-4 col-lg-2 card-p">
+                        <p style={{ color: "grey" }}>Stipend:</p>{" "}
                         <p>Rs. {intern.stipend}/-</p>
                       </div>
                     </div>

@@ -10,6 +10,7 @@ import {
 import Select from "react-select";
 import { showAlert } from "../Utilities/Alerts";
 let final;
+let src;
 
 function StudentDetails(props) {
   const [studentProfile, setStudentProfile] = useState({
@@ -18,6 +19,7 @@ function StudentDetails(props) {
   const [resume, setResume] = useState("Not Uploaded Resume");
   const [options, setOptions] = useState([]);
   const [select, setSelect] = useState([]);
+  const [resumeDisplay, setResumeDisplay] = useState("");
   useEffect(() => {
     document.title = "InternsHub | Profile";
     skills().then(res => {
@@ -39,6 +41,7 @@ function StudentDetails(props) {
         });
         //console.log(res.data.student[0].resume);
         if (res.data.student[0].resume !== undefined) {
+          setResumeDisplay(res.data.student[0].resume);
           setResume("Resume Uploaded Successfully");
         }
         // if (selected.length === 0) selected = [];
@@ -108,15 +111,96 @@ function StudentDetails(props) {
     });
   };
 
+  if (resumeDisplay !== "") {
+    src = `${localStorage.ip}/Resume/${resumeDisplay}`;
+  }
+
   return (
-    <div className="container">
-      <div className="jumbotron">
-        <h3 className="text-center">
-          <b>Skills and Resume</b>
-        </h3>
-        <form onSubmit={handleSubmit}>
-          <div className="col-sm-8 mx-auto display-4 text-center"></div>
-          {/* <center>
+    <div className="container pt-4">
+      <h2 className="text-center display-4 bg-secondary text-white py-2 rounded">
+        <i className="fas fa-pencil-alt" />
+        Skills and Resume
+      </h2>
+      {/* <header className="bg-secondary text-white" id="page-header">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 m-auto text-center">
+              <h1>Skills and Resume</h1>
+              <p>
+                Please Upload your Resume and Fill in your Skills for Applying
+                to Internships{" "}
+              </p>
+            </div>
+          </div>
+        </div>
+      </header> */}
+      <div className="row mt-4">
+        <div className="col-md-6">
+          <form onSubmit={handleSubmit}>
+            <div className="col-sm-8 mx-auto display-4 text-center"></div>
+
+            <div className="form-group">
+              <label htmlFor="skill">
+                <p className="blockquote">Add/Edit Skills: </p>
+              </label>
+              {final !== [] ? selectLink : {}}
+            </div>
+            <button className="btn btn-success btn-block" type="submit">
+              Submit
+            </button>
+          </form>
+          <form onSubmit={handleSubmit1}>
+            <div className="form-group mt-5">
+              <label htmlFor="resume">
+                <p className="blockquote">Add/Edit Resume: </p>
+              </label>{" "}
+              <div className="inline-block">
+                <input
+                  type="file"
+                  name="resume"
+                  id="resume"
+                  onChange={handleFile}
+                  accept="application/pdf"
+                />
+                <small className="form-text text-muted" id="fileHelp">
+                  Max 1Mb size
+                </small>
+              </div>
+            </div>
+
+            <button className="btn btn-success btn-block" type="submit">
+              Submit
+            </button>
+            <br></br>
+          </form>
+        </div>
+        <div className="col-md-6 ml-0">
+          <p className="blockquote">Status: {resume}</p>
+          {resume !== "Resume Uploaded Successfully" ? (
+            <div>
+              <h3 className="pt-2">
+                There is Currently No Resume to be Displayed.
+              </h3>{" "}
+              <h4 className="pt-2">Please upload your resume!</h4>
+            </div>
+          ) : (
+            <iframe
+              className="small-resume"
+              src={src}
+              title="student"
+              width="100%"
+              height="400px"
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default StudentDetails;
+
+/* <center>
             {select !== null
               ? select.map(el => {
                   return (
@@ -127,47 +211,4 @@ function StudentDetails(props) {
                   );
                 })
               : ""}
-          </center> */}
-          <div className="form-group">
-            <label htmlFor="skill">
-              <b>Add/Edit Skills: </b>
-            </label>
-            {final !== [] ? selectLink : {}}
-          </div>
-          <button className="btn btn-success" type="submit">
-            Submit
-          </button>
-        </form>
-        <br></br>
-        <br></br>
-        <form onSubmit={handleSubmit1}>
-          <div className="col-sm-8 mx-auto display-4 text-center"></div>
-          <div className="form-group">
-            <label htmlFor="resume">
-              <b>Add/Edit Resume: </b>
-            </label>
-            <br></br>
-            <input
-              type="file"
-              name="resume"
-              id="resume"
-              onChange={handleFile}
-              accept="application/pdf"
-            />{" "}
-            <small class="form-text text-muted" id="fileHelp">
-              Max 1Mb size
-            </small>
-          </div>
-
-          <button className="btn btn-success" type="submit">
-            Submit
-          </button>
-          <br></br>
-        </form>
-        Status: {resume}
-      </div>
-    </div>
-  );
-}
-
-export default StudentDetails;
+          </center> */
