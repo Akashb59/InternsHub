@@ -359,17 +359,19 @@ function Example(props) {
             </div>
             <form onSubmit={handleSubmit}>
               <div className="modal-body">
-                <p className="lead font-weight-bold">Academic Information:</p>{" "}
+                <p className="lead font-weight-bold">Academic Information:</p>
                 <p className="lead"> {display.academic}</p>
                 <p className="lead font-weight-bold">Personal Information: </p>
                 <p className="lead">{display.personal}</p>
                 <p className="lead font-weight-bold">
-                  Skills and Resume Information:{" "}
+                  Skills and Resume Information:
                 </p>
-                {display.resSkill}
+                <p className="lead"> {display.resSkill}</p>
                 <br></br>
                 <div className="form-group">
-                  <label htmlFor="info">Message: </label>
+                  <p className="lead font-weight-bold">
+                    <label htmlFor="info">Message: </label>
+                  </p>
                   <input
                     type="text"
                     className="form-control"

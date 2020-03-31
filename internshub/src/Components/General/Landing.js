@@ -18,7 +18,7 @@ function Landing() {
         });
       });
     });
-    const ip = "http://192.168.1.9:3000";
+    const ip = "http://192.168.1.11:3000";
     localStorage.setItem("ip", ip);
   }, []);
 
@@ -180,17 +180,17 @@ function Landing() {
                 >
                   <i className="fas fa-play fa-3x" />
                 </Link>
-                <h1>See What We Do</h1>
+                <h1 className="pt-2">More About Us</h1>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <div class="modal fade" id="videoModal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <button class="close" data-dismiss="modal">
+      <div className="modal fade" id="videoModal">
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-body">
+              <button className="close" data-dismiss="modal">
                 <span>&times;</span>
               </button>
               <iframe

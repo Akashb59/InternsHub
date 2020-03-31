@@ -13,7 +13,7 @@ function Contact() {
   });
   useEffect(() => {
     document.title = "InternsHub | Home";
-    const ip = "http://192.168.1.9:3000";
+    const ip = "http://192.168.1.11:3000";
     localStorage.setItem("ip", ip);
   }, []);
   const handleChange = event => {

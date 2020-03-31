@@ -26,7 +26,7 @@ function Signup(props) {
 
   useEffect(() => {
     document.title = "InternsHub | SignUp";
-    const ip = "http://192.168.1.9:3000";
+    const ip = "http://192.168.1.11:3000";
     localStorage.setItem("ip", ip);
     roles().then(res => {
       if (res) {

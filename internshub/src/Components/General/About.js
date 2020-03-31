@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 function About() {
   useEffect(() => {
     document.title = "InternsHub | Home";
-    const ip = "http://192.168.1.9:3000";
+    const ip = "http://192.168.1.11:3000";
     localStorage.setItem("ip", ip);
   }, []);
   return (
@@ -14,8 +14,8 @@ function About() {
             <div className="col-md-6 m-auto text-center">
               <h1>About Us</h1>
               <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quas,
-                temporibus?
+                We strive to provide you with a very good experience throughout
+                our website
               </p>
             </div>
           </div>
@@ -36,12 +36,12 @@ function About() {
                 matter more than your university degree.
               </p>
               <p>
-                {"{"}" "{"}"}A world where you do not have to wait till 21 to
-                taste your first work experience (and get a rude shock that it
-                is nothing like you had imagine it to be). A world where you
-                graduate fully assured, fully confident, and fully prepared to
-                stake claim on your place in the world. At Internshala, we are
-                making this dream a reality.
+                A world where you do not have to wait till 21 to taste your
+                first work experience (and get a rude shock that it is nothing
+                like you had imagine it to be). A world where you graduate fully
+                assured, fully confident, and fully prepared to stake claim on
+                your place in the world. At Internshala, we are making this
+                dream a reality.
               </p>
               <p>
                 Internships allow you to test out specific techniques learned in
@@ -64,10 +64,10 @@ function About() {
             <div className="col-md-4">
               <div className="card bg-danger text-white text-center">
                 <div className="card-body">
-                  <i className="fas fa-building fa-3x" />
-                  <h3>Sample Heading</h3>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Molestias, adipisci.
+                  <i className="fas fa-shopping-bag fa-3x"></i>
+                  <h3>Many Opportunities</h3>
+                  We have a huge collection of Internships across all domains
+                  and fields for your needs
                 </div>
               </div>
             </div>
@@ -75,9 +75,9 @@ function About() {
               <div className="card bg-dark text-white text-center">
                 <div className="card-body">
                   <i className="fas fa-bullhorn fa-3x" />
-                  <h3>Sample Heading</h3>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Molestias, adipisci.
+                  <h3>Internships</h3>
+                  This is what all graduates do to get into dream companies and
+                  we in InternsHub help you with the same
                 </div>
               </div>
             </div>
@@ -85,9 +85,9 @@ function About() {
               <div className="card bg-danger text-white text-center">
                 <div className="card-body">
                   <i className="fas fa-comments fa-3x" />
-                  <h3>Sample Heading</h3>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Molestias, adipisci.
+                  <h3>Chat Support</h3>
+                  We at InternsHub are striving to provide you with 24/7 help
+                  support for all your queries
                 </div>
               </div>
             </div>

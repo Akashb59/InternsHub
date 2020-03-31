@@ -33,12 +33,12 @@ const studentSchema = new mongoose.Schema(
       ref: 'User',
       required: true
     },
-    internship: [
-      {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Internship'
-      }
-    ],
+    // internship: [
+    //   {
+    //     type: mongoose.Schema.ObjectId,
+    //     ref: 'Internship'
+    //   }
+    // ],
     skills: [
       {
         type: mongoose.Schema.ObjectId,

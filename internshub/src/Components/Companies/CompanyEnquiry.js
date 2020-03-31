@@ -702,30 +702,33 @@ function CompanyEnquiry(props) {
               <div className="jumbotron">
                 {selectedInternship !== {} ? selectLink : <p>Loading</p>}
               </div>
-              <div className="modal-footer">
-                {selectedInternship.accepted === "Yes" ? (
+              <div className="modal-footer row">
+                <div className="col-md-9">
+                  {selectedInternship.accepted === "Yes" ? (
+                    <button
+                      className="btn btn-block btn-success"
+                      data-toggle="modal"
+                      data-target="#completedInternship"
+                    >
+                      <i className="fas fa-check-circle"></i> Mark Student as
+                      completed Internship
+                    </button>
+                  ) : (
+                    <button className="btn btn-block btn-success" disabled>
+                      <i className="fas fa-check-circle"></i> Mark Student as
+                      completed Internship
+                    </button>
+                  )}
+                </div>
+                <div className="col-md-3">
                   <button
-                    className="btn btn-success"
-                    data-toggle="modal"
-                    data-target="#completedInternship"
+                    type="button"
+                    className="btn btn-block btn-danger mt-3"
+                    data-dismiss="modal"
                   >
-                    <i className="fas fa-check-circle"></i> Mark Student as
-                    completed Internship
+                    Close
                   </button>
-                ) : (
-                  <button className="btn btn-success" disabled>
-                    <i className="fas fa-check-circle"></i> Mark Student as
-                    completed Internship
-                  </button>
-                )}
-
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  data-dismiss="modal"
-                >
-                  Close
-                </button>
+                </div>
               </div>
             </div>
           </div>
@@ -780,6 +783,7 @@ function CompanyEnquiry(props) {
                       showAlert("success", "Successfully Accpted Candidate");
                     }
                   });
+                  //Adding the completed internship to student profile can be checked in enquiries
                 }}
               >
                 Accept
