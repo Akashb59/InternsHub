@@ -82,6 +82,7 @@ function Navbar(props) {
     localStorage.removeItem("name");
     localStorage.removeItem("photo");
     props.history.push(`/`);
+    window.location.reload(true);
   };
   const loginRegLink = (
     <ul className="navbar-nav ml-auto">

@@ -22,7 +22,7 @@ export const company = () => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401, 404, 500].includes(err.response.status))
+      if ([400, 401].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -41,7 +41,7 @@ export const companyInternships = () => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    if ([400, 401, 404, 500].includes(err.response.status))
+    if ([400, 401].includes(err.response.status))
       showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
@@ -60,7 +60,7 @@ export const internship = id => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    if ([400, 401, 404, 500].includes(err.response.status))
+    if ([400, 401].includes(err.response.status))
       showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
@@ -79,7 +79,7 @@ export const companyEnquiries = () => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    if ([400, 401, 404, 500].includes(err.response.status))
+    if ([400, 401].includes(err.response.status))
       showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
@@ -98,7 +98,7 @@ export const internshipEnquiries = id => {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   }).catch(err => {
-    if ([400, 401, 404, 500].includes(err.response.status))
+    if ([400, 401].includes(err.response.status))
       showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
@@ -119,7 +119,7 @@ export const companyform = details => {
       user: details.user
     })
     .catch(err => {
-      if ([400, 401, 404, 500].includes(err.response.status))
+      if ([400, 401].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -145,7 +145,7 @@ export const hostInternship = internship => {
       stipend: internship.stipend
     })
     .catch(err => {
-      if ([400, 401, 404, 500].includes(err.response.status))
+      if ([400, 401].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -172,7 +172,7 @@ export const editInternship = internship => {
       stipend: internship.stipend
     })
     .catch(err => {
-      if ([400, 401, 404, 500].includes(err.response.status))
+      if ([400, 401].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -187,7 +187,7 @@ export const companyDescription = desc => {
       aboutCompany: desc.aboutCompany
     })
     .catch(err => {
-      if ([400, 401, 404, 500].includes(err.response.status))
+      if ([400, 401].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -203,7 +203,7 @@ export const companyTechnology = tech => {
       technology: tech.technology
     })
     .catch(err => {
-      if ([400, 401, 404, 500].includes(err.response.status))
+      if ([400, 401].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -219,7 +219,7 @@ export const internshipAccept = (id, accepted, completed) => {
       completed
     })
     .catch(err => {
-      if ([400, 401, 404, 500].includes(err.response.status))
+      if ([400, 401].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -236,7 +236,7 @@ export const editDetailsForm = editDetails => {
       establishedYear: editDetails.establishedYear
     })
     .catch(err => {
-      if ([400, 401, 404, 500].includes(err.response.status))
+      if ([400, 401].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });

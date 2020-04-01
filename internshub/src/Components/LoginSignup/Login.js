@@ -36,9 +36,9 @@ function Login(props) {
         //console.log(roleTypes);
         const newroleTypes = roleTypes.filter(role => role !== "Admin");
         setRoleState(newroleTypes);
+        if (newroleTypes !== "") setLoading("true");
       }
     });
-    setLoading("true");
   }, []);
 
   const validEmailRegex = RegExp(

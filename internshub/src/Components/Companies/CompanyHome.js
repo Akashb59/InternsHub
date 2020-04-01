@@ -182,6 +182,8 @@ function CompanyHome(props) {
         final = selected;
       }
     });
+    //Example if (options.length !== 0)
+    //pending
     setLoading("true");
     // eslint-disable-next-line
   }, []);
