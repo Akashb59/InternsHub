@@ -59,7 +59,7 @@ function Contact() {
       <section id="contact" className="py-3">
         <div className="container">
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-4 mt-3">
               <div className="card p-4">
                 <div className="card-body">
                   <h4>Get In Touch</h4>
@@ -78,7 +78,7 @@ function Contact() {
                 </div>
               </div>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-8 mt-3">
               <div className="card p-4">
                 <div className="card-body">
                   <form onSubmit={handleSubmit}>

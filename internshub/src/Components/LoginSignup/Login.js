@@ -111,7 +111,7 @@ function Login(props) {
           <div className="row">
             <div className="col-md-6 m-auto text-center">
               <h1 className="text-capitalize"> Log into your account</h1>
-              <p>
+              <p className="d-none d-md-block">
                 Get access to all your content by just logging in into your
                 account
               </p>

@@ -63,66 +63,81 @@ function AdminLogin(props) {
   };
 
   return (
-    <div className="container">
-      <div className="text-center ">
-        <h2 className="heading-secondary ma-bt-md">Log into your account</h2>
-      </div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            className="form-control"
-            placeholder="you@example.com"
-            value={adminLoginState.email}
-            onChange={handleChange}
-            required
-          />
-          {errors.email.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.email}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control "
-            placeholder="********"
-            value={adminLoginState.password}
-            onChange={handleChange}
-            required
-          />
-          {errors.password.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.password}</span>
-            </small>
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="role">Role</label>
-          <input
-            type="text"
-            name="role"
-            className="form-control "
-            disabled
-            value={adminLoginState.role}
-            required
-          />
-        </div>
-        <br></br>
-        <div className="row">
-          <div className="form-group ml-auto">
-            <button className="btn btn-success" type="submit">
-              Log In
-            </button>
+    <div>
+      <header id="page-header">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 m-auto text-center">
+              <h1 className="text-capitalize"> Log In As Admin</h1>
+              <p className="d-none d-md-block">
+                Get access to all Admin content by just logging in into admin
+                account
+              </p>
+            </div>
           </div>
         </div>
-      </form>
+      </header>
+      <div className="row py-5">
+        <div className="col-lg-6 offset-lg-3">
+          <div className="card bg-body p-3 rounded card-form">
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    className="form-control"
+                    placeholder="you@example.com"
+                    value={adminLoginState.email}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.email.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.email}</span>
+                    </small>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    className="form-control "
+                    placeholder="********"
+                    value={adminLoginState.password}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.password.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.password}</span>
+                    </small>
+                  )}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="role">Role</label>
+                  <input
+                    type="text"
+                    name="role"
+                    className="form-control "
+                    disabled
+                    value={adminLoginState.role}
+                    required
+                  />
+                </div>
+                <div className="form-group ml-auto">
+                  <button className="btn btn-block btn-success" type="submit">
+                    Log In
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

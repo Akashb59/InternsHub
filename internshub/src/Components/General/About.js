@@ -58,10 +58,10 @@ function About() {
           </div>
         </div>
       </section>
-      <section id="icon-boxes" className="p-5">
+      <section id="icon-boxes" className="p-2">
         <div className="container">
           <div className="row mb-4">
-            <div className="col-md-4">
+            <div className="col-md-4 mt-3">
               <div className="card bg-danger text-white text-center">
                 <div className="card-body">
                   <i className="fas fa-shopping-bag fa-3x"></i>
@@ -71,7 +71,7 @@ function About() {
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 mt-3">
               <div className="card bg-dark text-white text-center">
                 <div className="card-body">
                   <i className="fas fa-bullhorn fa-3x" />
@@ -81,13 +81,13 @@ function About() {
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 mt-3">
               <div className="card bg-danger text-white text-center">
                 <div className="card-body">
                   <i className="fas fa-comments fa-3x" />
                   <h3>Chat Support</h3>
                   We at InternsHub are striving to provide you with 24/7 help
-                  support for all your queries
+                  through email support for all your queries
                 </div>
               </div>
             </div>

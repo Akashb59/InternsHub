@@ -8,6 +8,7 @@ import {
   internship
 } from "../Utilities/CompanyFunctions";
 import { skills } from "../Utilities/CommonFunctions";
+import { load } from "./../Utilities/Utils";
 import Select from "react-select";
 import { showAlert } from "../Utilities/Alerts";
 let final;
@@ -125,6 +126,7 @@ function ViewInternships(props) {
     }
   });
   const [options, setOptions] = useState([]);
+  const [loading, setLoading] = useState("false");
   const [select, setSelect] = useState([]);
   const [info, setInfo] = useState({
     desc: [],
@@ -148,6 +150,7 @@ function ViewInternships(props) {
         setInternshipState(res.data.data.internship);
       }
     });
+    setLoading("true");
   }, []);
   const realoptions = options.map(option => ({
     value: option.skillid,
@@ -391,439 +394,459 @@ function ViewInternships(props) {
   }
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2 small-header">
-        <i className="fas fa-book" /> Hosted Internships
-      </h2>
-      <div id="delInternship" className="modal fade">
-        <div className="modal-dialog modal-confirm modal-dialog-centered">
-          <div className="modal-content modal-responsive">
-            <div className="modal-header">
-              <div className="icon-box">
-                <i className="fa fa-times" aria-hidden="true"></i>
+      {loading === "false" ? (
+        load(loading)
+      ) : (
+        <div>
+          <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2 small-header">
+            <i className="fas fa-book" /> Hosted Internships
+          </h2>
+          <div id="delInternship" className="modal fade">
+            <div className="modal-dialog modal-confirm modal-dialog-centered">
+              <div className="modal-content modal-responsive">
+                <div className="modal-header">
+                  <div className="icon-box">
+                    <i className="fa fa-times" aria-hidden="true"></i>
+                  </div>
+                  <h4 className="modal-title">Are you sure?</h4>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>
+                    Do you really want to delete the Internship? This process
+                    cannot be undone.
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-info"
+                    data-dismiss="modal"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      deleteInternship(localStorage.internshipId);
+                    }}
+                    className="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </div>
               </div>
-              <h4 className="modal-title">Are you sure?</h4>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-hidden="true"
-              >
-                &times;
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>
-                Do you really want to delete the Internship? This process cannot
-                be undone.
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-info"
-                data-dismiss="modal"
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  deleteInternship(localStorage.internshipId);
-                }}
-                className="btn btn-danger"
-              >
-                Delete
-              </button>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div className="modal fade" id="editInternship">
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header bg-info  text-white">
-              <h5 className="modal-title">Edit {internshipHostState.title}</h5>
-              <button className="close" data-dismiss="modal">
-                <span>&times;</span>
-              </button>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="modal-body">
-                <div className="form-group">
-                  <label htmlFor="title">Title: </label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-clipboard"></i>
-                      </span>
-                    </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="title"
-                      disabled
-                      //onBlur={validate}
-                      value={internshipHostState.title}
-                      onChange={handleChange}
-                      required
-                      maxLength="50"
-                      minLength="5"
-                      placeholder="Enter Title"
-                    />
-                  </div>
-                  {errors.title.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.title}</span>
-                    </small>
-                  )}
+          <div className="modal fade" id="editInternship">
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content">
+                <div className="modal-header bg-info  text-white">
+                  <h5 className="modal-title">
+                    Edit {internshipHostState.title}
+                  </h5>
+                  <button className="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="location">Location: </label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-map-marker-alt"></i>
-                      </span>
+                <form onSubmit={handleSubmit}>
+                  <div className="modal-body">
+                    <div className="form-group">
+                      <label htmlFor="title">Title: </label>
+                      <div className="input-group">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text">
+                            <i className="fas fa-clipboard"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="title"
+                          disabled
+                          //onBlur={validate}
+                          value={internshipHostState.title}
+                          onChange={handleChange}
+                          required
+                          maxLength="50"
+                          minLength="5"
+                          placeholder="Enter Title"
+                        />
+                      </div>
+                      {errors.title.length > 0 && (
+                        <small style={{ color: "red" }}>
+                          <span className="error">{errors.title}</span>
+                        </small>
+                      )}
                     </div>
-                    <input
-                      type="text"
-                      className="form-control"
-                      name="location"
-                      disabled
-                      //onBlur={validate}
-                      value={internshipHostState.location}
-                      onChange={handleChange}
-                      required
-                      maxLength="50"
-                      minLength="5"
-                      placeholder="Enter Location"
-                    />
-                  </div>
+                    <div className="form-group">
+                      <label htmlFor="location">Location: </label>
+                      <div className="input-group">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text">
+                            <i className="fas fa-map-marker-alt"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="location"
+                          disabled
+                          //onBlur={validate}
+                          value={internshipHostState.location}
+                          onChange={handleChange}
+                          required
+                          maxLength="50"
+                          minLength="5"
+                          placeholder="Enter Location"
+                        />
+                      </div>
 
-                  {errors.location.length > 0 && (
-                    <small style={{ color: "red" }}>
-                      <span className="error">{errors.location}</span>
-                    </small>
-                  )}
-                </div>
-                <div className="form-group">
-                  <label htmlFor="duration">Duration (In months):</label>
-                  <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fa fa-clock" aria-hidden="true"></i>
-                      </span>
+                      {errors.location.length > 0 && (
+                        <small style={{ color: "red" }}>
+                          <span className="error">{errors.location}</span>
+                        </small>
+                      )}
                     </div>
-                    <input
-                      type="number"
-                      className="form-control"
-                      name="duration"
-                      disabled
-                      //onBlur={validate}
-                      value={internshipHostState.duration}
-                      placeholder="Enter Duration"
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="starts_on">Starts On: </label>
-
-                  <div className="input-group mb-3">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fa fa-calendar" aria-hidden="true"></i>
-                      </span>
+                    <div className="form-group">
+                      <label htmlFor="duration">Duration (In months):</label>
+                      <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text">
+                            <i className="fa fa-clock" aria-hidden="true"></i>
+                          </span>
+                        </div>
+                        <input
+                          type="number"
+                          className="form-control"
+                          name="duration"
+                          disabled
+                          //onBlur={validate}
+                          value={internshipHostState.duration}
+                          placeholder="Enter Duration"
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
                     </div>
-                    <input
-                      type="date"
-                      className="form-control"
-                      name="starts_on"
-                      min={new Date(Date.now()).toISOString().substring(0, 10)}
-                      value={internshipHostState.starts_on}
-                      disabled
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="requiredSkills">Required Skills: </label>
+                    <div className="form-group">
+                      <label htmlFor="starts_on">Starts On: </label>
 
-                  {final !== [] ? selectLink : <p>Loading</p>}
-                  {/* {options.map(function(requiredskill) {
+                      <div className="input-group mb-3">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text">
+                            <i
+                              className="fa fa-calendar"
+                              aria-hidden="true"
+                            ></i>
+                          </span>
+                        </div>
+                        <input
+                          type="date"
+                          className="form-control"
+                          name="starts_on"
+                          min={new Date(Date.now())
+                            .toISOString()
+                            .substring(0, 10)}
+                          value={internshipHostState.starts_on}
+                          disabled
+                          onChange={handleChange}
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label htmlFor="requiredSkills">Required Skills: </label>
+
+                      {final !== [] ? selectLink : <p>Loading</p>}
+                      {/* {options.map(function(requiredskill) {
               return (
                 <option key={requiredskill} value={requiredskill}>
                   {requiredskill}
                 </option>
               );
             })} */}
-                </div>
-                <div className="row">
-                  <div className="sm-col-4">
-                    <table className="table bg-white table-borderless">
-                      <tbody>
-                        <tr>
-                          <th>Categories:</th>
-                          <td>
-                            {" "}
-                            <div className="custom-control custom-radio custom-control-inline">
-                              <input
-                                type="radio"
-                                className="custom-control-input"
-                                id="defaultInline1"
-                                name="categories"
-                                checked={
-                                  internshipHostState.categories === "Fulltime"
-                                }
-                                value="Fulltime"
-                                disabled
-                                onChange={handleChange}
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="defaultInline1"
-                                style={{ color: "black" }}
-                              >
-                                Full Time
-                              </label>
-                            </div>
-                          </td>
-                          <td>
-                            {" "}
-                            <div className="custom-control custom-radio custom-control-inline">
-                              <input
-                                type="radio"
-                                name="categories"
-                                className="custom-control-input"
-                                id="defaultInline2"
-                                checked={
-                                  internshipHostState.categories === "Parttime"
-                                }
-                                value="Parttime"
-                                disabled
-                                onChange={handleChange}
-                              />
-                              <label
-                                className="custom-control-label"
-                                htmlFor="defaultInline2"
-                                style={{ color: "black" }}
-                              >
-                                PartTime
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-
-                        <tr>
-                          <th>Type Of Internship:</th>
-                          <td>
-                            <div className="custom-control custom-radio custom-control-inline">
-                              <input
-                                type="radio"
-                                name="type_of_internship"
-                                checked={
-                                  internshipHostState.type_of_internship ===
-                                  "Paid"
-                                }
-                                value="Paid"
-                                disabled
-                                className="custom-control-input border"
-                                id="defaultInline3"
-                                onChange={handleChange}
-                              />
-                              <label
-                                className="custom-control-label s1"
-                                htmlFor="defaultInline3"
-                                style={{ color: "black" }}
-                              >
-                                Paid
-                              </label>
-                            </div>
-                          </td>
-                          <td>
-                            <div className="custom-control custom-radio custom-control-inline">
-                              <input
-                                type="radio"
-                                name="type_of_internship"
-                                checked={
-                                  internshipHostState.type_of_internship ===
-                                  "Free"
-                                }
-                                value="Free"
-                                disabled
-                                className="custom-control-input"
-                                id="defaultInline4"
-                                onChange={handleChange}
-                              />
-                              <label
-                                className="custom-control-label s1"
-                                htmlFor="defaultInline4"
-                                style={{ color: "black" }}
-                              >
-                                Free
-                              </label>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="stipend">Stipend: </label>
-                  <div className="input-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-rupee-sign"></i>
-                      </span>
                     </div>
-                    <input
-                      type="number"
-                      className="form-control"
-                      name="stipend"
-                      placeholder="Enter Stipend"
-                      onChange={handleChange}
-                      value={internshipHostState.stipend}
-                      required
-                      disabled
-                    />
-                  </div>
-                  <small>Enter 0 if no stipend</small>
-                </div>
-                <div className="form-group">
-                  {info.count < 3 ? addTextbox() : ""}
-                  <div className="form-group">
-                    <label htmlFor="descbutton">Description:</label>
-                    <br />
-                    <Link
-                      to="#"
-                      id="descbutton"
-                      className="btn btn-primary btn-sm p-2 px-4"
-                      onClick={addTextbox}
-                    >
-                      <i className="fas fa-plus"></i>
-                    </Link>
-                    {` `}
-                    <Link
-                      to="#"
-                      id="descbutton"
-                      className="btn btn-primary btn-sm p-2 px-4 "
-                      onClick={removeTextbox}
-                    >
-                      <i className="fas fa-minus"></i>
-                    </Link>
-                  </div>
-                  <hr />
-                  {info.desc.map((desc, index) => {
-                    return (
-                      <div className="form-group" key={index}>
-                        <label htmlFor={index}>{alphas[index]}:</label>
-                        {` `}
-                        <input
-                          id={index}
-                          type="text"
-                          value={desc}
-                          maxLength="200"
-                          minLength="20"
-                          required
-                          onChange={e => addSubInfoValue(e, index)}
-                        />
-                        {errors.description.length > 0 && (
-                          <small style={{ color: "red" }}>
-                            <span className="error">{errors.description}</span>
-                          </small>
-                        )}
+                    <div className="row">
+                      <div className="sm-col-4">
+                        <table className="table bg-white table-borderless">
+                          <tbody>
+                            <tr>
+                              <th>Categories:</th>
+                              <td>
+                                {" "}
+                                <div className="custom-control custom-radio custom-control-inline">
+                                  <input
+                                    type="radio"
+                                    className="custom-control-input"
+                                    id="defaultInline1"
+                                    name="categories"
+                                    checked={
+                                      internshipHostState.categories ===
+                                      "Fulltime"
+                                    }
+                                    value="Fulltime"
+                                    disabled
+                                    onChange={handleChange}
+                                  />
+                                  <label
+                                    className="custom-control-label"
+                                    htmlFor="defaultInline1"
+                                    style={{ color: "black" }}
+                                  >
+                                    Full Time
+                                  </label>
+                                </div>
+                              </td>
+                              <td>
+                                {" "}
+                                <div className="custom-control custom-radio custom-control-inline">
+                                  <input
+                                    type="radio"
+                                    name="categories"
+                                    className="custom-control-input"
+                                    id="defaultInline2"
+                                    checked={
+                                      internshipHostState.categories ===
+                                      "Parttime"
+                                    }
+                                    value="Parttime"
+                                    disabled
+                                    onChange={handleChange}
+                                  />
+                                  <label
+                                    className="custom-control-label"
+                                    htmlFor="defaultInline2"
+                                    style={{ color: "black" }}
+                                  >
+                                    PartTime
+                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+
+                            <tr>
+                              <th>Type Of Internship:</th>
+                              <td>
+                                <div className="custom-control custom-radio custom-control-inline">
+                                  <input
+                                    type="radio"
+                                    name="type_of_internship"
+                                    checked={
+                                      internshipHostState.type_of_internship ===
+                                      "Paid"
+                                    }
+                                    value="Paid"
+                                    disabled
+                                    className="custom-control-input border"
+                                    id="defaultInline3"
+                                    onChange={handleChange}
+                                  />
+                                  <label
+                                    className="custom-control-label s1"
+                                    htmlFor="defaultInline3"
+                                    style={{ color: "black" }}
+                                  >
+                                    Paid
+                                  </label>
+                                </div>
+                              </td>
+                              <td>
+                                <div className="custom-control custom-radio custom-control-inline">
+                                  <input
+                                    type="radio"
+                                    name="type_of_internship"
+                                    checked={
+                                      internshipHostState.type_of_internship ===
+                                      "Free"
+                                    }
+                                    value="Free"
+                                    disabled
+                                    className="custom-control-input"
+                                    id="defaultInline4"
+                                    onChange={handleChange}
+                                  />
+                                  <label
+                                    className="custom-control-label s1"
+                                    htmlFor="defaultInline4"
+                                    style={{ color: "black" }}
+                                  >
+                                    Free
+                                  </label>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
                       </div>
-                    );
-                  })}
-                </div>
-                <div className="form-group">
-                  {info1.count1 < 3 ? addTextbox1() : ""}
-                  <div className="form-group">
-                    <label htmlFor="intended">Intended Participants:</label>
-                    <br />
-                    <Link
-                      to="#"
-                      id="intended"
-                      className="btn btn-primary btn-sm p-2 px-4"
-                      onClick={addTextbox1}
-                    >
-                      <i className="fas fa-plus"></i>
-                    </Link>
-                    {` `}
-                    <Link
-                      to="#"
-                      id="intended"
-                      className="btn btn-primary btn-sm p-2 px-4 "
-                      onClick={removeTextbox1}
-                    >
-                      <i className="fas fa-minus"></i>
-                    </Link>
-                  </div>
-                  <hr />
-                  {info1.intd.map((intd, index) => {
-                    return (
-                      <div className="form-group" key={index}>
-                        <label htmlFor={index}>{alphas[index]}:</label>
-                        {` `}
+                    </div>
+
+                    <div className="form-group">
+                      <label htmlFor="stipend">Stipend: </label>
+                      <div className="input-group">
+                        <div className="input-group-prepend">
+                          <span className="input-group-text">
+                            <i className="fas fa-rupee-sign"></i>
+                          </span>
+                        </div>
                         <input
-                          id={index}
-                          type="text"
-                          value={intd}
-                          maxLength="200"
-                          minLength="20"
+                          type="number"
+                          className="form-control"
+                          name="stipend"
+                          placeholder="Enter Stipend"
+                          onChange={handleChange}
+                          value={internshipHostState.stipend}
                           required
-                          onChange={e => addSubIntendedValue(e, index)}
+                          disabled
                         />
-                        {errors.intended_participants.length > 0 && (
-                          <small style={{ color: "red" }}>
-                            <span className="error">
-                              {errors.intended_participants}
-                            </span>
-                          </small>
-                        )}
                       </div>
-                    );
-                  })}
-                </div>
-                <div className="modal-footer">
-                  <button className="btn btn-success btn-block" type="submit">
-                    Submit
-                  </button>
-                </div>
+                      <small>Enter 0 if no stipend</small>
+                    </div>
+                    <div className="form-group">
+                      {info.count < 3 ? addTextbox() : ""}
+                      <div className="form-group">
+                        <label htmlFor="descbutton">Description:</label>
+                        <br />
+                        <Link
+                          to="#"
+                          id="descbutton"
+                          className="btn btn-primary btn-sm p-2 px-4"
+                          onClick={addTextbox}
+                        >
+                          <i className="fas fa-plus"></i>
+                        </Link>
+                        {` `}
+                        <Link
+                          to="#"
+                          id="descbutton"
+                          className="btn btn-primary btn-sm p-2 px-4 "
+                          onClick={removeTextbox}
+                        >
+                          <i className="fas fa-minus"></i>
+                        </Link>
+                      </div>
+                      <hr />
+                      {info.desc.map((desc, index) => {
+                        return (
+                          <div className="form-group" key={index}>
+                            <label htmlFor={index}>{alphas[index]}:</label>
+                            {` `}
+                            <input
+                              id={index}
+                              type="text"
+                              value={desc}
+                              maxLength="200"
+                              minLength="20"
+                              required
+                              onChange={e => addSubInfoValue(e, index)}
+                            />
+                            {errors.description.length > 0 && (
+                              <small style={{ color: "red" }}>
+                                <span className="error">
+                                  {errors.description}
+                                </span>
+                              </small>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="form-group">
+                      {info1.count1 < 3 ? addTextbox1() : ""}
+                      <div className="form-group">
+                        <label htmlFor="intended">Intended Participants:</label>
+                        <br />
+                        <Link
+                          to="#"
+                          id="intended"
+                          className="btn btn-primary btn-sm p-2 px-4"
+                          onClick={addTextbox1}
+                        >
+                          <i className="fas fa-plus"></i>
+                        </Link>
+                        {` `}
+                        <Link
+                          to="#"
+                          id="intended"
+                          className="btn btn-primary btn-sm p-2 px-4 "
+                          onClick={removeTextbox1}
+                        >
+                          <i className="fas fa-minus"></i>
+                        </Link>
+                      </div>
+                      <hr />
+                      {info1.intd.map((intd, index) => {
+                        return (
+                          <div className="form-group" key={index}>
+                            <label htmlFor={index}>{alphas[index]}:</label>
+                            {` `}
+                            <input
+                              id={index}
+                              type="text"
+                              value={intd}
+                              maxLength="200"
+                              minLength="20"
+                              required
+                              onChange={e => addSubIntendedValue(e, index)}
+                            />
+                            {errors.intended_participants.length > 0 && (
+                              <small style={{ color: "red" }}>
+                                <span className="error">
+                                  {errors.intended_participants}
+                                </span>
+                              </small>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                    <div className="modal-footer">
+                      <button
+                        className="btn btn-success btn-block"
+                        type="submit"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </form>
+            </div>
           </div>
+          <h2>Active Internships</h2>
+          <table className="table table-striped table-hover bg-white">
+            <thead className="thead-dark">
+              <tr>
+                <th>Title</th>
+                <th className="small-table">Starts On</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>{internshipListActive()}</tbody>
+          </table>
+          <h2>Past Internships</h2>
+          <table className="table table-striped table-hover bg-white">
+            <thead className="thead-dark">
+              <tr>
+                <th>Title</th>
+                <th className="small-table">Starts On</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>{internshipListPast()}</tbody>
+          </table>
         </div>
-      </div>
-      <h2>Active Internships</h2>
-      <table className="table table-striped table-hover bg-white">
-        <thead className="thead-dark">
-          <tr>
-            <th>Title</th>
-            <th className="small-table">Starts On</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>{internshipListActive()}</tbody>
-      </table>
-      <h2>Past Internships</h2>
-      <table className="table table-striped table-hover bg-white">
-        <thead className="thead-dark">
-          <tr>
-            <th>Title</th>
-            <th className="small-table">Starts On</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>{internshipListPast()}</tbody>
-      </table>
+      )}
     </div>
   );
 }

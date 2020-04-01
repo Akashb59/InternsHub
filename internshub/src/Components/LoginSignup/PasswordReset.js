@@ -68,49 +68,67 @@ function PasswordReset(props) {
   }, []);
 
   return (
-    <div className="container">
-      <div className="text-center ">
-        <h2 className="heading-secondary ma-bt-md">Reset your password</h2>
+    <div>
+      <header id="page-header">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 m-auto text-center">
+              <h1 className="text-capitalize"> Reset Password</h1>
+              <p className="d-none d-md-block">
+                You can reset your password here and use the same password to
+                login in the future
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div className="row py-5">
+        <div className="col-lg-8 offset-lg-2">
+          <div className="card bg-body p-3 rounded card-form">
+            <div className="card-body">
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    className="form-control "
+                    placeholder="********"
+                    value={pass.password}
+                    onChange={handleChange}
+                    required
+                  />{" "}
+                  {errors.password.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.password}</span>
+                    </small>
+                  )}
+                </div>
+                <div className="form-group">
+                  <label htmlFor="passwordConfirm">Password Confirm</label>
+                  <input
+                    type="password"
+                    name="passwordConfirm"
+                    className="form-control "
+                    placeholder="********"
+                    value={pass.passwordConfirm}
+                    onChange={handleChange}
+                    required
+                  />{" "}
+                  {errors.passwordConfirm.length > 0 && (
+                    <small style={{ color: "red" }}>
+                      <span className="error">{errors.passwordConfirm}</span>
+                    </small>
+                  )}
+                </div>
+                <button className="btn btn-success" type="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            className="form-control "
-            placeholder="********"
-            value={pass.password}
-            onChange={handleChange}
-            required
-          />{" "}
-          {errors.password.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.password}</span>
-            </small>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="passwordConfirm">Password Confirm</label>
-          <input
-            type="password"
-            name="passwordConfirm"
-            className="form-control "
-            placeholder="********"
-            value={pass.passwordConfirm}
-            onChange={handleChange}
-            required
-          />{" "}
-          {errors.passwordConfirm.length > 0 && (
-            <small style={{ color: "red" }}>
-              <span className="error">{errors.passwordConfirm}</span>
-            </small>
-          )}
-        </div>
-        <button className="btn btn-success" type="submit">
-          Submit
-        </button>
-      </form>
     </div>
   );
 }

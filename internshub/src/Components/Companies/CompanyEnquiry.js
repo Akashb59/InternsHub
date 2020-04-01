@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { FaQuestion } from "react-icons/fa";
+import { load } from "./../Utilities/Utils";
 import {
   companyEnquiries,
   internshipEnquiries,
@@ -10,6 +11,7 @@ import { showAlert } from "../Utilities/Alerts";
 function CompanyEnquiry(props) {
   let src;
   const [internshipEnquiry, setInternshipEnquiry] = useState([]);
+  const [loading, setLoading] = useState("false");
   const [resume, setResume] = useState("");
   const [selectedInternship, setSelectedInternship] = useState({
     accepted: "",
@@ -193,6 +195,7 @@ function CompanyEnquiry(props) {
         setInternshipEnquiry(internEnq);
       }
     });
+    setLoading("true");
   }, []);
 
   if (resume !== "") {
@@ -625,231 +628,248 @@ function CompanyEnquiry(props) {
 
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2 small-header">
-        <i className="fas fa-clipboard-check"></i> Company Enquiry
-      </h2>
-      <div>
-        <h2>Pending Enquiries</h2>
-        <table className="table table-striped table-hover bg-white">
-          <thead className="thead-dark">
-            <tr>
-              <th>Internship</th>
-              <th className="small-table">Student Name</th>
-              <th>Resume</th>
-              <th className="small-table">Requested On</th>
-              <th>Details</th>
-              <th className="small-table">Accepted</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>{internshipEnquiryListNo()}</tbody>
-        </table>
-        <h2>Accepted Enquiries</h2>
-        <table className="table table-striped table-hover bg-white">
-          <thead className="thead-dark">
-            <tr>
-              <th>Internship</th>
-              <th className="small-table">Student Name</th>
-              <th>Resume</th>
-              <th className="small-table">Requested On</th>
-              <th>Details</th>
-              <th className="xsmall-table">Accepted</th>
-            </tr>
-          </thead>
-          <tbody>{internshipEnquiryListYes()}</tbody>
-        </table>
-        <h2>Past Enquiries</h2>
-        <table className="table table-striped table-hover bg-white">
-          <thead className="thead-dark">
-            <tr>
-              <th>Internship</th>
-              <th className="small-table">Student Name</th>
-              <th>Resume</th>
-              <th className="small-table">Requested On</th>
-              <th>Details</th>
-              <th className="xsmall-table">Accepted</th>
-            </tr>
-          </thead>
-          <tbody>{internshipEnquiryListRest()}</tbody>
-        </table>
-      </div>
-      <div className="modal fade" id="resume">
-        <div className="modal-dialog modal-lg">
-          <div className="modal-content">
-            <div className="modal-header bg-info  text-white">
-              <h5 className="modal-title">Resume</h5>
-              <button className="close" data-dismiss="modal">
-                <span>&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <iframe src={src} title="student" width="100%" height="500px" />
+      {loading === "false" ? (
+        load(loading)
+      ) : (
+        <div>
+          <h2 className="text-center display-4 bg-secondary rounded text-white py-2 mb-2 small-header">
+            <i className="fas fa-clipboard-check"></i> Company Enquiry
+          </h2>
+          <div>
+            <h2>Pending Enquiries</h2>
+            <table className="table table-striped table-hover bg-white">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Internship</th>
+                  <th className="small-table">Student Name</th>
+                  <th>Resume</th>
+                  <th className="small-table">Requested On</th>
+                  <th>Details</th>
+                  <th className="small-table">Accepted</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>{internshipEnquiryListNo()}</tbody>
+            </table>
+            <h2>Accepted Enquiries</h2>
+            <table className="table table-striped table-hover bg-white">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Internship</th>
+                  <th className="small-table">Student Name</th>
+                  <th>Resume</th>
+                  <th className="small-table">Requested On</th>
+                  <th>Details</th>
+                  <th className="xsmall-table">Accepted</th>
+                </tr>
+              </thead>
+              <tbody>{internshipEnquiryListYes()}</tbody>
+            </table>
+            <h2>Past Enquiries</h2>
+            <table className="table table-striped table-hover bg-white">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Internship</th>
+                  <th className="small-table">Student Name</th>
+                  <th>Resume</th>
+                  <th className="small-table">Requested On</th>
+                  <th>Details</th>
+                  <th className="xsmall-table">Accepted</th>
+                </tr>
+              </thead>
+              <tbody>{internshipEnquiryListRest()}</tbody>
+            </table>
+          </div>
+          <div className="modal fade" id="resume">
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content">
+                <div className="modal-header bg-info  text-white">
+                  <h5 className="modal-title">Resume</h5>
+                  <button className="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <iframe
+                    src={src}
+                    title="student"
+                    width="100%"
+                    height="500px"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className="modal fade" id="viewInternship">
-        <div className="modal-dialog modal-md">
-          <div className="modal-content">
-            <div className="modal-header bg-info text-white">
-              <h5 className="modal-title">Details</h5>
-              <button className="close" data-dismiss="modal">
-                <span>&times;</span>
-              </button>
-            </div>
-
-            <div className="modal-body">
-              <div className="jumbotron">
-                {selectedInternship !== {} ? selectLink : <p>Loading</p>}
-              </div>
-              <div className="modal-footer row">
-                <div className="col-md-9">
-                  {selectedInternship.accepted === "Yes" ? (
-                    <button
-                      className="btn btn-block btn-success"
-                      data-toggle="modal"
-                      data-target="#completedInternship"
-                    >
-                      <i className="fas fa-check-circle"></i> Mark Student as
-                      completed Internship
-                    </button>
-                  ) : (
-                    <button className="btn btn-block btn-success" disabled>
-                      <i className="fas fa-check-circle"></i> Mark Student as
-                      completed Internship
-                    </button>
-                  )}
+          <div className="modal fade" id="viewInternship">
+            <div className="modal-dialog modal-md">
+              <div className="modal-content">
+                <div className="modal-header bg-info text-white">
+                  <h5 className="modal-title">Details</h5>
+                  <button className="close" data-dismiss="modal">
+                    <span>&times;</span>
+                  </button>
                 </div>
-                <div className="col-md-3">
+
+                <div className="modal-body">
+                  <div className="jumbotron">
+                    {selectedInternship !== {} ? selectLink : <p>Loading</p>}
+                  </div>
+                  <div className="modal-footer row">
+                    <div className="col-md-9">
+                      {selectedInternship.accepted === "Yes" ? (
+                        <button
+                          className="btn btn-block btn-success"
+                          data-toggle="modal"
+                          data-target="#completedInternship"
+                        >
+                          <i className="fas fa-check-circle"></i> Mark Student
+                          as completed Internship
+                        </button>
+                      ) : (
+                        <button className="btn btn-block btn-success" disabled>
+                          <i className="fas fa-check-circle"></i> Mark Student
+                          as completed Internship
+                        </button>
+                      )}
+                    </div>
+                    <div className="col-md-3">
+                      <button
+                        type="button"
+                        className="btn btn-block btn-danger mt-3"
+                        data-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="completedInternship" className="modal fade">
+            <div className="modal-dialog modal-confirm modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header bg-info ">
+                  <div className="container">
+                    <h4 className="modal-title">Are you sure</h4>
+                    <br></br>
+                    <h2>
+                      <FaQuestion />
+                    </h2>
+                  </div>
                   <button
                     type="button"
-                    className="btn btn-block btn-danger mt-3"
+                    className="close"
                     data-dismiss="modal"
+                    aria-hidden="true"
                   >
-                    Close
+                    &times;
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>
+                    Do you really want to mark the candidate as "completed the
+                    Internship?" This process cannot be undone.
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn" data-dismiss="modal">
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => {
+                      const accept = "Yes";
+                      const completed = "Yes";
+                      internshipAccept(
+                        localStorage.acceptInternshipId,
+                        accept,
+                        completed
+                      ).then(res => {
+                        //console.log(props.internship._id);
+                        //localStorage.setItem("internshipId", props.internship._id);
+                        if (res) {
+                          props.history.push("/companyEnquiry");
+                          window.location.reload(false);
+                          showAlert(
+                            "success",
+                            "Successfully Accpted Candidate"
+                          );
+                        }
+                      });
+                      //Adding the completed internship to student profile can be checked in enquiries
+                    }}
+                  >
+                    Accept
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="acceptInternship" className="modal fade">
+            <div className="modal-dialog modal-confirm modal-dialog-centered">
+              <div className="modal-content modal-responsive">
+                <div className="modal-header">
+                  <div className="container">
+                    <h4 className="modal-title">Are you sure</h4>
+                    <br></br>
+                    <h2>
+                      <FaQuestion />
+                    </h2>
+                  </div>
+                  <button
+                    type="button"
+                    className="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                  >
+                    &times;
+                  </button>
+                </div>
+                <div className="modal-body">
+                  <p>
+                    Do you really want to accept the candidate for Internship?
+                    This process cannot be undone.
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <button type="button" className="btn" data-dismiss="modal">
+                    Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => {
+                      const accept = "Yes";
+                      const completed = "No";
+                      internshipAccept(
+                        localStorage.acceptInternshipId,
+                        accept,
+                        completed
+                      ).then(res => {
+                        //console.log(props.internship._id);
+                        //localStorage.setItem("internshipId", props.internship._id);
+                        if (res) {
+                          props.history.push("/companyEnquiry");
+                          window.location.reload(false);
+                          showAlert(
+                            "success",
+                            "Successfully Accpted Candidate"
+                          );
+                        }
+                      });
+                    }}
+                  >
+                    Accept
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="completedInternship" className="modal fade">
-        <div className="modal-dialog modal-confirm modal-dialog-centered">
-          <div className="modal-content">
-            <div className="modal-header bg-info ">
-              <div className="container">
-                <h4 className="modal-title">Are you sure</h4>
-                <br></br>
-                <h2>
-                  <FaQuestion />
-                </h2>
-              </div>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-hidden="true"
-              >
-                &times;
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>
-                Do you really want to mark the candidate as "completed the
-                Internship?" This process cannot be undone.
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn" data-dismiss="modal">
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => {
-                  const accept = "Yes";
-                  const completed = "Yes";
-                  internshipAccept(
-                    localStorage.acceptInternshipId,
-                    accept,
-                    completed
-                  ).then(res => {
-                    //console.log(props.internship._id);
-                    //localStorage.setItem("internshipId", props.internship._id);
-                    if (res) {
-                      props.history.push("/companyEnquiry");
-                      window.location.reload(false);
-                      showAlert("success", "Successfully Accpted Candidate");
-                    }
-                  });
-                  //Adding the completed internship to student profile can be checked in enquiries
-                }}
-              >
-                Accept
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="acceptInternship" className="modal fade">
-        <div className="modal-dialog modal-confirm modal-dialog-centered">
-          <div className="modal-content modal-responsive">
-            <div className="modal-header">
-              <div className="container">
-                <h4 className="modal-title">Are you sure</h4>
-                <br></br>
-                <h2>
-                  <FaQuestion />
-                </h2>
-              </div>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-hidden="true"
-              >
-                &times;
-              </button>
-            </div>
-            <div className="modal-body">
-              <p>
-                Do you really want to accept the candidate for Internship? This
-                process cannot be undone.
-              </p>
-            </div>
-            <div className="modal-footer">
-              <button type="button" className="btn" data-dismiss="modal">
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={() => {
-                  const accept = "Yes";
-                  const completed = "No";
-                  internshipAccept(
-                    localStorage.acceptInternshipId,
-                    accept,
-                    completed
-                  ).then(res => {
-                    //console.log(props.internship._id);
-                    //localStorage.setItem("internshipId", props.internship._id);
-                    if (res) {
-                      props.history.push("/companyEnquiry");
-                      window.location.reload(false);
-                      showAlert("success", "Successfully Accpted Candidate");
-                    }
-                  });
-                }}
-              >
-                Accept
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      )}
     </div>
   );
 }

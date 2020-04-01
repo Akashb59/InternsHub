@@ -204,7 +204,15 @@ th {
     margin-bottom: 1rem; }
 
   .card-p p {
-    display: inline-block; } }
+    display: inline-block; }
+
+  .admin {
+    font-size: small;
+    padding-top: 0.4rem; }
+
+  .foot {
+    font-size: medium;
+    padding-top: 0.3rem; } }
 @media (max-width: 575px) {
   .small-header {
     font-size: 2rem;

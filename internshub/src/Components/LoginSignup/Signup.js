@@ -131,7 +131,7 @@ function Signup(props) {
           <div className="row">
             <div className="col-md-6 m-auto text-center">
               <h1 className="text-capitalize">Create A New Account</h1>
-              <p>
+              <p className="d-none d-md-block">
                 To get access to all content you first have to create an account
               </p>
             </div>

@@ -9,21 +9,17 @@ const adminLink = (
 function Footer() {
   return (
     <footer id="main-footer" className="text-white">
-      <div className="d-flex">
-        <div className="container">
-          <div className="row">
-            <div className="col">
-              <p className="lead text-center mt-3">
-                Copyright ©
-                <span id="year" />
-                InternsHub
-              </p>
-            </div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col offset-md-3">
+            <p className="lead foot mt-3 text-center">Copyright © InternsHub</p>
+          </div>
+          <div className="col-4 col-md-3">
+            <p className="lead admin text-right mt-3 mr-3">
+              {localStorage.usertoken === undefined ? adminLink : ""}
+            </p>
           </div>
         </div>
-        <p className="lead text-right mt-3 mr-3">
-          {localStorage.usertoken === undefined ? adminLink : ""}
-        </p>
       </div>
     </footer>
   );

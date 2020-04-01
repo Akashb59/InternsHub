@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { studentEnquiries } from "../Utilities/StudentFunctions";
+import { load } from "../Utilities/Utils";
 
 function StudentEnquiry() {
   const [studentEnquiry, setStudentEnquiry] = useState([]);
+  const [loading, setLoading] = useState("false");
   const [more, setMore] = useState({
     starts: Date,
     compName: "",
@@ -24,6 +26,7 @@ function StudentEnquiry() {
         setStudentEnquiry(internEnq);
       }
     });
+    setLoading("true");
     // eslint-disable-next-line
   }, []);
   const InternshipEnq = props => (
@@ -118,53 +121,59 @@ function StudentEnquiry() {
 
   return (
     <div className="container pt-4">
-      <h2 className="text-center display-4 bg-secondary rounded text-white pb-3 small-header small-head-padding">
-        <i className="fas fa-clipboard-check"></i> My Enquiries
-      </h2>
-      <div>
-        <h2>Requested / Ongoing Internships</h2>
-        <table className="table table-striped table-hover bg-white">
-          <thead className="thead-dark">
-            <tr>
-              <th>Internship</th>
-              <th>Requested On</th>
-              <th>More Info</th>
-            </tr>
-          </thead>
-          <tbody>{internshipEnquiryListReq()}</tbody>
-        </table>
-        <h2>Completed / Past Internships</h2>
-        <table className="table table-striped table-hover bg-white">
-          <thead className="thead-dark">
-            <tr>
-              <th>Internship</th>
-              <th>Requested On</th>
-              <th>More Info</th>
-            </tr>
-          </thead>
-          <tbody>{internshipEnquiryListCom()}</tbody>
-        </table>
-        <div className="modal fade" id="more">
-          <div className="modal-dialog modal-lg">
-            <div className="modal-content">
-              <div className="modal-header bg-info  text-white">
-                <h5 className="modal-title">More Information</h5>
-                <button className="close" data-dismiss="modal">
-                  <span>&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>Starts On: {more.starts.toString()}</p>
-                <p>Company Name: {more.compName}</p>
-                <p>Company Email: {more.compEmail}</p>
-                <p>Company Phone Number: {more.compPhone}</p>
-                <p>Accepted State: {more.accepted}</p>
-                <p>Completed State: {more.completed}</p>
+      {loading === "false" ? (
+        load(loading)
+      ) : (
+        <div>
+          <h2 className="text-center display-4 bg-secondary rounded text-white pb-3 small-header small-head-padding">
+            <i className="fas fa-clipboard-check"></i> My Enquiries
+          </h2>
+          <div>
+            <h2>Requested / Ongoing Internships</h2>
+            <table className="table table-striped table-hover bg-white">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Internship</th>
+                  <th>Requested On</th>
+                  <th>More Info</th>
+                </tr>
+              </thead>
+              <tbody>{internshipEnquiryListReq()}</tbody>
+            </table>
+            <h2>Completed / Past Internships</h2>
+            <table className="table table-striped table-hover bg-white">
+              <thead className="thead-dark">
+                <tr>
+                  <th>Internship</th>
+                  <th>Requested On</th>
+                  <th>More Info</th>
+                </tr>
+              </thead>
+              <tbody>{internshipEnquiryListCom()}</tbody>
+            </table>
+            <div className="modal fade" id="more">
+              <div className="modal-dialog modal-lg">
+                <div className="modal-content">
+                  <div className="modal-header bg-info  text-white">
+                    <h5 className="modal-title">More Information</h5>
+                    <button className="close" data-dismiss="modal">
+                      <span>&times;</span>
+                    </button>
+                  </div>
+                  <div className="modal-body">
+                    <p>Starts On: {more.starts.toString()}</p>
+                    <p>Company Name: {more.compName}</p>
+                    <p>Company Email: {more.compEmail}</p>
+                    <p>Company Phone Number: {more.compPhone}</p>
+                    <p>Accepted State: {more.accepted}</p>
+                    <p>Completed State: {more.completed}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
