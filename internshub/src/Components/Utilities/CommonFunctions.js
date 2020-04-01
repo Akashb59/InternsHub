@@ -129,7 +129,7 @@ export const editAddressForm = editAddress => {
 };
 
 export const editUserInfo = details => {
-  console.log(details);
+  //console.log(details);
   return axios({
     method: "patch",
     url: `${ip}/api/v1/users/updateMe`,

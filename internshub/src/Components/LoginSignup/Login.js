@@ -105,7 +105,20 @@ function Login(props) {
   };
 
   return (
-    <div className="container">
+    <div>
+      <header id="page-header">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6 m-auto text-center">
+              <h1 className="text-capitalize"> Log into your account</h1>
+              <p>
+                Get access to all your content by just logging in into your
+                account
+              </p>
+            </div>
+          </div>
+        </div>
+      </header>
       <div className="row py-5">
         {/* <div className="col-lg-6 d-none d-lg-block">
           <h1 className="login-quote pt-5">
@@ -122,11 +135,6 @@ function Login(props) {
         <div className="col-lg-8 offset-lg-2">
           <div className="card bg-body p-3 rounded card-form">
             <div className="card-body">
-              <div className="text-center">
-                <h2 className="heading-secondary ma-bt-md">
-                  Log into your account
-                </h2>
-              </div>
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
                   <label htmlFor="email">Email:</label>

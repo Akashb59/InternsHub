@@ -196,10 +196,10 @@ function Landing() {
               <iframe
                 src=""
                 title="title"
-                frameborder="0"
+                frameBorder="0"
                 height="350"
                 width="100%"
-                allowfullscreen
+                allowFullScreen
               ></iframe>
             </div>
           </div>
