@@ -9,7 +9,7 @@ export const profile = user => {
   //console.log(user.id);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/users/${user.id}`,
+    url: `${ip}api/v1/users/${user.id}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -34,7 +34,7 @@ export const roles = () => {
   //console.log(ip);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/userTypeMasters`,
+    url: `${ip}api/v1/userTypeMasters`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -58,7 +58,7 @@ export const roles = () => {
 //POST
 export const signup = newUser => {
   return axios
-    .post(`${ip}/api/v1/users/signUp`, {
+    .post(`${ip}api/v1/users/signUp`, {
       fullname: newUser.fullname,
       email: newUser.email,
       password: newUser.password,
@@ -89,7 +89,7 @@ export const signup = newUser => {
 
 export const login = user => {
   return axios
-    .post(`${ip}/api/v1/users/logIn`, {
+    .post(`${ip}api/v1/users/logIn`, {
       email: user.email,
       password: user.password,
       role: user.role
@@ -119,7 +119,7 @@ export const login = user => {
 
 export const forgotPassword = user => {
   return axios
-    .post(`${ip}/api/v1/users/forgotPassword`, {
+    .post(`${ip}api/v1/users/forgotPassword`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -135,7 +135,7 @@ export const forgotPassword = user => {
 //PATCH
 export const updatePass = pass => {
   return axios
-    .patch(`${ip}/api/v1/users/updateMyPassword`, {
+    .patch(`${ip}api/v1/users/updateMyPassword`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -152,7 +152,7 @@ export const updatePass = pass => {
 
 export const newPass = (pass, token) => {
   return axios
-    .patch(`${ip}/api/v1/users/resetPassword/${token}`, {
+    .patch(`${ip}api/v1/users/resetPassword/${token}`, {
       headers: {
         jwt: localStorage.usertoken
       },

@@ -26,7 +26,6 @@ function Login(props) {
       port: 3000
     }).lanUrl;
     document.title = "InternsHub | Login";
-    //const ip = "http://192.168.1.11:3000";
     localStorage.setItem("ip", ip);
     roles().then(res => {
       if (res) {

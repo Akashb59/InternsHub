@@ -6,7 +6,7 @@ const ip = localStorage.ip;
 export const skills = () => {
   return axios({
     method: "get",
-    url: `${ip}/api/v1/skillTypeMasters/`,
+    url: `${ip}api/v1/skillTypeMasters/`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -30,7 +30,7 @@ export const role = roleType => {
   //console.log(user);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/userTypeMasters/${roleType}`,
+    url: `${ip}api/v1/userTypeMasters/${roleType}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -54,7 +54,7 @@ export const role = roleType => {
 //POST
 export const addressform = address => {
   return axios
-    .post(`${ip}/api/v1/addresses/`, {
+    .post(`${ip}api/v1/addresses/`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -75,7 +75,7 @@ export const addressform = address => {
 
 export const sendContactInfo = contact => {
   return axios
-    .post(`${ip}/api/v1/contact/`, {
+    .post(`${ip}api/v1/contact/`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -94,7 +94,7 @@ export const sendContactInfo = contact => {
 
 export const createSkill = skill => {
   return axios
-    .post(`${ip}/api/v1/skillTypeMasters/`, {
+    .post(`${ip}api/v1/skillTypeMasters/`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -110,7 +110,7 @@ export const createSkill = skill => {
 //PATCH
 export const editAddressForm = editAddress => {
   return axios
-    .patch(`${ip}/api/v1/addresses/${editAddress.addressID}`, {
+    .patch(`${ip}api/v1/addresses/${editAddress.addressID}`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -132,7 +132,7 @@ export const editUserInfo = details => {
   //console.log(details);
   return axios({
     method: "patch",
-    url: `${ip}/api/v1/users/updateMe`,
+    url: `${ip}api/v1/users/updateMe`,
     data: details,
     headers: {
       "Content-Type": "multipart/form-data",

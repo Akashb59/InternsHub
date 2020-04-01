@@ -6,7 +6,7 @@ const ip = localStorage.ip;
 export const company = () => {
   return axios({
     method: "get",
-    url: `${ip}/api/v1/companies/user/${localStorage.userid}`,
+    url: `${ip}api/v1/companies/user/${localStorage.userid}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -32,7 +32,7 @@ export const companyInternships = () => {
   //console.log(details.user);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/internships/company/${localStorage.companyid}`,
+    url: `${ip}api/v1/internships/company/${localStorage.companyid}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -51,7 +51,7 @@ export const internship = id => {
   //  console.log(id);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/internships/${id}`,
+    url: `${ip}api/v1/internships/${id}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -70,7 +70,7 @@ export const companyEnquiries = () => {
   //console.log(details.user);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/enquiries/company/${localStorage.companyid}`,
+    url: `${ip}api/v1/enquiries/company/${localStorage.companyid}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -89,7 +89,7 @@ export const internshipEnquiries = id => {
   //console.log(details.user);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/enquiries/${id}`,
+    url: `${ip}api/v1/enquiries/${id}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -108,7 +108,7 @@ export const internshipEnquiries = id => {
 export const companyform = details => {
   //console.log(details.user);
   return axios
-    .post(`${ip}/api/v1/companies/`, {
+    .post(`${ip}api/v1/companies/`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -127,7 +127,7 @@ export const companyform = details => {
 
 export const hostInternship = internship => {
   return axios
-    .post(`${ip}/api/v1/internships/`, {
+    .post(`${ip}api/v1/internships/`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -154,7 +154,7 @@ export const hostInternship = internship => {
 //PATCH
 export const editInternship = internship => {
   return axios
-    .patch(`${ip}/api/v1/internships/${localStorage.internshipId}`, {
+    .patch(`${ip}api/v1/internships/${localStorage.internshipId}`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -180,7 +180,7 @@ export const editInternship = internship => {
 
 export const companyDescription = desc => {
   return axios
-    .patch(`${ip}/api/v1/companies/${localStorage.companyid}`, {
+    .patch(`${ip}api/v1/companies/${localStorage.companyid}`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -196,7 +196,7 @@ export const companyDescription = desc => {
 export const companyTechnology = tech => {
   //console.log(tech.technology);
   return axios
-    .patch(`${ip}/api/v1/companies/${localStorage.companyid}`, {
+    .patch(`${ip}api/v1/companies/${localStorage.companyid}`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -211,7 +211,7 @@ export const companyTechnology = tech => {
 
 export const internshipAccept = (id, accepted, completed) => {
   return axios
-    .patch(`${ip}/api/v1/enquiries/${id}`, {
+    .patch(`${ip}api/v1/enquiries/${id}`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -227,7 +227,7 @@ export const internshipAccept = (id, accepted, completed) => {
 
 export const editDetailsForm = editDetails => {
   return axios
-    .patch(`${ip}/api/v1/companies/${localStorage.companyid}`, {
+    .patch(`${ip}api/v1/companies/${localStorage.companyid}`, {
       headers: {
         jwt: localStorage.usertoken
       },

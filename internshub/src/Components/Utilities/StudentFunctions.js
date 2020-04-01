@@ -6,7 +6,7 @@ const ip = localStorage.ip;
 export const student = () => {
   return axios({
     method: "get",
-    url: `${ip}/api/v1/students/user/${localStorage.userid}`,
+    url: `${ip}api/v1/students/user/${localStorage.userid}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -31,7 +31,7 @@ export const internshipAll = () => {
   //console.log(filter);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/internships/`,
+    url: `${ip}api/v1/internships/`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -54,7 +54,7 @@ export const selectedIntern = id => {
   //console.log(filter);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/internships/${id}`,
+    url: `${ip}api/v1/internships/${id}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -76,7 +76,7 @@ export const studentEnquiries = () => {
   //console.log(filter);
   return axios({
     method: "get",
-    url: `${ip}/api/v1/enquiries/student/${localStorage.studentid}`,
+    url: `${ip}api/v1/enquiries/student/${localStorage.studentid}`,
     //withCredentials: true,
     headers: {
       jwt: localStorage.usertoken
@@ -98,7 +98,7 @@ export const studentEnquiries = () => {
 //POST
 export const studentform = det => {
   return axios
-    .post(`${ip}/api/v1/students/`, {
+    .post(`${ip}api/v1/students/`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -140,7 +140,7 @@ export const studentform = det => {
 export const internshipFilter = filter => {
   //console.log(filter);
   return axios
-    .post(`${ip}/api/v1/internships/internshipFilter`, {
+    .post(`${ip}api/v1/internships/internshipFilter`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -163,7 +163,7 @@ export const internshipFilter = filter => {
 export const sendEnquiry = info => {
   //console.log(info);
   return axios
-    .post(`${ip}/api/v1/enquiries/`, {
+    .post(`${ip}api/v1/enquiries/`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -186,7 +186,7 @@ export const sendEnquiry = info => {
 //PATCH
 export const SkillsUpdate = skill => {
   return axios
-    .patch(`${ip}/api/v1/students/${localStorage.studentid}`, {
+    .patch(`${ip}api/v1/students/${localStorage.studentid}`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -202,7 +202,7 @@ export const SkillsUpdate = skill => {
 export const uploadResume = (ab, size) => {
   return axios({
     method: "patch",
-    url: `${ip}/api/v1/students/uploadResume/${localStorage.studentid}`,
+    url: `${ip}api/v1/students/uploadResume/${localStorage.studentid}`,
     data: ab,
     headers: {
       "Content-Type": "multipart/form-data",
@@ -218,7 +218,7 @@ export const uploadResume = (ab, size) => {
 
 export const editStudProfilePersonal = editStudProfile => {
   return axios
-    .patch(`${ip}/api/v1/students/${localStorage.studentid}`, {
+    .patch(`${ip}api/v1/students/${localStorage.studentid}`, {
       headers: {
         jwt: localStorage.usertoken
       },
@@ -240,7 +240,7 @@ export const editStudProfilePersonal = editStudProfile => {
 
 export const editStudProfileAcademic = editStudProfile => {
   return axios
-    .patch(`${ip}/api/v1/students/${localStorage.studentid}`, {
+    .patch(`${ip}api/v1/students/${localStorage.studentid}`, {
       headers: {
         jwt: localStorage.usertoken
       },
