@@ -490,6 +490,9 @@ function StudentHome() {
                             <td colSpan="2">
                               <input
                                 type="date"
+                                min={new Date(Date.now())
+                                  .toISOString()
+                                  .substring(0, 10)}
                                 className="form-control"
                                 name="startsOn"
                                 value={filterState.startsOn}

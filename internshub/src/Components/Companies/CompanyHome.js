@@ -704,6 +704,7 @@ function CompanyHome(props) {
                       type="date"
                       className="form-control"
                       name="starts_on"
+                      min={new Date(Date.now()).toISOString().substring(0, 10)}
                       //onBlur={validate}
                       onChange={handleChange}
                       required

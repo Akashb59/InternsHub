@@ -541,6 +541,7 @@ function ViewInternships(props) {
                       type="date"
                       className="form-control"
                       name="starts_on"
+                      min={new Date(Date.now()).toISOString().substring(0, 10)}
                       value={internshipHostState.starts_on}
                       disabled
                       onChange={handleChange}
