@@ -1,9 +1,16 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+const prepareUrls = require("local-ip-url/prepareUrls");
+
 function Landing() {
   useEffect(() => {
     document.title = "InternsHub | Home";
+    const ip = prepareUrls({
+      protocol: "http",
+      host: "0.0.0.0",
+      port: 3000
+    }).lanUrl;
     $(function() {
       // Auto play modal video
       $(".video").click(function() {
@@ -18,7 +25,6 @@ function Landing() {
         });
       });
     });
-    const ip = "http://192.168.1.11:3000";
     localStorage.setItem("ip", ip);
   }, []);
 

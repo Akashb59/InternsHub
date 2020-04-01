@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { signup, roles, profile } from "../Utilities/LoginSignup";
 import { role } from "../Utilities/CommonFunctions";
 import { formatInput } from "../Utilities/Utils";
+const prepareUrls = require("local-ip-url/prepareUrls");
 
 function Signup(props) {
   const [signupState, setSignupState] = useState({
@@ -26,7 +27,11 @@ function Signup(props) {
 
   useEffect(() => {
     document.title = "InternsHub | SignUp";
-    const ip = "http://192.168.1.11:3000";
+    const ip = prepareUrls({
+      protocol: "http",
+      host: "0.0.0.0",
+      port: 3000
+    }).lanUrl;
     localStorage.setItem("ip", ip);
     roles().then(res => {
       if (res) {
