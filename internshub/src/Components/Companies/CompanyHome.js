@@ -631,6 +631,7 @@ function CompanyHome(props) {
                       type="text"
                       className="form-control"
                       name="title"
+                      value={internshipHostState.title}
                       //onBlur={validate}
                       placeholder="Enter Title"
                       onChange={handleChange}
@@ -657,6 +658,7 @@ function CompanyHome(props) {
                       type="text"
                       className="form-control"
                       name="location"
+                      value={internshipHostState.location}
                       //onBlur={validate}
                       placeholder="Enter Location"
                       onChange={handleChange}
@@ -684,6 +686,7 @@ function CompanyHome(props) {
                       type="number"
                       className="form-control"
                       name="duration"
+                      value={internshipHostState.duration}
                       //onBlur={validate}
                       placeholder="Enter Duration"
                       onChange={handleChange}
@@ -706,6 +709,7 @@ function CompanyHome(props) {
                       name="starts_on"
                       min={new Date(Date.now()).toISOString().substring(0, 10)}
                       //onBlur={validate}
+                      value={internshipHostState.starts_on}
                       onChange={handleChange}
                       required
                     />
