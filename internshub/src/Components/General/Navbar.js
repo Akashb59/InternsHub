@@ -119,7 +119,7 @@ function Navbar(props) {
         aria-expanded="false"
       >
         {/* <img
-          src={`${localStorage.ip}/Images/${localStorage.photo}`}
+          src={`${localStorage.ip}Images/${localStorage.photo}`}
           alt=""
           width="auto"
           height="30"

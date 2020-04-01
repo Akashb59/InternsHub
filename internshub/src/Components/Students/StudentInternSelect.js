@@ -217,7 +217,7 @@ function Example(props) {
               </div>
               <div className="col-lg-3 col-md-4">
                 <img
-                  src={`${localStorage.ip}/Images/${internship.photo}`}
+                  src={`${localStorage.ip}Images/${internship.photo}`}
                   alt=""
                 />
               </div>

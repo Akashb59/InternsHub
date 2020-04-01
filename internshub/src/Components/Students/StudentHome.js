@@ -470,7 +470,7 @@ function StudentHome() {
                           </div>
                           <div className="col-sm-6 col-md-4 col-lg-3 mt-3">
                             <img
-                              src={`${localStorage.ip}/Images/${intern.photo}`}
+                              src={`${localStorage.ip}Images/${intern.photo}`}
                               className="card-img small-image"
                               alt="Logo"
                             />

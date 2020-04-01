@@ -6,6 +6,34 @@ import { showAlert } from "../Utilities/Alerts";
 import { formatInput, load } from "../Utilities/Utils";
 
 function CompanyProfile(props) {
+  const [validState, setValidState] = useState({
+    errors: {
+      gst_no: "",
+      website: "",
+      locality: "",
+      city: "",
+      district: "",
+      state: "",
+      country: "",
+      pincode: ""
+    }
+  });
+  const [compProfileState, setCompProfileState] = useState({
+    fullname: "",
+    phoneNumber: "",
+    photo: "",
+    gst_no: "",
+    website: "",
+    establishedYear: Date,
+    locality: "",
+    city: "",
+    district: "",
+    state: "",
+    country: "",
+    pincode: "",
+    address: ""
+  });
+  const [loading, setLoading] = useState("false");
   useEffect(() => {
     document.title = "InternsHub | Company Profile";
 
@@ -37,34 +65,6 @@ function CompanyProfile(props) {
     setLoading("true");
     // eslint-disable-next-line
   }, []);
-  const [validState, setValidState] = useState({
-    errors: {
-      gst_no: "",
-      website: "",
-      locality: "",
-      city: "",
-      district: "",
-      state: "",
-      country: "",
-      pincode: ""
-    }
-  });
-  const [compProfileState, setCompProfileState] = useState({
-    fullname: "",
-    phoneNumber: "",
-    photo: "",
-    gst_no: "",
-    website: "",
-    establishedYear: Date,
-    locality: "",
-    city: "",
-    district: "",
-    state: "",
-    country: "",
-    pincode: "",
-    address: ""
-  });
-  const [loading, setLoading] = useState("false");
   const handleChange = event => {
     const { name, value } = event.target;
     let errors = validState.errors;
@@ -204,7 +204,7 @@ function CompanyProfile(props) {
                   </label>
                   <img
                     className="form__user-photo ml-4"
-                    src={`${localStorage.ip}/Images/${compProfileState.photo}`}
+                    src={`${localStorage.ip}Images/${compProfileState.photo}`}
                     alt=""
                   />
                 </div>

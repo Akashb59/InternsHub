@@ -223,7 +223,7 @@ function StudentPersonalProfile(props) {
                   </label>
                   <img
                     className="form__user-photo ml-4"
-                    src={`${localStorage.ip}/Images/${studPersonalProfile.photo}`}
+                    src={`${localStorage.ip}Images/${studPersonalProfile.photo}`}
                     alt=""
                   />
                 </div>
