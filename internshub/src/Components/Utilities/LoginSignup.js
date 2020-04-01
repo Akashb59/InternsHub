@@ -24,7 +24,7 @@ export const profile = user => {
       return res.data;
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -50,7 +50,7 @@ export const roles = () => {
     })
     .catch(err => {
       console.log(err);
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
     });
 };
@@ -81,7 +81,7 @@ export const signup = newUser => {
       return res.data;
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -111,9 +111,10 @@ export const login = user => {
       return res.data;
     })
     .catch(err => {
-      if (err.value !== undefined)
-        showAlert("error", `${err.response.data.message}`);
       console.log(err);
+
+      if ([400, 401, 404, 500].includes(err.response.status))
+        showAlert("error", `${err.response.data.message}`);
     });
 };
 
@@ -126,7 +127,7 @@ export const forgotPassword = user => {
       email: user.email
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -144,7 +145,7 @@ export const updatePass = pass => {
       passwordConfirm: pass.passwordConfirm
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -160,7 +161,7 @@ export const newPass = (pass, token) => {
       passwordConfirm: pass.passwordConfirm
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });

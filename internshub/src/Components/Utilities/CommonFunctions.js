@@ -21,7 +21,7 @@ export const skills = () => {
     })
     .catch(err => {
       console.log(err);
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
     });
 };
@@ -45,7 +45,7 @@ export const role = roleType => {
       return res.data;
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -67,7 +67,7 @@ export const addressform = address => {
       pincode: address.pincode
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -86,7 +86,7 @@ export const sendContactInfo = contact => {
       email: contact.email
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -101,7 +101,7 @@ export const createSkill = skill => {
       skill_name: skill
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -122,7 +122,7 @@ export const editAddressForm = editAddress => {
       pincode: editAddress.pincode
     })
     .catch(err => {
-      if (err.value !== undefined)
+      if ([400, 401, 404, 500].includes(err.response.status))
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -139,7 +139,7 @@ export const editUserInfo = details => {
       jwt: localStorage.usertoken
     }
   }).catch(err => {
-    if (err.value !== undefined)
+    if ([400, 401, 404, 500].includes(err.response.status))
       showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
