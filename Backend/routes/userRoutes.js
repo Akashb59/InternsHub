@@ -15,9 +15,7 @@ router.use(authController.protect);
 router
   .route('/')
   .get(authController.restrictTo('Admin'), userController.getAllUsers);
-router.use(
-  authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell')
-);
+router.use(authController.restrictTo('Admin', 'Student', 'Company'));
 router.patch('/updateMyPassword', authController.updatePassword);
 router.patch(
   '/updateMe',

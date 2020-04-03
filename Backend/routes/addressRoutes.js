@@ -9,7 +9,7 @@ router
   .route('/')
   .get(authController.restrictTo('Admin'), addressController.getAllAddresses)
   .post(
-    authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
+    authController.restrictTo('Admin', 'Student', 'Company'),
     addressController.createAddress
   );
 router.use(authController.restrictTo('Admin', 'Student', 'Company'));

@@ -12,22 +12,22 @@ router
     reviewController.getAllReviews
   )
   .post(
-    authController.restrictTo('Admin', 'Student', 'PlacementCell'),
+    authController.restrictTo('Admin', 'Student'),
     reviewController.createReview
   );
 
 router
   .route('/:id')
   .get(
-    authController.restrictTo('Admin', 'PlacementCell', 'Student', 'Company'),
+    authController.restrictTo('Admin', 'Student', 'Company'),
     reviewController.getReviewById
   )
   .patch(
-    authController.restrictTo('Admin', 'PlacementCell', 'Student'),
+    authController.restrictTo('Admin', 'Student'),
     reviewController.updateReview
   )
   .delete(
-    authController.restrictTo('Admin', 'PlacementCell', 'Student'),
+    authController.restrictTo('Admin', 'Student'),
     reviewController.deleteReview
   );
 

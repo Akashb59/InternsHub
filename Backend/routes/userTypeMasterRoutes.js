@@ -18,7 +18,7 @@ router
 router
   .route('/:id')
   .get(
-    authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
+    authController.restrictTo('Admin', 'Student', 'Company'),
     userTypeMasterController.getUserTypeMasterById
   );
 module.exports = router;

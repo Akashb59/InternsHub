@@ -8,7 +8,7 @@ router.use(authController.protect);
 router
   .route('/')
   .get(
-    authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
+    authController.restrictTo('Admin', 'Student', 'Company'),
     skillTypeMasterController.getAllSkillTypeMasters
   )
   .post(
@@ -19,7 +19,7 @@ router
 router
   .route('/:id')
   .get(
-    authController.restrictTo('Admin', 'Student', 'Company', 'PlacementCell'),
+    authController.restrictTo('Admin', 'Student', 'Company'),
     skillTypeMasterController.getSkillTypeMasterById
   );
 
