@@ -21,34 +21,6 @@ function Check() {
         <div className="row no-gutters">
           <div className="col-lg-8 col-md-7">
             <div className="d-flex flex-column">
-              <div className="p-5 bg-dark text-white">
-                <div className="d-flex flex-row justify-content-between align-items-center">
-                  <h1 className="display-4">John Doe</h1>
-                  <div className="d-none d-md-block">
-                    <a href="http://twitter.com" className="text-white">
-                      <i className="fab fa-twitter" />
-                    </a>
-                  </div>
-                  <div>
-                    <a href="http://facebook.com" className="text-white">
-                      <i className="fab fa-facebook" />
-                    </a>
-                  </div>
-                  <div>
-                    <a href="http://instagram.com" className="text-white">
-                      <i className="fab fa-instagram" />
-                    </a>
-                  </div>
-                  <div>
-                    <a href="http://github.com" className="text-white">
-                      <i className="fab fa-github" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="p-4 bg-black">
-                Experienced Full Stack Web Developer
-              </div>
               <div>
                 <div className="d-flex flex-row text-white align-items-stretch text-center">
                   <div

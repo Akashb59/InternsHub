@@ -24,7 +24,10 @@ export const profile = user => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -50,7 +53,10 @@ export const roles = () => {
     })
     .catch(err => {
       console.log(err);
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
     });
 };
@@ -81,7 +87,10 @@ export const signup = newUser => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -113,7 +122,10 @@ export const login = user => {
     .catch(err => {
       console.log(err);
 
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
     });
 };
@@ -127,7 +139,10 @@ export const forgotPassword = user => {
       email: user.email
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -145,7 +160,10 @@ export const updatePass = pass => {
       passwordConfirm: pass.passwordConfirm
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -161,7 +179,10 @@ export const newPass = (pass, token) => {
       passwordConfirm: pass.passwordConfirm
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });

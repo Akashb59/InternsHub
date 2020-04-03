@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 function About() {
   useEffect(() => {
     document.title = "InternsHub | Home";
-    const ip = "http://192.168.1.11:3000";
-    localStorage.setItem("ip", ip);
   }, []);
   return (
     <div>

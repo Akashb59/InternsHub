@@ -148,9 +148,9 @@ function ViewInternships(props) {
       if (res) {
         //console.log(res.data.data.internship[0].requiredSkills);
         setInternshipState(res.data.data.internship);
+        if (res.data !== undefined) setLoading("true");
       }
     });
-    setLoading("true");
   }, []);
   const realoptions = options.map(option => ({
     value: option.skillid,

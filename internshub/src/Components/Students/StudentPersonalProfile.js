@@ -48,7 +48,6 @@ function StudentPersonalProfile(props) {
         const profile = res.data.student[0].personal_details;
         const profile1 = res.data.student[0].address[0];
         setStudPersonal({
-          ...studPersonalProfile,
           name: res.data.student[0].user.fullname,
           photo: res.data.student[0].user.photo,
           phoneNumber: res.data.student[0].user.phoneNumber,
@@ -65,10 +64,10 @@ function StudentPersonalProfile(props) {
           pincode: profile1.pincode,
           address: profile1.id
         });
+        if (res.data !== undefined) setLoading("true");
+        //console.log(res.data);
       }
     });
-    setLoading("true");
-    // eslint-disable-next-line
   }, []);
   const handleChange = event => {
     const { name, value } = event.target;
@@ -221,11 +220,15 @@ function StudentPersonalProfile(props) {
                   <label className="ml-auto" htmlFor="photo">
                     Choose new photo
                   </label>
-                  <img
-                    className="form__user-photo ml-4"
-                    src={`${localStorage.ip}Images/${studPersonalProfile.photo}`}
-                    alt=""
-                  />
+                  {studPersonalProfile.photo !== undefined ? (
+                    <img
+                      className="form__user-photo ml-4"
+                      src={`${localStorage.ip}Images/${studPersonalProfile.photo}`}
+                      alt=""
+                    />
+                  ) : (
+                    <p>Loading...</p>
+                  )}
                 </div>
                 <div className="form-group">
                   <label htmlFor="name">Full Name: </label>

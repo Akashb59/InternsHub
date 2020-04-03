@@ -10,7 +10,7 @@ import $ from "jquery";
 import { MdPermDeviceInformation } from "react-icons/md";
 import { FaBuilding, FaGraduationCap } from "react-icons/fa";
 
-function Example(props) {
+function StudentInternSelect(props) {
   const [loading, setLoading] = useState("false");
   const [internship, setInternship] = useState({
     startsOn: "",
@@ -47,14 +47,12 @@ function Example(props) {
       $(".show").removeClass("show");
       $(".show").addClass("hide");
     });
-
     selectedIntern(localStorage.internId).then(res => {
       if (res) {
         document.title = `InternsHub | ${res.data.title}`;
         //console.log(res.data.internship);
         const ab = res.data;
         setInternship({
-          ...internship,
           startsOn: ab.starts_on.substring(0, 10),
           postedOn: ab.posted_on.substring(0, 10),
           type: ab.type_of_internship,
@@ -87,11 +85,11 @@ function Example(props) {
           })),
           id: ab.id
         });
+        if (res.data !== undefined) setLoading("true");
       }
     });
-    setLoading("true");
-    // eslint-disable-next-line
   }, []);
+
   const handleChange = event => {
     //const {name,value}=event.target;
     setInfo(event.target.value);
@@ -202,228 +200,219 @@ function Example(props) {
 
   return (
     <div className="container">
-      {loading === "false" ? (
-        load(loading)
-      ) : (
-        <div>
-          <header id="main-header">
-            <div className="row no-gutters">
-              <div className="col-12 p-2 text-white bg-head ">
-                <div className=" text-center">
-                  <h1 className="display-1 head-internship">
-                    {internship.title}
-                  </h1>
-                </div>
-              </div>
-              <div className="col-lg-3 col-md-4">
-                <img
-                  src={`${localStorage.ip}Images/${internship.photo}`}
-                  alt=""
-                />
-              </div>
-              <div className="col-lg-9 col-md-8">
-                <div className="d-flex flex-column">
-                  <div className="bg-gray-dark text-white blockquote p-3 font-increase mb-0 ">
-                    {internship.name}
-                  </div>
-
-                  <div>
-                    <div className="d-flex flex-row text-white align-items-stretch text-center">
-                      <div
-                        className="port-item pt-2 pb-4 bg-primary"
-                        data-toggle="collapse"
-                        data-target="#internship"
-                      >
-                        <i className="fa-3x d-block" aria-hidden="true">
-                          <FaGraduationCap />
-                        </i>
-                        <span className="d-sm-block">Internship Details</span>
-                      </div>
-                      <div
-                        className="port-item pt-2 pb-4 bg-dark-green"
-                        data-toggle="collapse"
-                        data-target="#company"
-                      >
-                        <i className="fa-3x d-block" aria-hidden="true">
-                          <FaBuilding />
-                        </i>
-                        <span className="d-sm-block">Company Details</span>
-                      </div>
-                      <div
-                        className="port-item pt-2 pb-4 bg-primary"
-                        data-toggle="collapse"
-                        data-target="#other"
-                      >
-                        <i className="fa-3x d-block" aria-hidden="true">
-                          <MdPermDeviceInformation />
-                        </i>
-                        <span className="d-sm-block">Others</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </header>
-          <div id="internship" className="collapse show">
-            <div className="card card-body bg-primary text-white py-5 rounded-0">
-              <p className="lead font-weight-bold">Description: </p>
-              {internship.description.map((data, index) => {
-                return (
-                  <div key={index}>
-                    <p className="lead">
-                      {index + 1}: {data}
-                    </p>
-                  </div>
-                );
-              })}
-              <div className="d-flex">
-                <p className="lead font-weight-bold">Duration (In Months): </p>
-                <p className="lead ml-2"> {internship.duration} </p>
-              </div>
-              <div className="d-flex">
-                <p className="lead font-weight-bold">Starts On: </p>
-                <p className="lead ml-2">{internship.startsOn}</p>
-              </div>
-              <div className="row">
-                <div className="col-md-4 offset-md-4"> {applyBtn}</div>
-              </div>
+      {load(loading)}
+      <header id="main-header">
+        <div className="row no-gutters">
+          <div className="col-12 p-2 text-white bg-head ">
+            <div className=" text-center">
+              <h1 className="display-1 head-internship">{internship.title}</h1>
             </div>
           </div>
-          <div id="company" className="collapse">
-            <div className="card card-body bg-dark-green text-white py-5 rounded-0">
-              <p className="lead font-weight-bold">About Company: </p>
-
-              <p className="lead">{internship.aboutCompany}</p>
-
-              {internship.address.map(function(add) {
-                return (
-                  <div key={add.id}>
-                    <p className="lead font-weight-bold"> Address: </p>
-                    <p className="lead">
-                      {add.locality}, {add.city} {add.state} <br />
-                      {add.country} {add.pincode}
-                    </p>
-                  </div>
-                );
-              })}
-
-              <p className="lead font-weight-bold">Comapany Technologies: </p>
-
-              {internship.technology.map((tech, index) => {
-                return (
-                  <div key={index}>
-                    <p className="lead">
-                      {" "}
-                      {index + 1}: {tech.name}
-                    </p>
-                  </div>
-                );
-              })}
-              <div className="d-flex">
-                <p className="lead font-weight-bold">Company Website: </p>
-                <p className="lead ml-2"> {internship.website}</p>
-              </div>
-              <div className="row">
-                <div className="col-md-4 offset-md-4"> {applyBtn}</div>
-              </div>
-            </div>
+          <div className="col-lg-3 col-md-4">
+            {internship.photo !== undefined ? (
+              <img
+                src={`${localStorage.ip}Images/${internship.photo}`}
+                alt=""
+              />
+            ) : (
+              <p>Loading...</p>
+            )}
           </div>
-          <div id="other" className="collapse">
-            <div className="card card-body bg-primary text-white py-5 rounded-0">
-              <p className="lead font-weight-bold">Intended Participants: </p>
+          <div className="col-lg-9 col-md-8">
+            <div className="d-flex flex-column">
+              <div className="bg-gray-dark text-white blockquote p-3 font-increase mb-0 ">
+                {internship.name}
+              </div>
 
-              {internship.intendedParticipants.map((data, index) => {
-                return (
-                  <div key={index}>
-                    <p className="lead">
-                      {" "}
-                      {index + 1}: {data}
-                    </p>
+              <div>
+                <div className="d-flex flex-row text-white align-items-stretch text-center">
+                  <div
+                    className="port-item pt-2 pb-4 bg-primary"
+                    data-toggle="collapse"
+                    data-target="#internship"
+                  >
+                    <i className="fa-3x d-block" aria-hidden="true">
+                      <FaGraduationCap />
+                    </i>
+                    <span className="d-sm-block">Internship Details</span>
                   </div>
-                );
-              })}
-              <div className="d-flex">
-                <p className="lead font-weight-bold"> Category: </p>
-                <p className="lead ml-2">{internship.category}</p>
-              </div>
-              <div className="d-flex">
-                <p className="lead font-weight-bold">Stipend: Rs. </p>
-                <p className="lead ml-2"> {internship.stipend}/-</p>
-              </div>
-              <div className="d-flex">
-                <p className="lead font-weight-bold">Type: </p>
-                <p className="lead ml-2">{internship.type}</p>
-              </div>
-              <div className="row">
-                <div className="col-md-4 offset-md-4"> {applyBtn}</div>
-              </div>
-            </div>
-          </div>
-          <div className="modal fade" id="reqInternship">
-            <div className="modal-dialog modal-lg">
-              <div className="modal-content">
-                <div className="modal-header bg-info  text-white">
-                  <h5 className="modal-title">
-                    Request for {internship.title}
-                  </h5>
-                  <button className="close" data-dismiss="modal">
-                    <span>&times;</span>
-                  </button>
+                  <div
+                    className="port-item pt-2 pb-4 bg-dark-green"
+                    data-toggle="collapse"
+                    data-target="#company"
+                  >
+                    <i className="fa-3x d-block" aria-hidden="true">
+                      <FaBuilding />
+                    </i>
+                    <span className="d-sm-block">Company Details</span>
+                  </div>
+                  <div
+                    className="port-item pt-2 pb-4 bg-primary"
+                    data-toggle="collapse"
+                    data-target="#other"
+                  >
+                    <i className="fa-3x d-block" aria-hidden="true">
+                      <MdPermDeviceInformation />
+                    </i>
+                    <span className="d-sm-block">Others</span>
+                  </div>
                 </div>
-                <form onSubmit={handleSubmit}>
-                  <div className="modal-body">
-                    <p className="lead font-weight-bold">
-                      Academic Information:
-                    </p>
-                    <p className="lead"> {display.academic}</p>
-                    <p className="lead font-weight-bold">
-                      Personal Information:{" "}
-                    </p>
-                    <p className="lead">{display.personal}</p>
-                    <p className="lead font-weight-bold">
-                      Skills and Resume Information:
-                    </p>
-                    <p className="lead"> {display.resSkill}</p>
-                    <br></br>
-                    <div className="form-group">
-                      <p className="lead font-weight-bold">
-                        <label htmlFor="info">Message: </label>
-                      </p>
-                      <input
-                        type="text"
-                        className="form-control"
-                        name="info"
-                        //onBlur={validate}
-                        onChange={handleChange}
-                        required
-                        maxLength="40"
-                        minLength="10"
-                      />
-                    </div>
-                    <div className="modal-footer">
-                      {studentState === "Valid" ? (
-                        <button className="btn btn-success" type="submit">
-                          Submit
-                        </button>
-                      ) : (
-                        <button
-                          className="btn btn-success"
-                          type="submit"
-                          disabled
-                        >
-                          Submit
-                        </button>
-                      )}
-                    </div>
-                  </div>
-                </form>
               </div>
             </div>
           </div>
         </div>
-      )}
+      </header>
+      <div
+        id="internship"
+        className="collapse show"
+        style={{ transition: "all .5s" }}
+      >
+        <div className="card card-body bg-primary text-white py-5 rounded-0">
+          <p className="lead font-weight-bold">Description: </p>
+          {internship.description.map((data, index) => {
+            return (
+              <div key={index}>
+                <p className="lead">
+                  {index + 1}: {data}
+                </p>
+              </div>
+            );
+          })}
+          <div className="d-flex">
+            <p className="lead font-weight-bold">Duration (In Months): </p>
+            <p className="lead ml-2"> {internship.duration} </p>
+          </div>
+          <div className="d-flex">
+            <p className="lead font-weight-bold">Starts On: </p>
+            <p className="lead ml-2">{internship.startsOn}</p>
+          </div>
+          <div className="row">
+            <div className="col-md-4 offset-md-4"> {applyBtn}</div>
+          </div>
+        </div>
+      </div>
+      <div id="company" className="collapse" style={{ transition: "all .5s" }}>
+        <div className="card card-body bg-dark-green text-white py-5 rounded-0">
+          <p className="lead font-weight-bold">About Company: </p>
+
+          <p className="lead">{internship.aboutCompany}</p>
+
+          {internship.address.map(function(add) {
+            return (
+              <div key={add.id}>
+                <p className="lead font-weight-bold"> Address: </p>
+                <p className="lead">
+                  {add.locality}, {add.city} {add.state} <br />
+                  {add.country} {add.pincode}
+                </p>
+              </div>
+            );
+          })}
+
+          <p className="lead font-weight-bold">Comapany Technologies: </p>
+
+          {internship.technology.map((tech, index) => {
+            return (
+              <div key={index}>
+                <p className="lead">
+                  {" "}
+                  {index + 1}: {tech.name}
+                </p>
+              </div>
+            );
+          })}
+          <div className="d-flex">
+            <p className="lead font-weight-bold">Company Website: </p>
+            <p className="lead ml-2"> {internship.website}</p>
+          </div>
+          <div className="row">
+            <div className="col-md-4 offset-md-4"> {applyBtn}</div>
+          </div>
+        </div>
+      </div>
+      <div id="other" className="collapse" style={{ transition: "all .5s" }}>
+        <div className="card card-body bg-primary text-white py-5 rounded-0">
+          <p className="lead font-weight-bold">Intended Participants: </p>
+
+          {internship.intendedParticipants.map((data, index) => {
+            return (
+              <div key={index}>
+                <p className="lead">
+                  {" "}
+                  {index + 1}: {data}
+                </p>
+              </div>
+            );
+          })}
+          <div className="d-flex">
+            <p className="lead font-weight-bold"> Category: </p>
+            <p className="lead ml-2">{internship.category}</p>
+          </div>
+          <div className="d-flex">
+            <p className="lead font-weight-bold">Stipend: Rs. </p>
+            <p className="lead ml-2"> {internship.stipend}/-</p>
+          </div>
+          <div className="d-flex">
+            <p className="lead font-weight-bold">Type: </p>
+            <p className="lead ml-2">{internship.type}</p>
+          </div>
+          <div className="row">
+            <div className="col-md-4 offset-md-4"> {applyBtn}</div>
+          </div>
+        </div>
+      </div>
+      <div className="modal fade" id="reqInternship">
+        <div className="modal-dialog modal-lg">
+          <div className="modal-content">
+            <div className="modal-header bg-info  text-white">
+              <h5 className="modal-title">Request for {internship.title}</h5>
+              <button className="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+            </div>
+            <form onSubmit={handleSubmit}>
+              <div className="modal-body">
+                <p className="lead font-weight-bold">Academic Information:</p>
+                <p className="lead"> {display.academic}</p>
+                <p className="lead font-weight-bold">Personal Information: </p>
+                <p className="lead">{display.personal}</p>
+                <p className="lead font-weight-bold">
+                  Skills and Resume Information:
+                </p>
+                <p className="lead"> {display.resSkill}</p>
+                <br></br>
+                <div className="form-group">
+                  <p className="lead font-weight-bold">
+                    <label htmlFor="info">Message: </label>
+                  </p>
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="info"
+                    //onBlur={validate}
+                    onChange={handleChange}
+                    required
+                    maxLength="40"
+                    minLength="10"
+                  />
+                </div>
+                <div className="modal-footer">
+                  {studentState === "Valid" ? (
+                    <button className="btn btn-success" type="submit">
+                      Submit
+                    </button>
+                  ) : (
+                    <button className="btn btn-success" type="submit" disabled>
+                      Submit
+                    </button>
+                  )}
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
-export default Example;
+export default StudentInternSelect;

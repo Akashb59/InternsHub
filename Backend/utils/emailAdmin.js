@@ -3,15 +3,17 @@ const pug = require('pug');
 const htmlToText = require('html-to-text');
 
 //new Email(user,url).sendWelcome();
-module.exports = class Email {
-  constructor(user, url) {
-    this.to = user.email;
+
+module.exports = class EmailAdmin {
+  constructor(user) {
+    this.message = user.message;
+    this.phone = user.phone;
+    this.to = `${process.env.EMAIL_FROM}`;
     this.firstName = user.fullname.split(' ')[0];
-    this.url = url;
-    this.from = `InternsHub Admin <${process.env.EMAIL_FROM}>`;
+    this.from = user.emailInfo;
   }
   newTransport() {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV === 'development') {
       // SendGrid
       return nodemailer.createTransport({
         service: 'SendGrid',
@@ -32,15 +34,18 @@ module.exports = class Email {
       //Activate in gmail "less secure app" option
     });
   }
-  async send(template, subject) {
+
+  async sendAdmin(template, subject) {
     //Send the actual email
     //1. Render HTML based on template
     const html = pug.renderFile(
       `${__dirname}/../Views/Emails/${template}.pug`,
       {
         firstName: this.firstName,
-        url: this.url,
-        subject
+        subject,
+        message: this.message,
+        emailInfo: this.from,
+        phone: this.phone
       }
     );
     //2. Define email options
@@ -52,19 +57,9 @@ module.exports = class Email {
       text: htmlToText.fromString(html)
     };
     //3. Create a transport and send email
-
     await this.newTransport().sendMail(mailOptions);
   }
-  async sendWelcomeStudent() {
-    await this.send(`welcome`, 'Welcome to InternsHub!');
-  }
-  async sendWelcomeCompany() {
-    await this.send(`welcomeCompany`, 'Welcome to InternsHub!');
-  }
-  async sendPasswordReset() {
-    await this.send(
-      `passwordReset`,
-      'Your password reset token is valid for only 10 minutes!'
-    );
+  async sendContact() {
+    await this.sendAdmin(`contact`, 'You have a new contact request!');
   }
 };

@@ -60,12 +60,9 @@ exports.signup = catchAsync(async (req, res, next) => {
     roleTypeObj = await userTypeMaster.findOne({
       roleName: 'Admin'
     });
-    roleName = roleTypeObj._id;
-  } else if ((await req.body.role) == 'PlacementCell') {
-    roleTypeObj = await userTypeMaster.findOne({
-      roleName: 'PlacementCell'
-    });
     roleType = roleTypeObj._id;
+  } else {
+    return next(new AppError('Please enter valid role', 400));
   }
   const slug = slugify(req.body.fullname);
   //console.log(roleType);
@@ -79,17 +76,29 @@ exports.signup = catchAsync(async (req, res, next) => {
     roleType,
     slug
   });
-  const urlCompany = `http://localhost:3001/companyHome`;
-  const urlStudent = `http://localhost:3001/studentHome`;
-  if ((await req.body.role) == 'Student') {
-    //console.log(urlStudent);
-    await new Email(newUser, urlStudent).sendWelcomeStudent();
-  }
-  if ((await req.body.role) == 'Company') {
-    await new Email(newUser, urlCompany).sendWelcomeCompany();
-  }
+  try {
+    let urlStudent, urlCompany;
+    if (process.env.NODE_ENV === 'development') {
+      urlStudent = `http://localhost:3001/studentHome`;
+      urlCompany = `http://localhost:3001/companyHome`;
+    } else {
+      urlStudent = `${req.protocol}://${req.get('host')}/studentHome`;
+      urlCompany = `${req.protocol}://${req.get('host')}companyHome`;
+    }
 
-  createSendToken(newUser, 201, res);
+    if ((await req.body.role) == 'Student') {
+      await new Email(newUser, urlStudent).sendWelcomeStudent();
+    }
+    if ((await req.body.role) == 'Company') {
+      await new Email(newUser, urlCompany).sendWelcomeCompany();
+    }
+    createSendToken(newUser, 201, res);
+  } catch (err) {
+    console.log(err);
+    return next(
+      new AppError('There was an error sending email, try again later!', 500)
+    );
+  }
 });
 
 exports.login = catchAsync(async (req, res, next) => {

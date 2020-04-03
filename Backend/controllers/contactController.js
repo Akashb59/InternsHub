@@ -1,5 +1,5 @@
 const catchAsync = require('./../utils/catchAsync');
-const EmailAdmin = require('./../utils/email');
+const EmailAdmin = require('./../utils/emailAdmin');
 
 exports.sendEmail = catchAsync(async (req, res, next) => {
   const user = {

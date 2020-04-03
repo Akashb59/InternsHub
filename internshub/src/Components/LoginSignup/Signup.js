@@ -41,7 +41,7 @@ function Signup(props) {
         //console.log(roleTypes);
         const newroleTypes = roleTypes.filter(role => role !== "Admin");
         setRoleState(newroleTypes);
-        if (newroleTypes !== "") setLoading("true");
+        if (res.data !== undefined) setLoading("true");
       }
     });
     setLoading("true");
@@ -122,7 +122,7 @@ function Signup(props) {
             if (check === "Student") {
               props.history.push(`/studentDetails`);
             } else if (check === "Company") {
-              props.history.push(`/companyForm`);
+              props.history.push(`/companyDetails`);
             } else if (check === "PlacementCell") {
               props.history.push(`/`);
             }

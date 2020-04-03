@@ -42,9 +42,9 @@ function StudentHome() {
           id: data.id
         }));
         setInternArray(arr);
+        if (res.data !== undefined) setLoading("true");
       }
     });
-    setLoading("true");
   }, []);
 
   function onFilterChange(event) {
@@ -101,6 +101,7 @@ function StudentHome() {
     });
   };
   count = internArray.length;
+
   return (
     <div className="container pt-4">
       {loading === "false" ? (
@@ -469,11 +470,15 @@ function StudentHome() {
                             </h6>
                           </div>
                           <div className="col-sm-6 col-md-4 col-lg-3 mt-3">
-                            <img
-                              src={`${localStorage.ip}Images/${intern.photo}`}
-                              className="card-img small-image"
-                              alt="Logo"
-                            />
+                            {intern.photo !== undefined ? (
+                              <img
+                                src={`${localStorage.ip}Images/${intern.photo}`}
+                                className="card-img small-image"
+                                alt="Logo"
+                              />
+                            ) : (
+                              <p>Loading...</p>
+                            )}
                           </div>
                         </div>
                         <hr />

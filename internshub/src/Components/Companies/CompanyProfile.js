@@ -42,7 +42,6 @@ function CompanyProfile(props) {
         //console.log(res.data.company[0]);
         const profile = res.data.company[0];
         setCompProfileState({
-          ...compProfileState,
           fullname: profile.user.fullname,
           photo: profile.user.photo,
           phoneNumber: profile.user.phoneNumber,
@@ -60,10 +59,9 @@ function CompanyProfile(props) {
           pincode: profile.address[0].pincode,
           address: profile.address[0].id
         });
+        if (res.data !== undefined) setLoading("true");
       }
     });
-    setLoading("true");
-    // eslint-disable-next-line
   }, []);
   const handleChange = event => {
     const { name, value } = event.target;
@@ -202,11 +200,15 @@ function CompanyProfile(props) {
                   <label className="ml-auto" htmlFor="photo">
                     Choose new photo
                   </label>
-                  <img
-                    className="form__user-photo ml-4"
-                    src={`${localStorage.ip}Images/${compProfileState.photo}`}
-                    alt=""
-                  />
+                  {compProfileState.photo !== undefined ? (
+                    <img
+                      className="form__user-photo ml-4"
+                      src={`${localStorage.ip}Images/${compProfileState.photo}`}
+                      alt=""
+                    />
+                  ) : (
+                    <p>Loading...</p>
+                  )}
                 </div>
                 <br></br>
                 <div className="input-field mb-3">

@@ -89,103 +89,101 @@ function CompanyHome(props) {
         }));
         setOptions(options);
         //console.log(options);
-      }
-    });
 
-    companyInternships().then(res => {
-      if (res) {
-        //console.log(res.data.data);
-        setCount(res.data.results);
-        let c = 0;
-        const result = res.data.data.internship.map(currentInternship => {
-          const active = currentInternship.ends_on;
+        companyInternships().then(res => {
+          if (res) {
+            //console.log(res.data.data);
+            setCount(res.data.results);
+            let c = 0;
+            const result = res.data.data.internship.map(currentInternship => {
+              const active = currentInternship.ends_on;
 
-          if (active >= Date.now()) {
-            c += 1;
+              if (active >= Date.now()) {
+                c += 1;
+              }
+              return c;
+            });
+            //console.log(result[result.length - 1]);
+            setCountActive(result[result.length - 1]);
+
+            companyEnquiries().then(res => {
+              if (res) {
+                const array = res.data.data.enquiry.map(el => {
+                  var date = new Date(el.reqAt);
+                  return date.getTime();
+                });
+                //console.log(array);
+                //console.log(7 * 24 * 60 * 60 * 1000);
+                //console.log(Date.now());
+                //console.log(Date.now() - 7 * 24 * 60 * 60 * 1000);
+                let count1 = 0;
+                let count2 = 0;
+                let count3 = 0;
+                let count4 = 0;
+                let result = [];
+                const w1 = Date.now() - 7 * 24 * 60 * 60 * 1000;
+                const w2 = Date.now() - 2 * 7 * 24 * 60 * 60 * 1000;
+                const w3 = Date.now() - 3 * 7 * 24 * 60 * 60 * 1000;
+                // eslint-disable-next-line
+                array.map(el => {
+                  if (el > w1) count1 += 1;
+                  else if (el > w2) count2 += 1;
+                  else if (el > w3) count3 += 1;
+                  else count4 += 1;
+                });
+                result[3] = count1;
+                result[2] = count2;
+                result[1] = count3;
+                result[0] = count4;
+                //console.log(result);
+                const resChart = [
+                  {
+                    label: "Enquiries",
+                    fill: false,
+                    lineTension: 0.4,
+                    backgroundColor: "rgba(75,192,192,1)",
+                    borderColor: "rgba(0,0,0,1)",
+                    borderWidth: 2,
+                    data: result
+                  }
+                ];
+                setEnqChart({ datasets: resChart });
+                const internEnq = res.data.data.enquiry.filter(
+                  data => data.internship !== null
+                );
+                setcountEnquiry(internEnq.length);
+                const AcceptedEnq = res.data.data.enquiry.filter(
+                  data => data.accepted === "Yes"
+                );
+                setCountAcceptedEnquiry(AcceptedEnq.length);
+                //console.log(AcceptedEnq.length);
+                const PendingEnq = res.data.data.enquiry.filter(
+                  data => data.accepted === "No"
+                );
+                setCountPendingEnquiry(PendingEnq.length);
+
+                company(localStorage.companyid).then(res => {
+                  if (res) {
+                    setDescription({
+                      aboutCompany: res.data.company[0].aboutCompany
+                    });
+
+                    const selected = res.data.company[0].technology.map(el => {
+                      return { value: el.id, label: el.skill_name };
+                    });
+                    // if (selected.length === 0) selected = [];
+                    setSelect(selected);
+                    //console.log(selected);
+                    final = selected;
+                    if (res.data !== undefined) setLoading("true");
+                  }
+                });
+              }
+            });
           }
-          return c;
         });
-        //console.log(result[result.length - 1]);
-        setCountActive(result[result.length - 1]);
       }
     });
-    companyEnquiries().then(res => {
-      if (res) {
-        const array = res.data.data.enquiry.map(el => {
-          var date = new Date(el.reqAt);
-          return date.getTime();
-        });
-        //console.log(array);
-        //console.log(7 * 24 * 60 * 60 * 1000);
-        //console.log(Date.now());
-        //console.log(Date.now() - 7 * 24 * 60 * 60 * 1000);
-        let count1 = 0;
-        let count2 = 0;
-        let count3 = 0;
-        let count4 = 0;
-        let result = [];
-        const w1 = Date.now() - 7 * 24 * 60 * 60 * 1000;
-        const w2 = Date.now() - 2 * 7 * 24 * 60 * 60 * 1000;
-        const w3 = Date.now() - 3 * 7 * 24 * 60 * 60 * 1000;
-        // eslint-disable-next-line
-        array.map(el => {
-          if (el > w1) count1 += 1;
-          else if (el > w2) count2 += 1;
-          else if (el > w3) count3 += 1;
-          else count4 += 1;
-        });
-        result[3] = count1;
-        result[2] = count2;
-        result[1] = count3;
-        result[0] = count4;
-        //console.log(result);
-        const resChart = [
-          {
-            label: "Enquiries",
-            fill: false,
-            lineTension: 0.4,
-            backgroundColor: "rgba(75,192,192,1)",
-            borderColor: "rgba(0,0,0,1)",
-            borderWidth: 2,
-            data: result
-          }
-        ];
-        setEnqChart({ ...enqChart, datasets: resChart });
-        const internEnq = res.data.data.enquiry.filter(
-          data => data.internship !== null
-        );
-        setcountEnquiry(internEnq.length);
-        const AcceptedEnq = res.data.data.enquiry.filter(
-          data => data.accepted === "Yes"
-        );
-        setCountAcceptedEnquiry(AcceptedEnq.length);
-        //console.log(AcceptedEnq.length);
-        const PendingEnq = res.data.data.enquiry.filter(
-          data => data.accepted === "No"
-        );
-        setCountPendingEnquiry(PendingEnq.length);
-      }
-    });
-    company(localStorage.companyid).then(res => {
-      if (res) {
-        setDescription({
-          ...descriptionState,
-          aboutCompany: res.data.company[0].aboutCompany
-        });
-
-        const selected = res.data.company[0].technology.map(el => {
-          return { value: el.id, label: el.skill_name };
-        });
-        // if (selected.length === 0) selected = [];
-        setSelect(selected);
-        //console.log(selected);
-        final = selected;
-      }
-    });
-    //Example if (options.length !== 0)
-    //pending
-    setLoading("true");
-    // eslint-disable-next-line
   }, []);
 
   const realoptions = options.map(option => ({
@@ -557,7 +555,7 @@ function CompanyHome(props) {
                             className="form-control"
                             name="aboutCompany"
                             rows="3"
-                            maxLength="200"
+                            maxLength="400"
                             minLength="20"
                             placeholder="Enter some description about your company"
                             value={descriptionState.aboutCompany}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { login } from "../Utilities/LoginSignup";
 import { showAlert } from "../Utilities/Alerts";
-
+const prepareUrls = require("local-ip-url/prepareUrls");
 function AdminLogin(props) {
   const [adminLoginState, setAdminLoginState] = useState({
     email: "",
@@ -17,7 +17,11 @@ function AdminLogin(props) {
   });
   useEffect(() => {
     document.title = "InternsHub | Admin Login";
-    const ip = "http://192.168.1.16:3000";
+    const ip = prepareUrls({
+      protocol: "http",
+      host: "0.0.0.0",
+      port: 3000
+    }).lanUrl;
     localStorage.setItem("ip", ip);
   }, []);
 

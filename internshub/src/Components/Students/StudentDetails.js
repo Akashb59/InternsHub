@@ -33,31 +33,30 @@ function StudentDetails(props) {
         }));
         setOptions(options);
         //console.log(options);
+
+        student().then(res => {
+          if (res) {
+            //console.log(res.data.student[0].skills);
+            const selected = res.data.student[0].skills.map(el => {
+              return { value: el.id, label: el.skill_name };
+            });
+            //console.log(res.data.student[0].resume);
+            if (res.data.student[0].resume !== undefined) {
+              setResumeDisplay(res.data.student[0].resume);
+              setResume("Resume Uploaded Successfully");
+            }
+            // if (selected.length === 0) selected = [];
+            setStudentProfile({
+              skills: selected
+            });
+            setSelect(selected);
+            //console.log(selected);
+            final = selected;
+            if (res.data !== undefined) setLoading("true");
+          }
+        });
       }
     });
-    student().then(res => {
-      if (res) {
-        //console.log(res.data.student[0].skills);
-        const selected = res.data.student[0].skills.map(el => {
-          return { value: el.id, label: el.skill_name };
-        });
-        //console.log(res.data.student[0].resume);
-        if (res.data.student[0].resume !== undefined) {
-          setResumeDisplay(res.data.student[0].resume);
-          setResume("Resume Uploaded Successfully");
-        }
-        // if (selected.length === 0) selected = [];
-        setStudentProfile({
-          ...studentProfile,
-          skills: selected
-        });
-        setSelect(selected);
-        //console.log(selected);
-        final = selected;
-      }
-    });
-    setLoading("true");
-    // eslint-disable-next-line
   }, []);
   const realoptions = options.map(option => ({
     value: option.skillid,
@@ -110,6 +109,7 @@ function StudentDetails(props) {
       if (res) {
         showAlert("success", "Resume Uploaded successfully");
         props.history.push("/studentProfile");
+        props.location.reload(true);
       }
     });
   };

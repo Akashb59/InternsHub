@@ -22,7 +22,10 @@ export const student = () => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -44,7 +47,10 @@ export const internshipAll = () => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -67,7 +73,10 @@ export const selectedIntern = id => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -89,7 +98,10 @@ export const studentEnquiries = () => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -131,7 +143,10 @@ export const studentform = det => {
       user: det.user
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -154,7 +169,10 @@ export const internshipFilter = filter => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -177,7 +195,10 @@ export const sendEnquiry = info => {
       return res.data;
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -193,7 +214,10 @@ export const SkillsUpdate = skill => {
       skills: skill
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -210,7 +234,10 @@ export const uploadResume = (ab, size) => {
       jwt: localStorage.usertoken
     }
   }).catch(err => {
-    if ([400, 401].includes(err.response.status))
+    if (
+      err.response !== undefined &&
+      [400, 401, 500].includes(err.response.status)
+    )
       showAlert("error", `${err.response.data.message}`);
     console.log(err);
   });
@@ -232,7 +259,10 @@ export const editStudProfilePersonal = editStudProfile => {
       }
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });
@@ -264,7 +294,10 @@ export const editStudProfileAcademic = editStudProfile => {
       }
     })
     .catch(err => {
-      if ([400, 401].includes(err.response.status))
+      if (
+        err.response !== undefined &&
+        [400, 401, 500].includes(err.response.status)
+      )
         showAlert("error", `${err.response.data.message}`);
       console.log(err);
     });

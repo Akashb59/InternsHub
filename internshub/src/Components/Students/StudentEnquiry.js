@@ -24,10 +24,9 @@ function StudentEnquiry() {
         );
         //console.log(res.data.data.enquiry[0]);
         setStudentEnquiry(internEnq);
+        if (res.data !== undefined) setLoading("true");
       }
     });
-    setLoading("true");
-    // eslint-disable-next-line
   }, []);
   const InternshipEnq = props => (
     <tr>

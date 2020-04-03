@@ -173,29 +173,14 @@ function CompanyEnquiry(props) {
     document.title = "InternsHub | Company Enquiries";
     companyEnquiries().then(res => {
       if (res) {
-        //console.log(x);
-        // const enq = res.data.data.enquiry.map(el => {
-        //   return {
-        //     accepted: el.accepted,
-        //     studentName: el.user.fullname,
-        //     studentEmail: el.user.studentEmail,
-        //     studentPhone: el.user.phoneNumber,
-        //     // studentAcademic:el.student.academic_details,
-        //     // studentPersonal:el.student.personal_details,
-        //     student: el.student,
-        //     internship: el.internship,
-        //     message: el.reqMessage
-        //   };
-        // });
-        //console.log(res.data);
         const internEnq = res.data.data.enquiry.filter(
           data => data.internship !== null
         );
         //console.log(res.data.data.enquiry[0]);
         setInternshipEnquiry(internEnq);
+        if (res.data !== undefined) setLoading("true");
       }
     });
-    setLoading("true");
   }, []);
 
   if (resume !== "") {

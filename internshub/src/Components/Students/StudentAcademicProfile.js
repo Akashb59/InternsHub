@@ -48,7 +48,6 @@ function StudentAcademicProfile(props) {
         const profile = res.data.student[0].academic_details;
         const profile1 = res.data.student[0].college[0];
         setStudentProfileState({
-          ...studentProfileState,
           schoolName: profile.school_name,
           gradeTen: profile.grade_10_per,
           puCollegeName: profile.pu_college_name,
@@ -63,10 +62,9 @@ function StudentAcademicProfile(props) {
           project1: profile.project1_undertaken,
           project2: profile.project2_undertaken
         });
+        if (res.data !== undefined) setLoading("true");
       }
     });
-    setLoading("true");
-    // eslint-disable-next-line
   }, []);
   const validEmailRegex = RegExp(
     // eslint-disable-next-line

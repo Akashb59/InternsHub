@@ -82,7 +82,6 @@ app.delete('/api/v1/interns/:id', deleteIntern); */
 const addressRouter = require('./routes/addressRoutes');
 const companyRouter = require('./routes/companyRoutes');
 const internshipRouter = require('./routes/internshipRoutes');
-const placementCellRouter = require('./routes/placementCellRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const userRouter = require('./routes/userRoutes');
 const userTypeMasterRouter = require('./routes/userTypeMasterRoutes');
@@ -92,6 +91,7 @@ const AppError = require('./utils/appError');
 const enquiryRouter = require('./routes/enquiryRoutes');
 const contactRouter = require('./routes/contactRoutes');
 const globalErrorHandler = require('./controllers/errorController');
+//const placementCellRouter = require('./routes/placementCellRoutes');
 
 app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -112,7 +112,6 @@ app.use('/api/v1/users', userRouter);
 //app.use('/api/v1/interns', internRouter);
 app.use('/api/v1/addresses', addressRouter);
 app.use('/api/v1/companies', companyRouter);
-app.use('/api/v1/placementCells', placementCellRouter);
 app.use('/api/v1/internships', internshipRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/skillTypeMasters', skillTypeMasterRouter);
@@ -120,6 +119,7 @@ app.use('/api/v1/students', studentRouter);
 app.use('/api/v1/enquiries', enquiryRouter);
 app.use('/api/v1/contact', contactRouter);
 app.use('/api/v1/userTypeMasters', userTypeMasterRouter);
+//app.use('/api/v1/placementCells', placementCellRouter);
 
 //10.Global error handling middleware
 app.use(globalErrorHandler);

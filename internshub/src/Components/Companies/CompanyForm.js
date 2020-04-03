@@ -102,11 +102,12 @@ function CompanyForm(props) {
     };
     addressform(address).then(res => {
       if (res) {
+        //console.log(res.data.data);
         const details = {
           gst_no: compformstate.gst_no,
           website: compformstate.website,
           establishedYear: compformstate.establishedYear,
-          address: res.data.data.Address._id,
+          address: res.data.data.doc._id,
           user: localStorage.userid
         };
 
@@ -149,8 +150,8 @@ function CompanyForm(props) {
                   </b>
                 </center>
                 <br></br>
-                <div class="form-row">
-                  <div class="form-group col-md-6">
+                <div className="form-row">
+                  <div className="form-group col-md-6">
                     <div className="input-field">
                       <label htmlFor="fullname">GST-NUMBER:</label>
                       <div className="input-group">
@@ -178,7 +179,7 @@ function CompanyForm(props) {
                       )}
                     </div>
                   </div>
-                  <div class="form-group col-md-6">
+                  <div className="form-group col-md-6">
                     <div className="input-field">
                       <label htmlFor="eyear">Established Year:</label>
                       <div className="input-group">
@@ -193,7 +194,7 @@ function CompanyForm(props) {
                           className="form-control"
                           id="eyear"
                           placeholder="Enter Established Year"
-                          value={compformstate.establishedYear}
+                          value={compformstate.establishedYear.toString()}
                           onChange={handleChange}
                           required
                         />
@@ -242,8 +243,8 @@ function CompanyForm(props) {
                   </b>
                 </center>{" "}
                 <br></br>
-                <div class="form-row">
-                  <div class="form-group col-md-4">
+                <div className="form-row">
+                  <div className="form-group col-md-4">
                     <div className="input-field">
                       <label htmlFor="locality">Locality:</label>
                       <div className="input-group">
@@ -272,7 +273,7 @@ function CompanyForm(props) {
                     </div>
                   </div>
 
-                  <div class="form-group col-md-4">
+                  <div className="form-group col-md-4">
                     <div className="input-field">
                       <label htmlFor="city">City:</label>
                       <div className="input-group">
@@ -300,7 +301,7 @@ function CompanyForm(props) {
                       )}
                     </div>
                   </div>
-                  <div class="form-group col-md-4">
+                  <div className="form-group col-md-4">
                     <div className="input-field">
                       <label htmlFor="district">District:</label>
                       <div className="input-group">
@@ -329,8 +330,8 @@ function CompanyForm(props) {
                     </div>
                   </div>
                 </div>
-                <div class="form-row">
-                  <div class="form-group col-md-4">
+                <div className="form-row">
+                  <div className="form-group col-md-4">
                     <div className="input-field">
                       <label htmlFor="state">State:</label>
                       <div className="input-group">
@@ -358,7 +359,7 @@ function CompanyForm(props) {
                       )}
                     </div>
                   </div>
-                  <div class="form-group col-md-4">
+                  <div className="form-group col-md-4">
                     <div className="input-field">
                       <label htmlFor="country">Country:</label>
                       <div className="input-group">
@@ -387,7 +388,7 @@ function CompanyForm(props) {
                     </div>
                   </div>
 
-                  <div class="form-group col-md-4">
+                  <div className="form-group col-md-4">
                     <div className="input-field">
                       <label htmlFor="pincode">Pincode:</label>
                       <div className="input-group">
