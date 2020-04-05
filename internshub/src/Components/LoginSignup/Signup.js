@@ -44,7 +44,6 @@ function Signup(props) {
         if (res.data !== undefined) setLoading("true");
       }
     });
-    setLoading("true");
   }, []);
 
   const validEmailRegex = RegExp(
