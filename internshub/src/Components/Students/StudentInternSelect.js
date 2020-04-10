@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   selectedIntern,
   sendEnquiry,
-  student
+  student,
 } from "../Utilities/StudentFunctions";
 import { showAlert } from "../Utilities/Alerts";
 import { load } from "../Utilities/Utils";
@@ -15,6 +15,7 @@ function StudentInternSelect(props) {
   const [internship, setInternship] = useState({
     startsOn: "",
     postedOn: "",
+    companyId: "",
     type: "",
     address: [],
     city: "",
@@ -30,7 +31,7 @@ function StudentInternSelect(props) {
     category: "",
     duration: "",
     intendedParticipants: [],
-    id: ""
+    id: "",
   });
 
   const [info, setInfo] = useState("");
@@ -38,16 +39,16 @@ function StudentInternSelect(props) {
   const [display, setDisplay] = useState({
     academic: "",
     personal: "",
-    resSkill: ""
+    resSkill: "",
   });
   const id = props.location.id;
   if (props.location.id !== undefined) localStorage.setItem("internId", id);
   useEffect(() => {
-    $(".port-item").click(function() {
+    $(".port-item").click(function () {
       $(".show").removeClass("show");
       $(".show").addClass("hide");
     });
-    selectedIntern(localStorage.internId).then(res => {
+    selectedIntern(localStorage.internId).then((res) => {
       if (res) {
         document.title = `InternsHub | ${res.data.title}`;
         //console.log(res.data.internship);
@@ -56,55 +57,56 @@ function StudentInternSelect(props) {
           startsOn: ab.starts_on.substring(0, 10),
           postedOn: ab.posted_on.substring(0, 10),
           type: ab.type_of_internship,
+          companyId: ab.company.id,
           stipend: ab.stipend,
           name: ab.company.user.fullname,
           photo: ab.company.user.photo,
           phone: ab.company.user.phoneNumber,
-          technology: ab.company.technology.map(te => ({
+          technology: ab.company.technology.map((te) => ({
             id: te._id,
-            name: te.skill_name
+            name: te.skill_name,
           })),
           aboutCompany: ab.company.aboutCompany,
           website: ab.company.website,
-          requiredSkills: ab.requiredSkills.map(rs => ({
+          requiredSkills: ab.requiredSkills.map((rs) => ({
             id: rs.id,
-            skillName: rs.skill_name
+            skillName: rs.skill_name,
           })),
           title: ab.title,
           description: ab.description,
           category: ab.categories,
           duration: ab.duration,
           intendedParticipants: ab.intended_participants,
-          address: ab.company.address.map(id => ({
+          address: ab.company.address.map((id) => ({
             id: id.id,
             locality: id.locality,
             city: id.city,
             state: id.state,
             country: id.country,
-            pincode: id.pincode
+            pincode: id.pincode,
           })),
-          id: ab.id
+          id: ab.id,
         });
         if (res.data !== undefined) setLoading("true");
       }
     });
   }, []);
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     //const {name,value}=event.target;
     setInfo(event.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const information = {
       info: info,
       company: internship.companyId,
       student: localStorage.studentid,
       user: localStorage.userid,
-      internship: localStorage.internId
+      internship: localStorage.internId,
     };
-    sendEnquiry(information).then(res => {
+    sendEnquiry(information).then((res) => {
       if (res) {
         showAlert(
           "success",
@@ -121,7 +123,7 @@ function StudentInternSelect(props) {
       data-toggle="modal"
       data-target="#reqInternship"
       onClick={() => {
-        student().then(res => {
+        student().then((res) => {
           //console.log(props.internship._id);
           //localStorage.setItem("internshipId", props.internship._id);
           if (res) {
@@ -159,7 +161,7 @@ function StudentInternSelect(props) {
             }
             if (
               res.data.student[0].resume &&
-              res.data.student[0].skills !== (undefined || null || "" || [])
+              res.data.student[0].skills.length !== 0
             ) {
               resumeSkill = "Valid";
             }
@@ -188,7 +190,7 @@ function StudentInternSelect(props) {
               ...display,
               academic: academicDetails,
               personal: personalDetails,
-              resSkill: resumeSkill
+              resSkill: resumeSkill,
             });
           }
         });
@@ -297,7 +299,7 @@ function StudentInternSelect(props) {
 
           <p className="lead">{internship.aboutCompany}</p>
 
-          {internship.address.map(function(add) {
+          {internship.address.map(function (add) {
             return (
               <div key={add.id}>
                 <p className="lead font-weight-bold"> Address: </p>

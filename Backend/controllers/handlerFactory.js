@@ -49,6 +49,20 @@ exports.createOne = Model =>
       }
       //console.log(req.body);
     }
+    if (req.originalUrl === '/api/v1/reviews/') {
+      let query = Model.find({
+        user: req.body.user,
+        internship: req.body.internship
+      });
+      const doc = await query;
+      //console.log(doc[0]);
+      if (doc[0]) {
+        return next(
+          new AppError('Only One Rating allowed for an Internship', 400)
+        );
+      }
+      //console.log(req.body);
+    }
     const doc = await Model.create(req.body);
     res.status(201).json({
       status: 'Success',

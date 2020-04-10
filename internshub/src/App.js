@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {
   ProtectedRouteCompany,
   ProtectedRouteStudent,
-  ProtectedRouteAdmin
+  ProtectedRouteAdmin,
 } from "./ProtectedRoute";
 
 import Landing from "./Components/General/Landing";
@@ -15,9 +15,6 @@ import Forbidden from "./Components/General/Forbidden";
 import NotFound from "./Components/General/NotFound";
 
 import Admin from "./Components/LoginSignup/Admin";
-
-import Basics from "./Components/Others/Basics";
-import Check from "./Components/Others/Check";
 
 import Login from "./Components/LoginSignup/Login";
 import Signup from "./Components/LoginSignup/Signup";
@@ -31,6 +28,7 @@ import CompanyForm from "./Components/Companies/CompanyForm";
 //import CompanyDescription from "./Components/Companies/CompanyDescription";
 import CompanyEnquiry from "./Components/Companies/CompanyEnquiry";
 import CompanyProfile from "./Components/Companies/CompanyProfile";
+import CompanyReview from "./Components/Companies/CompanyReview";
 //import CompanyTechnologies from "./Components/Companies/CompanyTechnologies";
 //import EditInternship from "./Components/Companies/EditInternship";
 
@@ -67,9 +65,6 @@ function App() {
             <Route exact path="/resetPassword/:id" component={PasswordReset} />
             <Route exact path="/adminLogin" component={AdminLogin} />
 
-            <Route exact path="/check" component={Check} />
-            <Route exact path="/basics" component={Basics} />
-
             <ProtectedRouteAdmin path="/adminHome" component={Admin} />
 
             <ProtectedRouteCompany
@@ -96,6 +91,11 @@ function App() {
               exact
               path="/companyEnquiry"
               component={CompanyEnquiry}
+            />
+            <ProtectedRouteCompany
+              exact
+              path="/companyReview"
+              component={CompanyReview}
             />
             <ProtectedRouteCompany
               exact

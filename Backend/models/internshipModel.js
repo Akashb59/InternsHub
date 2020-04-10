@@ -83,8 +83,11 @@ const internshipSchema = new mongoose.Schema(
     }
   }
 );
+
 internshipSchema.virtual('ends_on').get(function() {
-  return this.starts_on.getTime() + 30 * 24 * 60 * 60 * 1000 * this.duration;
+  if (this.starts_on !== undefined) {
+    return this.starts_on.getTime() + 30 * 24 * 60 * 60 * 1000 * this.duration;
+  }
 });
 internshipSchema.pre(/^find/, function(next) {
   //this points to current query

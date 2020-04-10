@@ -6,7 +6,7 @@ import {
   companyTechnology,
   hostInternship,
   companyInternships,
-  companyEnquiries
+  companyEnquiries,
 } from "../Utilities/CompanyFunctions";
 import { showAlert } from "./../Utilities/Alerts";
 import { load } from "./../Utilities/Utils";
@@ -21,7 +21,7 @@ let final;
 function CompanyHome(props) {
   const [loading, setLoading] = useState("false");
   const [descriptionState, setDescription] = useState({
-    aboutCompany: ""
+    aboutCompany: "",
   });
   const [internshipHostState, setInternshipHostState] = useState({
     title: "",
@@ -33,7 +33,7 @@ function CompanyHome(props) {
     requiredSkills: [],
     categories: "",
     type_of_internship: "",
-    stipend: ""
+    stipend: "",
   });
   const [enqChart, setEnqChart] = useState({
     labels: ["Previous week", "Previous week", "Previous week", "Current week"],
@@ -45,9 +45,9 @@ function CompanyHome(props) {
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "rgba(0,0,0,1)",
         borderWidth: 2,
-        data: [0, 0, 0, 0]
-      }
-    ]
+        data: [0, 0, 0, 0],
+      },
+    ],
   });
   const [options, setOptions] = useState([]);
   const [count, setCount] = useState(0);
@@ -56,17 +56,19 @@ function CompanyHome(props) {
   const [countAcceptedEnquiry, setCountAcceptedEnquiry] = useState(0);
   const [countPendingEnquiry, setCountPendingEnquiry] = useState(0);
   const [technologyState, setTechnology] = useState({
-    technology: []
+    technology: [],
   });
 
   const [select, setSelect] = useState([]);
   const [info, setInfo] = useState({
     desc: [],
-    count: 0
+    count: 0,
   });
+
+  const [ratingAvg, setRatingAvg] = useState(0);
   const [info1, setInfo1] = useState({
     intd: [],
-    count1: 0
+    count1: 0,
   });
   const [validState, setValidState] = useState({
     errors: {
@@ -74,125 +76,128 @@ function CompanyHome(props) {
       description: "",
       intended_participants: "",
       descriptions: "",
-      location: ""
-    }
+      location: "",
+    },
   });
 
   useEffect(() => {
     document.title = "InternsHub | Company Home";
-    skills().then(res => {
+    skills().then((res) => {
       if (res) {
         //console.log(res.data.skillTypeMaster);
-        const options = res.data.doc.map(skill => ({
+        const options = res.data.doc.map((skill) => ({
           skill: skill.skill_name,
-          skillid: skill._id
+          skillid: skill._id,
         }));
         setOptions(options);
         //console.log(options);
-
-        companyInternships().then(res => {
-          if (res) {
-            //console.log(res.data.data);
-            setCount(res.data.results);
-            let c = 0;
-            const result = res.data.data.internship.map(currentInternship => {
-              const active = currentInternship.ends_on;
-
-              if (active >= Date.now()) {
-                c += 1;
-              }
-              return c;
-            });
-            //console.log(result[result.length - 1]);
-            setCountActive(result[result.length - 1]);
-
-            companyEnquiries().then(res => {
-              if (res) {
-                const array = res.data.data.enquiry.map(el => {
-                  var date = new Date(el.reqAt);
-                  return date.getTime();
-                });
-                //console.log(array);
-                //console.log(7 * 24 * 60 * 60 * 1000);
-                //console.log(Date.now());
-                //console.log(Date.now() - 7 * 24 * 60 * 60 * 1000);
-                let count1 = 0;
-                let count2 = 0;
-                let count3 = 0;
-                let count4 = 0;
-                let result = [];
-                const w1 = Date.now() - 7 * 24 * 60 * 60 * 1000;
-                const w2 = Date.now() - 2 * 7 * 24 * 60 * 60 * 1000;
-                const w3 = Date.now() - 3 * 7 * 24 * 60 * 60 * 1000;
-                // eslint-disable-next-line
-                array.map(el => {
-                  if (el > w1) count1 += 1;
-                  else if (el > w2) count2 += 1;
-                  else if (el > w3) count3 += 1;
-                  else count4 += 1;
-                });
-                result[3] = count1;
-                result[2] = count2;
-                result[1] = count3;
-                result[0] = count4;
-                //console.log(result);
-                const resChart = [
-                  {
-                    label: "Enquiries",
-                    fill: false,
-                    lineTension: 0.4,
-                    backgroundColor: "rgba(75,192,192,1)",
-                    borderColor: "rgba(0,0,0,1)",
-                    borderWidth: 2,
-                    data: result
-                  }
-                ];
-                setEnqChart({ datasets: resChart });
-                const internEnq = res.data.data.enquiry.filter(
-                  data => data.internship !== null
-                );
-                setcountEnquiry(internEnq.length);
-                const AcceptedEnq = res.data.data.enquiry.filter(
-                  data => data.accepted === "Yes"
-                );
-                setCountAcceptedEnquiry(AcceptedEnq.length);
-                //console.log(AcceptedEnq.length);
-                const PendingEnq = res.data.data.enquiry.filter(
-                  data => data.accepted === "No"
-                );
-                setCountPendingEnquiry(PendingEnq.length);
-
-                company(localStorage.companyid).then(res => {
-                  if (res) {
-                    setDescription({
-                      aboutCompany: res.data.company[0].aboutCompany
-                    });
-
-                    const selected = res.data.company[0].technology.map(el => {
-                      return { value: el.id, label: el.skill_name };
-                    });
-                    // if (selected.length === 0) selected = [];
-                    setSelect(selected);
-                    //console.log(selected);
-                    final = selected;
-                    if (res.data !== undefined) setLoading("true");
-                  }
-                });
-              }
-            });
-          }
-        });
       }
     });
+
+    companyInternships().then((res) => {
+      if (res) {
+        //console.log(res.data.data);
+        setCount(res.data.results);
+        let c = 0;
+        const result = res.data.data.internship.map((currentInternship) => {
+          const active = currentInternship.ends_on;
+
+          if (active >= Date.now()) {
+            c += 1;
+          }
+          return c;
+        });
+        //console.log(result[result.length - 1]);
+        setCountActive(result[result.length - 1]);
+      }
+    });
+    companyEnquiries().then((res) => {
+      if (res) {
+        const array = res.data.data.enquiry.map((el) => {
+          var date = new Date(el.reqAt);
+          return date.getTime();
+        });
+        //console.log(array);
+        //console.log(7 * 24 * 60 * 60 * 1000);
+        //console.log(Date.now());
+        //console.log(Date.now() - 7 * 24 * 60 * 60 * 1000);
+        let count1 = 0;
+        let count2 = 0;
+        let count3 = 0;
+        let count4 = 0;
+        let result = [];
+        const w1 = Date.now() - 7 * 24 * 60 * 60 * 1000;
+        const w2 = Date.now() - 2 * 7 * 24 * 60 * 60 * 1000;
+        const w3 = Date.now() - 3 * 7 * 24 * 60 * 60 * 1000;
+        // eslint-disable-next-line
+        array.map((el) => {
+          if (el > w1) count1 += 1;
+          else if (el > w2) count2 += 1;
+          else if (el > w3) count3 += 1;
+          else count4 += 1;
+        });
+        result[3] = count1;
+        result[2] = count2;
+        result[1] = count3;
+        result[0] = count4;
+        //console.log(result);
+        const resChart = [
+          {
+            label: "Enquiries",
+            fill: false,
+            lineTension: 0.4,
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
+            borderWidth: 2,
+            data: result,
+          },
+        ];
+        setEnqChart({ ...enqChart, datasets: resChart });
+        const internEnq = res.data.data.enquiry.filter(
+          (data) => data.internship !== null
+        );
+        setcountEnquiry(internEnq.length);
+        const AcceptedEnq = res.data.data.enquiry.filter(
+          (data) => data.accepted === "Yes"
+        );
+        setCountAcceptedEnquiry(AcceptedEnq.length);
+        //console.log(AcceptedEnq.length);
+        const PendingEnq = res.data.data.enquiry.filter(
+          (data) => data.accepted === "No"
+        );
+        setCountPendingEnquiry(PendingEnq.length);
+      }
+    });
+    company(localStorage.companyid).then((res) => {
+      if (res) {
+        setDescription({
+          ...descriptionState,
+          aboutCompany: res.data.company[0].aboutCompany,
+        });
+
+        const selected = res.data.company[0].technology.map((el) => {
+          return { value: el.id, label: el.skill_name };
+        });
+        // if (selected.length === 0) selected = [];
+        setSelect(selected);
+        setRatingAvg(res.data.company[0].ratingsAverage);
+        //console.log(selected);
+        final = selected;
+      }
+    });
+    //Example if (options.length !== 0)
+    //pending
+    setLoading("true");
+    // eslint-disable-next-line
   }, []);
 
-  const realoptions = options.map(option => ({
+  const realoptions = options.map((option) => ({
     value: option.skillid,
-    label: option.skill
+    label: option.skill,
   }));
   //console.log(realoptions);
   //const [setHandleSkills] = useState('');
-  const handleChange = event => {
+  const handleChange = (event) => {
     //event.preventDefault();
     //const {name,value}=event.target;
     const { name, value } = event.target;
@@ -218,42 +223,42 @@ function CompanyHome(props) {
     setValidState({ errors, [name]: value });
     setInternshipHostState({
       ...internshipHostState,
-      [name]: value
+      [name]: value,
     });
   };
-  const handleChange1 = event => {
+  const handleChange1 = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     setDescription({
       ...descriptionState,
-      [name]: value
+      [name]: value,
     });
   };
   const { errors } = validState;
-  const handleChangeSelect = selectedOption => {
+  const handleChangeSelect = (selectedOption) => {
     //   console.log(`Option selected:`, selectedOption);
     if (selectedOption === null) return "";
-    const selected = selectedOption.map(option => option.value);
+    const selected = selectedOption.map((option) => option.value);
     // if (selected.length === 0) selected = [];
     // console.log(selected);
     setInternshipHostState({
       ...internshipHostState,
-      requiredSkills: selected
+      requiredSkills: selected,
     });
   };
 
-  const handleChangeSelect1 = selectedOption => {
+  const handleChangeSelect1 = (selectedOption) => {
     //console.log(`Option selected:`, selectedOption);
     setSelect(selectedOption);
     //console.log(select);
     if (selectedOption === null) return "";
     //if (select === null) setSelect("");
-    const selected = selectedOption.map(option => option.value);
+    const selected = selectedOption.map((option) => option.value);
     // if (selected.length === 0) selected = [];
     // console.log(selected);
     setTechnology({
       ...technologyState,
-      technology: selected
+      technology: selected,
     });
   };
 
@@ -265,7 +270,7 @@ function CompanyHome(props) {
     if (info.count < 8)
       setInfo({
         count: info.count + 1,
-        desc: [...info.desc, ""]
+        desc: [...info.desc, ""],
       });
   };
   const removeTextbox = () => {
@@ -276,7 +281,7 @@ function CompanyHome(props) {
       if (info.count > 0)
         setInfo({
           desc: info.desc,
-          count: info.count - 1
+          count: info.count - 1,
         });
     }
   };
@@ -287,7 +292,7 @@ function CompanyHome(props) {
     setInfo({ ...info, desc: info.desc });
     setInternshipHostState({
       ...internshipHostState,
-      description: info.desc
+      description: info.desc,
     });
   };
   const addTextbox1 = () => {
@@ -297,7 +302,7 @@ function CompanyHome(props) {
     if (info1.count1 < 8)
       setInfo1({
         count1: info1.count1 + 1,
-        intd: [...info1.intd, ""]
+        intd: [...info1.intd, ""],
       });
   };
   const removeTextbox1 = () => {
@@ -308,7 +313,7 @@ function CompanyHome(props) {
       if (info1.count1 > 0)
         setInfo1({
           intd: info1.intd,
-          count1: info1.count1 - 1
+          count1: info1.count1 - 1,
         });
     }
   };
@@ -319,7 +324,7 @@ function CompanyHome(props) {
     setInfo1({ ...info1, intd: info1.intd });
     setInternshipHostState({
       ...internshipHostState,
-      intended_participants: info1.intd
+      intended_participants: info1.intd,
     });
   };
   const selectLink = (
@@ -334,7 +339,7 @@ function CompanyHome(props) {
       options={realoptions}
     />
   );
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const Internship = {
       title: internshipHostState.title,
@@ -347,10 +352,10 @@ function CompanyHome(props) {
       categories: internshipHostState.categories,
       type_of_internship: internshipHostState.type_of_internship,
       company: localStorage.companyid,
-      stipend: internshipHostState.stipend
+      stipend: internshipHostState.stipend,
     };
 
-    hostInternship(Internship).then(res => {
+    hostInternship(Internship).then((res) => {
       if (res) {
         showAlert("success", "Successfully hosted internship");
         props.history.push("/companyHome");
@@ -358,12 +363,12 @@ function CompanyHome(props) {
       }
     });
   };
-  const handleSubmit1 = e => {
+  const handleSubmit1 = (e) => {
     e.preventDefault();
     const Desc = {
-      aboutCompany: descriptionState.aboutCompany
+      aboutCompany: descriptionState.aboutCompany,
     };
-    companyDescription(Desc).then(res => {
+    companyDescription(Desc).then((res) => {
       if (res) {
         showAlert("success", "Details Recorded");
         props.history.push("/companyHome");
@@ -371,12 +376,12 @@ function CompanyHome(props) {
       }
     });
   };
-  const handleSubmit2 = e => {
+  const handleSubmit2 = (e) => {
     e.preventDefault();
     const Techno = {
-      technology: technologyState.technology
+      technology: technologyState.technology,
     };
-    companyTechnology(Techno).then(res => {
+    companyTechnology(Techno).then((res) => {
       if (res) {
         showAlert("success", "Changed successfully");
         props.history.push("/companyHome");
@@ -444,6 +449,10 @@ function CompanyHome(props) {
                               Accepted Enquiries:
                               <h5> {countAcceptedEnquiry} </h5>
                             </li>
+                            <li className="list-group-item px-0 text-muted pb-0">
+                              Average Rating:
+                              <h5> {ratingAvg} </h5>
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -456,12 +465,12 @@ function CompanyHome(props) {
                             display: true,
                             text: "Average Enquiries Per Week",
                             fontSize: 20,
-                            fontWeight: 900
+                            fontWeight: 900,
                           },
                           legend: {
                             display: true,
-                            position: "top"
-                          }
+                            position: "top",
+                          },
                         }}
                       />
                     </div>
@@ -555,7 +564,7 @@ function CompanyHome(props) {
                             className="form-control"
                             name="aboutCompany"
                             rows="3"
-                            maxLength="400"
+                            maxLength="200"
                             minLength="20"
                             placeholder="Enter some description about your company"
                             value={descriptionState.aboutCompany}
@@ -914,7 +923,7 @@ function CompanyHome(props) {
                                 minLength="20"
                                 placeholder="Enter Description for Internship"
                                 required
-                                onChange={e => addSubInfoValue(e, index)}
+                                onChange={(e) => addSubInfoValue(e, index)}
                               />
                             </div>
                             {errors.description.length > 0 && (
@@ -969,7 +978,7 @@ function CompanyHome(props) {
                                 maxLength="200"
                                 minLength="20"
                                 required
-                                onChange={e => addSubIntendedValue(e, index)}
+                                onChange={(e) => addSubIntendedValue(e, index)}
                               />{" "}
                             </div>
                             {errors.intended_participants.length > 0 && (

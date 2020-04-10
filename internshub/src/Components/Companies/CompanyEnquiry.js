@@ -4,7 +4,7 @@ import { load } from "./../Utilities/Utils";
 import {
   companyEnquiries,
   internshipEnquiries,
-  internshipAccept
+  internshipAccept,
 } from "./../Utilities/CompanyFunctions";
 import { showAlert } from "../Utilities/Alerts";
 
@@ -46,9 +46,9 @@ function CompanyEnquiry(props) {
     istip: "",
     message: "",
     reqAt: Date,
-    completed: ""
+    completed: "",
   });
-  const None = key => (
+  const None = (key) => (
     <tr key={key}>
       <td colSpan="7">
         <center>
@@ -57,7 +57,7 @@ function CompanyEnquiry(props) {
       </td>
     </tr>
   );
-  const InternshipEnq = props => (
+  const InternshipEnq = (props) => (
     <tr>
       <td>{props.internship.internship.title}</td>
       {/* <td>{props.internship.internship.starts_on.substring(0, 10)}</td> */}
@@ -68,7 +68,7 @@ function CompanyEnquiry(props) {
           data-toggle="modal"
           data-target="#resume"
           onClick={() => {
-            internshipEnquiries(props.internship._id).then(res => {
+            internshipEnquiries(props.internship._id).then((res) => {
               //console.log(props.internship._id);
               //localStorage.setItem("internshipId", props.internship._id);
               if (res) {
@@ -89,21 +89,21 @@ function CompanyEnquiry(props) {
           data-toggle="modal"
           data-target="#viewInternship"
           onClick={() => {
-            internshipEnquiries(props.internship._id).then(res => {
+            internshipEnquiries(props.internship._id).then((res) => {
               //console.log(props.internship._id);
               //localStorage.setItem("internshipId", props.internship._id);
               if (res) {
                 const x = res.data.data;
                 const skill = res.data.data.internship.requiredSkills.map(
-                  el => {
+                  (el) => {
                     return {
-                      name: el.skill_name
+                      name: el.skill_name,
                     };
                   }
                 );
-                const skills = res.data.data.student.skills.map(el => {
+                const skills = res.data.data.student.skills.map((el) => {
                   return {
-                    name: el.skill_name
+                    name: el.skill_name,
                   };
                 });
                 //console.log(skill);
@@ -141,7 +141,7 @@ function CompanyEnquiry(props) {
                   istip: x.internship.stipend,
                   message: x.reqMessage,
                   reqAt: x.reqAt.substring(0, 10),
-                  completed: x.completed
+                  completed: x.completed,
                 });
               }
             });
@@ -171,10 +171,10 @@ function CompanyEnquiry(props) {
   );
   useEffect(() => {
     document.title = "InternsHub | Company Enquiries";
-    companyEnquiries().then(res => {
+    companyEnquiries().then((res) => {
       if (res) {
         const internEnq = res.data.data.enquiry.filter(
-          data => data.internship !== null
+          (data) => data.internship !== null
         );
         //console.log(res.data.data.enquiry[0]);
         setInternshipEnquiry(internEnq);
@@ -530,7 +530,7 @@ function CompanyEnquiry(props) {
       return <None key="key" />;
     }
     // eslint-disable-next-line
-    return acceptedYes.map(currentInternship => {
+    return acceptedYes.map((currentInternship) => {
       var created_date = new Date(currentInternship.internship.starts_on);
       var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
       if (currentInternship.accepted === "Yes" && startsOn > Date.now()) {
@@ -559,7 +559,7 @@ function CompanyEnquiry(props) {
       return <None key="key" />;
     }
     // eslint-disable-next-line
-    return acceptedNo.map(currentInternship => {
+    return acceptedNo.map((currentInternship) => {
       var created_date = new Date(currentInternship.internship.starts_on);
       var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
       if (currentInternship.accepted === "No" && startsOn > Date.now()) {
@@ -588,7 +588,7 @@ function CompanyEnquiry(props) {
       return <None key="key" />;
     }
     // eslint-disable-next-line
-    return rest.map(currentInternship => {
+    return rest.map((currentInternship) => {
       var created_date = new Date(currentInternship.internship.starts_on);
       var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
       // console.log(startsOn);
@@ -734,7 +734,7 @@ function CompanyEnquiry(props) {
           <div id="completedInternship" className="modal fade">
             <div className="modal-dialog modal-confirm modal-dialog-centered">
               <div className="modal-content">
-                <div className="modal-header bg-info ">
+                <div className="modal-header">
                   <div className="container">
                     <h4 className="modal-title">Are you sure</h4>
                     <br></br>
@@ -771,7 +771,7 @@ function CompanyEnquiry(props) {
                         localStorage.acceptInternshipId,
                         accept,
                         completed
-                      ).then(res => {
+                      ).then((res) => {
                         //console.log(props.internship._id);
                         //localStorage.setItem("internshipId", props.internship._id);
                         if (res) {
@@ -786,7 +786,7 @@ function CompanyEnquiry(props) {
                       //Adding the completed internship to student profile can be checked in enquiries
                     }}
                   >
-                    Accept
+                    Completed
                   </button>
                 </div>
               </div>
@@ -833,7 +833,7 @@ function CompanyEnquiry(props) {
                         localStorage.acceptInternshipId,
                         accept,
                         completed
-                      ).then(res => {
+                      ).then((res) => {
                         //console.log(props.internship._id);
                         //localStorage.setItem("internshipId", props.internship._id);
                         if (res) {

@@ -18,14 +18,14 @@ function StudentInfo(props) {
     district: "",
     state: "",
     country: "",
-    pincode: ""
+    pincode: "",
   });
   const [more, setMore] = useState({
     father_name: "",
     mother_name: "",
     dob: Date,
     gender: "",
-    hobbies: ""
+    hobbies: "",
   });
   const [completed, setCompleted] = useState("No");
   //const [info, setInfo] = useState("");
@@ -42,7 +42,7 @@ function StudentInfo(props) {
     website: "",
     email: "",
     project1_undertaken: "",
-    project2_undertaken: ""
+    project2_undertaken: "",
   });
   useEffect(() => {
     document.title = "InternsHub | Student Details";
@@ -74,15 +74,15 @@ function StudentInfo(props) {
       district: "",
       state: "",
       country: "",
-      pincode: ""
-    }
+      pincode: "",
+    },
   });
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     let errors = validState.errors;
     setStudFormState({
       ...studFormState,
-      [name]: value
+      [name]: value,
     });
 
     switch (name) {
@@ -138,13 +138,13 @@ function StudentInfo(props) {
   //   const validate = () => {
   //     if (studFormState === " ") setStudFormState("Please fill the information");
   //   };
-  const handleChange1 = event => {
+  const handleChange1 = (event) => {
     const { name, value } = event.target;
     let errors = validState.errors;
 
     setAcademicFormState({
       ...academicFormState,
-      [name]: value
+      [name]: value,
     });
 
     switch (name) {
@@ -209,7 +209,7 @@ function StudentInfo(props) {
   };
   const { errors } = validState;
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const address = {
       locality: studFormState.locality,
@@ -218,7 +218,7 @@ function StudentInfo(props) {
       state: studFormState.state,
       country: studFormState.country,
       pincode: studFormState.pincode,
-      user: localStorage.userid
+      user: localStorage.userid,
     };
 
     setMore({
@@ -227,10 +227,10 @@ function StudentInfo(props) {
       mother_name: studFormState.mother_name,
       dob: studFormState.dob,
       gender: studFormState.gender,
-      hobbies: studFormState.hobbies
+      hobbies: studFormState.hobbies,
     });
 
-    addressform(address).then(res => {
+    addressform(address).then((res) => {
       if (res) {
         showAlert("success", "Personal Information Recorded");
         //window.location.reload(false);
@@ -243,7 +243,7 @@ function StudentInfo(props) {
       }
     });
   };
-  const handleSubmit1 = e => {
+  const handleSubmit1 = (e) => {
     e.preventDefault();
 
     //const newadd = localStorage.address_copy;
@@ -268,12 +268,12 @@ function StudentInfo(props) {
       project1_undertaken: academicFormState.project1_undertaken,
       project2_undertaken: academicFormState.project2_undertaken,
       //address: res.data.data.Address._id,
-      user: localStorage.userid
+      user: localStorage.userid,
     };
 
-    studentform(det).then(res => {
+    studentform(det).then((res) => {
       if (res) {
-        student().then(res => {
+        student().then((res) => {
           if (res) {
             showAlert("success", "Academic Information Recorded");
             props.history.push(`/studentHome`);
@@ -325,7 +325,7 @@ function StudentInfo(props) {
                         <span
                           className="heading-secondary"
                           style={{
-                            fontSize: "150%"
+                            fontSize: "150%",
                             //fontFamily: "Segoe Print"
                           }}
                         >
@@ -494,7 +494,7 @@ function StudentInfo(props) {
                         <span
                           className="heading-secondary"
                           style={{
-                            fontSize: "150%"
+                            fontSize: "150%",
                             //fontFamily: "Segoe Print"
                           }}
                         >
@@ -595,7 +595,7 @@ function StudentInfo(props) {
                         <div className="input-group">
                           <div className="input-group-prepend">
                             <span className="input-group-text">
-                              <i class="fas fa-map-marker-alt"></i>
+                              <i className="fas fa-map-marker-alt"></i>
                             </span>
                           </div>
                           <input
@@ -711,7 +711,7 @@ function StudentInfo(props) {
                         <span
                           className="heading-secondary"
                           style={{
-                            fontSize: "150%"
+                            fontSize: "150%",
                             //fontFamily: "Segoe Print"
                           }}
                         >
@@ -786,7 +786,7 @@ function StudentInfo(props) {
                         <span
                           className="heading-secondary"
                           style={{
-                            fontSize: "150%"
+                            fontSize: "150%",
                             //fontFamily: "Segoe Print"
                           }}
                         >
@@ -865,7 +865,7 @@ function StudentInfo(props) {
                         <span
                           className="heading-secondary"
                           style={{
-                            fontSize: "150%"
+                            fontSize: "150%",
                             //fontFamily: "Segoe Print"
                           }}
                         >
@@ -1085,7 +1085,7 @@ function StudentInfo(props) {
                         <span
                           className="heading-secondary"
                           style={{
-                            fontSize: "150%"
+                            fontSize: "150%",
                             //fontFamily: "Segoe Print"
                           }}
                         >

@@ -6,7 +6,7 @@ import { load } from "../Utilities/Utils";
 import {
   student,
   SkillsUpdate,
-  uploadResume
+  uploadResume,
 } from "../Utilities/StudentFunctions";
 import Select from "react-select";
 import { showAlert } from "../Utilities/Alerts";
@@ -15,7 +15,7 @@ let src;
 
 function StudentDetails(props) {
   const [studentProfile, setStudentProfile] = useState({
-    skills: []
+    skills: [],
   });
   const [loading, setLoading] = useState("false");
   const [resume, setResume] = useState("Not Uploaded Resume");
@@ -24,20 +24,20 @@ function StudentDetails(props) {
   const [resumeDisplay, setResumeDisplay] = useState("");
   useEffect(() => {
     document.title = "InternsHub | Profile";
-    skills().then(res => {
+    skills().then((res) => {
       if (res) {
         //console.log(res.data.skillTypeMaster);
-        const options = res.data.doc.map(skill => ({
+        const options = res.data.doc.map((skill) => ({
           skill: skill.skill_name,
-          skillid: skill._id
+          skillid: skill._id,
         }));
         setOptions(options);
         //console.log(options);
 
-        student().then(res => {
+        student().then((res) => {
           if (res) {
             //console.log(res.data.student[0].skills);
-            const selected = res.data.student[0].skills.map(el => {
+            const selected = res.data.student[0].skills.map((el) => {
               return { value: el.id, label: el.skill_name };
             });
             //console.log(res.data.student[0].resume);
@@ -47,7 +47,7 @@ function StudentDetails(props) {
             }
             // if (selected.length === 0) selected = [];
             setStudentProfile({
-              skills: selected
+              skills: selected,
             });
             setSelect(selected);
             //console.log(selected);
@@ -58,23 +58,23 @@ function StudentDetails(props) {
       }
     });
   }, []);
-  const realoptions = options.map(option => ({
+  const realoptions = options.map((option) => ({
     value: option.skillid,
-    label: option.skill
+    label: option.skill,
   }));
-  const handleChangeSelect = selectedOption => {
+  const handleChangeSelect = (selectedOption) => {
     setSelect(selectedOption);
     //console.log(select);
     if (selectedOption === null) return "";
     //if (select === null) setSelect("");
-    const selected = selectedOption.map(option => option.value);
+    const selected = selectedOption.map((option) => option.value);
     setStudentProfile({
       ...studentProfile,
-      skills: selected
+      skills: selected,
     });
   };
   let file;
-  const handleFile = event => {
+  const handleFile = (event) => {
     //const {name,value}=event.target;
     file = event.target.files[0];
     // console.log(file);
@@ -91,25 +91,25 @@ function StudentDetails(props) {
       options={realoptions}
     />
   );
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    SkillsUpdate(studentProfile.skills).then(res => {
+    SkillsUpdate(studentProfile.skills).then((res) => {
       showAlert("success", "Skills recorded successfully");
       props.history.push("/studentProfile");
     });
   };
-  const handleSubmit1 = e => {
+  const handleSubmit1 = (e) => {
     e.preventDefault();
     //console.log(file);
     const size = file.size;
     const form = new FormData();
     form.append("resume", file);
     //console.log(size);
-    uploadResume(form, size).then(res => {
+    uploadResume(form, size).then((res) => {
       if (res) {
         showAlert("success", "Resume Uploaded successfully");
         props.history.push("/studentProfile");
-        props.location.reload(true);
+        window.location.reload(false);
       }
     });
   };

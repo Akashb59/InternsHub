@@ -9,19 +9,19 @@ export const company = () => {
     url: `${ip}api/v1/companies/user/${localStorage.userid}`,
     //withCredentials: true,
     headers: {
-      jwt: localStorage.usertoken
-    }
+      jwt: localStorage.usertoken,
+    },
     // headers: {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   })
-    .then(res => {
+    .then((res) => {
       //console.log(res.data.data.company[0].id);
       //console.log(res.data.token);
       localStorage.setItem("companyid", res.data.data.company[0].id);
       return res.data;
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -38,12 +38,12 @@ export const companyInternships = () => {
     url: `${ip}api/v1/internships/company/${localStorage.companyid}`,
     //withCredentials: true,
     headers: {
-      jwt: localStorage.usertoken
-    }
+      jwt: localStorage.usertoken,
+    },
     // headers: {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
-  }).catch(err => {
+  }).catch((err) => {
     if (
       err.response !== undefined &&
       [400, 401, 500].includes(err.response.status)
@@ -53,19 +53,19 @@ export const companyInternships = () => {
   });
 };
 
-export const internship = id => {
+export const internship = (id) => {
   //  console.log(id);
   return axios({
     method: "get",
     url: `${ip}api/v1/internships/${id}`,
     //withCredentials: true,
     headers: {
-      jwt: localStorage.usertoken
-    }
+      jwt: localStorage.usertoken,
+    },
     // headers: {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
-  }).catch(err => {
+  }).catch((err) => {
     if (
       err.response !== undefined &&
       [400, 401, 500].includes(err.response.status)
@@ -82,12 +82,12 @@ export const companyEnquiries = () => {
     url: `${ip}api/v1/enquiries/company/${localStorage.companyid}`,
     //withCredentials: true,
     headers: {
-      jwt: localStorage.usertoken
-    }
+      jwt: localStorage.usertoken,
+    },
     // headers: {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
-  }).catch(err => {
+  }).catch((err) => {
     if (
       err.response !== undefined &&
       [400, 401, 500].includes(err.response.status)
@@ -97,19 +97,19 @@ export const companyEnquiries = () => {
   });
 };
 
-export const internshipEnquiries = id => {
+export const internshipEnquiries = (id) => {
   //console.log(details.user);
   return axios({
     method: "get",
     url: `${ip}api/v1/enquiries/${id}`,
     //withCredentials: true,
     headers: {
-      jwt: localStorage.usertoken
-    }
+      jwt: localStorage.usertoken,
+    },
     // headers: {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
-  }).catch(err => {
+  }).catch((err) => {
     if (
       err.response !== undefined &&
       [400, 401, 500].includes(err.response.status)
@@ -119,21 +119,44 @@ export const internshipEnquiries = id => {
   });
 };
 
+export const reviews = () => {
+  return axios({
+    method: "get",
+    url: `${ip}api/v1/reviews/company/${localStorage.companyid}`,
+    //withCredentials: true,
+    headers: {
+      jwt: localStorage.usertoken,
+    },
+    // headers: {
+    //   Cookie: `jwt=${localStorage.usertoken}`
+    // }
+  })
+    .then((res) => {
+      //console.log(res.data.data.doc);
+      return res.data;
+    })
+    .catch((err) => {
+      console.log(err);
+      if ([400, 401].includes(err.response.status))
+        showAlert("error", `${err.response.data.message}`);
+    });
+};
+
 //POST
-export const companyform = details => {
+export const companyform = (details) => {
   //console.log(details.user);
   return axios
     .post(`${ip}api/v1/companies/`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
       gst_no: details.gst_no,
       website: details.website,
       establishedYear: details.establishedYear,
       address: details.address,
-      user: details.user
+      user: details.user,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -143,11 +166,11 @@ export const companyform = details => {
     });
 };
 
-export const hostInternship = internship => {
+export const hostInternship = (internship) => {
   return axios
     .post(`${ip}api/v1/internships/`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
       title: internship.title,
       location: internship.location,
@@ -160,9 +183,9 @@ export const hostInternship = internship => {
       categories: internship.categories,
       type_of_internship: internship.type_of_internship,
       company: internship.company,
-      stipend: internship.stipend
+      stipend: internship.stipend,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -173,11 +196,11 @@ export const hostInternship = internship => {
 };
 
 //PATCH
-export const editInternship = internship => {
+export const editInternship = (internship) => {
   return axios
     .patch(`${ip}api/v1/internships/${localStorage.internshipId}`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
       title: internship.title,
       location: internship.location,
@@ -190,9 +213,9 @@ export const editInternship = internship => {
       categories: internship.categories,
       type_of_internship: internship.type_of_internship,
       company: internship.company,
-      stipend: internship.stipend
+      stipend: internship.stipend,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -202,15 +225,15 @@ export const editInternship = internship => {
     });
 };
 
-export const companyDescription = desc => {
+export const companyDescription = (desc) => {
   return axios
     .patch(`${ip}api/v1/companies/${localStorage.companyid}`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
-      aboutCompany: desc.aboutCompany
+      aboutCompany: desc.aboutCompany,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -220,16 +243,16 @@ export const companyDescription = desc => {
     });
 };
 
-export const companyTechnology = tech => {
+export const companyTechnology = (tech) => {
   //console.log(tech.technology);
   return axios
     .patch(`${ip}api/v1/companies/${localStorage.companyid}`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
-      technology: tech.technology
+      technology: tech.technology,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -243,12 +266,12 @@ export const internshipAccept = (id, accepted, completed) => {
   return axios
     .patch(`${ip}api/v1/enquiries/${id}`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
       accepted,
-      completed
+      completed,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -258,17 +281,17 @@ export const internshipAccept = (id, accepted, completed) => {
     });
 };
 
-export const editDetailsForm = editDetails => {
+export const editDetailsForm = (editDetails) => {
   return axios
     .patch(`${ip}api/v1/companies/${localStorage.companyid}`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
       gst_no: editDetails.gst_no,
       website: editDetails.website,
-      establishedYear: editDetails.establishedYear
+      establishedYear: editDetails.establishedYear,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)

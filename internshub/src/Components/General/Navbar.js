@@ -8,16 +8,16 @@ function Navbar(props) {
   const [pass, setPass] = useState({
     currentPassword: "",
     password: "",
-    passwordConfirm: ""
+    passwordConfirm: "",
   });
   const [validState, setValidState] = useState({
     errors: {
       currentPassword: "",
       password: "",
-      passwordConfirm: ""
-    }
+      passwordConfirm: "",
+    },
   });
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setPass({ ...pass, [name]: value });
     let errors = validState.errors;
@@ -44,15 +44,15 @@ function Navbar(props) {
     setValidState({ errors, [name]: value });
   };
   const { errors } = validState;
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const user = {
       currentPassword: pass.currentPassword,
       password: pass.password,
-      passwordConfirm: pass.passwordConfirm
+      passwordConfirm: pass.passwordConfirm,
     };
-    updatePass(user).then(res => {
+    updatePass(user).then((res) => {
       if (res) {
         //console.log(res.data);
         showAlert("success", "Successfully Updated password");
@@ -69,7 +69,7 @@ function Navbar(props) {
     firstName = "Profile";
   }
 
-  const logout = e => {
+  const logout = (e) => {
     e.preventDefault();
     localStorage.removeItem("usertoken");
     localStorage.removeItem("userid");
@@ -201,36 +201,9 @@ function Navbar(props) {
               Update Password
             </Link>
           </li>
-        </ul>
-      </div>
-    </li>
-  );
-
-  const admLink = (
-    <li className="nav-item dropdown">
-      <Link
-        className="nav-link dropdown-toggle"
-        to="#"
-        id="navbarDropdownMenuLink"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
-      >
-        <span>{firstName}</span>
-      </Link>
-      <div
-        className="dropdown-menu nav_item"
-        aria-labelledby="navbarDropdownMenuLink"
-      >
-        <ul className="nav_ul">
           <li className="nav_li">
-            <Link
-              className="nav_link"
-              to="#"
-              data-toggle="modal"
-              data-target="#updatePassword"
-            >
-              Update Password
+            <Link className="nav_link" to="/companyReview">
+              Reviews
             </Link>
           </li>
         </ul>
@@ -238,7 +211,7 @@ function Navbar(props) {
     </li>
   );
 
-  const placLink = (
+  const admLink = (
     <li className="nav-item dropdown">
       <Link
         className="nav-link dropdown-toggle"
@@ -286,9 +259,7 @@ function Navbar(props) {
         ? stuLink
         : localStorage.type === "Company"
         ? compLink
-        : localStorage.type === "Admin"
-        ? admLink
-        : placLink}
+        : admLink}
       <li className="nav-item">
         <a href="/" onClick={logout} className="nav-link">
           Log Out
@@ -320,11 +291,6 @@ function Navbar(props) {
       <img className="logo" src="Logo1.png" alt="logo" />
     </a>
   );
-  const placementLink = (
-    <a href="/" className="navbar-brand">
-      <img className="logo" src="Logo1.png" alt="logo" />
-    </a>
-  );
 
   return (
     <nav className="navbar navbar-expand-sm navbar-dark">
@@ -334,9 +300,7 @@ function Navbar(props) {
             ? studentLink
             : localStorage.type === "Company"
             ? companyLink
-            : localStorage.type === "Admin"
-            ? adminLink
-            : placementLink
+            : adminLink
           : homeLink}
 
         <button

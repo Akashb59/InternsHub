@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { studentEnquiries } from "../Utilities/StudentFunctions";
+import {
+  studentEnquiries,
+  rate,
+  editReview,
+  reviewInternship,
+} from "../Utilities/StudentFunctions";
 import { load } from "../Utilities/Utils";
+import { FaStar } from "react-icons/fa";
+import { showAlert } from "./../Utilities/Alerts";
 
-function StudentEnquiry() {
+function StudentEnquiry(props) {
   const [studentEnquiry, setStudentEnquiry] = useState([]);
   const [loading, setLoading] = useState("false");
   const [more, setMore] = useState({
@@ -10,17 +17,26 @@ function StudentEnquiry() {
     compName: "",
     accepted: "",
     completed: "",
+    ratings: "No",
     compEmail: "",
-    compPhone: ""
+    compPhone: "",
+  });
+  const [rating, setRating] = useState(null);
+  const [hover, setHover] = useState(null);
+  const [review, setReview] = useState({
+    user: "",
+    review: "",
+    company: "",
+    internship: "",
   });
 
   useEffect(() => {
     document.title = "InternsHub | Student Enquiry";
-    studentEnquiries().then(res => {
+    studentEnquiries().then((res) => {
       if (res) {
         //console.log(res.data);
         const internEnq = res.data.enquiry.filter(
-          data => data.internship !== null
+          (data) => data.internship !== null
         );
         //console.log(res.data.data.enquiry[0]);
         setStudentEnquiry(internEnq);
@@ -28,7 +44,7 @@ function StudentEnquiry() {
       }
     });
   }, []);
-  const InternshipEnq = props => (
+  const InternshipEnq = (props) => (
     <tr>
       <td>{props.internship.internship.title}</td>
       <td>{props.internship.reqAt.substring(0, 10)}</td>
@@ -38,16 +54,51 @@ function StudentEnquiry() {
           data-toggle="modal"
           data-target="#more"
           onClick={() => {
-            setMore({
-              ...more,
-              starts: props.internship.internship.starts_on
-                .substring(0, 10)
-                .toString(),
-              compName: props.internship.company.user.fullname,
-              accepted: props.internship.accepted,
-              completed: props.internship.completed,
-              compEmail: props.internship.company.user.email,
-              compPhone: props.internship.company.user.phoneNumber
+            reviewInternship(
+              props.internship.user.id,
+              props.internship.internship.id
+            ).then((res) => {
+              if (res.data.length !== 0) {
+                setMore({
+                  ...more,
+                  ratings: "Yes",
+                  starts: props.internship.internship.starts_on
+                    .substring(0, 10)
+                    .toString(),
+                  compName: props.internship.company.user.fullname,
+                  accepted: props.internship.accepted,
+                  completed: props.internship.completed,
+                  compEmail: props.internship.company.user.email,
+                  compPhone: props.internship.company.user.phoneNumber,
+                });
+                setReview({
+                  ...review,
+                  review: res.data[0].review,
+                  user: props.internship.user.id,
+                  company: props.internship.company.id,
+                  internship: props.internship.internship.id,
+                });
+                setRating(res.data[0].rating);
+                localStorage.setItem("reviewid", res.data[0].id);
+              } else {
+                setMore({
+                  ...more,
+                  starts: props.internship.internship.starts_on
+                    .substring(0, 10)
+                    .toString(),
+                  compName: props.internship.company.user.fullname,
+                  accepted: props.internship.accepted,
+                  completed: props.internship.completed,
+                  compEmail: props.internship.company.user.email,
+                  compPhone: props.internship.company.user.phoneNumber,
+                });
+                setReview({
+                  ...review,
+                  user: props.internship.user.id,
+                  company: props.internship.company.id,
+                  internship: props.internship.internship.id,
+                });
+              }
             });
           }}
         >
@@ -56,7 +107,7 @@ function StudentEnquiry() {
       </td>
     </tr>
   );
-  const None = key => (
+  const None = (key) => (
     <tr key={key}>
       <td colSpan="7">
         <center>
@@ -72,7 +123,7 @@ function StudentEnquiry() {
       return <None key="key" />;
     }
     // eslint-disable-next-line
-    return studentEnquiry.map(currentInternship => {
+    return studentEnquiry.map((currentInternship) => {
       var ends_on = new Date(currentInternship.internship.ends_on);
       if (ends_on > Date.now() && currentInternship.completed === "No") {
         c += 1;
@@ -98,7 +149,7 @@ function StudentEnquiry() {
       return <None key="key" />;
     }
     // eslint-disable-next-line
-    return studentEnquiry.map(currentInternship => {
+    return studentEnquiry.map((currentInternship) => {
       var ends_on = new Date(currentInternship.internship.ends_on);
       if (currentInternship.completed === "Yes" || ends_on < Date.now()) {
         c += 1;
@@ -117,7 +168,132 @@ function StudentEnquiry() {
       }
     });
   }
+  const handleChange = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setReview({
+      ...review,
+      [name]: value,
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const reviews = {
+      user: review.user,
+      review: review.review,
+      company: review.company,
+      internship: review.internship,
+    };
+    rate(reviews, rating).then((res) => {
+      if (res) {
+        showAlert("success", "Thank You for your valuable Review");
+        props.history.push("/studentHome");
+        window.location.reload(false);
+      }
+    });
+  };
+  const handleSubmit1 = (e) => {
+    e.preventDefault();
+    const reviews = {
+      user: review.user,
+      review: review.review,
+      company: review.company,
+      internship: review.internship,
+    };
+    editReview(reviews, rating).then((res) => {
+      if (res) {
+        showAlert("success", "Thank You for your valuable Review");
+        props.history.push("/studentHome");
+        window.location.reload(false);
+      }
+    });
+  };
+  let method;
+  more.ratings === "Yes" ? (method = handleSubmit1) : (method = handleSubmit);
 
+  const link = (
+    <div>
+      {" "}
+      {more.completed === "Yes" ? (
+        <div>
+          <form onSubmit={method}>
+            <div className="reviews__rating">
+              {[...Array(5)].map((star, i) => {
+                const ratingValue = i + 1;
+                return (
+                  <label key={i}>
+                    <input
+                      type="radio"
+                      name="rating"
+                      value={ratingValue}
+                      onClick={() => setRating(ratingValue)}
+                    />
+                    <FaStar
+                      className={star}
+                      color={
+                        ratingValue <= (hover || rating) ? "ffc107" : "#e4e5e9"
+                      }
+                      size={40}
+                      onMouseEnter={() => setHover(ratingValue)}
+                      onMouseLeave={() => setHover(null)}
+                    />
+                  </label>
+                );
+              })}
+            </div>
+            <br />
+
+            <div className="form-group">
+              <label htmlFor="review">
+                <b>Add A Review: </b>
+              </label>
+              <textarea
+                className="form-control"
+                name="review"
+                rows="3"
+                maxLength="100"
+                minLength="10"
+                placeholder="Enter some valuable review about your experience"
+                value={review.review}
+                onChange={handleChange}
+              ></textarea>
+              <hr />
+              <button
+                className="btn btn-success float-right px-5"
+                type="submit"
+              >
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
+      ) : (
+        <div className="reviews__rating">
+          {[...Array(5)].map((star, i) => {
+            const ratingValue = i + 1;
+            return (
+              <label key={i}>
+                <input
+                  type="radio"
+                  name="rating"
+                  value={ratingValue}
+                  disabled
+                />
+                <FaStar
+                  className={star}
+                  color={
+                    ratingValue <= (hover || rating) ? "ffc107" : "#e4e5e9"
+                  }
+                  size={40}
+                />
+              </label>
+            );
+          })}
+          <p className="pt-2 pl-3">Only If Internship Completed</p>
+        </div>
+      )}
+    </div>
+  );
   return (
     <div className="container pt-4">
       {loading === "false" ? (
@@ -166,6 +342,7 @@ function StudentEnquiry() {
                     <p>Company Phone Number: {more.compPhone}</p>
                     <p>Accepted State: {more.accepted}</p>
                     <p>Completed State: {more.completed}</p>
+                    {link}
                   </div>
                 </div>
               </div>

@@ -9,17 +9,17 @@ export const skills = () => {
     url: `${ip}api/v1/skillTypeMasters/`,
     //withCredentials: true,
     headers: {
-      jwt: localStorage.usertoken
-    }
+      jwt: localStorage.usertoken,
+    },
     // headers: {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   })
-    .then(res => {
+    .then((res) => {
       //console.log(res.data.data.doc);
       return res.data;
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       if (
         err.response !== undefined &&
@@ -29,25 +29,25 @@ export const skills = () => {
     });
 };
 
-export const role = roleType => {
+export const role = (roleType) => {
   //console.log(user);
   return axios({
     method: "get",
     url: `${ip}api/v1/userTypeMasters/${roleType}`,
     //withCredentials: true,
     headers: {
-      jwt: localStorage.usertoken
-    }
+      jwt: localStorage.usertoken,
+    },
     // headers: {
     //   Cookie: `jwt=${localStorage.usertoken}`
     // }
   })
-    .then(res => {
+    .then((res) => {
       //console.log(res);
       //console.log(res.data.token);
       return res.data;
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -58,11 +58,11 @@ export const role = roleType => {
 };
 
 //POST
-export const addressform = address => {
+export const addressform = (address) => {
   return axios
     .post(`${ip}api/v1/addresses/`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
       user: address.user,
       locality: address.locality,
@@ -70,9 +70,9 @@ export const addressform = address => {
       district: address.district,
       state: address.state,
       country: address.country,
-      pincode: address.pincode
+      pincode: address.pincode,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -82,19 +82,19 @@ export const addressform = address => {
     });
 };
 
-export const sendContactInfo = contact => {
+export const sendContactInfo = (contact) => {
   return axios
     .post(`${ip}api/v1/contact/`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
       firstName: contact.firstName,
       lastName: contact.lastName,
       phone: contact.phone,
       message: contact.message,
-      email: contact.email
+      email: contact.email,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -104,15 +104,15 @@ export const sendContactInfo = contact => {
     });
 };
 
-export const createSkill = skill => {
+export const createSkill = (skill) => {
   return axios
     .post(`${ip}api/v1/skillTypeMasters/`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
-      skill_name: skill
+      skill_name: skill,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -123,20 +123,20 @@ export const createSkill = skill => {
 };
 
 //PATCH
-export const editAddressForm = editAddress => {
+export const editAddressForm = (editAddress) => {
   return axios
     .patch(`${ip}api/v1/addresses/${editAddress.addressID}`, {
       headers: {
-        jwt: localStorage.usertoken
+        jwt: localStorage.usertoken,
       },
       locality: editAddress.locality,
       city: editAddress.city,
       district: editAddress.district,
       state: editAddress.state,
       country: editAddress.country,
-      pincode: editAddress.pincode
+      pincode: editAddress.pincode,
     })
-    .catch(err => {
+    .catch((err) => {
       if (
         err.response !== undefined &&
         [400, 401, 500].includes(err.response.status)
@@ -146,7 +146,7 @@ export const editAddressForm = editAddress => {
     });
 };
 
-export const editUserInfo = details => {
+export const editUserInfo = (details) => {
   //console.log(details);
   return axios({
     method: "patch",
@@ -154,9 +154,9 @@ export const editUserInfo = details => {
     data: details,
     headers: {
       "Content-Type": "multipart/form-data",
-      jwt: localStorage.usertoken
-    }
-  }).catch(err => {
+      jwt: localStorage.usertoken,
+    },
+  }).catch((err) => {
     if (
       err.response !== undefined &&
       [400, 401, 500].includes(err.response.status)
