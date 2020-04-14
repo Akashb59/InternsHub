@@ -211,6 +211,10 @@ function StudentInfo(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (studFormState.gender === "")
+      showAlert("error", "Please fill in the gender details");
+
     const address = {
       locality: studFormState.locality,
       city: studFormState.city,

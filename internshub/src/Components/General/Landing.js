@@ -9,18 +9,18 @@ function Landing() {
     const ip = prepareUrls({
       protocol: "http",
       host: "0.0.0.0",
-      port: 3000
+      port: 3000,
     }).lanUrl;
-    $(function() {
+    $(function () {
       // Auto play modal video
-      $(".video").click(function() {
+      $(".video").click(function () {
         var theModal = $(this).data("target"),
           videoSRC = $(this).attr("data-video"),
           videoSRCauto =
             videoSRC +
             "?modestbranding=1&rel=0&controls=0&showinfo=0&html5=1&autoplay=1";
         $(theModal + " iframe").attr("src", videoSRCauto);
-        $(theModal + " button.close").click(function() {
+        $(theModal + " button.close").click(function () {
           $(theModal + " iframe").attr("src", videoSRC);
         });
       });
@@ -47,7 +47,7 @@ function Landing() {
                 <div className="carousel-caption d-none d-sm-block text-right mb-5">
                   <h1 className="display-3">WELCOME!</h1>
                   <p className="lead text-capitalize">
-                    Give youself an edge in the job market. Gain valuable work
+                    Give yourself an edge in the job market. Gain valuable work
                     experience and explore your career path!!
                   </p>
                   <Link to="/signUp" className="btn btn-danger btn-lg">

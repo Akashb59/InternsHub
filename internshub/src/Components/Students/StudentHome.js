@@ -15,17 +15,17 @@ function StudentHome() {
     category: "",
     duration1: false,
     duration2: false,
-    duration3: false
+    duration3: false,
   });
   const [loading, setLoading] = useState("false");
   const [internArray, setInternArray] = useState([]);
 
   useEffect(() => {
     document.title = "InternsHub | Student Home";
-    internshipAll().then(res => {
+    internshipAll().then((res) => {
       if (res) {
         //console.log(res.data.doc);
-        const arr = res.data.doc.map(data => ({
+        const arr = res.data.doc.map((data) => ({
           title: data.title,
           location: data.location,
           category: data.categories,
@@ -39,7 +39,7 @@ function StudentHome() {
           company: data.company.user.fullname,
           photo: data.company.user.photo,
           requiredSkills: data.requiredSkills,
-          id: data.id
+          id: data.id,
         }));
         setInternArray(arr);
         if (res.data !== undefined) setLoading("true");
@@ -55,18 +55,18 @@ function StudentHome() {
   }
 
   let count = 0;
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const stipend = [
       filterState.stipend1,
       filterState.stipend2,
       filterState.stipend3,
-      filterState.stipend4
+      filterState.stipend4,
     ];
     const duration = [
       filterState.duration1,
       filterState.duration2,
-      filterState.duration3
+      filterState.duration3,
     ];
 
     const filter = {
@@ -74,13 +74,13 @@ function StudentHome() {
       categories: filterState.category,
       duration: duration,
       type_of_internship: filterState.type,
-      starts_on: filterState.startsOn
+      starts_on: filterState.startsOn,
     };
-    internshipFilter(filter).then(res => {
+    internshipFilter(filter).then((res) => {
       if (res) {
         //console.log(res);
         //console.log(res.data.stats[0]);
-        const arr = res.data.doc.map(data => ({
+        const arr = res.data.doc.map((data) => ({
           title: data.title,
           photo: data.company.user.photo,
           location: data.location,
@@ -94,7 +94,7 @@ function StudentHome() {
           intendedParticipants: data.intended_participants,
           company: data.company.user.fullname,
           requiredSkills: data.requiredSkills,
-          id: data.id
+          id: data.id,
         }));
         setInternArray(arr);
       }
@@ -455,7 +455,7 @@ function StudentHome() {
               <h2 className="text-center text-right small-header mb-3 count-disp">
                 <i className="fas fa-sliders-h"></i> {count} Listings
               </h2>
-              {internArray.map(function(intern) {
+              {internArray.map(function (intern) {
                 return (
                   <div key={intern.id}>
                     <div className="card bg-card intern-card">
@@ -511,7 +511,7 @@ function StudentHome() {
                           className="btn btn-success"
                           to={{
                             pathname: "/selectedInternship",
-                            id: intern.id
+                            id: intern.id,
                           }}
                         >
                           View Details{" "}
