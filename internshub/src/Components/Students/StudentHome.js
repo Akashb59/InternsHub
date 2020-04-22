@@ -462,10 +462,10 @@ function StudentHome() {
                       <div className="card-body small-intern-card">
                         <div className="row">
                           <div className="col-sm-6 col-md-8 col-lg-9">
-                            <h3 className="card-title small-intern-title">
+                            <h3 className="card-title small-intern-title text-capitalize">
                               {intern.title}
                             </h3>
-                            <h6 className="card-subtitle small-intern-subtitle text-muted">
+                            <h6 className="card-subtitle small-intern-subtitle text-muted text-capitalize">
                               Company: {intern.company}
                             </h6>
                           </div>
@@ -489,7 +489,7 @@ function StudentHome() {
                           </div>
                           <div className="col-sm-4 col-lg-2 card-p">
                             <p style={{ color: "grey" }}>Location:</p>{" "}
-                            <p>{intern.location}</p>
+                            <p className="text-capitalize">{intern.location}</p>
                           </div>
                           <div className="col-sm-4 col-lg-2 card-p">
                             <p style={{ color: "grey" }}>Duration:</p>{" "}

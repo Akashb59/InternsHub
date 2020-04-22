@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { login } from "../Utilities/LoginSignup";
 import { showAlert } from "../Utilities/Alerts";
-const prepareUrls = require("local-ip-url/prepareUrls");
+
 function AdminLogin(props) {
   const [adminLoginState, setAdminLoginState] = useState({
     email: "",
     password: "",
-    role: "Admin"
+    role: "Admin",
   });
 
   const [validState, setValidState] = useState({
     errors: {
       email: "",
-      password: ""
-    }
+      password: "",
+    },
   });
   useEffect(() => {
     document.title = "InternsHub | Admin Login";
-    const ip = prepareUrls({
-      protocol: "http",
-      host: "0.0.0.0",
-      port: 3000
-    }).lanUrl;
+    const ip = "http://192.168.1.17:3000/";
     localStorage.setItem("ip", ip);
   }, []);
 
@@ -30,7 +26,7 @@ function AdminLogin(props) {
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   );
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setAdminLoginState({ ...adminLoginState, [name]: value });
     let errors = validState.errors;
@@ -48,14 +44,14 @@ function AdminLogin(props) {
     setValidState({ errors, [name]: value });
   };
   const { errors } = validState;
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const user = {
       email: adminLoginState.email,
       password: adminLoginState.password,
-      role: adminLoginState.role
+      role: adminLoginState.role,
     };
-    login(user).then(res => {
+    login(user).then((res) => {
       if (res) {
         //console.log(res.data);
         localStorage.setItem("type", res.data.user.roleType.roleName);

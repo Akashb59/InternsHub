@@ -59,9 +59,13 @@ function CompanyEnquiry(props) {
   );
   const InternshipEnq = (props) => (
     <tr>
-      <td>{props.internship.internship.title}</td>
+      <td className="text-change text-lowercase">
+        {props.internship.internship.title}
+      </td>
       {/* <td>{props.internship.internship.starts_on.substring(0, 10)}</td> */}
-      <td className="small-table">{props.internship.user.fullname}</td>
+      <td className="small-table text-lowercase text-change">
+        {props.internship.user.fullname.split(" ")[0]}
+      </td>
       <td>
         <button
           className="btn btn-dark btn-sm btn-block"
@@ -150,22 +154,35 @@ function CompanyEnquiry(props) {
           <i className="fas fa-expand-arrows-alt"></i>
         </button>
       </td>
-      <td className="xsmall-table">{props.internship.accepted}</td>
+      <td className="small-table">{props.internship.accepted}</td>
       {props.internship.accepted === "No" ? (
-        <td>
-          <button
-            className="btn btn-success btn-sm btn-block"
-            data-toggle="modal"
-            data-target="#acceptInternship"
-            onClick={() => {
-              localStorage.setItem("acceptInternshipId", props.internship._id);
-            }}
-          >
-            <i className="fas fa-check-circle"></i>
-          </button>
-        </td>
+        props.accept === "No" && props.accepted === "Yes" ? (
+          <td>
+            <button className="btn btn-success btn-sm btn-block" disabled>
+              <i className="fas fa-check-circle"></i>
+            </button>
+          </td>
+        ) : (
+          <td>
+            <button
+              className="btn btn-success btn-sm btn-block"
+              data-toggle="modal"
+              data-target="#acceptInternship"
+              onClick={() => {
+                localStorage.setItem(
+                  "acceptInternshipId",
+                  props.internship._id
+                );
+              }}
+            >
+              <i className="fas fa-check-circle"></i>
+            </button>
+          </td>
+        )
+      ) : props.accept === "No" ? (
+        <td>Accepted</td>
       ) : (
-        <Fragment />
+        <Fragment></Fragment>
       )}
     </tr>
   );
@@ -184,7 +201,7 @@ function CompanyEnquiry(props) {
   }, []);
 
   if (resume !== "") {
-    src = `${localStorage.ip}/Resume/${resume}`;
+    src = `${localStorage.ip}Resume/${resume}`;
   }
 
   const selectLink = (
@@ -568,6 +585,7 @@ function CompanyEnquiry(props) {
           <InternshipEnq
             key={currentInternship.id}
             internship={currentInternship}
+            accept="Yes"
           />
         );
       } else {
@@ -599,6 +617,8 @@ function CompanyEnquiry(props) {
           <InternshipEnq
             key={currentInternship.id}
             internship={currentInternship}
+            accept="No"
+            accepted="Yes"
           />
         );
       } else {
@@ -645,7 +665,7 @@ function CompanyEnquiry(props) {
                   <th>Resume</th>
                   <th className="small-table">Requested On</th>
                   <th>Details</th>
-                  <th className="xsmall-table">Accepted</th>
+                  <th className="small-table">Accepted</th>
                 </tr>
               </thead>
               <tbody>{internshipEnquiryListYes()}</tbody>
@@ -659,7 +679,8 @@ function CompanyEnquiry(props) {
                   <th>Resume</th>
                   <th className="small-table">Requested On</th>
                   <th>Details</th>
-                  <th className="xsmall-table">Accepted</th>
+                  <th className="small-table">Accepted</th>
+                  <th>Status</th>
                 </tr>
               </thead>
               <tbody>{internshipEnquiryListRest()}</tbody>

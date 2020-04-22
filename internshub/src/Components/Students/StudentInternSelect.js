@@ -207,7 +207,9 @@ function StudentInternSelect(props) {
         <div className="row no-gutters">
           <div className="col-12 p-2 text-white bg-head ">
             <div className=" text-center">
-              <h1 className="display-1 head-internship">{internship.title}</h1>
+              <h1 className="display-1 head-internship text-capitalize">
+                {internship.title}
+              </h1>
             </div>
           </div>
           <div className="col-lg-3 col-md-4">
@@ -222,7 +224,7 @@ function StudentInternSelect(props) {
           </div>
           <div className="col-lg-9 col-md-8">
             <div className="d-flex flex-column">
-              <div className="bg-gray-dark text-white blockquote p-3 font-increase mb-0 ">
+              <div className="bg-gray-dark text-white blockquote p-3 font-increase mb-0 text-capitalize">
                 {internship.name}
               </div>
 
@@ -274,7 +276,7 @@ function StudentInternSelect(props) {
           {internship.description.map((data, index) => {
             return (
               <div key={index}>
-                <p className="lead">
+                <p className="lead text-capitalize">
                   {index + 1}: {data}
                 </p>
               </div>
@@ -303,7 +305,7 @@ function StudentInternSelect(props) {
             return (
               <div key={add.id}>
                 <p className="lead font-weight-bold"> Address: </p>
-                <p className="lead">
+                <p className="lead text-capitalize">
                   {add.locality}, {add.city} {add.state} <br />
                   {add.country} {add.pincode}
                 </p>
@@ -316,7 +318,7 @@ function StudentInternSelect(props) {
           {internship.technology.map((tech, index) => {
             return (
               <div key={index}>
-                <p className="lead">
+                <p className="lead text-capitalize">
                   {" "}
                   {index + 1}: {tech.name}
                 </p>
@@ -339,7 +341,7 @@ function StudentInternSelect(props) {
           {internship.intendedParticipants.map((data, index) => {
             return (
               <div key={index}>
-                <p className="lead">
+                <p className="lead text-capitalize">
                   {" "}
                   {index + 1}: {data}
                 </p>

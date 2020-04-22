@@ -189,6 +189,10 @@ label {
   font-weight: 400 !important;
 }
 
+.text-change::first-letter {
+  text-transform: uppercase;
+}
+
 // Small screen
 .filter-table td,
 th {

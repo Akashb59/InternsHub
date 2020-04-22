@@ -46,7 +46,7 @@ function StudentEnquiry(props) {
   }, []);
   const InternshipEnq = (props) => (
     <tr>
-      <td>{props.internship.internship.title}</td>
+      <td className="text-capitalize">{props.internship.internship.title}</td>
       <td>{props.internship.reqAt.substring(0, 10)}</td>
       <td>
         <button

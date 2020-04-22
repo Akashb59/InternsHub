@@ -129,12 +129,13 @@ function CompanyHome(props) {
         const w1 = Date.now() - 7 * 24 * 60 * 60 * 1000;
         const w2 = Date.now() - 2 * 7 * 24 * 60 * 60 * 1000;
         const w3 = Date.now() - 3 * 7 * 24 * 60 * 60 * 1000;
+        const w4 = Date.now() - 4 * 7 * 24 * 60 * 60 * 1000;
         // eslint-disable-next-line
         array.map((el) => {
           if (el > w1) count1 += 1;
           else if (el > w2) count2 += 1;
           else if (el > w3) count3 += 1;
-          else count4 += 1;
+          else if (el > w4) count4 += 1;
         });
         result[3] = count1;
         result[2] = count2;
@@ -157,14 +158,20 @@ function CompanyHome(props) {
           (data) => data.internship !== null
         );
         setcountEnquiry(internEnq.length);
-        const AcceptedEnq = res.data.data.enquiry.filter(
-          (data) => data.accepted === "Yes"
-        );
+        let AcceptedEnq = res.data.data.enquiry.map((data) => {
+          var created_date = new Date(data.internship.starts_on);
+          var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
+          return data.accepted === "Yes" && startsOn > Date.now();
+        });
+        AcceptedEnq = AcceptedEnq.filter((data) => data === true);
         setCountAcceptedEnquiry(AcceptedEnq.length);
         //console.log(AcceptedEnq.length);
-        const PendingEnq = res.data.data.enquiry.filter(
-          (data) => data.accepted === "No"
-        );
+        let PendingEnq = res.data.data.enquiry.map((data) => {
+          var created_date = new Date(data.internship.starts_on);
+          var startsOn = created_date.getTime() + 7 * 24 * 60 * 60 * 1000;
+          return data.accepted === "No" && startsOn > Date.now();
+        });
+        PendingEnq = PendingEnq.filter((data) => data === true);
         setCountPendingEnquiry(PendingEnq.length);
       }
     });

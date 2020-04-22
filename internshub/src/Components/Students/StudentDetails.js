@@ -113,9 +113,9 @@ function StudentDetails(props) {
       }
     });
   };
-
+  //console.log(`${localStorage.ip}Resume/${resumeDisplay}`);
   if (resumeDisplay !== "") {
-    src = `${localStorage.ip}/Resume/${resumeDisplay}`;
+    src = `${localStorage.ip}Resume/${resumeDisplay}`;
   }
 
   return (

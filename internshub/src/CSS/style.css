@@ -168,6 +168,9 @@ label {
 .no-bold {
   font-weight: 400 !important; }
 
+.text-change::first-letter {
+  text-transform: uppercase; }
+
 .filter-table td,
 th {
   padding: 0 5px; }

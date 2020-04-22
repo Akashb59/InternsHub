@@ -48,16 +48,18 @@ function CompanyReview() {
     });
   }, []);
   const [hover] = useState(null);
-
   const [reviewData, setReviewData] = useState([]);
-
   return (
     <div className="container">
-      <div className="card-columns">
-        {reviewData.map((el) => {
-          return <Rating key={el.id} reviews={el} />;
-        })}
-      </div>
+      {reviewData.length !== 0 ? (
+        <div className="card-columns">
+          {reviewData.map((el) => {
+            return <Rating key={el.id} reviews={el} />;
+          })}
+        </div>
+      ) : (
+        <h1 className="display-1 pt-4 text-center">No Reviews</h1>
+      )}
     </div>
   );
 }

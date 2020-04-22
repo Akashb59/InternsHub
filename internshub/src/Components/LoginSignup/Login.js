@@ -4,37 +4,32 @@ import { company } from "../Utilities/CompanyFunctions";
 import { student } from "../Utilities/StudentFunctions";
 import { showAlert } from "../Utilities/Alerts";
 import { load } from "../Utilities/Utils";
-const prepareUrls = require("local-ip-url/prepareUrls");
 
 function Login(props) {
   const [loginState, setLoginState] = useState({
     email: "",
     password: "",
     role: "Student",
-    emailForgot: ""
+    emailForgot: "",
   });
   const [roleState, setRoleState] = useState([]);
   const [validState, setValidState] = useState({
     errors: {
       email: "",
-      password: ""
-    }
+      password: "",
+    },
   });
   const [loading, setLoading] = useState("false");
   useEffect(() => {
-    const ip = prepareUrls({
-      protocol: "http",
-      host: "0.0.0.0",
-      port: 3000
-    }).lanUrl;
+    const ip = "http://192.168.1.17:3000/";
     document.title = "InternsHub | Login";
     localStorage.setItem("ip", ip);
-    roles().then(res => {
+    roles().then((res) => {
       if (res) {
         //console.log(res.data.doc);
-        const roleTypes = res.data.doc.map(role => role.roleName);
+        const roleTypes = res.data.doc.map((role) => role.roleName);
         //console.log(roleTypes);
-        const newroleTypes = roleTypes.filter(role => role !== "Admin");
+        const newroleTypes = roleTypes.filter((role) => role !== "Admin");
         setRoleState(newroleTypes);
         if (res.data !== undefined) setLoading("true");
       }
@@ -46,7 +41,7 @@ function Login(props) {
     /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
   );
 
-  const handleChange = event => {
+  const handleChange = (event) => {
     const { name, value } = event.target;
     setLoginState({ ...loginState, [name]: value });
     let errors = validState.errors;
@@ -64,15 +59,15 @@ function Login(props) {
     setValidState({ errors, [name]: value });
   };
   const { errors } = validState;
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     let check;
     const user = {
       email: loginState.email,
       password: loginState.password,
-      role: loginState.role
+      role: loginState.role,
     };
-    login(user).then(res => {
+    login(user).then((res) => {
       if (res) {
         //console.log(res.data);
         check = res.data.user.roleType.roleName;
@@ -80,13 +75,13 @@ function Login(props) {
         localStorage.setItem("name", res.data.user.fullname);
         localStorage.setItem("photo", res.data.user.photo);
         if (check === "Student") {
-          student().then(res => {
+          student().then((res) => {
             if (res) {
               props.history.push(`/studentHome`);
             }
           });
         } else if (check === "Company") {
-          company().then(res => {
+          company().then((res) => {
             if (res) {
               props.history.push(`/companyHome`);
             }
@@ -97,12 +92,12 @@ function Login(props) {
       }
     });
   };
-  const handleForgot = e => {
+  const handleForgot = (e) => {
     e.preventDefault();
     const forgot = {
-      email: loginState.emailForgot
+      email: loginState.emailForgot,
     };
-    forgotPassword(forgot).then(res => {
+    forgotPassword(forgot).then((res) => {
       if (res) {
         //console.log(res.data.user.roleType.roleName);
         showAlert("success", "Email Sent Successfully");
@@ -211,7 +206,7 @@ function Login(props) {
                           className="form-control "
                           onChange={handleChange}
                         >
-                          {roleState.map(function(role) {
+                          {roleState.map(function (role) {
                             return (
                               <option key={role} value={role}>
                                 {role}

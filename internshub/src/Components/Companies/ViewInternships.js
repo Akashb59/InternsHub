@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import {
   companyInternships,
   editInternship,
-  internship
+  internship,
 } from "../Utilities/CompanyFunctions";
 import { skills } from "../Utilities/CommonFunctions";
 import { load } from "./../Utilities/Utils";
@@ -14,9 +14,9 @@ import { showAlert } from "../Utilities/Alerts";
 let final;
 
 function ViewInternships(props) {
-  const Internship = props => (
+  const Internship = (props) => (
     <tr>
-      <td>{props.internship.title}</td>
+      <td className="text-capitalize">{props.internship.title}</td>
       <td className="small-table">
         {props.internship.starts_on.substring(0, 10)}
       </td>
@@ -27,14 +27,14 @@ function ViewInternships(props) {
           data-toggle="modal"
           data-target="#editInternship"
           onClick={() => {
-            internship(props.internship._id).then(res => {
+            internship(props.internship._id).then((res) => {
               //console.log(props.internship._id);
               localStorage.setItem("internshipId", props.internship._id);
               if (res) {
                 // console.log(res.data.data.internship.requiredSkills[0]._id);
                 document.title = `InternsHub | Edit ${res.data.data.title}`;
                 //console.log(res.data);
-                const selected = res.data.data.requiredSkills.map(el => {
+                const selected = res.data.data.requiredSkills.map((el) => {
                   return { value: el.id, label: el.skill_name };
                 });
                 // if (selected.length === 0) selected = [];
@@ -52,25 +52,25 @@ function ViewInternships(props) {
                   categories: res.data.data.categories,
                   intended_participants: res.data.data.intended_participants,
                   starts_on: res.data.data.starts_on.substring(0, 10),
-                  duration: res.data.data.duration
+                  duration: res.data.data.duration,
                   // requiredSkills: res.data.data.internship.requiredSkills[0]._id
                 });
                 setInfo({
                   ...info,
-                  desc: res.data.data.description
+                  desc: res.data.data.description,
                 });
                 setInfo1({
                   ...info1,
-                  intd: res.data.data.intended_participants
+                  intd: res.data.data.intended_participants,
                 });
               }
             });
-            skills().then(res => {
+            skills().then((res) => {
               if (res) {
                 //console.log(res.data.skillTypeMaster);
-                const options = res.data.doc.map(skill => ({
+                const options = res.data.doc.map((skill) => ({
                   skill: skill.skill_name,
-                  skillid: skill._id
+                  skillid: skill._id,
                 }));
                 setOptions(options);
                 //console.log(options);
@@ -114,7 +114,7 @@ function ViewInternships(props) {
     requiredSkills: [],
     categories: "",
     type_of_internship: "",
-    stipend: ""
+    stipend: "",
   });
   const [validState, setValidState] = useState({
     errors: {
@@ -122,19 +122,19 @@ function ViewInternships(props) {
       description: "",
       intended_participants: "",
       location: "",
-      descriptions: ""
-    }
+      descriptions: "",
+    },
   });
   const [options, setOptions] = useState([]);
   const [loading, setLoading] = useState("false");
   const [select, setSelect] = useState([]);
   const [info, setInfo] = useState({
     desc: [],
-    count: 0
+    count: 0,
   });
   const [info1, setInfo1] = useState({
     intd: [],
-    count1: 0
+    count1: 0,
   });
   // const id = props.location.internship;
   // if (props.location.internship !== undefined)
@@ -144,7 +144,7 @@ function ViewInternships(props) {
   //const ip = "http://192.168.1.25:3000";
   useEffect(() => {
     document.title = "InternsHub | Hosted Internships";
-    companyInternships().then(res => {
+    companyInternships().then((res) => {
       if (res) {
         //console.log(res.data.data.internship[0].requiredSkills);
         setInternshipState(res.data.data.internship);
@@ -152,12 +152,12 @@ function ViewInternships(props) {
       }
     });
   }, []);
-  const realoptions = options.map(option => ({
+  const realoptions = options.map((option) => ({
     value: option.skillid,
-    label: option.skill
+    label: option.skill,
   }));
   //const [setHandleSkills] = useState('');
-  const handleChange = event => {
+  const handleChange = (event) => {
     //const {name,value}=event.target;
     const { name, value } = event.target;
     let errors = validState.errors;
@@ -182,20 +182,20 @@ function ViewInternships(props) {
     setValidState({ errors, [name]: value });
     setInternshipHostState({
       ...internshipHostState,
-      [name]: value
+      [name]: value,
     });
   };
   const { errors } = validState;
-  const handleChangeSelect = selectedOption => {
+  const handleChangeSelect = (selectedOption) => {
     //console.log(`Option selected:`, selectedOption);
     setSelect(selectedOption);
     //console.log(select);
     if (selectedOption === null) return "";
     //if (select === null) setSelect("");
-    const selected = selectedOption.map(option => option.value);
+    const selected = selectedOption.map((option) => option.value);
     setInternshipHostState({
       ...internshipHostState,
-      requiredSkills: selected
+      requiredSkills: selected,
     });
     //console.log(select);
   };
@@ -220,7 +220,7 @@ function ViewInternships(props) {
     if (info.count < 8)
       setInfo({
         count: info.count + 1,
-        desc: [...info.desc, ""]
+        desc: [...info.desc, ""],
       });
   };
   const removeTextbox = () => {
@@ -231,7 +231,7 @@ function ViewInternships(props) {
       if (info.count > 0)
         setInfo({
           desc: info.desc,
-          count: info.count - 1
+          count: info.count - 1,
         });
     }
   };
@@ -242,7 +242,7 @@ function ViewInternships(props) {
     setInfo({ ...info, desc: info.desc });
     setInternshipHostState({
       ...internshipHostState,
-      description: info.desc
+      description: info.desc,
     });
   };
   const addTextbox1 = () => {
@@ -252,7 +252,7 @@ function ViewInternships(props) {
     if (info1.count1 < 8)
       setInfo1({
         count1: info1.count1 + 1,
-        intd: [...info1.intd, ""]
+        intd: [...info1.intd, ""],
       });
   };
   const removeTextbox1 = () => {
@@ -263,7 +263,7 @@ function ViewInternships(props) {
       if (info1.count1 > 0)
         setInfo1({
           intd: info1.intd,
-          count1: info1.count1 - 1
+          count1: info1.count1 - 1,
         });
     }
   };
@@ -274,10 +274,10 @@ function ViewInternships(props) {
     setInfo1({ ...info1, intd: info1.intd });
     setInternshipHostState({
       ...internshipHostState,
-      intended_participants: info1.intd
+      intended_participants: info1.intd,
     });
   };
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     const Internship = {
       title: internshipHostState.title,
@@ -290,10 +290,10 @@ function ViewInternships(props) {
       categories: internshipHostState.categories,
       type_of_internship: internshipHostState.type_of_internship,
       company: localStorage.companyid,
-      stipend: internshipHostState.stipend
+      stipend: internshipHostState.stipend,
     };
 
-    editInternship(Internship).then(res => {
+    editInternship(Internship).then((res) => {
       if (res) {
         showAlert("success", "Successfully edited internship");
         props.history.push("/viewInternships");
@@ -308,23 +308,23 @@ function ViewInternships(props) {
       url: `${localStorage.ip}/api/v1/internships/deleteHostedInternship/` + id,
       //withCredentials: true,
       headers: {
-        jwt: localStorage.usertoken
-      }
+        jwt: localStorage.usertoken,
+      },
       // headers: {
       //   Cookie: `jwt=${localStorage.usertoken}`
       // }
     })
-      .then(response => {
+      .then((response) => {
         //console.log(response.data);
         props.history.push("/viewInternships");
         window.location.reload(false);
       })
-      .catch(err => {
+      .catch((err) => {
         alert(err.response.data.message);
         console.log(err);
       });
 
-    setInternshipState(internshipState.filter(el => el._id !== id));
+    setInternshipState(internshipState.filter((el) => el._id !== id));
   }
 
   function internshipListActive() {
@@ -334,7 +334,7 @@ function ViewInternships(props) {
       return <None key="key" />;
     }
     // eslint-disable-next-line
-    return internshipState.map(currentInternship => {
+    return internshipState.map((currentInternship) => {
       const active = currentInternship.ends_on;
 
       if (active >= Date.now()) {
@@ -355,7 +355,7 @@ function ViewInternships(props) {
       }
     });
   }
-  const None = key => (
+  const None = (key) => (
     <tr key={key}>
       <td colSpan="7">
         <center>
@@ -371,7 +371,7 @@ function ViewInternships(props) {
       return <None key="key" />;
     }
     // eslint-disable-next-line
-    return internshipState.map(currentInternship => {
+    return internshipState.map((currentInternship) => {
       const inactive = currentInternship.ends_on;
       //console.log(inactive);
       if (inactive < Date.now()) {
@@ -746,7 +746,7 @@ function ViewInternships(props) {
                               maxLength="200"
                               minLength="20"
                               required
-                              onChange={e => addSubInfoValue(e, index)}
+                              onChange={(e) => addSubInfoValue(e, index)}
                             />
                             {errors.description.length > 0 && (
                               <small style={{ color: "red" }}>
@@ -795,7 +795,7 @@ function ViewInternships(props) {
                               maxLength="200"
                               minLength="20"
                               required
-                              onChange={e => addSubIntendedValue(e, index)}
+                              onChange={(e) => addSubIntendedValue(e, index)}
                             />
                             {errors.intended_participants.length > 0 && (
                               <small style={{ color: "red" }}>
