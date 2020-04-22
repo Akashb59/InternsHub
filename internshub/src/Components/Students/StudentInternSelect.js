@@ -299,7 +299,11 @@ function StudentInternSelect(props) {
         <div className="card card-body bg-dark-green text-white py-5 rounded-0">
           <p className="lead font-weight-bold">About Company: </p>
 
-          <p className="lead">{internship.aboutCompany}</p>
+          <p className="lead">
+            {internship.aboutCompany === undefined
+              ? "N/A"
+              : internship.aboutCompany}
+          </p>
 
           {internship.address.map(function (add) {
             return (
@@ -315,16 +319,19 @@ function StudentInternSelect(props) {
 
           <p className="lead font-weight-bold">Comapany Technologies: </p>
 
-          {internship.technology.map((tech, index) => {
-            return (
-              <div key={index}>
-                <p className="lead text-capitalize">
-                  {" "}
-                  {index + 1}: {tech.name}
-                </p>
-              </div>
-            );
-          })}
+          {internship.technology.length === 0 ? (
+            <p className="lead text-capitalize">N/A</p>
+          ) : (
+            internship.technology.map((tech, index) => {
+              return (
+                <div key={index}>
+                  <p className="lead text-capitalize">
+                    {index + 1}: {tech.name}
+                  </p>
+                </div>
+              );
+            })
+          )}
           <div className="d-flex">
             <p className="lead font-weight-bold">Company Website: </p>
             <p className="lead ml-2"> {internship.website}</p>
