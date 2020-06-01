@@ -17,7 +17,7 @@ function AdminLogin(props) {
   });
   useEffect(() => {
     document.title = "InternsHub | Admin Login";
-    const ip = "http://192.168.1.17:3000/";
+    const ip = "http://192.168.1.24:3000/";
     localStorage.setItem("ip", ip);
   }, []);
 

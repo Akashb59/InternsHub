@@ -5,7 +5,7 @@ import $ from "jquery";
 function Landing() {
   useEffect(() => {
     document.title = "InternsHub | Home";
-    const ip = "http://192.168.1.17:3000/";
+    const ip = "http://192.168.1.24:3000/";
     $(function () {
       // Auto play modal video
       $(".video").click(function () {

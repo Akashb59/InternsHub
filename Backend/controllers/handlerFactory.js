@@ -21,6 +21,7 @@ exports.updateOne = Model =>
       runValidators: true
       //re validate for each update
     });
+    console.log(req.body);
     if (!doc) {
       return next(new AppError('No Document found with that ID', 404));
     }

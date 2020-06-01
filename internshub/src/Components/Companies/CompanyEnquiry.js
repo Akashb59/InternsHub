@@ -40,6 +40,7 @@ function CompanyEnquiry(props) {
     ipart: [],
     idur: "",
     istarts: Date,
+    iends: "",
     icat: "",
     iloc: "",
     itype: "",
@@ -47,6 +48,7 @@ function CompanyEnquiry(props) {
     message: "",
     reqAt: Date,
     completed: "",
+    eid: "",
   });
   const None = (key) => (
     <tr key={key}>
@@ -139,6 +141,7 @@ function CompanyEnquiry(props) {
                   ipart: x.internship.intended_participants,
                   idur: x.internship.duration,
                   istarts: x.internship.starts_on.substring(0, 10),
+                  iends: x.internship.ends_on,
                   icat: x.internship.categories,
                   itype: x.internship.type_of_internship,
                   iloc: x.internship.location,
@@ -146,6 +149,7 @@ function CompanyEnquiry(props) {
                   message: x.reqMessage,
                   reqAt: x.reqAt.substring(0, 10),
                   completed: x.completed,
+                  eid: x.id,
                 });
               }
             });
@@ -722,11 +726,18 @@ function CompanyEnquiry(props) {
                   </div>
                   <div className="modal-footer row">
                     <div className="col-md-9">
-                      {selectedInternship.accepted === "Yes" ? (
+                      {selectedInternship.accepted === "Yes" &&
+                      selectedInternship.ends_on < Date.now() ? (
                         <button
                           className="btn btn-block btn-success"
                           data-toggle="modal"
                           data-target="#completedInternship"
+                          onClick={() => {
+                            localStorage.setItem(
+                              "acceptInternshipId",
+                              selectedInternship.eid
+                            );
+                          }}
                         >
                           <i className="fas fa-check-circle"></i> Mark Student
                           as completed Internship
@@ -800,7 +811,7 @@ function CompanyEnquiry(props) {
                           window.location.reload(false);
                           showAlert(
                             "success",
-                            "Successfully Accpted Candidate"
+                            "Candidate Successfully Completed Internship"
                           );
                         }
                       });

@@ -21,7 +21,7 @@ function Login(props) {
   });
   const [loading, setLoading] = useState("false");
   useEffect(() => {
-    const ip = "http://192.168.1.17:3000/";
+    const ip = "http://192.168.1.24:3000/";
     document.title = "InternsHub | Login";
     localStorage.setItem("ip", ip);
     roles().then((res) => {

@@ -263,6 +263,7 @@ export const companyTechnology = (tech) => {
 };
 
 export const internshipAccept = (id, accepted, completed) => {
+  console.log(accepted, completed);
   return axios
     .patch(`${ip}api/v1/enquiries/${id}`, {
       headers: {
